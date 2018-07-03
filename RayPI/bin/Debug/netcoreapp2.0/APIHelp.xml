@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RayPI</name>
+    </assembly>
+    <members>
+        <member name="T:RayPI.AuthHelper.TokenAuth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:RayPI.AuthHelper.TokenAuth._next">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RayPI.AuthHelper.TokenAuth.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:RayPI.AuthHelper.TokenAuth.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RayPI.Controllers.AdminController">
+            <summary>
+            后台
+            </summary>
+        </member>
+        <member name="M:RayPI.Controllers.AdminController.GetStudentPageList(System.Int32,System.Int32)">
+            <summary>
+            获取学生分页列表
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RayPI.Controllers.AdminController.GetStudentById(System.Int64)">
+            <summary>
+            获取单个学生
+            </summary>
+            <param name="id">Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:RayPI.Controllers.AdminController.Add(RayPI.Entity.Student)">
+            <summary>
+            添加
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RayPI.Controllers.AdminController.Update(RayPI.Entity.Student)">
+            <summary>
+            编辑学生
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RayPI.Controllers.AdminController.Dels(System.Object[])">
+            <summary>
+            删除学生
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RayPI.Controllers.ClientController">
+            <summary>
+            客户端
+            </summary>
+        </member>
+        <member name="M:RayPI.Controllers.ClientController.GetByName(System.String)">
+            <summary>
+            根据姓名获取学生
+            </summary>
+            <param name="name">学生姓名</param>
+            <returns></returns>
+        </member>
+        <member name="T:RayPI.Controllers.SystemController">
+            <summary>
+            系统
+            </summary>
+        </member>
+        <member name="M:RayPI.Controllers.SystemController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="M:RayPI.Controllers.SystemController.CreateEntity(System.String)">
+            <summary>
+            生成实体类
+            </summary>
+            <param name="entityName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RayPI.Controllers.SystemController.GetJWTStr(System.Int64,System.String,System.Int32,System.Int32)">
+            <summary>
+            获取JWT，并存入缓存
+            </summary>
+            <param name="id">用户Id</param>
+            <param name="sub">身份</param>
+            <param name="expiresSliding">相对过期时间，单位为分</param>
+            <param name="expiresAbsoulute">绝对过期时间，单位为天</param>
+            <returns></returns>
+        </member>
+        <member name="T:RayPI.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RayPI.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:RayPI.Program.BuildWebHost(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RayPI.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RayPI.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:RayPI.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RayPI.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:RayPI.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+        <member name="T:RayPI.SwaggerHelp.SwaggerDocTag">
+            <summary>
+            Swagger注释帮助类
+            </summary>
+        </member>
+        <member name="M:RayPI.SwaggerHelp.SwaggerDocTag.Apply(Swashbuckle.AspNetCore.Swagger.SwaggerDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            添加附加注释
+            </summary>
+            <param name="swaggerDoc"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:RayPI.SwaggerHelp.SwaggerHeader">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RayPI.SwaggerHelp.SwaggerHeader.Apply(Swashbuckle.AspNetCore.Swagger.Operation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+    </members>
+</doc>

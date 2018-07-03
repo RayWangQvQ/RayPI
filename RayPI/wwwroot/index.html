@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="js/jquery-2.1.4.js"></script>
+    <script>
+        //获取jwt字符串
+        function GetToken() {
+            var tokenModel = {
+                id: $("#tid").val(),
+                name: $("#tname").val(),
+                sub: $("#tsub").val()
+            };
+            alert(JSON.stringify(tokenModel));
+            $.ajax({
+                url: "http://localhost:3608/api/TestAuth",
+                type: "get",
+                dataType: "json",
+                data: tokenModel,
+                async: false,
+                success: function (d) {
+                    alert(JSON.stringify(d));
+                    $("#jwt").val(d);
+                },
+                error: function (d) {
+                    alert(JSON.stringify(d));
+                }
+            });
+        }
+        //测试使用jwt调用接口
+        function Test() {
+            var s = { name: $("#sname").val() };
+            $.ajax({
+                url: "http://localhost:3608/api/client/Student/GetByName",
+                type: $("#method").val(),
+                dataType: "json",
+                data: s,
+                async: false,
+                headers: { "Authorization": "Bearer " + $("#jwt").val().trim() },
+
+                success: function (d) {
+                    alert(JSON.stringify(d));
+                },
+                error: function (d) {
+                    alert(JSON.stringify(d))
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    I  D:<input type="text" id="tid" value="1" /><br />
+    Name:<input type="text" id="tname" value="张三" /><br />
+    Sub :<input type="text" id="tsub" value="Client" /><br />
+    <input type="button" value="获取Token" onclick="GetToken()" /><br />
+    <br />
+    <input type="text" id="jwt" />
+    <br />
+    <input type="text" id="sname" value="张三" /> <input type="button" value="点击查询" onclick="Test()" />
+</body>
+</html>

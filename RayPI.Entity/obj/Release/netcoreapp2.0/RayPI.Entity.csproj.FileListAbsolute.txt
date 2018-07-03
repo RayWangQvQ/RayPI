@@ -1,0 +1,11 @@
+G:\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\RayPI.Entity.deps.json
+G:\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\RayPI.Entity.dll
+G:\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\RayPI.Entity.pdb
+G:\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\SqlSugar.dll
+G:\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\SqlSugar.pdb
+G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.csprojResolveAssemblyReference.cache
+G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.csproj.CoreCompileInputs.cache
+G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.AssemblyInfoInputs.cache
+G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.AssemblyInfo.cs
+G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.dll
+G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.pdb
