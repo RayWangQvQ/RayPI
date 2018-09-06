@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RayPI.IService\RayPI.IService.csproj" />
-    <ProjectReference Include="..\RayPI.Service\RayPI.Service.csproj" />
+    <ProjectReference Include="..\RayPI.IService\RayPI.IRepository.csproj" />
+    <ProjectReference Include="..\RayPI.Service\RayPI.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

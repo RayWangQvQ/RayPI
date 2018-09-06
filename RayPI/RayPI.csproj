@@ -6,6 +6,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.0\APIHelp.xml</DocumentationFile>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RayPI.Bussiness\RayPI.Bussiness.csproj" />
-    <ProjectReference Include="..\RayPI.Token\RayPI.Token.csproj" />
   </ItemGroup>
 
 </Project>

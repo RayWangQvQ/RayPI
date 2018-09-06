@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost:3607",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:3608/",
       "sslPort": 0
@@ -17,9 +21,9 @@
       }
     },
     "RayPI": {
-      "commandName": "Project",
+      "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

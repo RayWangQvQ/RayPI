@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "d9a5dfc2bc4c4cade31b99b66fd59218007a73ad"
+    "signature": "b12cfb19920d85a35cf45b4e810635124423edcb"
   },
   "compilationOptions": {},
   "targets": {
@@ -11,7 +11,7 @@
         "dependencies": {
           "Microsoft.Data.Sqlite": "2.0.0",
           "MySql.Data": "6.10.4",
-          "NETStandard.Library": "2.0.1",
+          "NETStandard.Library": "2.0.3",
           "Newtonsoft.Json": "10.0.3",
           "Oracle.ManagedDataAccess.Core": "2.12.0-beta2",
           "System.Data.Common": "4.3.0",
@@ -62,7 +62,7 @@
       "Microsoft.Extensions.Configuration/1.1.2": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.1.2",
-          "NETStandard.Library": "2.0.1"
+          "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "lib/netstandard1.1/Microsoft.Extensions.Configuration.dll": {}
@@ -71,7 +71,7 @@
       "Microsoft.Extensions.Configuration.Abstractions/1.1.2": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "1.1.1",
-          "NETStandard.Library": "2.0.1"
+          "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "lib/netstandard1.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
@@ -81,7 +81,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration": "1.1.2",
           "Microsoft.Extensions.FileProviders.Physical": "1.1.1",
-          "NETStandard.Library": "2.0.1",
+          "NETStandard.Library": "2.0.3",
           "System.Threading.Thread": "4.3.0"
         },
         "runtime": {
@@ -92,7 +92,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration": "1.1.2",
           "Microsoft.Extensions.Configuration.FileExtensions": "1.1.2",
-          "NETStandard.Library": "2.0.1",
+          "NETStandard.Library": "2.0.3",
           "Newtonsoft.Json": "10.0.3",
           "System.Dynamic.Runtime": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0"
@@ -104,7 +104,7 @@
       "Microsoft.Extensions.FileProviders.Abstractions/1.1.1": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "1.1.1",
-          "NETStandard.Library": "2.0.1"
+          "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
@@ -114,7 +114,7 @@
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Abstractions": "1.1.1",
           "Microsoft.Extensions.FileSystemGlobbing": "1.1.1",
-          "NETStandard.Library": "2.0.1",
+          "NETStandard.Library": "2.0.3",
           "System.IO.FileSystem.Watcher": "4.3.0"
         },
         "runtime": {
@@ -123,7 +123,7 @@
       },
       "Microsoft.Extensions.FileSystemGlobbing/1.1.1": {
         "dependencies": {
-          "NETStandard.Library": "2.0.1"
+          "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.Extensions.FileSystemGlobbing.dll": {}
@@ -131,7 +131,7 @@
       },
       "Microsoft.Extensions.Primitives/1.1.1": {
         "dependencies": {
-          "NETStandard.Library": "2.0.1",
+          "NETStandard.Library": "2.0.3",
           "System.Runtime.CompilerServices.Unsafe": "4.3.0"
         },
         "runtime": {
@@ -159,7 +159,7 @@
       "MySql.Data/6.10.4": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "1.1.2",
-          "NETStandard.Library": "2.0.1",
+          "NETStandard.Library": "2.0.3",
           "System.Collections.NonGeneric": "4.3.0",
           "System.ComponentModel": "4.3.0",
           "System.ComponentModel.Annotations": "4.3.0",
@@ -192,7 +192,7 @@
           "lib/netstandard1.3/MySql.Data.dll": {}
         }
       },
-      "NETStandard.Library/2.0.1": {
+      "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
@@ -200,7 +200,7 @@
       "Newtonsoft.Json/10.0.3": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
-          "NETStandard.Library": "2.0.1",
+          "NETStandard.Library": "2.0.3",
           "System.ComponentModel.TypeConverter": "4.3.0",
           "System.Runtime.Serialization.Formatters": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0",
@@ -281,7 +281,7 @@
       "runtime.win-x86.runtime.native.System.Data.SqlClient.sni/4.4.0": {},
       "SQLitePCLRaw.bundle_green/1.1.7": {
         "dependencies": {
-          "NETStandard.Library": "2.0.1",
+          "NETStandard.Library": "2.0.3",
           "SQLitePCLRaw.core": "1.1.7"
         },
         "runtime": {
@@ -291,7 +291,7 @@
       },
       "SQLitePCLRaw.core/1.1.7": {
         "dependencies": {
-          "NETStandard.Library": "2.0.1"
+          "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "lib/netstandard1.1/SQLitePCLRaw.core.dll": {}
@@ -1383,12 +1383,12 @@
       "path": "mysql.data/6.10.4",
       "hashPath": "mysql.data.6.10.4.nupkg.sha512"
     },
-    "NETStandard.Library/2.0.1": {
+    "NETStandard.Library/2.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oA6nwv9MhEKYvLpjZ0ggSpb1g4CQViDVQjLUcDWg598jtvJbpfeP2reqwI1GLW2TbxC/Ml7xL6BBR1HmKPXlTg==",
-      "path": "netstandard.library/2.0.1",
-      "hashPath": "netstandard.library.2.0.1.nupkg.sha512"
+      "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "path": "netstandard.library/2.0.3",
+      "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
     },
     "Newtonsoft.Json/10.0.3": {
       "type": "package",

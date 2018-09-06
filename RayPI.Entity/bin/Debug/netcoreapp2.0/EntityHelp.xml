@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RayPI.Entity</name>
+    </assembly>
+    <members>
+        <member name="T:RayPI.Entity.Book">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:RayPI.Entity.Book.Tid">
+            <summary>
+            Desc:Id
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="P:RayPI.Entity.Book.Title">
+            <summary>
+            Desc:书名
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="P:RayPI.Entity.Book.Writer">
+            <summary>
+            Desc:作者
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="T:RayPI.Entity.Student">
+            <summary>
+            学生实体
+            </summary>
+        </member>
+        <member name="P:RayPI.Entity.Student.Tid">
+            <summary>
+            Desc:Id
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="P:RayPI.Entity.Student.ClassId">
+            <summary>
+            Desc:班级Id
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="P:RayPI.Entity.Student.Name">
+            <summary>
+            Desc:姓名
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="T:RayPI.Entity.Teacher">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:RayPI.Entity.Teacher.Tid">
+            <summary>
+            Desc:
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+        <member name="P:RayPI.Entity.Teacher.Name">
+            <summary>
+            Desc:
+            Default:
+            Nullable:False
+            </summary>           
+        </member>
+    </members>
+</doc>

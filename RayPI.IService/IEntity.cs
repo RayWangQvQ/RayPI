@@ -1,5 +1,5 @@
 ﻿
-namespace RayPI.IService
+namespace RayPI.IRepository
 {
     /// <summary>
     /// 实体数据接口

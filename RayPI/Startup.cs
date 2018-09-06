@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using RayPI.SwaggerHelp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
-using RayPI.AuthHelper;
-using RayPI.Token;
 using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.AspNetCore.StaticFiles;
+using RayPI.Model.ConfigModel;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using RayPI.AuthHelp;
+using RayPI.ExceptionHelp;
 
 namespace RayPI
 {
@@ -29,10 +23,16 @@ namespace RayPI
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="configuration"></param>
-        public Startup(IConfiguration configuration)
+        /// <param name="env"></param>
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            this.Configuration = builder.Build();
+            var test = Configuration.ToString();
+            BaseConfigModel.SetBaseConfig(Configuration,env.ContentRootPath,env.WebRootPath);
         }
         /// <summary>
         /// 
@@ -45,7 +45,6 @@ namespace RayPI
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<Dictionary<string, string>>(Configuration.GetSection("Mime"));
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
@@ -64,10 +63,13 @@ namespace RayPI
                 });
                 //添加注释服务
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var xmlPath = Path.Combine(basePath, "APIHelp.xml");
-                c.IncludeXmlComments(xmlPath);
-                //添加对控制器的标签(描述)
-                c.DocumentFilter<SwaggerDocTag>();
+                var apiXmlPath = Path.Combine(basePath, "APIHelp.xml");
+                var entityXmlPath = Path.Combine(basePath, "EntityHelp.xml"); 
+                c.IncludeXmlComments(apiXmlPath, true);//控制器层注释（true表示显示控制器注释）
+                c.IncludeXmlComments(entityXmlPath);
+
+                //添加控制器注释
+                //c.DocumentFilter<SwaggerDocTag>();
 
                 //添加header验证信息
                 //c.OperationFilter<SwaggerHeader>();
@@ -83,17 +85,67 @@ namespace RayPI
             });
             #endregion
 
-            #region Token
-            services.AddSingleton<IMemoryCache>(factory =>
-            {
-                var cache = new MemoryCache(new MemoryCacheOptions());
-                return cache;
-            });
+            #region 认证
+            services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(o =>
+                {
+                    JwtAuthConfigModel jwtConfig=new JwtAuthConfigModel();
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = "RayPI",
+                        ValidAudience = "wr",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtConfig.JWTSecretKey)),
+
+                        /***********************************TokenValidationParameters的参数默认值***********************************/
+                        RequireSignedTokens = true,
+                        // SaveSigninToken = false,
+                        // ValidateActor = false,
+                        // 将下面两个参数设置为false，可以不验证Issuer和Audience，但是不建议这样做。
+                        ValidateAudience = false,
+                        ValidateIssuer = true,
+                        ValidateIssuerSigningKey = true,
+                        // 是否要求Token的Claims中必须包含 Expires
+                        RequireExpirationTime = true,
+                        // 允许的服务器时间偏移量
+                        // ClockSkew = TimeSpan.FromSeconds(300),
+                        // 是否验证Token有效期，使用当前时间与Token的Claims中的NotBefore和Expires对比
+                        ValidateLifetime = true
+                    };
+                });
+            #endregion
+
+            #region 授权
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("System", policy => policy.RequireClaim("SystemType").Build());
-                options.AddPolicy("Client", policy => policy.RequireClaim("ClientTpe").Build());
-                options.AddPolicy("Admin", policy => policy.RequireClaim("AdminType").Build());
+                options.AddPolicy("RequireClient", policy => policy.RequireRole("Client").Build());
+                options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin").Build());
+                options.AddPolicy("RequireAdminOrClient", policy => policy.RequireRole("Admin,Client").Build());
+            });
+            #endregion
+
+            #region CORS
+            services.AddCors(c =>
+            {
+                c.AddPolicy("Any", policy =>
+                 {
+                     policy.AllowAnyOrigin()
+                     .AllowAnyMethod()
+                     .AllowAnyHeader()
+                     .AllowCredentials();
+                 });
+
+                c.AddPolicy("Limit", policy =>
+                 {
+                     policy
+                     .WithOrigins("localhost:8083")
+                     .WithMethods("get", "post", "put", "delete")
+                     //.WithHeaders("Authorization");
+                     .AllowAnyHeader();
+                 });
             });
             #endregion
         }
@@ -105,10 +157,13 @@ namespace RayPI
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            /*
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            */
+            app.UseMiddleware<ExceptionFilter>();//自定义异常处理
 
             #region Swagger
             app.UseSwagger();
@@ -118,12 +173,14 @@ namespace RayPI
             });
             #endregion
 
-            #region TokenAuth
-            app.UseMiddleware<TokenAuth>();
-            #endregion
+            //认证
+            app.UseAuthentication();
+
+            //授权
+            app.UseMiddleware<JwtAuthorizationFilter>();
 
             app.UseMvc();
-            
+
             app.UseStaticFiles();//用于访问wwwroot下的文件 
         }
     }

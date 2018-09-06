@@ -1,6 +1,6 @@
-﻿using RayPI.IService;
+﻿using RayPI.IRepository;
 using RayPI.Model;
-using RayPI.Service;
+using RayPI.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +9,9 @@ namespace RayPI.Bussiness.System
 {
     public class EntityBLL
     {
-        private IEntity iService = new EntityService();
+        private IEntity iDAL = new EntityDAL();
 
-        public MessageModel<string> CreateEntity(string entityName, string contentRootPath)
+        public bool CreateEntity(string entityName, string contentRootPath)
         {
             string[] arr = contentRootPath.Split('\\');
             string baseFileProvider = "";
@@ -21,10 +21,7 @@ namespace RayPI.Bussiness.System
                 baseFileProvider += "\\";
             }
             string filePath = baseFileProvider + "RayPI.Entity";
-            if (iService.CreateEntity(entityName, filePath))
-                return new MessageModel<string> { Success = true, Msg = "生成成功" };
-            else
-                return new MessageModel<string> { Success = false, Msg = "生成失败" };
+            return iDAL.CreateEntity(entityName, filePath);
         }
     }
 }

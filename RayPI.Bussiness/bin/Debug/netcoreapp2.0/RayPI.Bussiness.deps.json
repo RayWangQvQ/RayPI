@@ -8,8 +8,8 @@
     ".NETCoreApp,Version=v2.0": {
       "RayPI.Bussiness/1.0.0": {
         "dependencies": {
-          "RayPI.IService": "1.0.0",
-          "RayPI.Service": "1.0.0",
+          "RayPI.IRepository": "1.0.0",
+          "RayPI.Repository": "1.0.0",
           "Microsoft.Extensions.PlatformAbstractions": "1.1.0.0"
         },
         "runtime": {
@@ -1431,13 +1431,22 @@
           "RayPI.Entity.dll": {}
         }
       },
-      "RayPI.IService/1.0.0": {
+      "RayPI.Helper/1.0.0": {
+        "dependencies": {
+          "RayPI.Model": "1.0.0",
+          "SqlSugar": "4.6.4.9"
+        },
+        "runtime": {
+          "RayPI.Helper.dll": {}
+        }
+      },
+      "RayPI.IRepository/1.0.0": {
         "dependencies": {
           "RayPI.Entity": "1.0.0",
           "RayPI.Model": "1.0.0"
         },
         "runtime": {
-          "RayPI.IService.dll": {}
+          "RayPI.IRepository.dll": {}
         }
       },
       "RayPI.Model/1.0.0": {
@@ -1448,15 +1457,16 @@
           "RayPI.Model.dll": {}
         }
       },
-      "RayPI.Service/1.0.0": {
+      "RayPI.Repository/1.0.0": {
         "dependencies": {
           "RayPI.Entity": "1.0.0",
-          "RayPI.IService": "1.0.0",
+          "RayPI.Helper": "1.0.0",
+          "RayPI.IRepository": "1.0.0",
           "RayPI.Model": "1.0.0",
           "SqlSugar": "4.6.4.9"
         },
         "runtime": {
-          "RayPI.Service.dll": {}
+          "RayPI.Repository.dll": {}
         }
       },
       "SqlSugar/4.6.4.9": {
@@ -2331,7 +2341,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "RayPI.IService/1.0.0": {
+    "RayPI.Helper/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RayPI.IRepository/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -2341,7 +2356,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "RayPI.Service/1.0.0": {
+    "RayPI.Repository/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

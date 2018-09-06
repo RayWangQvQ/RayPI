@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using RayPI.IService;
+using RayPI.IRepository;
 using RayPI.Entity;
-using RayPI.Service;
+using RayPI.Repository;
 
 namespace RayPI.Bussiness.Client
 {
     public class CStuentBLL
     {
-        private IStudent iService = new StudentService();
+        private IStudent iStuendt = new StudentDAL();
         public Student GetByName(string name)
         {
-            return iService.GetByName(name);
+            return iStuendt.GetByName(name);
         }
     }
 }

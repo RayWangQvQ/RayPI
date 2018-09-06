@@ -2270,7 +2270,21 @@
           "bin/placeholder/RayPI.Entity.dll": {}
         }
       },
-      "RayPI.IService/1.0.0": {
+      "RayPI.Helper/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "RayPI.Model": "1.0.0",
+          "SqlSugar": "4.6.4.9"
+        },
+        "compile": {
+          "bin/placeholder/RayPI.Helper.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RayPI.Helper.dll": {}
+        }
+      },
+      "RayPI.IRepository/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
@@ -2278,10 +2292,10 @@
           "RayPI.Model": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/RayPI.IService.dll": {}
+          "bin/placeholder/RayPI.IRepository.dll": {}
         },
         "runtime": {
-          "bin/placeholder/RayPI.IService.dll": {}
+          "bin/placeholder/RayPI.IRepository.dll": {}
         }
       },
       "RayPI.Model/1.0.0": {
@@ -7330,10 +7344,15 @@
       "path": "../RayPI.Entity/RayPI.Entity.csproj",
       "msbuildProject": "../RayPI.Entity/RayPI.Entity.csproj"
     },
-    "RayPI.IService/1.0.0": {
+    "RayPI.Helper/1.0.0": {
       "type": "project",
-      "path": "../RayPI.IService/RayPI.IService.csproj",
-      "msbuildProject": "../RayPI.IService/RayPI.IService.csproj"
+      "path": "../RayPI.Helper/RayPI.Helper.csproj",
+      "msbuildProject": "../RayPI.Helper/RayPI.Helper.csproj"
+    },
+    "RayPI.IRepository/1.0.0": {
+      "type": "project",
+      "path": "../RayPI.IService/RayPI.IRepository.csproj",
+      "msbuildProject": "../RayPI.IService/RayPI.IRepository.csproj"
     },
     "RayPI.Model/1.0.0": {
       "type": "project",
@@ -7350,29 +7369,30 @@
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.NETCore.App >= 2.0.0",
       "RayPI.Entity >= 1.0.0",
-      "RayPI.IService >= 1.0.0",
+      "RayPI.Helper >= 1.0.0",
+      "RayPI.IRepository >= 1.0.0",
       "RayPI.Model >= 1.0.0",
       "SqlSugar >= 4.6.4.9"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\22712\\.nuget\\packages\\": {},
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MyProjects\\RayPI\\RayPI.Service\\RayPI.Service.csproj",
-      "projectName": "RayPI.Service",
-      "projectPath": "D:\\MyProjects\\RayPI\\RayPI.Service\\RayPI.Service.csproj",
-      "packagesPath": "C:\\Users\\22712\\.nuget\\packages\\",
-      "outputPath": "D:\\MyProjects\\RayPI\\RayPI.Service\\obj\\",
+      "projectUniqueName": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Service\\RayPI.Repository.csproj",
+      "projectName": "RayPI.Repository",
+      "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Service\\RayPI.Repository.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\22712\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7385,17 +7405,20 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "D:\\MyProjects\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj": {
-              "projectPath": "D:\\MyProjects\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj"
+            "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj": {
+              "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj"
             },
-            "D:\\MyProjects\\RayPI\\RayPI.IService\\RayPI.IService.csproj": {
-              "projectPath": "D:\\MyProjects\\RayPI\\RayPI.IService\\RayPI.IService.csproj"
+            "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Helper\\RayPI.Helper.csproj": {
+              "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Helper\\RayPI.Helper.csproj"
             },
-            "D:\\MyProjects\\RayPI\\RayPI.Model\\RayPI.Model.csproj": {
-              "projectPath": "D:\\MyProjects\\RayPI\\RayPI.Model\\RayPI.Model.csproj"
+            "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.IService\\RayPI.IRepository.csproj": {
+              "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.IService\\RayPI.IRepository.csproj"
             },
-            "D:\\MyProjects\\RayPI\\SqlSugar\\SqlSugar.csproj": {
-              "projectPath": "D:\\MyProjects\\RayPI\\SqlSugar\\SqlSugar.csproj"
+            "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Model\\RayPI.Model.csproj": {
+              "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Model\\RayPI.Model.csproj"
+            },
+            "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\SqlSugar\\SqlSugar.csproj": {
+              "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\SqlSugar\\SqlSugar.csproj"
             }
           }
         }

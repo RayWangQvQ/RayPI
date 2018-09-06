@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RayPI.Model</name>
+    </assembly>
+    <members>
+        <member name="T:RayPI.Model.ConfigModel.JwtAuthConfigModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RayPI.Model.ConfigModel.JwtAuthConfigModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.JWTSecretKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.WebExp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.AppExp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.MiniProgramExp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.OtherExp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:RayPI.Model.MyException">
+            <summary>
+            自定义业务异常类
+            </summary>
+        </member>
+        <member name="T:RayPI.Model.ReturnModel.TableModel`1">
+            <summary>
+            表格数据，支持分页
+            </summary>
+        </member>
+        <member name="P:RayPI.Model.ReturnModel.TableModel`1.Code">
+            <summary>
+            返回编码
+            </summary>
+        </member>
+        <member name="P:RayPI.Model.ReturnModel.TableModel`1.Msg">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="P:RayPI.Model.ReturnModel.TableModel`1.Count">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:RayPI.Model.ReturnModel.TableModel`1.Data">
+            <summary>
+            返回数据集
+            </summary>
+        </member>
+    </members>
+</doc>

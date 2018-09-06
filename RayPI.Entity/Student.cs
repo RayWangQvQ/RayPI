@@ -6,32 +6,28 @@ using SqlSugar;
 namespace RayPI.Entity
 {
     ///<summary>
-    ///
+    ///学生实体
     ///</summary>
     [SugarTable("Student")]
     public partial class Student
     {
            public Student(){
-
-
            }
            /// <summary>
-           /// Desc:
+           /// Desc:Id
            /// Default:
            /// Nullable:False
            /// </summary>           
            [SugarColumn(IsPrimaryKey=true,IsIdentity=true)]
            public long Tid {get;set;}
-
            /// <summary>
-           /// Desc:
+           /// Desc:班级Id
            /// Default:
            /// Nullable:False
            /// </summary>           
            public long ClassId {get;set;}
-
            /// <summary>
-           /// Desc:
+           /// Desc:姓名
            /// Default:
            /// Nullable:False
            /// </summary>           

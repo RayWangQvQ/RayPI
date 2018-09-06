@@ -9,15 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Bussiness", "RayPI.Bu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Entity", "RayPI.Entity\RayPI.Entity.csproj", "{E4CDA23E-FC32-4FBC-BD18-05CC6D9C371D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.IService", "RayPI.IService\RayPI.IService.csproj", "{221B3E7A-9CC3-4C2C-90E1-D7FD018ADC56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.IRepository", "RayPI.IService\RayPI.IRepository.csproj", "{221B3E7A-9CC3-4C2C-90E1-D7FD018ADC56}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Model", "RayPI.Model\RayPI.Model.csproj", "{8107740E-C3C1-4DB4-848A-ADAABD6BCAF2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Service", "RayPI.Service\RayPI.Service.csproj", "{846B820A-7D98-45C7-A1A3-6409B92E1DA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Repository", "RayPI.Service\RayPI.Repository.csproj", "{846B820A-7D98-45C7-A1A3-6409B92E1DA4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar", "SqlSugar\SqlSugar.csproj", "{902C44A9-6D0E-4713-879C-58A927EC967E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayPI.Token", "RayPI.Token\RayPI.Token.csproj", "{25BE5B7E-9EF7-4AD9-8586-81229BAAF661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Helper", "RayPI.Helper\RayPI.Helper.csproj", "{B563CC18-796F-4692-8396-016F70C747FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{902C44A9-6D0E-4713-879C-58A927EC967E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{902C44A9-6D0E-4713-879C-58A927EC967E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{902C44A9-6D0E-4713-879C-58A927EC967E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{25BE5B7E-9EF7-4AD9-8586-81229BAAF661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{25BE5B7E-9EF7-4AD9-8586-81229BAAF661}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{25BE5B7E-9EF7-4AD9-8586-81229BAAF661}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{25BE5B7E-9EF7-4AD9-8586-81229BAAF661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B563CC18-796F-4692-8396-016F70C747FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B563CC18-796F-4692-8396-016F70C747FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B563CC18-796F-4692-8396-016F70C747FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B563CC18-796F-4692-8396-016F70C747FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

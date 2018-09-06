@@ -14,7 +14,7 @@
             };
             alert(JSON.stringify(tokenModel));
             $.ajax({
-                url: "http://localhost:3608/api/TestAuth",
+                url: "http://localhost:3608/api/System/Token",
                 type: "get",
                 dataType: "json",
                 data: tokenModel,
@@ -25,6 +25,7 @@
                 },
                 error: function (d) {
                     alert(JSON.stringify(d));
+                    $("#jwt").val(JSON.stringify(d));
                 }
             });
         }
@@ -32,31 +33,37 @@
         function Test() {
             var s = { name: $("#sname").val() };
             $.ajax({
-                url: "http://localhost:3608/api/client/Student/GetByName",
-                type: $("#method").val(),
+                url: "http://localhost:3608/api/Client/Student/GetByName",
+                type: "get",
                 dataType: "json",
                 data: s,
                 async: false,
                 headers: { "Authorization": "Bearer " + $("#jwt").val().trim() },
-
                 success: function (d) {
                     alert(JSON.stringify(d));
+                    $("#sudent").val(JSON.stringify(d));
                 },
                 error: function (d) {
-                    alert(JSON.stringify(d))
+                    alert(JSON.stringify(d));
+                    $("#sudent").val(JSON.stringify(d));
                 }
             });
         }
     </script>
 </head>
 <body>
-    I  D:<input type="text" id="tid" value="1" /><br />
-    Name:<input type="text" id="tname" value="张三" /><br />
-    Sub :<input type="text" id="tsub" value="Client" /><br />
-    <input type="button" value="获取Token" onclick="GetToken()" /><br />
-    <br />
-    <input type="text" id="jwt" />
-    <br />
-    <input type="text" id="sname" value="张三" /> <input type="button" value="点击查询" onclick="Test()" />
+    <div style="width:350px; margin:100px auto 0;">
+        I  D:<input type="text" id="tid" value="1" /><br />
+        Name:<input type="text" id="tname" value="张三" /><br />
+        Sub :<input type="text" id="tsub" value="Client" /><br />
+        <input type="button" value="获取Token" onclick="GetToken()" /><br />
+        <br />
+        <p>token:</p>
+        <textarea id="jwt" style="width:300px; height:200px; "></textarea>
+        <br />
+        学生姓名：<input type="text" id="sname" value="张三" /> <input type="button" value="点击查询" onclick="Test()" />
+        <br />
+        <textarea id="sudent" style="width:300px;height:200px;"></textarea>
+    </div>
 </body>
 </html>

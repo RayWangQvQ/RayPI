@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RayPI.Bussiness.System;
-using RayPI.Token;
+using RayPI.Helper;
+using RayPI.Model;
+using RayPI.Model.ConfigModel;
 
 namespace RayPI.Controllers
 {
@@ -15,18 +19,11 @@ namespace RayPI.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/System")]
+    [EnableCors("Any")]
+    //[Authorize(Policy = "RequireAdminOrClient")]
     public class SystemController : Controller
     {
         private EntityBLL bll = new EntityBLL();
-        private readonly IHostingEnvironment _hostingEnvironment;
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="hostingEnvironment"></param>
-        public SystemController(IHostingEnvironment hostingEnvironment)
-        {
-            _hostingEnvironment = hostingEnvironment;
-        }
 
         #region 生成实体类
         /// <summary>
@@ -36,39 +33,23 @@ namespace RayPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("Entity/Create")]
-        public JsonResult CreateEntity(string entityName = null)
+        public JsonResult CreateEntity(string entityName)
         {
-            if (entityName == null)
-                return Json("参数为空");
-            return Json(bll.CreateEntity(entityName, _hostingEnvironment.ContentRootPath));
+            return Json(bll.CreateEntity(entityName, BaseConfigModel.ContentRootPath));
         }
         #endregion
 
         #region Token
         /// <summary>
-        /// 获取JWT，并存入缓存
+        /// 模拟登录，获取JWT
         /// </summary>
-        /// <param name="id">用户Id</param>
-        /// <param name="sub">身份</param>
-        /// <param name="expiresSliding">相对过期时间，单位为分</param>
-        /// <param name="expiresAbsoulute">绝对过期时间，单位为天</param>
+        /// <param name="tm"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        public JsonResult GetJWTStr(long id, string sub, int expiresSliding = 30, int expiresAbsoulute = 30)
+        public JsonResult GetJWTStr(TokenModel tm)
         {
-            Token.Model.TokenModel tokenModel = new Token.Model.TokenModel();
-            tokenModel.Uid = id;
-            tokenModel.Sub = sub;
-
-            DateTime d1 = DateTime.Now;
-            DateTime d2 = d1.AddMinutes(expiresSliding);
-            DateTime d3 = d1.AddDays(expiresAbsoulute);
-            TimeSpan sliding = d2 - d1;
-            TimeSpan absoulute = d3 - d1;
-
-            string jwtStr = RayPIToken.IssueJWT(tokenModel, sliding, absoulute);
-            return Json(jwtStr);
+            return Json(JwtHelper.IssueJWT(tm));
         }
         #endregion
     }
