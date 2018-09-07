@@ -7401,11 +7401,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Bussiness\\RayPI.Bussiness.csproj",
+      "projectUniqueName": "E:\\RayPI\\RayPI.Bussiness\\RayPI.Bussiness.csproj",
       "projectName": "RayPI.Bussiness",
-      "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Bussiness\\RayPI.Bussiness.csproj",
+      "projectPath": "E:\\RayPI\\RayPI.Bussiness\\RayPI.Bussiness.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Bussiness\\obj\\",
+      "outputPath": "E:\\RayPI\\RayPI.Bussiness\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -7424,11 +7424,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.IService\\RayPI.IRepository.csproj": {
-              "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.IService\\RayPI.IRepository.csproj"
+            "E:\\RayPI\\RayPI.IService\\RayPI.IRepository.csproj": {
+              "projectPath": "E:\\RayPI\\RayPI.IService\\RayPI.IRepository.csproj"
             },
-            "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Service\\RayPI.Repository.csproj": {
-              "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Service\\RayPI.Repository.csproj"
+            "E:\\RayPI\\RayPI.Service\\RayPI.Repository.csproj": {
+              "projectPath": "E:\\RayPI\\RayPI.Service\\RayPI.Repository.csproj"
             }
           }
         }

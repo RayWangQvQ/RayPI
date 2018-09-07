@@ -60,3 +60,12 @@ G:\RayPI（180831集成配置读取）\RayPI（180831集成配置读取）\RayPI
 G:\RayPI（180831集成配置读取）\RayPI（180831集成配置读取）\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.AssemblyInfo.cs
 G:\RayPI（180831集成配置读取）\RayPI（180831集成配置读取）\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.dll
 G:\RayPI（180831集成配置读取）\RayPI（180831集成配置读取）\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.pdb
+E:\RayPI\SqlSugar\bin\Debug\netstandard2.0\SqlSugar.deps.json
+E:\RayPI\SqlSugar\bin\Debug\netstandard2.0\SqlSugar.dll
+E:\RayPI\SqlSugar\bin\Debug\netstandard2.0\SqlSugar.pdb
+E:\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.csprojAssemblyReference.cache
+E:\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.csproj.CoreCompileInputs.cache
+E:\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.AssemblyInfoInputs.cache
+E:\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.AssemblyInfo.cs
+E:\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.dll
+E:\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.pdb

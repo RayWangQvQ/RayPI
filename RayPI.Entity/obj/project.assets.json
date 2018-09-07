@@ -7304,11 +7304,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj",
+      "projectUniqueName": "E:\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj",
       "projectName": "RayPI.Entity",
-      "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj",
+      "projectPath": "E:\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\RayPI.Entity\\obj\\",
+      "outputPath": "E:\\RayPI\\RayPI.Entity\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -7327,8 +7327,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\SqlSugar\\SqlSugar.csproj": {
-              "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\SqlSugar\\SqlSugar.csproj"
+            "E:\\RayPI\\SqlSugar\\SqlSugar.csproj": {
+              "projectPath": "E:\\RayPI\\SqlSugar\\SqlSugar.csproj"
             }
           }
         }

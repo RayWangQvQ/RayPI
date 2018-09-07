@@ -6764,11 +6764,11 @@
   "project": {
     "version": "4.6.4.9",
     "restore": {
-      "projectUniqueName": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\SqlSugar\\SqlSugar.csproj",
+      "projectUniqueName": "E:\\RayPI\\SqlSugar\\SqlSugar.csproj",
       "projectName": "SqlSugar",
-      "projectPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\SqlSugar\\SqlSugar.csproj",
+      "projectPath": "E:\\RayPI\\SqlSugar\\SqlSugar.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "G:\\RayPI（180831集成配置读取）\\RayPI（180831集成配置读取、自定义日志和异常处理）\\RayPI\\SqlSugar\\obj\\",
+      "outputPath": "E:\\RayPI\\SqlSugar\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

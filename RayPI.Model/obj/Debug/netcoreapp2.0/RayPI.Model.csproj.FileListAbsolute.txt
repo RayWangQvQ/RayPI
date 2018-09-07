@@ -88,3 +88,16 @@ G:\RayPI（180831集成配置读取）\RayPI（180831集成配置读取）\RayPI
 G:\RayPI（180831集成配置读取）\RayPI（180831集成配置读取）\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.csproj.CopyComplete
 G:\RayPI（180831集成配置读取）\RayPI（180831集成配置读取）\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.dll
 G:\RayPI（180831集成配置读取）\RayPI（180831集成配置读取）\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.pdb
+E:\RayPI\RayPI.Model\bin\Debug\netcoreapp2.0\RayPI.Model.deps.json
+E:\RayPI\RayPI.Model\bin\Debug\netcoreapp2.0\RayPI.Model.dll
+E:\RayPI\RayPI.Model\bin\Debug\netcoreapp2.0\RayPI.Model.pdb
+E:\RayPI\RayPI.Model\bin\Debug\netcoreapp2.0\ModelHelp.xml
+E:\RayPI\RayPI.Model\bin\Debug\netcoreapp2.0\SqlSugar.dll
+E:\RayPI\RayPI.Model\bin\Debug\netcoreapp2.0\SqlSugar.pdb
+E:\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.csprojAssemblyReference.cache
+E:\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.csproj.CoreCompileInputs.cache
+E:\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.AssemblyInfoInputs.cache
+E:\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.AssemblyInfo.cs
+E:\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.csproj.CopyComplete
+E:\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.dll
+E:\RayPI\RayPI.Model\obj\Debug\netcoreapp2.0\RayPI.Model.pdb
