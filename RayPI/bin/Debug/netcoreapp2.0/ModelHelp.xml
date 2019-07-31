@@ -24,45 +24,32 @@
             
             </summary>
         </member>
-        <member name="M:RayPI.Model.ConfigModel.BaseConfigModel.SetBaseConfig(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="config"></param>
-            <param name="contentRootPath"></param>
-            <param name="webRootPath"></param>
-        </member>
         <member name="T:RayPI.Model.ConfigModel.JwtAuthConfigModel">
             <summary>
             
             </summary>
         </member>
-        <member name="M:RayPI.Model.ConfigModel.JwtAuthConfigModel.#ctor">
+        <member name="P:RayPI.Model.ConfigModel.JwtAuthConfigModel.JWTSecretKey">
             <summary>
             
             </summary>
         </member>
-        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.JWTSecretKey">
+        <member name="P:RayPI.Model.ConfigModel.JwtAuthConfigModel.WebExp">
             <summary>
             
             </summary>
         </member>
-        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.WebExp">
+        <member name="P:RayPI.Model.ConfigModel.JwtAuthConfigModel.AppExp">
             <summary>
             
             </summary>
         </member>
-        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.AppExp">
+        <member name="P:RayPI.Model.ConfigModel.JwtAuthConfigModel.MiniProgramExp">
             <summary>
             
             </summary>
         </member>
-        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.MiniProgramExp">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:RayPI.Model.ConfigModel.JwtAuthConfigModel.OtherExp">
+        <member name="P:RayPI.Model.ConfigModel.JwtAuthConfigModel.OtherExp">
             <summary>
             
             </summary>

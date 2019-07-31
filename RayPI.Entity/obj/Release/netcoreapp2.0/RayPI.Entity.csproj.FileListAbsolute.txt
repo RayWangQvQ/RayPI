@@ -9,3 +9,15 @@ G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.AssemblyInfoInputs.
 G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.AssemblyInfo.cs
 G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.dll
 G:\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.pdb
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\RayPI.Entity.deps.json
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\RayPI.Entity.dll
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\RayPI.Entity.pdb
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\SqlSugar.dll
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\bin\Release\netcoreapp2.0\SqlSugar.pdb
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.csprojAssemblyReference.cache
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.csproj.CoreCompileInputs.cache
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.AssemblyInfoInputs.cache
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.AssemblyInfo.cs
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.csproj.CopyComplete
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.dll
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Entity\obj\Release\netcoreapp2.0\RayPI.Entity.pdb

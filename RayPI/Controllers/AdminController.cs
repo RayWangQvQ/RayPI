@@ -24,7 +24,7 @@ namespace RayPI.Controllers
     public class AdminController : Controller
     {
         #region 学生
-        private StudentBLL bll = new StudentBLL();
+        private StudentBussiness bll = new StudentBussiness();
 
         /// <summary>
         /// 获取学生分页列表
@@ -50,7 +50,7 @@ namespace RayPI.Controllers
         public JsonResult GetStudentById(long id = 0)
         {
             if (id == 0)
-                throw new MyException("参数id不合法",StatusCodes.Status400BadRequest);
+                throw new MyException("参数id不合法", StatusCodes.Status400BadRequest);
             return Json(bll.GetById(id));
         }
 
@@ -97,7 +97,7 @@ namespace RayPI.Controllers
         #endregion
 
         #region 教师
-        private TeacherBLL _TeacherBLL = new TeacherBLL();
+        private TeacherBussiness _TeacherBLL = new TeacherBussiness();
 
         /// <summary>
         /// 获取教师分页列表

@@ -7,3 +7,12 @@ G:\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.AssemblyInfoInputs.cache
 G:\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.AssemblyInfo.cs
 G:\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.dll
 G:\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.pdb
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\SqlSugar\bin\Release\netstandard2.0\SqlSugar.deps.json
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\SqlSugar\bin\Release\netstandard2.0\SqlSugar.dll
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\SqlSugar\bin\Release\netstandard2.0\SqlSugar.pdb
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.csprojAssemblyReference.cache
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.csproj.CoreCompileInputs.cache
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.AssemblyInfoInputs.cache
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.AssemblyInfo.cs
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.dll
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\SqlSugar\obj\Release\netstandard2.0\SqlSugar.pdb

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+//
 using RayPI.Bussiness.System;
-using RayPI.Helper;
-using RayPI.Model;
-using RayPI.Model.ConfigModel;
+using RayPI.ConfigService.ConfigModel;
+using RayPI.Treasury.Models;
+using RayPI.AuthService;
+
 
 namespace RayPI.Controllers
 {
@@ -24,6 +21,22 @@ namespace RayPI.Controllers
     public class SystemController : Controller
     {
         private EntityBLL bll = new EntityBLL();
+        private IConfiguration _config;
+        private IHostingEnvironment _env;
+        private JwtAuthConfigModel _jwtAuthConfigModel;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="env"></param>
+        /// <param name="jwtAuthConfigModel"></param>
+        public SystemController(IConfiguration configuration, IHostingEnvironment env, JwtAuthConfigModel jwtAuthConfigModel)
+        {
+            _config = configuration;
+            _env = env;
+            _jwtAuthConfigModel = jwtAuthConfigModel;
+        }
 
         #region 生成实体类
         /// <summary>
@@ -35,7 +48,7 @@ namespace RayPI.Controllers
         [Route("Entity/Create")]
         public JsonResult CreateEntity(string entityName)
         {
-            return Json(bll.CreateEntity(entityName, BaseConfigModel.ContentRootPath));
+            return Json(bll.CreateEntity(entityName, _env.ContentRootPath));
         }
         #endregion
 
@@ -47,9 +60,9 @@ namespace RayPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        public JsonResult GetJWTStr(TokenModel tm)
+        public string GetJWTStr(TokenModel tm)
         {
-            return Json(JwtHelper.IssueJWT(tm));
+            return JwtHelper.IssueJWT(tm, _jwtAuthConfigModel);
         }
         #endregion
     }

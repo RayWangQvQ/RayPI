@@ -104,12 +104,23 @@
             客户端
             </summary>
         </member>
+        <member name="M:RayPI.Controllers.ClientController.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:RayPI.Controllers.ClientController.GetByName(System.String)">
             <summary>
             根据姓名获取学生
             </summary>
             <remarks>精确查询</remarks>
             <param name="name">学生姓名</param>
+            <returns></returns>
+        </member>
+        <member name="M:RayPI.Controllers.ClientController.TestException">
+            <summary>
+            测试异常
+            </summary>
             <returns></returns>
         </member>
         <member name="T:RayPI.Controllers.SystemController">

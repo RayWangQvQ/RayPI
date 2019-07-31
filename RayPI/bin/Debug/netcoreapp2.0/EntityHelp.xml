@@ -9,6 +9,11 @@
             
             </summary>
         </member>
+        <member name="M:RayPI.Entity.Book.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:RayPI.Entity.Book.Tid">
             <summary>
             Desc:Id
@@ -35,6 +40,11 @@
             学生实体
             </summary>
         </member>
+        <member name="M:RayPI.Entity.Student.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:RayPI.Entity.Student.Tid">
             <summary>
             Desc:Id
@@ -57,6 +67,11 @@
             </summary>           
         </member>
         <member name="T:RayPI.Entity.Teacher">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RayPI.Entity.Teacher.#ctor">
             <summary>
             
             </summary>

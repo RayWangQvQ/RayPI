@@ -1,12 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RayPI.IService\RayPI.IRepository.csproj" />
-    <ProjectReference Include="..\RayPI.Service\RayPI.Repository.csproj" />
+    <ProjectReference Include="..\RayPI.Entity\RayPI.Entity.csproj" />
+    <ProjectReference Include="..\RayPI.IRepository\RayPI.IRepository.csproj" />
+    <ProjectReference Include="..\RayPI.Model\RayPI.Model.csproj" />
+    <ProjectReference Include="..\RayPI.Repository\RayPI.Repository.csproj" />
+    <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
   </ItemGroup>
 
   <ItemGroup>

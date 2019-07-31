@@ -9,3 +9,15 @@ G:\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.AssemblyInfoInputs.ca
 G:\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.AssemblyInfo.cs
 G:\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.dll
 G:\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.pdb
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\bin\Release\netcoreapp2.0\RayPI.Model.deps.json
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\bin\Release\netcoreapp2.0\RayPI.Model.dll
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\bin\Release\netcoreapp2.0\RayPI.Model.pdb
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\bin\Release\netcoreapp2.0\SqlSugar.dll
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\bin\Release\netcoreapp2.0\SqlSugar.pdb
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.csprojAssemblyReference.cache
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.csproj.CoreCompileInputs.cache
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.AssemblyInfoInputs.cache
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.AssemblyInfo.cs
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.csproj.CopyComplete
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.dll
+D:\MyProjects\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI（180831集成配置读取、自定义日志和异常处理）\RayPI\RayPI.Model\obj\Release\netcoreapp2.0\RayPI.Model.pdb

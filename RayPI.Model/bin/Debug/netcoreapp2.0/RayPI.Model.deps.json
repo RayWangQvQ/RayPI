@@ -45,7 +45,10 @@
           "SQLitePCLRaw.core": "1.1.7"
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {}
+          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.17205"
+          }
         }
       },
       "Microsoft.Extensions.Configuration/1.1.2": {
@@ -53,7 +56,10 @@
           "Microsoft.Extensions.Configuration.Abstractions": "1.1.2"
         },
         "runtime": {
-          "lib/netstandard1.1/Microsoft.Extensions.Configuration.dll": {}
+          "lib/netstandard1.1/Microsoft.Extensions.Configuration.dll": {
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.30427"
+          }
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions/1.1.2": {
@@ -61,7 +67,10 @@
           "Microsoft.Extensions.Primitives": "1.1.1"
         },
         "runtime": {
-          "lib/netstandard1.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.30427"
+          }
         }
       },
       "Microsoft.Extensions.Configuration.FileExtensions/1.1.2": {
@@ -71,7 +80,10 @@
           "System.Threading.Thread": "4.3.0"
         },
         "runtime": {
-          "lib/netstandard1.3/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
+          "lib/netstandard1.3/Microsoft.Extensions.Configuration.FileExtensions.dll": {
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.30427"
+          }
         }
       },
       "Microsoft.Extensions.Configuration.Json/1.1.2": {
@@ -83,7 +95,10 @@
           "System.Runtime.Serialization.Primitives": "4.3.0"
         },
         "runtime": {
-          "lib/netstandard1.3/Microsoft.Extensions.Configuration.Json.dll": {}
+          "lib/netstandard1.3/Microsoft.Extensions.Configuration.Json.dll": {
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.30427"
+          }
         }
       },
       "Microsoft.Extensions.FileProviders.Abstractions/1.1.1": {
@@ -91,7 +106,10 @@
           "Microsoft.Extensions.Primitives": "1.1.1"
         },
         "runtime": {
-          "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.30427"
+          }
         }
       },
       "Microsoft.Extensions.FileProviders.Physical/1.1.1": {
@@ -101,12 +119,18 @@
           "System.IO.FileSystem.Watcher": "4.3.0"
         },
         "runtime": {
-          "lib/netstandard1.3/Microsoft.Extensions.FileProviders.Physical.dll": {}
+          "lib/netstandard1.3/Microsoft.Extensions.FileProviders.Physical.dll": {
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.30427"
+          }
         }
       },
       "Microsoft.Extensions.FileSystemGlobbing/1.1.1": {
         "runtime": {
-          "lib/netstandard1.3/Microsoft.Extensions.FileSystemGlobbing.dll": {}
+          "lib/netstandard1.3/Microsoft.Extensions.FileSystemGlobbing.dll": {
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.30427"
+          }
         }
       },
       "Microsoft.Extensions.Primitives/1.1.1": {
@@ -114,7 +138,10 @@
           "System.Runtime.CompilerServices.Unsafe": "4.3.0"
         },
         "runtime": {
-          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {}
+          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.30427"
+          }
         }
       },
       "Microsoft.NETCore.Targets/1.1.0": {},
@@ -172,7 +199,10 @@
           "System.Threading.Timer": "4.3.0"
         },
         "runtime": {
-          "lib/netstandard1.3/MySql.Data.dll": {}
+          "lib/netstandard1.3/MySql.Data.dll": {
+            "assemblyVersion": "6.10.4.0",
+            "fileVersion": "6.10.4.0"
+          }
         }
       },
       "Newtonsoft.Json/10.0.3": {
@@ -184,12 +214,18 @@
           "System.Xml.XmlDocument": "4.3.0"
         },
         "runtime": {
-          "lib/netstandard1.3/Newtonsoft.Json.dll": {}
+          "lib/netstandard1.3/Newtonsoft.Json.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.3.21018"
+          }
         }
       },
       "Oracle.ManagedDataAccess.Core/2.12.0-beta2": {
         "runtime": {
-          "lib/netstandard2.0/Oracle.ManagedDataAccess.dll": {}
+          "lib/netstandard2.0/Oracle.ManagedDataAccess.dll": {
+            "assemblyVersion": "2.0.12.0",
+            "fileVersion": "2.0.12.0"
+          }
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -330,7 +366,8 @@
         "runtimeTargets": {
           "runtimes/win-arm64/native/sni.dll": {
             "rid": "win-arm64",
-            "assetType": "native"
+            "assetType": "native",
+            "fileVersion": "4.6.25512.1"
           }
         }
       },
@@ -338,7 +375,8 @@
         "runtimeTargets": {
           "runtimes/win-x64/native/sni.dll": {
             "rid": "win-x64",
-            "assetType": "native"
+            "assetType": "native",
+            "fileVersion": "4.6.25512.1"
           }
         }
       },
@@ -346,7 +384,8 @@
         "runtimeTargets": {
           "runtimes/win-x86/native/sni.dll": {
             "rid": "win-x86",
-            "assetType": "native"
+            "assetType": "native",
+            "fileVersion": "4.6.25512.1"
           }
         }
       },
@@ -359,24 +398,35 @@
           "SQLitePCLRaw.provider.e_sqlite3.netstandard11": "1.1.7"
         },
         "runtime": {
-          "lib/netcoreapp/SQLitePCLRaw.batteries_green.dll": {},
-          "lib/netcoreapp/SQLitePCLRaw.batteries_v2.dll": {}
+          "lib/netcoreapp/SQLitePCLRaw.batteries_green.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "lib/netcoreapp/SQLitePCLRaw.batteries_v2.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "SQLitePCLRaw.core/1.1.7": {
         "runtime": {
-          "lib/netstandard1.1/SQLitePCLRaw.core.dll": {}
+          "lib/netstandard1.1/SQLitePCLRaw.core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "SQLitePCLRaw.lib.e_sqlite3.linux/1.1.7": {
         "runtimeTargets": {
           "runtimes/linux-x64/native/libe_sqlite3.so": {
             "rid": "linux-x64",
-            "assetType": "native"
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/linux-x86/native/libe_sqlite3.so": {
             "rid": "linux-x86",
-            "assetType": "native"
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -384,7 +434,8 @@
         "runtimeTargets": {
           "runtimes/osx-x64/native/libe_sqlite3.dylib": {
             "rid": "osx-x64",
-            "assetType": "native"
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -392,11 +443,13 @@
         "runtimeTargets": {
           "runtimes/win7-x64/native/e_sqlite3.dll": {
             "rid": "win7-x64",
-            "assetType": "native"
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win7-x86/native/e_sqlite3.dll": {
             "rid": "win7-x86",
-            "assetType": "native"
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -405,7 +458,10 @@
           "SQLitePCLRaw.core": "1.1.7"
         },
         "runtime": {
-          "lib/netstandard1.1/SQLitePCLRaw.provider.e_sqlite3.dll": {}
+          "lib/netstandard1.1/SQLitePCLRaw.provider.e_sqlite3.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "System.Buffers/4.3.0": {
@@ -524,16 +580,23 @@
           "runtime.native.System.Data.SqlClient.sni": "4.4.0"
         },
         "runtime": {
-          "lib/netstandard2.0/System.Data.SqlClient.dll": {}
+          "lib/netstandard2.0/System.Data.SqlClient.dll": {
+            "assemblyVersion": "4.2.0.0",
+            "fileVersion": "4.6.25519.3"
+          }
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard2.0/System.Data.SqlClient.dll": {
             "rid": "unix",
-            "assetType": "runtime"
+            "assetType": "runtime",
+            "assemblyVersion": "4.2.0.0",
+            "fileVersion": "4.6.25519.3"
           },
           "runtimes/win/lib/netstandard2.0/System.Data.SqlClient.dll": {
             "rid": "win",
-            "assetType": "runtime"
+            "assetType": "runtime",
+            "assemblyVersion": "4.2.0.0",
+            "fileVersion": "4.6.25519.3"
           }
         }
       },
@@ -1017,7 +1080,10 @@
           "System.Runtime": "4.3.0"
         },
         "runtime": {
-          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "0.0.0.0"
+          }
         }
       },
       "System.Runtime.Extensions/4.3.0": {
@@ -1314,12 +1380,17 @@
       },
       "System.Text.Encoding.CodePages/4.4.0": {
         "runtime": {
-          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
+          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
+            "assemblyVersion": "4.1.0.0",
+            "fileVersion": "4.6.25519.3"
+          }
         },
         "runtimeTargets": {
           "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll": {
             "rid": "win",
-            "assetType": "runtime"
+            "assetType": "runtime",
+            "assemblyVersion": "4.1.0.0",
+            "fileVersion": "4.6.25519.3"
           }
         }
       },
@@ -1579,7 +1650,7 @@
     "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-c3YNH1GQJbfIPJeCnr4avseugSqPrxwIqzthYyZDN6EuOyNOzq+y2KSUfRcXauya1sF4foESTgwM5e1A8arAKw==",
+      "sha512": "sha512-LdIvj7Bi2jiaNTqY/ezZGVXHe1KI5fjLSI026O1TjVzsmdgTP/zTF+f3nwHCjwttyhsPBEiswv0PekimPWZwWg==",
       "path": "runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
     },
@@ -1600,7 +1671,7 @@
     "runtime.native.System.IO.Compression/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-INBPonS5QPEgn7naufQFXJEp3zX6L4bwHgJ/ZH78aBTpeNfQMtf7C6VrAFhlq2xxWBveIOWyFzQjJ8XzHMhdOQ==",
+      "sha512": "sha512-b+V9JC/Ii3sR659flBeaBJww111425tgjcDS1k+hqV4sGh9FALRDBvJnDtQ895gAzpPTUOFDHdqaZ2Et7BpZMg==",
       "path": "runtime.native.system.io.compression/4.3.0",
       "hashPath": "runtime.native.system.io.compression.4.3.0.nupkg.sha512"
     },
@@ -1649,7 +1720,7 @@
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kVXCuMTrTlxq4XOOMAysuNwsXWpYeboGddNGpIgNSZmv1b6r/s/DPk0fYMB7Q5Qo4bY68o48jt4T4y5BVecbCQ==",
+      "sha512": "sha512-Kh9W4agE0r/hK8AX1LvyQI2NrKHBL8pO0gRoDTdDb0LL6Ta1Z2OtFx3lOaAE0ZpCUc/dt9Wzs3rA7a3IsKdOVA==",
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0",
       "hashPath": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512"
     },
@@ -1670,7 +1741,7 @@
     "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ytoewC6wGorL7KoCAvRfsgoJPJbNq+64k2SqW6JcOAebWsFUvCCYgfzQMrnpvPiEl4OrblUlhF2ji+Q1+SVLrQ==",
+      "sha512": "sha512-JGc0pAWRE8lB4Ucygk2pYSKbUPLlAIq6Bczf5/WF2D/VKJEPtYlVUMxk8fbl1zRfTWzSHi+VcFZlaPlWiNxeKg==",
       "path": "runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
     },
@@ -1782,7 +1853,7 @@
     "System.Collections.Specialized/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Epx8PoVZR0iuOnJJDzp7pWvdfMMOAvpUo95pC4ScH2mJuXkKA2Y4aR3cG9qt2klHgSons1WFh4kcGW7cSXvrxg==",
+      "sha512": "sha512-NoPBj0ykejqAWW4p4gGtrrL+3c84ZLSvGnHgq422ew1Rj4WKj1FA8/BCybqC111EtgcqUl6ZJNFYYS22HLgbjA==",
       "path": "system.collections.specialized/4.3.0",
       "hashPath": "system.collections.specialized.4.3.0.nupkg.sha512"
     },
@@ -2111,7 +2182,7 @@
     "System.Runtime.Serialization.Primitives/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Wz+0KOukJGAlXjtKr+5Xpuxf8+c8739RI1C+A2BoQZT+wMCCoMDDdO8/4IRHfaVINqL78GO8dW8G2lW/e45Mcw==",
+      "sha512": "sha512-2Z5t70a2SwMsfQDp9KOclaZNyQhfIga2gppq9lIUDM1A4ohTshn4JqT7ir8bvIhXgorWKYDAr6rPzEbi/nTGKg==",
       "path": "system.runtime.serialization.primitives/4.3.0",
       "hashPath": "system.runtime.serialization.primitives.4.3.0.nupkg.sha512"
     },
@@ -2146,7 +2217,7 @@
     "System.Security.Cryptography.Csp/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-X4s/FCkEUnRGnwR3aSfVIkldBmtURMhmexALNTwpjklzxWU7yjMk7GHLKOZTNkgnWnE0q7+BCf9N2LVRWxewaA==",
+      "sha512": "sha512-yO2k5o+Z+DiFRBvvB9vdRRAGHi6bm02M9OWXfCqQ8K0UxD3Woc3svQheZfb7PoTEFs0kGacO0IzzMWsb6Mkeow==",
       "path": "system.security.cryptography.csp/4.3.0",
       "hashPath": "system.security.cryptography.csp.4.3.0.nupkg.sha512"
     },
@@ -2160,7 +2231,7 @@
     "System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-h4CEgOgv5PKVF/HwaHzJRiVboL2THYCou97zpmhjghx5frc7fIvlkY1jL+lnIQyChrJDMNEXS6r7byGif8Cy4w==",
+      "sha512": "sha512-vOYy7Jv9KsG3ld2hLt0GoERd82SZi4BelrbXLwI9yFBYX7kpbvUCWYo4eyevk47cuJXZ9ZLVAryANcc7iY71aA==",
       "path": "system.security.cryptography.openssl/4.3.0",
       "hashPath": "system.security.cryptography.openssl.4.3.0.nupkg.sha512"
     },

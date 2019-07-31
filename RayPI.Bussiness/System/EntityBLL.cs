@@ -9,7 +9,7 @@ namespace RayPI.Bussiness.System
 {
     public class EntityBLL
     {
-        private IEntity iDAL = new EntityDAL();
+        private IEntityRepository iDAL = new EntityRepository();
 
         public bool CreateEntity(string entityName, string contentRootPath)
         {

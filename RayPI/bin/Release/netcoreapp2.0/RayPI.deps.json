@@ -26,7 +26,9 @@
           "Microsoft.AspNetCore.All": "2.0.8",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3",
-          "RayPI.Bussiness": "1.0.0",
+          "RayPI.BLL": "1.0.0",
+          "RayPI.Helper": "1.0.0",
+          "RayPI.Model": "1.0.0",
           "Swashbuckle.AspNetCore": "2.5.0"
         },
         "runtime": {
@@ -4318,16 +4320,34 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
-      "RayPI.Bussiness/1.0.0": {
+      "RayPI.BLL/1.0.0": {
         "dependencies": {
-          "RayPI.IService": "1.0.0",
-          "RayPI.Service": "1.0.0"
+          "RayPI.DAL": "1.0.0",
+          "RayPI.Entity": "1.0.0",
+          "RayPI.Helper": "1.0.0",
+          "RayPI.IDAL": "1.0.0",
+          "RayPI.Model": "1.0.0"
         },
         "runtime": {
-          "RayPI.Bussiness.dll": {}
+          "RayPI.BLL.dll": {}
         },
         "compile": {
-          "RayPI.Bussiness.dll": {}
+          "RayPI.BLL.dll": {}
+        }
+      },
+      "RayPI.DAL/1.0.0": {
+        "dependencies": {
+          "RayPI.Entity": "1.0.0",
+          "RayPI.Helper": "1.0.0",
+          "RayPI.IDAL": "1.0.0",
+          "RayPI.Model": "1.0.0",
+          "SqlSugar": "4.6.4.9"
+        },
+        "runtime": {
+          "RayPI.DAL.dll": {}
+        },
+        "compile": {
+          "RayPI.DAL.dll": {}
         }
       },
       "RayPI.Entity/1.0.0": {
@@ -4341,16 +4361,28 @@
           "RayPI.Entity.dll": {}
         }
       },
-      "RayPI.IService/1.0.0": {
+      "RayPI.Helper/1.0.0": {
+        "dependencies": {
+          "RayPI.Model": "1.0.0",
+          "SqlSugar": "4.6.4.9"
+        },
+        "runtime": {
+          "RayPI.Helper.dll": {}
+        },
+        "compile": {
+          "RayPI.Helper.dll": {}
+        }
+      },
+      "RayPI.IDAL/1.0.0": {
         "dependencies": {
           "RayPI.Entity": "1.0.0",
           "RayPI.Model": "1.0.0"
         },
         "runtime": {
-          "RayPI.IService.dll": {}
+          "RayPI.IDAL.dll": {}
         },
         "compile": {
-          "RayPI.IService.dll": {}
+          "RayPI.IDAL.dll": {}
         }
       },
       "RayPI.Model/1.0.0": {
@@ -4362,20 +4394,6 @@
         },
         "compile": {
           "RayPI.Model.dll": {}
-        }
-      },
-      "RayPI.Service/1.0.0": {
-        "dependencies": {
-          "RayPI.Entity": "1.0.0",
-          "RayPI.IService": "1.0.0",
-          "RayPI.Model": "1.0.0",
-          "SqlSugar": "4.6.4.9"
-        },
-        "runtime": {
-          "RayPI.Service.dll": {}
-        },
-        "compile": {
-          "RayPI.Service.dll": {}
         }
       },
       "SqlSugar/4.6.4.9": {
@@ -6633,7 +6651,7 @@
     "System.Security.Cryptography.Xml/4.4.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1m+fKVrApgKYMRuE0MF0vGjqy4XqAp1rCtyAzMXhJajMDDytMh/rHk9hp4M7KKk3QQZoWJUvyUY7xcw74w+JiQ==",
+      "sha512": "sha512-q9Dren/YP5jhRCkDvLfuaPpMTQzP97ANvzq/OoGgwK8YdLRSTABS9oW5/23OKoM2DRCuBrh4qaecD2YNhPtuzQ==",
       "path": "system.security.cryptography.xml/4.4.2",
       "hashPath": "system.security.cryptography.xml.4.4.2.nupkg.sha512"
     },
@@ -6805,7 +6823,12 @@
       "path": "windowsazure.storage/8.1.4",
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
     },
-    "RayPI.Bussiness/1.0.0": {
+    "RayPI.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RayPI.DAL/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -6815,17 +6838,17 @@
       "serviceable": false,
       "sha512": ""
     },
-    "RayPI.IService/1.0.0": {
+    "RayPI.Helper/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RayPI.IDAL/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "RayPI.Model/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "RayPI.Service/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

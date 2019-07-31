@@ -16,12 +16,20 @@ namespace RayPI.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Client")]
-    [Authorize(Roles = "Client")]
+    //[Authorize(Roles = "Client")]
     [EnableCors("Limit")]
     public class ClientController : Controller
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public ClientController()
+        {
+
+        }
+
         #region 学生
-        private CStuentBLL bll = new CStuentBLL();
+        private CStuentBussiness bll = new CStuentBussiness();
         /// <summary>
         /// 根据姓名获取学生
         /// </summary>
@@ -38,5 +46,17 @@ namespace RayPI.Controllers
             return Json(bll.GetByName(name));
         }
         #endregion
+
+        /// <summary>
+        /// 测试异常
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Student/TestException")]
+        public JsonResult TestException()
+        {
+            string s = null;
+            return Json(s.Length);
+        }
     }
 }

@@ -11,24 +11,28 @@ namespace RayPI.Entity
     [SugarTable("Teacher")]
     public partial class Teacher
     {
-           public Teacher(){
+        /// <summary>
+        /// 
+        /// </summary>
+        public Teacher()
+        {
 
 
-           }
-           /// <summary>
-           /// Desc:
-           /// Default:
-           /// Nullable:False
-           /// </summary>           
-           [SugarColumn(IsPrimaryKey=true,IsIdentity=true)]
-           public long Tid {get;set;}
+        }
+        /// <summary>
+        /// Desc:
+        /// Default:
+        /// Nullable:False
+        /// </summary>           
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
+        public long Tid { get; set; }
 
-           /// <summary>
-           /// Desc:
-           /// Default:
-           /// Nullable:False
-           /// </summary>           
-           public string Name {get;set;}
+        /// <summary>
+        /// Desc:
+        /// Default:
+        /// Nullable:False
+        /// </summary>           
+        public string Name { get; set; }
 
     }
 }

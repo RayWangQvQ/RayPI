@@ -3,11 +3,11 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost:3607",
+      "applicationUrl": "http://localhost:36070",
       "sslPort": 0
     },
     "iisExpress": {
-      "applicationUrl": "http://localhost:3608/",
+      "applicationUrl": "http://localhost:36090/",
       "sslPort": 0
     }
   },
@@ -15,19 +15,21 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchUrl": "swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "nativeDebugging": true
     },
     "RayPI": {
-      "commandName": "IIS",
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:3609/"
+      "nativeDebugging": true,
+      "applicationUrl": "http://localhost:36090/"
     }
   }
 }
