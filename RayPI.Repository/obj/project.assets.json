@@ -1683,7 +1683,8 @@
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "RayPI.Entity": "1.0.0",
-          "RayPI.Model": "1.0.0"
+          "RayPI.Model": "1.0.0",
+          "RayPI.Treasury": "1.0.0"
         },
         "compile": {
           "bin/placeholder/RayPI.IRepository.dll": {}
@@ -6052,9 +6053,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Repository\\RayPI.Repository.csproj",
-      "projectName": "RayPI.Repository",
-      "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Repository\\RayPI.Repository.csproj",
+      "projectUniqueName": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Repository\\RayPI.SqlSugarRepository.csproj",
+      "projectName": "RayPI.SqlSugarRepository",
+      "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Repository\\RayPI.SqlSugarRepository.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
       "outputPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Repository\\obj\\",
       "projectStyle": "PackageReference",

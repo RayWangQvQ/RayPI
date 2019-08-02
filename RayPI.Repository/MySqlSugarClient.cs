@@ -3,13 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RayPI.Repository.Base
+namespace RayPI.SqlSugarRepository
 {
-    public class SqlSugarDbContext
+    public class MySqlSugarClient
     {
-        private readonly SqlSugarClient _sqlSugarClient;
-
-        public SqlSugarDbContext()
+        public MySqlSugarClient()
         {
             var connectionConfig = new ConnectionConfig
             {
@@ -17,7 +15,12 @@ namespace RayPI.Repository.Base
                 DbType = DbType.SqlServer,
                 IsAutoCloseConnection = true
             };
-            _sqlSugarClient = new SqlSugarClient(connectionConfig);
+            Client = new SqlSugarClient(connectionConfig);
+            SimpleClient = Client.GetSimpleClient();
         }
+
+        public SqlSugarClient Client { get; private set; }
+
+        public SimpleClient SimpleClient { get; private set; }
     }
 }

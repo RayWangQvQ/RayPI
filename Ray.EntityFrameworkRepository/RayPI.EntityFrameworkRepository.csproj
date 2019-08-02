@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RayPI.Entity\RayPI.Entity.csproj" />
-    <ProjectReference Include="..\RayPI.Model\RayPI.Model.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RayPI.IRepository\RayPI.IRepository.csproj" />
     <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
   </ItemGroup>
 

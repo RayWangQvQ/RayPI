@@ -5884,7 +5884,7 @@
           "RayPI.Entity": "1.0.0",
           "RayPI.IRepository": "1.0.0",
           "RayPI.Model": "1.0.0",
-          "RayPI.Repository": "1.0.0",
+          "RayPI.SqlSugarRepository": "1.0.0",
           "RayPI.Treasury": "1.0.0"
         },
         "compile": {
@@ -5955,7 +5955,8 @@
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "RayPI.Entity": "1.0.0",
-          "RayPI.Model": "1.0.0"
+          "RayPI.Model": "1.0.0",
+          "RayPI.Treasury": "1.0.0"
         },
         "compile": {
           "bin/placeholder/RayPI.IRepository.dll": {}
@@ -5977,7 +5978,7 @@
           "bin/placeholder/RayPI.Model.dll": {}
         }
       },
-      "RayPI.Repository/1.0.0": {
+      "RayPI.SqlSugarRepository/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
@@ -5988,10 +5989,10 @@
           "SqlSugar": "4.6.4.9"
         },
         "compile": {
-          "bin/placeholder/RayPI.Repository.dll": {}
+          "bin/placeholder/RayPI.SqlSugarRepository.dll": {}
         },
         "runtime": {
-          "bin/placeholder/RayPI.Repository.dll": {}
+          "bin/placeholder/RayPI.SqlSugarRepository.dll": {}
         }
       },
       "RayPI.SwaggerService/1.0.0": {
@@ -15674,10 +15675,10 @@
       "path": "../RayPI.Model/RayPI.Model.csproj",
       "msbuildProject": "../RayPI.Model/RayPI.Model.csproj"
     },
-    "RayPI.Repository/1.0.0": {
+    "RayPI.SqlSugarRepository/1.0.0": {
       "type": "project",
-      "path": "../RayPI.Repository/RayPI.Repository.csproj",
-      "msbuildProject": "../RayPI.Repository/RayPI.Repository.csproj"
+      "path": "../RayPI.Repository/RayPI.SqlSugarRepository.csproj",
+      "msbuildProject": "../RayPI.Repository/RayPI.SqlSugarRepository.csproj"
     },
     "RayPI.SwaggerService/1.0.0": {
       "type": "project",

@@ -1,7 +1,7 @@
 ﻿using RayPI.IRepository;
 using System;
 
-namespace RayPI.SqlSugarRepository.Repository
+namespace RayPI.EntityFrameworkRepository.Repository
 {
     /// <summary>
     /// 实体操作服务

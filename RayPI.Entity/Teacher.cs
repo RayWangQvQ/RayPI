@@ -9,7 +9,7 @@ namespace RayPI.Entity
     ///
     ///</summary>
     [SugarTable("Teacher")]
-    public partial class Teacher
+    public partial class Teacher : EntityBase
     {
         /// <summary>
         /// 

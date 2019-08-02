@@ -6,28 +6,27 @@ using SqlSugar;
 using RayPI.Model.ReturnModel;
 
 
-namespace RayPI.Repository.Base
+namespace RayPI.SqlSugarRepository.Repository
 {
     /// <summary>
     /// 服务层基类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseRepository<T> where T:class,new()
+    public abstract class BaseRepository<T> where T : class, new()
     {
-        public BaseRepository()
+        protected readonly MySqlSugarClient _sugarClient;
+
+        public BaseRepository(MySqlSugarClient sugarClient)
         {
-            db = SqlSugarHelper.GetClient();
-            sdb = db.GetSimpleClient();
+            _sugarClient = sugarClient;
         }
-        public SqlSugarClient db;
-        public SimpleClient sdb;
 
         #region CRUD
         public TableModel<T> GetPageList(int pageIndex, int pageSize)
         {
             PageModel p = new PageModel() { PageIndex = pageIndex, PageSize = pageSize };
             Expression<Func<T, bool>> ex = (it => 1 == 1);
-            List<T> data = sdb.GetPageList(ex, p);
+            List<T> data = _sugarClient.SimpleClient.GetPageList(ex, p);
             var t = new TableModel<T>
             {
                 Code = 0,
@@ -40,22 +39,22 @@ namespace RayPI.Repository.Base
 
         public T Get(long id)
         {
-            return sdb.GetById<T>(id);
+            return _sugarClient.SimpleClient.GetById<T>(id);
         }
 
         public bool Add(T entity)
         {
-            return sdb.Insert(entity);
+            return _sugarClient.SimpleClient.Insert(entity);
         }
 
         public bool Update(T entity)
         {
-            return sdb.Update(entity);
+            return _sugarClient.SimpleClient.Update(entity);
         }
 
         public bool Dels(dynamic[] ids)
         {
-            return sdb.DeleteByIds<T>(ids);
+            return _sugarClient.SimpleClient.DeleteByIds<T>(ids);
         }
         #endregion
     }

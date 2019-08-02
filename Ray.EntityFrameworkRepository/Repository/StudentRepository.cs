@@ -2,7 +2,7 @@
 using RayPI.IRepository;
 
 
-namespace RayPI.SqlSugarRepository.Repository
+namespace RayPI.EntityFrameworkRepository.Repository
 {
     public class StudentRepository : BaseRepository<Student>, IStudentRepository
     {
