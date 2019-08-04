@@ -51,7 +51,7 @@ namespace RayPI.IRepository
         /// <param name="id"></param>
         /// <param name="exceptDeleted"></param>
         /// <returns></returns>
-        T FindById(long id, bool exceptDeleted);
+        T FindById(long id, bool exceptDeleted = true);
         #endregion
 
         #region 添加

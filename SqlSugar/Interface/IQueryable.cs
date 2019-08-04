@@ -7,9 +7,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SqlSugar
 {
-    public partial interface ISugarQueryable<T>
+    public partial interface ISugarQueryable<T> //: IQueryable<T>
     {
         SqlSugarClient Context { get; set; }
         ISqlBuilder SqlBuilder { get; set; }

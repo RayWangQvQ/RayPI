@@ -2,37 +2,42 @@
 using RayPI.IRepository;
 using RayPI.Model;
 using RayPI.Model.ReturnModel;
-using RayPI.Repository;
+using RayPI.EntityFrameworkRepository.Repository;
+using RayPI.Treasury.Models;
 
 namespace RayPI.Bussiness.Admin
 {
     public class StudentBussiness
     {
-        private IStudentRepository iStudent = new StudentRepository();
+        private IStudentRepository _studentRepository;
+        public StudentBussiness(IStudentRepository studentRepository)
+        {
+            _studentRepository = studentRepository;
+        }
 
         public Student GetById(long id)
         {
-            return iStudent.Get(id);
+            return _studentRepository.FindById(id);
         }
 
-        public TableModel<Student> GetPageList(int pageIndex, int pageSize)
+        public PageResult<Student> GetPageList(int pageIndex, int pageSize)
         {
-            return iStudent.GetPageList(pageIndex, pageSize);
+            return _studentRepository.GetPageList(pageIndex, pageSize);
         }
 
         public bool Add(Student entity)
         {
-            return iStudent.Add(entity);
+            return _studentRepository.Add(entity);
         }
 
         public bool Update(Student entity)
         {
-            return iStudent.Update(entity);
+            return _studentRepository.Update(entity);
         }
 
         public bool Dels(dynamic[] ids)
         {
-            return iStudent.Dels(ids);
+            return _studentRepository.Dels(ids);
         }
     }
 }
