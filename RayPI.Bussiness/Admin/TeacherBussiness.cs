@@ -4,38 +4,47 @@ using RayPI.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using RayPI.Repository;
 using RayPI.Model.ReturnModel;
+using RayPI.Treasury.Models;
+using System.Linq;
 
 namespace RayPI.Bussiness.Admin
 {
     public class TeacherBussiness
     {
-        private ITeacherRepository iTeacher = new TeacherRepository();
+        private ITeacherRepository _teacherRepository;
+
+        public TeacherBussiness(ITeacherRepository teacherRepository)
+        {
+            _teacherRepository = teacherRepository;
+        }
 
         public Teacher GetById(long id)
         {
-            return iTeacher.Get(id);
+            return _teacherRepository.FindById(id);
         }
 
-        public TableModel<Teacher> GetPageList(int pageIndex, int pageSize)
+        public PageResult<Teacher> GetPageList(int pageIndex, int pageSize)
         {
-            return iTeacher.GetPageList(pageIndex, pageSize);
+            return _teacherRepository.GetPageList<Teacher>(pageIndex, pageSize);
         }
 
         public bool Add(Teacher entity)
         {
-            return iTeacher.Add(entity);
+            _teacherRepository.Add(entity);
+            return true;
         }
 
         public bool Update(Teacher entity)
         {
-            return iTeacher.Update(entity);
+            _teacherRepository.Update(entity);
+            return true;
         }
 
-        public bool Dels(dynamic[] ids)
+        public bool Dels(long[] ids)
         {
-            return iTeacher.Dels(ids);
+            _teacherRepository.Delete(x => ids.Contains(x.Id));
+            return true;
         }
     }
 }

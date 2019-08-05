@@ -20,7 +20,7 @@ namespace RayPI.Controllers
     //[Authorize(Policy = "RequireAdminOrClient")]
     public class SystemController : Controller
     {
-        private EntityBLL bll = new EntityBLL();
+        private EntityBLL _entityBussiness;
         private IConfiguration _config;
         private IHostingEnvironment _env;
         private JwtAuthConfigModel _jwtAuthConfigModel;
@@ -31,11 +31,12 @@ namespace RayPI.Controllers
         /// <param name="configuration"></param>
         /// <param name="env"></param>
         /// <param name="jwtAuthConfigModel"></param>
-        public SystemController(IConfiguration configuration, IHostingEnvironment env, JwtAuthConfigModel jwtAuthConfigModel)
+        public SystemController(IConfiguration configuration, IHostingEnvironment env, JwtAuthConfigModel jwtAuthConfigModel, EntityBLL entityBLL)
         {
             _config = configuration;
             _env = env;
             _jwtAuthConfigModel = jwtAuthConfigModel;
+            _entityBussiness = entityBLL;
         }
 
         #region 生成实体类
@@ -48,7 +49,7 @@ namespace RayPI.Controllers
         [Route("Entity/Create")]
         public JsonResult CreateEntity(string entityName)
         {
-            return Json(bll.CreateEntity(entityName, _env.ContentRootPath));
+            return Json(_entityBussiness.CreateEntity(entityName, _env.ContentRootPath));
         }
         #endregion
 

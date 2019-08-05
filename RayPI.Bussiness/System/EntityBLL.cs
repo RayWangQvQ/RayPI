@@ -1,6 +1,5 @@
 ﻿using RayPI.IRepository;
 using RayPI.Model;
-using RayPI.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +8,12 @@ namespace RayPI.Bussiness.System
 {
     public class EntityBLL
     {
-        private IEntityRepository iDAL = new EntityRepository();
+        private IEntityRepository _entityRepository;
+
+        public EntityBLL(IEntityRepository entityRepository)
+        {
+
+        }
 
         public bool CreateEntity(string entityName, string contentRootPath)
         {
@@ -21,7 +25,7 @@ namespace RayPI.Bussiness.System
                 baseFileProvider += "\\";
             }
             string filePath = baseFileProvider + "RayPI.Entity";
-            return iDAL.CreateEntity(entityName, filePath);
+            return _entityRepository.CreateEntity(entityName, filePath);
         }
     }
 }

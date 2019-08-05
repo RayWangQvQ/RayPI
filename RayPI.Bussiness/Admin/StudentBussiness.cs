@@ -4,6 +4,7 @@ using RayPI.Model;
 using RayPI.Model.ReturnModel;
 using RayPI.EntityFrameworkRepository.Repository;
 using RayPI.Treasury.Models;
+using System.Linq;
 
 namespace RayPI.Bussiness.Admin
 {
@@ -22,22 +23,25 @@ namespace RayPI.Bussiness.Admin
 
         public PageResult<Student> GetPageList(int pageIndex, int pageSize)
         {
-            return _studentRepository.GetPageList(pageIndex, pageSize);
+            return _studentRepository.GetPageList<Student>(pageIndex, pageSize);
         }
 
         public bool Add(Student entity)
         {
-            return _studentRepository.Add(entity);
+            _studentRepository.Add(entity);
+            return true;
         }
 
         public bool Update(Student entity)
         {
-            return _studentRepository.Update(entity);
+            _studentRepository.Update(entity);
+            return true;
         }
 
-        public bool Dels(dynamic[] ids)
+        public bool Dels(long[] ids)
         {
-            return _studentRepository.Dels(ids);
+            _studentRepository.Delete(x => ids.Contains(x.Id));
+            return true;
         }
     }
 }

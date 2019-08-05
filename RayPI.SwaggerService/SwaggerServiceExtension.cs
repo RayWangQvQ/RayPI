@@ -26,9 +26,9 @@ namespace RayPI.SwaggerService
                 });
                 //添加注释服务
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var apiXmlPath = Path.Combine(basePath, "APIHelp.xml");
-                var entityXmlPath = Path.Combine(basePath, "EntityHelp.xml");
-                c.IncludeXmlComments(apiXmlPath, true);//控制器层注释（true表示显示控制器注释）
+                var apiXmlPath = Path.Combine(basePath, "APIHelp.xml");//控制器层注释
+                var entityXmlPath = Path.Combine(basePath, "EntityHelp.xml");//实体注释
+                c.IncludeXmlComments(apiXmlPath, true);//true表示显示控制器注释
                 c.IncludeXmlComments(entityXmlPath);
 
                 //添加控制器注释

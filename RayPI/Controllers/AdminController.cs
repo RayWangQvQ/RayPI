@@ -24,7 +24,14 @@ namespace RayPI.Controllers
     public class AdminController : Controller
     {
         #region 学生
-        private StudentBussiness bll = new StudentBussiness();
+        private StudentBussiness _studentBussiness;
+        private TeacherBussiness _teacheBussiness;
+
+        public AdminController(StudentBussiness studentBussiness, TeacherBussiness teacheBussiness)
+        {
+            _studentBussiness = studentBussiness;
+            _teacheBussiness = teacheBussiness;
+        }
 
         /// <summary>
         /// 获取学生分页列表
@@ -36,7 +43,7 @@ namespace RayPI.Controllers
         [Route("Student")]
         public JsonResult GetStudentPageList(int pageIndex = 1, int pageSize = 10)
         {
-            return Json(bll.GetPageList(pageIndex, pageSize));
+            return Json(_studentBussiness.GetPageList(pageIndex, pageSize));
         }
 
         /// <summary>
@@ -51,7 +58,7 @@ namespace RayPI.Controllers
         {
             if (id == 0)
                 throw new MyException("参数id不合法", StatusCodes.Status400BadRequest);
-            return Json(bll.GetById(id));
+            return Json(_studentBussiness.GetById(id));
         }
 
         /// <summary>
@@ -65,7 +72,7 @@ namespace RayPI.Controllers
         {
             if (entity == null)
                 throw new ArgumentNullException();
-            return Json(bll.Add(entity));
+            return Json(_studentBussiness.Add(entity));
         }
         /// <summary>
         /// 编辑学生
@@ -78,7 +85,7 @@ namespace RayPI.Controllers
         {
             if (entity == null)
                 throw new ArgumentNullException();
-            return Json(bll.Update(entity));
+            return Json(_studentBussiness.Update(entity));
         }
 
         /// <summary>
@@ -88,16 +95,15 @@ namespace RayPI.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Route("Student")]
-        public JsonResult Dels(dynamic[] ids = null)
+        public JsonResult Dels(long[] ids = null)
         {
             if (ids.Length == 0)
                 throw new ArgumentNullException();
-            return Json(bll.Dels(ids));
+            return Json(_studentBussiness.Dels(ids));
         }
         #endregion
 
         #region 教师
-        private TeacherBussiness _TeacherBLL = new TeacherBussiness();
 
         /// <summary>
         /// 获取教师分页列表
@@ -109,7 +115,7 @@ namespace RayPI.Controllers
         [Route("Teacher")]
         public JsonResult GetTeacherPageList(int pageIndex = 1, int pageSize = 10)
         {
-            return Json(_TeacherBLL.GetPageList(pageIndex, pageSize));
+            return Json(_teacheBussiness.GetPageList(pageIndex, pageSize));
         }
 
         /// <summary>
@@ -122,7 +128,7 @@ namespace RayPI.Controllers
         [ProducesResponseType(typeof(Teacher), 200)]
         public JsonResult GetTeacherById(long id)
         {
-            return Json(_TeacherBLL.GetById(id));
+            return Json(_teacheBussiness.GetById(id));
         }
 
         /// <summary>
@@ -136,7 +142,7 @@ namespace RayPI.Controllers
         {
             if (entity == null)
                 return Json("参数为空");
-            return Json(_TeacherBLL.Add(entity));
+            return Json(_teacheBussiness.Add(entity));
         }
         /// <summary>
         /// 编辑
@@ -149,7 +155,7 @@ namespace RayPI.Controllers
         {
             if (entity == null)
                 return Json("参数为空");
-            return Json(_TeacherBLL.Update(entity));
+            return Json(_teacheBussiness.Update(entity));
         }
 
         /// <summary>
@@ -159,11 +165,11 @@ namespace RayPI.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Route("Teacher")]
-        public JsonResult DelsTeacher(dynamic[] ids = null)
+        public JsonResult DelsTeacher(long[] ids = null)
         {
             if (ids.Length == 0)
                 return Json("参数为空");
-            return Json(_TeacherBLL.Dels(ids));
+            return Json(_teacheBussiness.Dels(ids));
         }
         #endregion
     }

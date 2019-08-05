@@ -17,7 +17,7 @@ namespace RayPI.IRepository
         /// <param name="filter">查询条件</param>
         /// <param name="exceptDeleted">排除被逻辑删除的</param>
         /// <returns>IQueryable<T></T></returns>
-        IQueryable<T> GetAllMatching(Expression<Func<T, bool>> filter, bool exceptDeleted);
+        IQueryable<T> GetAllMatching(Expression<Func<T, bool>> filter = null, bool exceptDeleted = true);
 
         /// <summary>
         /// 分页查询
@@ -31,8 +31,8 @@ namespace RayPI.IRepository
         /// <param name="sortOrder"></param>
         /// <returns></returns>
         PageResult<T> GetPageList<TK>(int pageIndex, int pageSize,
-          bool exceptDeleted, Expression<Func<T, bool>> filterExpression,
-          Expression<Func<T, TK>> orderByExpression, SortEnum sortOrder);
+            bool exceptDeleted = true, Expression<Func<T, bool>> filterExpression = null,
+            Expression<Func<T, TK>> orderByExpression = null, SortEnum sortOrder = SortEnum.Asc);
 
         /// <summary>判断是否存在</summary>
         /// <param name="filter">查询条件</param>
@@ -43,7 +43,7 @@ namespace RayPI.IRepository
         /// <summary>根据条件获取</summary>
         /// <param name="filter">查询条件</param>
         /// <returns>T.</returns>
-        T Find(Expression<Func<T, bool>> filter, bool exceptDeleted);
+        T Find(Expression<Func<T, bool>> filter, bool exceptDeleted = true);
 
         /// <summary>
         /// 根据Id获取单个
@@ -104,6 +104,7 @@ namespace RayPI.IRepository
         /// <summary>逻辑删除</summary>
         /// <param name="filter">移除条件</param>
         void Delete(Expression<Func<T, bool>> filter);
+
         /// <summary>逻辑删除</summary>
         /// <param name="id">The item.</param>
         void Delete(long id);

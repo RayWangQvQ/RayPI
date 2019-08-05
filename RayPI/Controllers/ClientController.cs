@@ -20,16 +20,17 @@ namespace RayPI.Controllers
     [EnableCors("Limit")]
     public class ClientController : Controller
     {
+        private CStuentBussiness _studentBussiness;
+
         /// <summary>
         /// 
         /// </summary>
-        public ClientController()
+        public ClientController(CStuentBussiness studentBussiness)
         {
-
+            _studentBussiness = studentBussiness;
         }
 
         #region 学生
-        private CStuentBussiness bll = new CStuentBussiness();
         /// <summary>
         /// 根据姓名获取学生
         /// </summary>
@@ -43,7 +44,7 @@ namespace RayPI.Controllers
         {
             if (name == null)
                 throw new ArgumentNullException();
-            return Json(bll.GetByName(name));
+            return Json(_studentBussiness.GetByName(name));
         }
         #endregion
 
