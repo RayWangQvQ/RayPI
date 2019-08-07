@@ -1669,6 +1669,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
+          "RayPI.Treasury": "1.0.0",
           "SqlSugar": "4.6.4.9"
         },
         "compile": {

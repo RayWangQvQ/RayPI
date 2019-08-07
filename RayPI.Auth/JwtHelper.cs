@@ -68,12 +68,10 @@ namespace RayPI.AuthService
         {
             var jwtHandler = new JwtSecurityTokenHandler();
             JwtSecurityToken jwtToken = jwtHandler.ReadJwtToken(jwtStr);
-            object role = new object();
-            object project = new object();
             try
             {
-                jwtToken.Payload.TryGetValue("Role", out role);
-                jwtToken.Payload.TryGetValue("Project", out project);
+                jwtToken.Payload.TryGetValue("Role", out object role);
+                jwtToken.Payload.TryGetValue("Project", out object project);
             }
             catch (Exception e)
             {
@@ -84,7 +82,8 @@ namespace RayPI.AuthService
             {
                 Uid = long.Parse(jwtToken.Id),
                 Role = new object().ToString(),
-                Project = project.ToString()
+                Project = new object().ToString(),
+                TokenString = jwtStr
             };
             return tm;
         }

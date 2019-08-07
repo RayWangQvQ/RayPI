@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 //
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 //
 using RayPI.Treasury.Models;
 
@@ -15,14 +16,16 @@ namespace RayPI.AuthService
     public class JwtAuthorizationFilter
     {
         private readonly RequestDelegate _next;
+        private readonly IServiceCollection _services;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="next"></param>
-        public JwtAuthorizationFilter(RequestDelegate next)
+        public JwtAuthorizationFilter(RequestDelegate next, IServiceCollection services)
         {
             _next = next;
+            _services = services;
         }
 
         /// <summary>
@@ -37,10 +40,14 @@ namespace RayPI.AuthService
             {
                 return _next(httpContext);
             }
-            var tokenHeader = httpContext.Request.Headers["Authorization"];
-            tokenHeader = tokenHeader.ToString().Substring("Bearer ".Length).Trim();
+
+            string tokenHeader = httpContext.Request.Headers["Authorization"];
+            tokenHeader = tokenHeader.Substring("Bearer ".Length).Trim();
 
             TokenModel tm = JwtHelper.SerializeJWT(tokenHeader);
+
+            //注册tokenModel
+            _services.AddScoped(x => tm);
 
             //授权
             var claimList = new List<Claim>();

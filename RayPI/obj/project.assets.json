@@ -5929,6 +5929,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
+          "RayPI.Treasury": "1.0.0",
           "SqlSugar": "4.6.4.9"
         },
         "compile": {
@@ -15769,9 +15770,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI\\RayPI.csproj",
-      "projectName": "RayPI",
-      "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI\\RayPI.csproj",
+      "projectUniqueName": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI\\RayPI.OpenApi.csproj",
+      "projectName": "RayPI.OpenApi",
+      "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI\\RayPI.OpenApi.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
       "outputPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI\\obj\\",
       "projectStyle": "PackageReference",

@@ -7,9 +7,13 @@ namespace RayPI.Treasury.Models
     public class TokenModel
     {
         /// <summary>
-        /// 用户Id
+        /// 登录用户Id
         /// </summary>
         public long Uid { get; set; }
+        /// <summary>
+        /// 登录用户名
+        /// </summary>
+        public string Uname { get; set; }
         /// <summary>
         /// 身份
         /// </summary>
@@ -22,5 +26,9 @@ namespace RayPI.Treasury.Models
         /// 令牌类型
         /// </summary>
         public string TokenType { get; set; }
+        /// <summary>
+        /// 令牌
+        /// </summary>
+        public string TokenString { get; set; }
     }
 }

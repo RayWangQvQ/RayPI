@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RayPI.Treasury.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -50,5 +51,9 @@ namespace RayPI.Entity
         /// <value>The delete time.</value>
         public DateTime? DeleteTime { get; set; }
         #endregion
+
+        /// <summary>基础字段设置方法</summary>
+        /// <value>The automatic setter.</value>
+        public IEntityBaseAutoSetter AutoSetter { get; set; }
     }
 }

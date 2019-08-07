@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI", "RayPI\RayPI.csproj", "{65EED5EA-70C8-4228-9AC4-E2E47C23F87F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.OpenApi", "RayPI\RayPI.OpenApi.csproj", "{65EED5EA-70C8-4228-9AC4-E2E47C23F87F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Entity", "RayPI.Entity\RayPI.Entity.csproj", "{E4CDA23E-FC32-4FBC-BD18-05CC6D9C371D}"
 EndProject
