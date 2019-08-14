@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 //
 using SqlSugar;
-using RayPI.Model.ReturnModel;
 using RayPI.Entity;
 using RayPI.IRepository;
 using RayPI.Treasury.Enums;
@@ -25,52 +24,9 @@ namespace RayPI.SqlSugarRepository.Repository
             _sugarClient = sugarClient;
         }
 
-        #region CRUD
-        public TableModel<T> GetPageList(int pageIndex, int pageSize)
-        {
-            PageModel p = new PageModel() { PageIndex = pageIndex, PageSize = pageSize };
-            Expression<Func<T, bool>> ex = (it => 1 == 1);
-            List<T> data = _sugarClient.SimpleClient.GetPageList(ex, p);
-            var t = new TableModel<T>
-            {
-                Code = 0,
-                Count = p.PageCount,
-                Data = data,
-                Msg = "成功"
-            };
-            return t;
-        }
-
-        public T Get(long id)
-        {
-            return _sugarClient.SimpleClient.GetById<T>(id);
-        }
-
-        public bool Add(T entity)
-        {
-            return _sugarClient.SimpleClient.Insert(entity);
-        }
-
-        public bool Update(T entity)
-        {
-            return _sugarClient.SimpleClient.Update(entity);
-        }
-
-        public bool Dels(dynamic[] ids)
-        {
-            return _sugarClient.SimpleClient.DeleteByIds<T>(ids);
-        }
-        #endregion
-
-
         public IQueryable<T> GetAllMatching(Expression<Func<T, bool>> filter = null, bool exceptDeleted = true)
         {
-            ISugarQueryable<T> re = _sugarClient.Client.Queryable<T>();
-            if (filter != null)
-                re = re.Where(filter);
-            if (exceptDeleted)
-                re = re.Where(x => x.IsDeleted == false);
-            return (IQueryable<T>)re;
+            throw new NotImplementedException();
         }
 
         public PageResult<T> GetPageList<TK>(int pageIndex, int pageSize, bool exceptDeleted, Expression<Func<T, bool>> filterExpression, Expression<Func<T, TK>> orderByExpression, SortEnum sortOrder)

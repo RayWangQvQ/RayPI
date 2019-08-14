@@ -8,7 +8,6 @@
     <ProjectReference Include="..\Ray.EntityFrameworkRepository\RayPI.EntityFrameworkRepository.csproj" />
     <ProjectReference Include="..\RayPI.Entity\RayPI.Entity.csproj" />
     <ProjectReference Include="..\RayPI.IRepository\RayPI.IRepository.csproj" />
-    <ProjectReference Include="..\RayPI.Model\RayPI.Model.csproj" />
     <ProjectReference Include="..\RayPI.Repository\RayPI.SqlSugarRepository.csproj" />
     <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
   </ItemGroup>
@@ -17,6 +16,10 @@
     <Reference Include="Microsoft.Extensions.PlatformAbstractions">
       <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.platformabstractions\1.1.0\lib\netstandard1.3\Microsoft.Extensions.PlatformAbstractions.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dto\" />
   </ItemGroup>
 
 </Project>

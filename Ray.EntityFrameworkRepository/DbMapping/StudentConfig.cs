@@ -13,7 +13,7 @@ namespace RayPI.EntityFrameworkRepository.DbMapping
         {
             base.Configure(builder);
 
-            builder.ToTable("Student");
+            //builder.ToTable("Student");
 
             builder.HasKey(x => x.Id);
 

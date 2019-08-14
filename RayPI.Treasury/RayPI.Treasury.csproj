@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ray.ConfigManager\RayPI.ConfigService.csproj" />
+    <ProjectReference Include="..\Ray.ConfigService\RayPI.ConfigService.csproj" />
     <ProjectReference Include="..\SqlSugar\SqlSugar.csproj" />
   </ItemGroup>
 

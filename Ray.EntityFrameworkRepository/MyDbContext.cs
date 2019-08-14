@@ -39,7 +39,7 @@ namespace Ray.EntityFrameworkRepository
         /// <summary>Creates the set.</summary>
         /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
         /// <returns>IQueryable&lt;TAggregateRoot&gt;.</returns>
-        public IQueryable<TAggregateRoot> CreateSet<TAggregateRoot>() where TAggregateRoot : class
+        public DbSet<TAggregateRoot> CreateSet<TAggregateRoot>() where TAggregateRoot : class
         {
             return this.Set<TAggregateRoot>();
         }
@@ -231,11 +231,14 @@ namespace Ray.EntityFrameworkRepository
 
         /// <summary>逻辑删除</summary>
         /// <param name="filter">移除条件</param>
-        public virtual void Delete(Expression<Func<T, bool>> filter)
+        public virtual void Delete<TAggregateRoot>(Expression<Func<TAggregateRoot, bool>> filter) where TAggregateRoot : EntityBase, new()
         {
-            var entityList = GetAllMatching(filter);
-            Delete(entityList);
-            _myDbContext.SaveChanges();
+            IQueryable<TAggregateRoot> list = this.CreateSet<TAggregateRoot>().Where(filter);
+            list.Each(x =>
+            {
+                x.IsDeleted = true;
+                this.Update(x, new Expression<Func<TAggregateRoot, object>>[0]);
+            });
         }
         #endregion
         #endregion

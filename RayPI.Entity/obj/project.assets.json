@@ -5966,8 +5966,8 @@
     },
     "RayPI.ConfigService/1.0.0": {
       "type": "project",
-      "path": "../Ray.ConfigManager/RayPI.ConfigService.csproj",
-      "msbuildProject": "../Ray.ConfigManager/RayPI.ConfigService.csproj"
+      "path": "../Ray.ConfigService/RayPI.ConfigService.csproj",
+      "msbuildProject": "../Ray.ConfigService/RayPI.ConfigService.csproj"
     },
     "RayPI.Treasury/1.0.0": {
       "type": "project",

@@ -95,7 +95,6 @@ G:\GitHub\MyOwnRepos\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.AssemblyIn
 G:\GitHub\MyOwnRepos\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.AssemblyInfo.cs
 G:\GitHub\MyOwnRepos\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.dll
 G:\GitHub\MyOwnRepos\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.pdb
-G:\GitHub\MyOwnRepos\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.csprojAssemblyReference.cache
 D:\Repository\My\RayPI\SqlSugar\bin\Debug\netstandard2.0\SqlSugar.deps.json
 D:\Repository\My\RayPI\SqlSugar\bin\Debug\netstandard2.0\SqlSugar.dll
 D:\Repository\My\RayPI\SqlSugar\bin\Debug\netstandard2.0\SqlSugar.pdb
@@ -105,3 +104,4 @@ D:\Repository\My\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.AssemblyInfoIn
 D:\Repository\My\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.AssemblyInfo.cs
 D:\Repository\My\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.dll
 D:\Repository\My\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.pdb
+G:\GitHub\MyOwnRepos\RayPI\SqlSugar\obj\Debug\netstandard2.0\SqlSugar.csprojAssemblyReference.cache

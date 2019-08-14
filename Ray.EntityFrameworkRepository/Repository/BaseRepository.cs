@@ -20,13 +20,11 @@ namespace RayPI.EntityFrameworkRepository.Repository
     /// <typeparam name="T"></typeparam>
     public class BaseRepository<T> : IBaseRepository<T> where T : EntityBase, new()
     {
-        private readonly DbSet<T> _dbSet;
         private readonly MyDbContext _myDbContext;
 
         public BaseRepository(MyDbContext myDbContext)
         {
             _myDbContext = myDbContext;
-            _dbSet = myDbContext.Set<T>();
         }
 
         #region 查询
@@ -36,14 +34,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         /// <returns>IQueryable<T></T></returns>
         public virtual IQueryable<T> GetAllMatching(Expression<Func<T, bool>> filter = null, bool exceptDeleted = true)
         {
-            IQueryable<T> source;
-            if (filter == null)
-                source = _dbSet.Where(x => true);
-            else
-                source = _dbSet.Where(filter);
-            if (exceptDeleted)
-                source = source.Where(x => x.IsDeleted == false);
-            return source;
+            return _myDbContext.GetAllMatching(filter, exceptDeleted);
         }
 
         /// <summary>
@@ -139,8 +130,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public long Add(T entity)
         {
             //todo:设置操作人信息
-            _dbSet.Add(entity);
-            _myDbContext.SaveChanges();
+            _myDbContext.Add(entity);
             return entity.Id;
         }
         /// <summary>批量新增</summary>
@@ -149,8 +139,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public virtual IEnumerable<long> Add(IEnumerable<T> entityList)
         {
             //todo
-            _dbSet.AddRange(entityList);
-            _myDbContext.SaveChanges();
+            _myDbContext.Add(entityList);
             return entityList.Select(x => x.Id);
         }
         #endregion
@@ -161,16 +150,14 @@ namespace RayPI.EntityFrameworkRepository.Repository
         /// <param name="ignoreFileds">忽略部分字段更新</param>        /// <exception cref="T:System.NotImplementedException"></exception>
         public virtual void Update(T entity)
         {
-            _dbSet.Update(entity);
-            _myDbContext.SaveChanges();
+            _myDbContext.Update(entity);
         }
 
         /// <summary>批量修改</summary>
         /// <param name="tAggregateRoots">批量实体</param>
         public virtual void Update(IQueryable<T> entityList)
         {
-            _dbSet.UpdateRange(entityList);
-            _myDbContext.SaveChanges();
+            _myDbContext.Update(entityList);
         }
         #endregion
 
@@ -180,31 +167,27 @@ namespace RayPI.EntityFrameworkRepository.Repository
         /// <param name="item">实体</param>
         public virtual void Remove(T entity)
         {
-            _dbSet.Remove(entity);
-            _myDbContext.SaveChanges();
+            _myDbContext.Remove(entity);
         }
 
         /// <summary>批量物理移除</summary>
         /// <param name="tAggregateRoots">批量实体</param>
         public void Remove(IQueryable<T> entityList)
         {
-            _dbSet.RemoveRange(entityList);
-            _myDbContext.SaveChanges();
+            _myDbContext.RemoveRange(entityList);
         }
 
         /// <summary>批量物理移除</summary>
         /// <param name="filter">移除条件</param>
         public virtual void Remove(Expression<Func<T, bool>> filter)
         {
-            _dbSet.Remove(Find(filter));
-            _myDbContext.SaveChanges();
+            _myDbContext.Remove(Find(filter));
         }
         /// <summary>物理移除</summary>
         /// <param name="id">主键</param>
         public virtual void Remove(long id)
         {
-            Remove(x => x.Id == id);
-            _myDbContext.SaveChanges();
+            this.Remove(x => x.Id == id);
         }
         #endregion
 
@@ -213,37 +196,27 @@ namespace RayPI.EntityFrameworkRepository.Repository
         /// <param name="item">The item.</param>
         public virtual void Delete(T entity)
         {
-            entity.IsDeleted = true;
-            Update(entity);
-            _myDbContext.SaveChanges();
+            _myDbContext.Delete(entity);
         }
 
         /// <summary>逻辑删除</summary>
         /// <param name="tAggregateRoots">批量实体</param>
         public void Delete(IQueryable<T> entityList)
         {
-            foreach (var entity in entityList)
-            {
-                entity.IsDeleted = true;
-            }
-            Update(entityList);
-            _myDbContext.SaveChanges();
+            _myDbContext.Delete(entityList);
         }
 
         /// <summary>逻辑删除</summary>
         /// <param name="filter">移除条件</param>
         public virtual void Delete(Expression<Func<T, bool>> filter)
         {
-            var entityList = GetAllMatching(filter);
-            Delete(entityList);
-            _myDbContext.SaveChanges();
+            _myDbContext.Delete(filter);
         }
         /// <summary>逻辑删除</summary>
         /// <param name="id">The item.</param>
         public virtual void Delete(long id)
         {
-            Delete(x => x.Id == id);
-            _myDbContext.SaveChanges();
+            _myDbContext.Delete<T>(x => x.Id == id);
         }
         #endregion
         #endregion

@@ -1679,19 +1679,6 @@
           "bin/placeholder/RayPI.Entity.dll": {}
         }
       },
-      "RayPI.Model/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.2",
-        "dependencies": {
-          "SqlSugar": "4.6.4.9"
-        },
-        "compile": {
-          "bin/placeholder/RayPI.Model.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/RayPI.Model.dll": {}
-        }
-      },
       "RayPI.Treasury/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
@@ -5993,18 +5980,13 @@
     },
     "RayPI.ConfigService/1.0.0": {
       "type": "project",
-      "path": "../Ray.ConfigManager/RayPI.ConfigService.csproj",
-      "msbuildProject": "../Ray.ConfigManager/RayPI.ConfigService.csproj"
+      "path": "../Ray.ConfigService/RayPI.ConfigService.csproj",
+      "msbuildProject": "../Ray.ConfigService/RayPI.ConfigService.csproj"
     },
     "RayPI.Entity/1.0.0": {
       "type": "project",
       "path": "../RayPI.Entity/RayPI.Entity.csproj",
       "msbuildProject": "../RayPI.Entity/RayPI.Entity.csproj"
-    },
-    "RayPI.Model/1.0.0": {
-      "type": "project",
-      "path": "../RayPI.Model/RayPI.Model.csproj",
-      "msbuildProject": "../RayPI.Model/RayPI.Model.csproj"
     },
     "RayPI.Treasury/1.0.0": {
       "type": "project",
@@ -6021,7 +6003,6 @@
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
       "RayPI.Entity >= 1.0.0",
-      "RayPI.Model >= 1.0.0",
       "RayPI.Treasury >= 1.0.0"
     ]
   },
@@ -6058,9 +6039,6 @@
           "projectReferences": {
             "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj": {
               "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj"
-            },
-            "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Model\\RayPI.Model.csproj": {
-              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Model\\RayPI.Model.csproj"
             },
             "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Treasury\\RayPI.Treasury.csproj": {
               "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Treasury\\RayPI.Treasury.csproj"

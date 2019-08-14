@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RayPI.Entity\RayPI.Entity.csproj" />
-    <ProjectReference Include="..\RayPI.Model\RayPI.Model.csproj" />
     <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
   </ItemGroup>
 
