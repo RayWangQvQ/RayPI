@@ -5,8 +5,8 @@ using System.Text;
 
 namespace RayPI.IRepository
 {
-    public interface IStudentRepository:IBaseRepository<Student>
+    public interface IStudentRepository:IBaseRepository<StudentEntity>
     {
-        Student GetByName(string name);
+        StudentEntity GetByName(string name);
     }
 }

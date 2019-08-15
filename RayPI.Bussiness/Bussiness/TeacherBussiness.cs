@@ -17,23 +17,23 @@ namespace RayPI.Bussiness
             _teacherRepository = teacherRepository;
         }
 
-        public Teacher GetById(long id)
+        public TeacherEntity GetById(long id)
         {
             return _teacherRepository.FindById(id);
         }
 
-        public PageResult<Teacher> GetPageList(int pageIndex, int pageSize)
+        public PageResult<TeacherEntity> GetPageList(int pageIndex, int pageSize)
         {
-            return _teacherRepository.GetPageList<Teacher>(pageIndex, pageSize);
+            return _teacherRepository.GetPageList<TeacherEntity>(pageIndex, pageSize);
         }
 
-        public bool Add(Teacher entity)
+        public bool Add(TeacherEntity entity)
         {
             _teacherRepository.Add(entity);
             return true;
         }
 
-        public bool Update(Teacher entity)
+        public bool Update(TeacherEntity entity)
         {
             _teacherRepository.Update(entity);
             return true;

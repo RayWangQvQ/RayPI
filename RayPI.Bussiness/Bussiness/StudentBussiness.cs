@@ -1,6 +1,5 @@
 ﻿using RayPI.Entity;
 using RayPI.IRepository;
-using RayPI.EntityFrameworkRepository.Repository;
 using RayPI.Treasury.Models;
 using System.Linq;
 
@@ -14,23 +13,23 @@ namespace RayPI.Bussiness
             _studentRepository = studentRepository;
         }
 
-        public Student GetById(long id)
+        public StudentEntity GetById(long id)
         {
             return _studentRepository.FindById(id);
         }
 
-        public PageResult<Student> GetPageList(int pageIndex, int pageSize)
+        public PageResult<StudentEntity> GetPageList(int pageIndex, int pageSize)
         {
-            return _studentRepository.GetPageList<Student>(pageIndex, pageSize);
+            return _studentRepository.GetPageList<StudentEntity>(pageIndex, pageSize);
         }
 
-        public bool Add(Student entity)
+        public bool Add(StudentEntity entity)
         {
             _studentRepository.Add(entity);
             return true;
         }
 
-        public bool Update(Student entity)
+        public bool Update(StudentEntity entity)
         {
             _studentRepository.Update(entity);
             return true;
@@ -42,7 +41,7 @@ namespace RayPI.Bussiness
             return true;
         }
 
-        public Student GetByName(string name)
+        public StudentEntity GetByName(string name)
         {
             return _studentRepository.GetAllMatching(x => x.Name.Contains(name)).FirstOrDefault();
         }

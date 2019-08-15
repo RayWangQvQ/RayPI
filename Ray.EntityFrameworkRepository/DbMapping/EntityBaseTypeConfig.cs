@@ -13,6 +13,8 @@ namespace RayPI.EntityFrameworkRepository.DbMapping
     {
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.Property(it => it.Id).IsRequired().ValueGeneratedNever();
 
             builder.Property(x => x.CreateId).IsRequired(false);

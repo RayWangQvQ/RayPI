@@ -15,8 +15,4 @@
     <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

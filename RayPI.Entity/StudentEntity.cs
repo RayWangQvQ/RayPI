@@ -3,7 +3,7 @@
     ///<summary>
     ///学生实体
     ///</summary>
-    public partial class Student : EntityBase
+    public partial class StudentEntity : EntityBase
     {
         /// <summary>
         /// Desc:班级Id

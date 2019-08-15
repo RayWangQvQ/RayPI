@@ -12,7 +12,7 @@ namespace RayPI.OpenApi.Controllers
     /// 学生接口
     /// </summary>
     [Produces("application/json")]
-    [Route("api/Client")]
+    [Route("api/Student")]
     //[Authorize(Roles = "Client")]
     [EnableCors("Limit")]
     public class StudentController : Controller
@@ -47,7 +47,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Student/{id}")]
-        [ProducesResponseType(typeof(Student), 200)]
+        [ProducesResponseType(typeof(StudentEntity), 200)]
         public JsonResult GetStudentById(long id = 0)
         {
             if (id == 0)
@@ -62,7 +62,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("Student")]
-        public JsonResult Add(Student entity = null)
+        public JsonResult Add(StudentEntity entity = null)
         {
             if (entity == null)
                 throw new ArgumentNullException();
@@ -75,7 +75,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("Student")]
-        public JsonResult Update(Student entity = null)
+        public JsonResult Update(StudentEntity entity = null)
         {
             if (entity == null)
                 throw new ArgumentNullException();
@@ -104,7 +104,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet()]
         [Route("Student/GetByName")]
-        [Produces(typeof(Student))]
+        [Produces(typeof(StudentEntity))]
         public JsonResult GetByName(string name = null)
         {
             if (name == null)

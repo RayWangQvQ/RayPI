@@ -3,7 +3,7 @@
     ///<summary>
     ///
     ///</summary>
-    public partial class Teacher : EntityBase
+    public partial class TeacherEntity : EntityBase
     {
         /// <summary>
         /// Desc:

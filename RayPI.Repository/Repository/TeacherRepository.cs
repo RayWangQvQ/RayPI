@@ -4,7 +4,7 @@ using RayPI.IRepository;
 
 namespace RayPI.SqlSugarRepository.Repository
 {
-    public class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
+    public class TeacherRepository : BaseRepository<TeacherEntity>, ITeacherRepository
     {
         public TeacherRepository(MySqlSugarClient sugarClient) : base(sugarClient)
         {

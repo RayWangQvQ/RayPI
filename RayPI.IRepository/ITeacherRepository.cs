@@ -2,7 +2,7 @@
 
 namespace RayPI.IRepository
 {
-    public interface ITeacherRepository : IBaseRepository<Teacher>
+    public interface ITeacherRepository : IBaseRepository<TeacherEntity>
     {
 
     }

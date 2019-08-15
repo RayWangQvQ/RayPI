@@ -7,15 +7,12 @@ using RayPI.Entity;
 
 namespace RayPI.EntityFrameworkRepository.DbMapping
 {
-    public class BookConfig : EntityBaseTypeConfig<Book>
+    public class BookConfig : EntityBaseTypeConfig<BookEntity>
     {
-        public override void Configure(EntityTypeBuilder<Book> builder)
+        public override void Configure(EntityTypeBuilder<BookEntity> builder)
         {
             //表名
             builder.ToTable("Book");
-
-            //主键
-            builder.HasKey(x => x.Id);
 
             //字段
             builder.Property(x => x.Title).HasMaxLength(50).IsRequired();

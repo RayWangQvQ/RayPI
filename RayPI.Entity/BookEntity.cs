@@ -3,7 +3,7 @@
     ///<summary>
     ///
     ///</summary>
-    public partial class Book : EntityBase
+    public partial class BookEntity : EntityBase
     {
         /// <summary>
         /// Desc:书名

@@ -131,6 +131,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         {
             //todo:设置操作人信息
             _myDbContext.Add(entity);
+            _myDbContext.SaveChanges();
             return entity.Id;
         }
         /// <summary>批量新增</summary>
@@ -140,6 +141,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         {
             //todo
             _myDbContext.Add(entityList);
+            _myDbContext.SaveChanges();
             return entityList.Select(x => x.Id);
         }
         #endregion
@@ -151,6 +153,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public virtual void Update(T entity)
         {
             _myDbContext.Update(entity);
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>批量修改</summary>
@@ -158,6 +161,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public virtual void Update(IQueryable<T> entityList)
         {
             _myDbContext.Update(entityList);
+            _myDbContext.SaveChanges();
         }
         #endregion
 
@@ -168,6 +172,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public virtual void Remove(T entity)
         {
             _myDbContext.Remove(entity);
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>批量物理移除</summary>
@@ -175,6 +180,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public void Remove(IQueryable<T> entityList)
         {
             _myDbContext.RemoveRange(entityList);
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>批量物理移除</summary>
@@ -182,6 +188,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public virtual void Remove(Expression<Func<T, bool>> filter)
         {
             _myDbContext.Remove(Find(filter));
+            _myDbContext.SaveChanges();
         }
         /// <summary>物理移除</summary>
         /// <param name="id">主键</param>
@@ -197,6 +204,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public virtual void Delete(T entity)
         {
             _myDbContext.Delete(entity);
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>逻辑删除</summary>
@@ -204,6 +212,7 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public void Delete(IQueryable<T> entityList)
         {
             _myDbContext.Delete(entityList);
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>逻辑删除</summary>
@@ -211,12 +220,13 @@ namespace RayPI.EntityFrameworkRepository.Repository
         public virtual void Delete(Expression<Func<T, bool>> filter)
         {
             _myDbContext.Delete(filter);
+            _myDbContext.SaveChanges();
         }
         /// <summary>逻辑删除</summary>
         /// <param name="id">The item.</param>
         public virtual void Delete(long id)
         {
-            _myDbContext.Delete<T>(x => x.Id == id);
+            this.Delete(x => x.Id == id);
         }
         #endregion
         #endregion

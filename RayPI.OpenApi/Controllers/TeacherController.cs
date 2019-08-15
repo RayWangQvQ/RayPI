@@ -50,7 +50,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Teacher/{id}")]
-        [ProducesResponseType(typeof(Teacher), 200)]
+        [ProducesResponseType(typeof(TeacherEntity), 200)]
         public JsonResult GetTeacherById(long id)
         {
             return Json(_teacheBussiness.GetById(id));
@@ -63,7 +63,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("Teacher")]
-        public JsonResult AddTeacher(Teacher entity = null)
+        public JsonResult AddTeacher(TeacherEntity entity = null)
         {
             if (entity == null)
                 return Json("参数为空");
@@ -76,7 +76,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("Teacher")]
-        public JsonResult UpdateTeacher(Teacher entity = null)
+        public JsonResult UpdateTeacher(TeacherEntity entity = null)
         {
             if (entity == null)
                 return Json("参数为空");

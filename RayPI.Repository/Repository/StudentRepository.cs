@@ -4,16 +4,16 @@ using RayPI.IRepository;
 
 namespace RayPI.SqlSugarRepository.Repository
 {
-    public class StudentRepository : BaseRepository<Student>, IStudentRepository
+    public class StudentRepository : BaseRepository<StudentEntity>, IStudentRepository
     {
         public StudentRepository(MySqlSugarClient sugarClient) : base(sugarClient)
         {
 
         }
 
-        public Student GetByName(string name)
+        public StudentEntity GetByName(string name)
         {
-            return _sugarClient.Client.Queryable<Student>().Where(it => it.Name == name).First();
+            return _sugarClient.Client.Queryable<StudentEntity>().Where(it => it.Name == name).First();
         }
     }
 }
