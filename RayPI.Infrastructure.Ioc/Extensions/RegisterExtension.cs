@@ -1,10 +1,16 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyModel;
+using Ray.EntityFrameworkRepository;
 using RayPI.Infrastructure.Ioc.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using System.Text;
+
 
 namespace RayPI.Infrastructure.Ioc.Extensions
 {
@@ -17,12 +23,26 @@ namespace RayPI.Infrastructure.Ioc.Extensions
         /// 自定义手动注册
         /// </summary>
         /// <param name="services"></param>
-        public static void AddMyServices(this IServiceCollection services, List<Assembly> assemblies)
+        public static void AddMyServices(this IServiceCollection services, IConfiguration config)
         {
-            //repository
+            //注册数据库实例
+            string conn = config.GetConnectionString("SqlServerDatabase");
+            services.AddDbContext<MyDbContext>(options => options.UseSqlServer(conn));
+
+            var assemblies = new List<Assembly>();
+            DependencyContext dependencyContext = DependencyContext.Default;
+            IEnumerable<CompilationLibrary> libs = dependencyContext.CompileLibraries
+                .Where(lib => !lib.Serviceable && lib.Type != "package" && lib.Name.StartsWith("RayPI"));
+            foreach (var lib in libs)
+            {
+                Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));
+                assemblies.Add(assembly);
+            }
+
+            //注册repository
             Assembly repositoryAssemblies = assemblies.FirstOrDefault(x => x.FullName.Contains("Repository"));
             services.AddAssemblyServices(repositoryAssemblies);
-            //service  
+            //注册bussiness
             Assembly serviceAssemblies = assemblies.FirstOrDefault(x => x.FullName.Contains(".Bussiness"));
             services.AddAssemblyServices(serviceAssemblies);
         }
@@ -57,7 +77,7 @@ namespace RayPI.Infrastructure.Ioc.Extensions
             foreach (var instanceType in typeDic.Keys)
             {
                 Type[] interfaceTypeList = typeDic[instanceType];
-                if (interfaceTypeList == null)//如果该类没有实现接口，则以其本身类型注册
+                if (interfaceTypeList == null | interfaceTypeList?.Count() == 0)//如果该类没有实现接口，则以其本身类型注册
                 {
                     services.AddServiceWithLifeScoped(null, instanceType, serviceLifetime);
                 }

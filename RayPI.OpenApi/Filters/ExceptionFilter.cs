@@ -6,7 +6,7 @@ using RayPI.Treasury.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using RayPI.Treasury.Models;
 
-namespace RayPI.Filters
+namespace RayPI.OpenApi.Filters
 {
     /// <summary>
     /// 

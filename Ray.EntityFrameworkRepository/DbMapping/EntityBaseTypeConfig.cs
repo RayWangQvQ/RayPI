@@ -25,6 +25,8 @@ namespace RayPI.EntityFrameworkRepository.DbMapping
 
             builder.Property(x => x.IsDeleted).IsRequired();
             builder.Property(x => x.DeleteTime).IsRequired(false);
+
+            builder.Ignore(x => x.AutoSetter);
         }
     }
 }

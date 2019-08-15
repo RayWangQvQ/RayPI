@@ -6,7 +6,7 @@ using RayPI.Bussiness;
 using RayPI.Entity;
 using RayPI.Treasury.Models;
 
-namespace RayPI.Controllers
+namespace RayPI.OpenApi.Controllers
 {
     /// <summary>
     /// 学生接口

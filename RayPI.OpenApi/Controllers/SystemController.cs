@@ -9,7 +9,7 @@ using RayPI.Treasury.Models;
 using RayPI.AuthService;
 
 
-namespace RayPI.Controllers
+namespace RayPI.OpenApi.Controllers
 {
     /// <summary>
     /// 系统接口

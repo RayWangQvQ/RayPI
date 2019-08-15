@@ -5983,8 +5983,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
-      "RayPI.Treasury >= 1.0.0",
-      "SqlSugar >= 4.6.4.9"
+      "RayPI.Treasury >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -6020,9 +6019,6 @@
           "projectReferences": {
             "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Treasury\\RayPI.Treasury.csproj": {
               "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Treasury\\RayPI.Treasury.csproj"
-            },
-            "G:\\GitHub\\MyOwnRepos\\RayPI\\SqlSugar\\SqlSugar.csproj": {
-              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\SqlSugar\\SqlSugar.csproj"
             }
           }
         }

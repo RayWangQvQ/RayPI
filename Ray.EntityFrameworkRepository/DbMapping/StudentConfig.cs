@@ -11,13 +11,17 @@ namespace RayPI.EntityFrameworkRepository.DbMapping
     {
         public override void Configure(EntityTypeBuilder<Student> builder)
         {
-            base.Configure(builder);
+            //表名
+            builder.ToTable("Student");
 
-            //builder.ToTable("Student");
-
+            //主键
             builder.HasKey(x => x.Id);
 
+            //字段
             builder.Property(x => x.Name).HasMaxLength(50).IsRequired();
+
+            //基础字段
+            base.Configure(builder);
         }
     }
 }

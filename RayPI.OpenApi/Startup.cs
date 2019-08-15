@@ -1,21 +1,23 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using System.Runtime.Loader;
+using System.Linq;
+//
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-using System.Linq;
+using Microsoft.Extensions.DependencyModel;
 //
 using RayPI.ConfigService;
 using RayPI.AuthService;
 using RayPI.SwaggerService;
 using RayPI.CorsService;
-using RayPI.Filters;
+using RayPI.OpenApi.Filters;
 using System.Collections.Generic;
 using RayPI.Infrastructure.Ioc.Extensions;
-using Microsoft.Extensions.DependencyModel;
-using System.Runtime.Loader;
+using Ray.EntityFrameworkRepository;
 
-namespace RayPI
+namespace RayPI.OpenApi
 {
     /// <summary>
     /// 
@@ -45,6 +47,7 @@ namespace RayPI
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            //注册MVC
             services.AddMvc()
                 .AddJsonOptions(options =>
                 {
@@ -54,23 +57,17 @@ namespace RayPI
             //注册配置管理服务
             services.AddConfigService(_config);
 
+            //注册Swagger
             services.AddSwaggerService();
 
+            //注册授权认证
             services.AddAuthService(_config);
 
+            //注册Cors跨域
             services.AddCorsService();
 
-            var list = new List<Assembly>();
-            DependencyContext dependencyContext = DependencyContext.Default;
-            IEnumerable<CompilationLibrary> libs = dependencyContext.CompileLibraries
-                .Where(lib => !lib.Serviceable && lib.Type != "package" && lib.Name.StartsWith("RayPI"));
-            foreach (var lib in libs)
-            {
-                Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));
-                list.Add(assembly);
-            }
-
-            services.AddMyServices(list);
+            //自定义注册
+            services.AddMyServices(_config);
         }
 
         /// <summary>
