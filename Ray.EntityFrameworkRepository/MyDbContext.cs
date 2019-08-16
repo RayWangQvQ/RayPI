@@ -1,15 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RayPI.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Linq.Expressions;
+//
+using Microsoft.EntityFrameworkCore;
+//
 using RayPI.Treasury.Models;
 using RayPI.Treasury.Helpers;
 using RayPI.Treasury.Interfaces;
-using System.Linq.Expressions;
 using RayPI.Treasury.Extensions;
+using RayPI.Entity;
+
 
 namespace Ray.EntityFrameworkRepository
 {
@@ -83,19 +85,16 @@ namespace Ray.EntityFrameworkRepository
         private void SetEntityBaseInfo<TAggregateRoot>(TAggregateRoot item, bool isAdd = true) where TAggregateRoot : EntityBase
         {
             IEntityBaseAutoSetter entityBaseAutoSetter = item.AutoSetter ?? new OperateSetter(_tokenModel);
-            if (!isAdd)
-            {
-                item.UpdateId = entityBaseAutoSetter.UpdateId;
-                item.UpdateTime = entityBaseAutoSetter.UpdateTime;
-                item.UpdateName = entityBaseAutoSetter.UpdateName;
-            }
-            else
+            if (isAdd)//添加
             {
                 if (item.Id <= 0L)
                     item.Id = IdGenerateHelper.NewId;
                 item.CreateId = entityBaseAutoSetter.CreateId;
                 item.CreateTime = entityBaseAutoSetter.CreateTime;
                 item.CreateName = entityBaseAutoSetter.CreateName;
+            }
+            else//编辑
+            {
                 item.UpdateId = entityBaseAutoSetter.UpdateId;
                 item.UpdateTime = entityBaseAutoSetter.UpdateTime;
                 item.UpdateName = entityBaseAutoSetter.UpdateName;

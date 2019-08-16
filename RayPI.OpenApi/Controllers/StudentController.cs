@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Student")]
-    //[Authorize(Roles = "Client")]
+    [Authorize(Policy = "RequireAdminOrClient")]
     [EnableCors("Limit")]
     public class StudentController : Controller
     {

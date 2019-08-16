@@ -15,10 +15,10 @@ namespace RayPI.OpenApi.Controllers
     /// 系统接口
     /// </summary>
     [Produces("application/json")]
-    [Route("api/System")]
+    [Route("api/Test")]
     [EnableCors("Any")]
     //[Authorize(Policy = "RequireAdminOrClient")]
-    public class SystemController : Controller
+    public class TestController : Controller
     {
         private EntityBussiness _entityBussiness;
         private IConfiguration _config;
@@ -31,7 +31,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="configuration"></param>
         /// <param name="env"></param>
         /// <param name="jwtAuthConfigModel"></param>
-        public SystemController(IConfiguration configuration, IHostingEnvironment env, JwtAuthConfigModel jwtAuthConfigModel, EntityBussiness entityBLL)
+        public TestController(IConfiguration configuration, IHostingEnvironment env, JwtAuthConfigModel jwtAuthConfigModel, EntityBussiness entityBLL)
         {
             _config = configuration;
             _env = env;
@@ -72,7 +72,7 @@ namespace RayPI.OpenApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("System/TestException")]
+        [Route("TestException")]
         public JsonResult TestException()
         {
             string s = null;

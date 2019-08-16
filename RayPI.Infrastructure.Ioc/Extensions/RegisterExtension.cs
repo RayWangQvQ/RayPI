@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 using Ray.EntityFrameworkRepository;
 using RayPI.Infrastructure.Ioc.Helpers;
+using RayPI.Treasury.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,9 @@ namespace RayPI.Infrastructure.Ioc.Extensions
             //注册数据库实例
             string conn = config.GetConnectionString("SqlServerDatabase");
             services.AddDbContext<MyDbContext>(options => options.UseSqlServer(conn));
+
+            //注册tokenModel
+            services.AddScoped<TokenModel>();
 
             var assemblies = new List<Assembly>();
             DependencyContext dependencyContext = DependencyContext.Default;

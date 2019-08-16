@@ -9,7 +9,7 @@ namespace RayPI.Bussiness.System
     {
         private IEntityRepository _entityRepository;
 
-        public EntityBussiness(IEntityRepository entityRepository)
+        public EntityBussiness()
         {
 
         }

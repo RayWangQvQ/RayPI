@@ -1,21 +1,15 @@
-﻿using System.Reflection;
-using System.Runtime.Loader;
-using System.Linq;
-//
+﻿//
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyModel;
 //
 using RayPI.ConfigService;
 using RayPI.AuthService;
 using RayPI.SwaggerService;
 using RayPI.CorsService;
 using RayPI.OpenApi.Filters;
-using System.Collections.Generic;
 using RayPI.Infrastructure.Ioc.Extensions;
-using Ray.EntityFrameworkRepository;
 
 namespace RayPI.OpenApi
 {
@@ -88,9 +82,9 @@ namespace RayPI.OpenApi
 
             app.UseAuthService();
 
-            app.UseMvc();
+            app.UseStaticFiles();//用于访问wwwroot下的文件
 
-            app.UseStaticFiles();//用于访问wwwroot下的文件 
+            app.UseMvc();
         }
 
     }

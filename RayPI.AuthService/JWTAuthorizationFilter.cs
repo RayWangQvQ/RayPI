@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 //
@@ -16,16 +17,22 @@ namespace RayPI.AuthService
     public class JwtAuthorizationFilter
     {
         private readonly RequestDelegate _next;
-        //private readonly IServiceCollection _services;
+        private TokenModel _tm;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="next"></param>
-        public JwtAuthorizationFilter(RequestDelegate next)
+        public JwtAuthorizationFilter(RequestDelegate next, IServiceProvider serviceProvider)
         {
             _next = next;
-            //_services = services;
+            try
+            {
+                _tm = serviceProvider.GetService<TokenModel>();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -44,14 +51,11 @@ namespace RayPI.AuthService
             string tokenHeader = httpContext.Request.Headers["Authorization"];
             tokenHeader = tokenHeader.Substring("Bearer ".Length).Trim();
 
-            TokenModel tm = JwtHelper.SerializeJWT(tokenHeader);
-
-            //注册tokenModel
-            //_services.AddScoped(x => tm);
+            _tm = JwtHelper.SerializeJWT(tokenHeader);
 
             //授权
             var claimList = new List<Claim>();
-            var claim = new Claim(ClaimTypes.Role, tm.Role);
+            var claim = new Claim(ClaimTypes.Role, _tm.Role);
             claimList.Add(claim);
             var identity = new ClaimsIdentity(claimList);
             var principal = new ClaimsPrincipal(identity);

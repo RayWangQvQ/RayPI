@@ -12,7 +12,7 @@ namespace RayPI.AuthService
     {
         public static IServiceCollection AddAuthService(this IServiceCollection services, IConfiguration config)
         {
-            #region 注册认证服务
+            #region 注册【认证】服务
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -45,7 +45,7 @@ namespace RayPI.AuthService
                 });
             #endregion
 
-            #region 注册授权服务
+            #region 注册【授权】服务
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireClient", policy => policy.RequireRole("Client").Build());
