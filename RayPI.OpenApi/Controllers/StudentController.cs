@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RayPI.AuthService;
+using RayPI.AuthService.Enums;
 using RayPI.Bussiness;
 using RayPI.Entity;
 using RayPI.Treasury.Models;
@@ -14,7 +16,7 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Student")]
-    [Authorize(Policy = "RequireAdminOrClient")]
+    [ApiAuthorize(PolicyEnum.RequireRoleOfAdminOrClient)]
     [EnableCors("Limit")]
     public class StudentController : Controller
     {

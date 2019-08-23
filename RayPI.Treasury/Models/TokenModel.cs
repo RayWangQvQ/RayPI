@@ -26,9 +26,5 @@ namespace RayPI.Treasury.Models
         /// 令牌类型
         /// </summary>
         public string TokenType { get; set; }
-        /// <summary>
-        /// 令牌
-        /// </summary>
-        public string TokenString { get; set; }
     }
 }

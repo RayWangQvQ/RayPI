@@ -6,65 +6,74 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using RayPI.Treasury.Models;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using RayPI.AuthService.Jwt;
 
 namespace RayPI.AuthService
 {
-    public static class JwtHelper
+    public class JwtService : IJwtServicecs
     {
         /// <summary>
         /// 颁发JWT字符串
         /// </summary>
         /// <param name="tokenModel"></param>
         /// <returns></returns>
-        public static string IssueJWT(TokenModel tokenModel, JwtAuthConfigModel jwtConfig)
+        public string IssueJWT(TokenModel tokenModel, JwtAuthConfigModel jwtConfig)
         {
             var dateTime = DateTime.UtcNow;
-            var claims = new Claim[]
+            var claims = new List<Claim>
             {
+                new Claim(JwtRegisteredClaimNames.Iss,"RayPI"),//颁发人
                 new Claim(JwtRegisteredClaimNames.Jti,tokenModel.Uid.ToString()),//用户Id
-                new Claim("Role", tokenModel.Role),//身份
-                new Claim("Project", tokenModel.Project),//身份
+                new Claim(ClaimTypes.Role, tokenModel.Role),//身份
+                new Claim("proj", tokenModel.Project),//项目
                 new Claim(JwtRegisteredClaimNames.Iat,dateTime.ToString(),ClaimValueTypes.Integer64)
             };
-            //秘钥
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecurityKey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
             //过期时间
-            double exp = 0;
+            double expMin = 0;
             switch (tokenModel.TokenType)
             {
                 case "Web":
-                    exp = jwtConfig.WebExp;
+                    expMin = jwtConfig.WebExp;
                     break;
                 case "App":
-                    exp = jwtConfig.AppExp;
+                    expMin = jwtConfig.AppExp;
                     break;
                 case "MiniProgram":
-                    exp = jwtConfig.MiniProgramExp;
+                    expMin = jwtConfig.MiniProgramExp;
                     break;
-                case "Other":
-                    exp = jwtConfig.OtherExp;
+                default:
+                    expMin = jwtConfig.OtherExp;
                     break;
             }
-            var jwt = new JwtSecurityToken(
-                issuer: "RayPI",
-                claims: claims, //声明集合
-                expires: dateTime.AddHours(exp),
+
+            DateTime expTime = dateTime.AddMinutes(expMin);
+
+            //秘钥
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecurityKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var jwt = new JwtSecurityToken(claims: claims,
+                expires: expTime,//过期时间
                 signingCredentials: creds);
 
             var jwtHandler = new JwtSecurityTokenHandler();
             var encodedJwt = jwtHandler.WriteToken(jwt);
 
-            return encodedJwt;
+            //用户标识
+            //var identity = new ClaimsIdentity(JwtBearerDefaults.AuthenticationScheme);
+            //identity.AddClaims(claims);
+
+            return $"{JwtBearerDefaults.AuthenticationScheme} {encodedJwt}";
         }
 
         /// <summary>
-        /// 解析
+        /// 解析jwt字符串
         /// </summary>
         /// <param name="jwtStr"></param>
         /// <returns></returns>
-        public static TokenModel SerializeJWT(string jwtStr)
+        public TokenModel SerializeJWT(string jwtStr)
         {
             var jwtHandler = new JwtSecurityTokenHandler();
             JwtSecurityToken jwtToken = jwtHandler.ReadJwtToken(jwtStr);
@@ -83,7 +92,7 @@ namespace RayPI.AuthService
                 Uid = long.Parse(jwtToken.Id),
                 Role = new object().ToString(),
                 Project = new object().ToString(),
-                TokenString = jwtStr
+                //TokenString = jwtStr
             };
             return tm;
         }

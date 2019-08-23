@@ -7,7 +7,7 @@ using RayPI.Bussiness.System;
 using RayPI.ConfigService.ConfigModel;
 using RayPI.Treasury.Models;
 using RayPI.AuthService;
-
+using RayPI.AuthService.Jwt;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -24,6 +24,7 @@ namespace RayPI.OpenApi.Controllers
         private IConfiguration _config;
         private IHostingEnvironment _env;
         private JwtAuthConfigModel _jwtAuthConfigModel;
+        private IJwtServicecs _jwtServicecs;
 
         /// <summary>
         /// 
@@ -31,12 +32,17 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="configuration"></param>
         /// <param name="env"></param>
         /// <param name="jwtAuthConfigModel"></param>
-        public TestController(IConfiguration configuration, IHostingEnvironment env, JwtAuthConfigModel jwtAuthConfigModel, EntityBussiness entityBLL)
+        public TestController(IConfiguration configuration,
+            IHostingEnvironment env,
+            JwtAuthConfigModel jwtAuthConfigModel,
+            EntityBussiness entityBLL,
+            IJwtServicecs jwtServicecs)
         {
             _config = configuration;
             _env = env;
             _jwtAuthConfigModel = jwtAuthConfigModel;
             _entityBussiness = entityBLL;
+            _jwtServicecs = jwtServicecs;
         }
 
         #region 生成实体类
@@ -57,13 +63,25 @@ namespace RayPI.OpenApi.Controllers
         /// <summary>
         /// 模拟登录，获取JWT
         /// </summary>
-        /// <param name="tm"></param>
+        /// <param name="uid"></param>
+        /// <param name="uname"></param>
+        /// <param name="role"></param>
+        /// <param name="project"></param>
+        /// <param name="tokentype"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        public string GetJWTStr(TokenModel tm)
+        public string GetJWTStr(long uid = 1, string uname = "Admin", string role = "Admin", string project = "RayPI", string tokentype = "Web")
         {
-            return JwtHelper.IssueJWT(tm, _jwtAuthConfigModel);
+            var tm = new TokenModel
+            {
+                Uid = uid,
+                Uname = uname,
+                Role = role,
+                Project = project,
+                TokenType = tokentype
+            };
+            return _jwtServicecs.IssueJWT(tm, _jwtAuthConfigModel);
         }
         #endregion
 

@@ -78,13 +78,13 @@ namespace RayPI.OpenApi
 
             app.UseMiddleware<ExceptionFilter>();//自定义异常处理中间件
 
-            app.UseSwaggerService();
-
             app.UseAuthService();
 
-            app.UseStaticFiles();//用于访问wwwroot下的文件
-
             app.UseMvc();
+
+            app.UseSwaggerService();
+
+            app.UseStaticFiles();//用于访问wwwroot下的文件
         }
 
     }
