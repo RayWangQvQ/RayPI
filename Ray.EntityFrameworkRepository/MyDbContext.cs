@@ -10,8 +10,7 @@ using RayPI.Treasury.Models;
 using RayPI.Treasury.Helpers;
 using RayPI.Treasury.Interfaces;
 using RayPI.Treasury.Extensions;
-using RayPI.Entity;
-
+using RayPI.Domain.Entity;
 
 namespace Ray.EntityFrameworkRepository
 {

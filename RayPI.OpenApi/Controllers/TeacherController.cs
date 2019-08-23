@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Rest.TransientFaultHandling;
 using RayPI.Bussiness;
-using RayPI.Entity;
+using RayPI.Domain.Entity;
 using RayPI.Treasury.Models;
 
 namespace RayPI.OpenApi.Controllers

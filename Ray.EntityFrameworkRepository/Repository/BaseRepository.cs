@@ -4,8 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 //
 using Ray.EntityFrameworkRepository;
-using RayPI.Entity;
-using RayPI.IRepository;
+using RayPI.Domain.Entity;
+using RayPI.Domain.IRepository;
 using RayPI.Treasury.Enums;
 using RayPI.Treasury.Models;
 

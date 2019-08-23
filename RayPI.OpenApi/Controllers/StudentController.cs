@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RayPI.AuthService;
 using RayPI.AuthService.Enums;
 using RayPI.Bussiness;
-using RayPI.Entity;
+using RayPI.Domain.Entity;
 using RayPI.Treasury.Models;
 
 namespace RayPI.OpenApi.Controllers

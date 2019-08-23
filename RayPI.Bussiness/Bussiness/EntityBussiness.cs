@@ -1,7 +1,7 @@
-﻿using RayPI.IRepository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RayPI.Domain.IRepository;
 
 namespace RayPI.Bussiness.System
 {

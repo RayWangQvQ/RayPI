@@ -1665,31 +1665,17 @@
           "bin/placeholder/RayPI.ConfigService.dll": {}
         }
       },
-      "RayPI.Entity/1.0.0": {
+      "RayPI.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "RayPI.Treasury": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/RayPI.Entity.dll": {}
+          "bin/placeholder/RayPI.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/RayPI.Entity.dll": {}
-        }
-      },
-      "RayPI.IRepository/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.2",
-        "dependencies": {
-          "RayPI.Entity": "1.0.0",
-          "RayPI.Treasury": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/RayPI.IRepository.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/RayPI.IRepository.dll": {}
+          "bin/placeholder/RayPI.Domain.dll": {}
         }
       },
       "RayPI.Treasury/1.0.0": {
@@ -5996,15 +5982,10 @@
       "path": "../Ray.ConfigService/RayPI.ConfigService.csproj",
       "msbuildProject": "../Ray.ConfigService/RayPI.ConfigService.csproj"
     },
-    "RayPI.Entity/1.0.0": {
+    "RayPI.Domain/1.0.0": {
       "type": "project",
-      "path": "../RayPI.Entity/RayPI.Entity.csproj",
-      "msbuildProject": "../RayPI.Entity/RayPI.Entity.csproj"
-    },
-    "RayPI.IRepository/1.0.0": {
-      "type": "project",
-      "path": "../RayPI.IRepository/RayPI.IRepository.csproj",
-      "msbuildProject": "../RayPI.IRepository/RayPI.IRepository.csproj"
+      "path": "../RayPI.Domain/RayPI.Domain.csproj",
+      "msbuildProject": "../RayPI.Domain/RayPI.Domain.csproj"
     },
     "RayPI.Treasury/1.0.0": {
       "type": "project",
@@ -6020,8 +6001,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
-      "RayPI.Entity >= 1.0.0",
-      "RayPI.IRepository >= 1.0.0",
+      "RayPI.Domain >= 1.0.0",
       "RayPI.Treasury >= 1.0.0",
       "SqlSugar >= 4.6.4.9"
     ]
@@ -6057,11 +6037,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj": {
-              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj"
-            },
-            "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.IRepository\\RayPI.IRepository.csproj": {
-              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.IRepository\\RayPI.IRepository.csproj"
+            "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Domain\\RayPI.Domain.csproj": {
+              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Domain\\RayPI.Domain.csproj"
             },
             "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Treasury\\RayPI.Treasury.csproj": {
               "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Treasury\\RayPI.Treasury.csproj"

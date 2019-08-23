@@ -1,5 +1,5 @@
-﻿using RayPI.IRepository;
-using System;
+﻿using System;
+using RayPI.Domain.IRepository;
 
 namespace RayPI.SqlSugarRepository.Repository
 {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RayPI.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using RayPI.Domain.Entity;
 
 namespace RayPI.EntityFrameworkRepository.DbMapping
 {

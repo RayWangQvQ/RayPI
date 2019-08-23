@@ -1876,17 +1876,17 @@
           "bin/placeholder/RayPI.ConfigService.dll": {}
         }
       },
-      "RayPI.Entity/1.0.0": {
+      "RayPI.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "RayPI.Treasury": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/RayPI.Entity.dll": {}
+          "bin/placeholder/RayPI.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/RayPI.Entity.dll": {}
+          "bin/placeholder/RayPI.Domain.dll": {}
         }
       },
       "RayPI.EntityFrameworkRepository/1.0.0": {
@@ -1896,7 +1896,7 @@
           "Microsoft.EntityFrameworkCore": "2.2.6",
           "Microsoft.EntityFrameworkCore.Relational": "2.2.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.6",
-          "RayPI.IRepository": "1.0.0",
+          "RayPI.Domain": "1.0.0",
           "RayPI.Treasury": "1.0.0"
         },
         "compile": {
@@ -1904,28 +1904,13 @@
         },
         "runtime": {
           "bin/placeholder/RayPI.EntityFrameworkRepository.dll": {}
-        }
-      },
-      "RayPI.IRepository/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.2",
-        "dependencies": {
-          "RayPI.Entity": "1.0.0",
-          "RayPI.Treasury": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/RayPI.IRepository.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/RayPI.IRepository.dll": {}
         }
       },
       "RayPI.SqlSugarRepository/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
-          "RayPI.Entity": "1.0.0",
-          "RayPI.IRepository": "1.0.0",
+          "RayPI.Domain": "1.0.0",
           "RayPI.Treasury": "1.0.0",
           "SqlSugar": "4.6.4.9"
         },
@@ -6643,20 +6628,15 @@
       "path": "../Ray.ConfigService/RayPI.ConfigService.csproj",
       "msbuildProject": "../Ray.ConfigService/RayPI.ConfigService.csproj"
     },
-    "RayPI.Entity/1.0.0": {
+    "RayPI.Domain/1.0.0": {
       "type": "project",
-      "path": "../RayPI.Entity/RayPI.Entity.csproj",
-      "msbuildProject": "../RayPI.Entity/RayPI.Entity.csproj"
+      "path": "../RayPI.Domain/RayPI.Domain.csproj",
+      "msbuildProject": "../RayPI.Domain/RayPI.Domain.csproj"
     },
     "RayPI.EntityFrameworkRepository/1.0.0": {
       "type": "project",
       "path": "../Ray.EntityFrameworkRepository/RayPI.EntityFrameworkRepository.csproj",
       "msbuildProject": "../Ray.EntityFrameworkRepository/RayPI.EntityFrameworkRepository.csproj"
-    },
-    "RayPI.IRepository/1.0.0": {
-      "type": "project",
-      "path": "../RayPI.IRepository/RayPI.IRepository.csproj",
-      "msbuildProject": "../RayPI.IRepository/RayPI.IRepository.csproj"
     },
     "RayPI.SqlSugarRepository/1.0.0": {
       "type": "project",
@@ -6677,9 +6657,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
-      "RayPI.Entity >= 1.0.0",
       "RayPI.EntityFrameworkRepository >= 1.0.0",
-      "RayPI.IRepository >= 1.0.0",
       "RayPI.SqlSugarRepository >= 1.0.0",
       "RayPI.Treasury >= 1.0.0"
     ]
@@ -6717,12 +6695,6 @@
           "projectReferences": {
             "G:\\GitHub\\MyOwnRepos\\RayPI\\Ray.EntityFrameworkRepository\\RayPI.EntityFrameworkRepository.csproj": {
               "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\Ray.EntityFrameworkRepository\\RayPI.EntityFrameworkRepository.csproj"
-            },
-            "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj": {
-              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Entity\\RayPI.Entity.csproj"
-            },
-            "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.IRepository\\RayPI.IRepository.csproj": {
-              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.IRepository\\RayPI.IRepository.csproj"
             },
             "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Repository\\RayPI.SqlSugarRepository.csproj": {
               "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Repository\\RayPI.SqlSugarRepository.csproj"

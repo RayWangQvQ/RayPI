@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ray.EntityFrameworkRepository\RayPI.EntityFrameworkRepository.csproj" />
-    <ProjectReference Include="..\RayPI.Entity\RayPI.Entity.csproj" />
-    <ProjectReference Include="..\RayPI.IRepository\RayPI.IRepository.csproj" />
     <ProjectReference Include="..\RayPI.Repository\RayPI.SqlSugarRepository.csproj" />
     <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
   </ItemGroup>

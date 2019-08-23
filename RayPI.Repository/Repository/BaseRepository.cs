@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 //
 using SqlSugar;
-using RayPI.Entity;
-using RayPI.IRepository;
 using RayPI.Treasury.Enums;
 using RayPI.Treasury.Models;
 using System.Linq;
+using RayPI.Domain.Entity;
+using RayPI.Domain.IRepository;
 
 namespace RayPI.SqlSugarRepository.Repository
 {

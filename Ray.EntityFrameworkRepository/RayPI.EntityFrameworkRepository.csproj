@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RayPI.IRepository\RayPI.IRepository.csproj" />
+    <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />
     <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
   </ItemGroup>
 
