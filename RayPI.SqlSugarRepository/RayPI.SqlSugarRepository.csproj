@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />
-    <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
     <ProjectReference Include="..\SqlSugar\SqlSugar.csproj" />
   </ItemGroup>
 

@@ -11,8 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ray.ConfigService\RayPI.ConfigService.csproj" />
-    <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.Treasury\RayPI.Infrastructure.Treasury.csproj" />
   </ItemGroup>
 
   <ItemGroup>

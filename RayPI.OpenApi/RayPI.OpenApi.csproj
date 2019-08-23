@@ -21,13 +21,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ray.ConfigService\RayPI.ConfigService.csproj" />
-    <ProjectReference Include="..\RayPI.AuthService\RayPI.AuthService.csproj" />
     <ProjectReference Include="..\RayPI.Bussiness\RayPI.Bussiness.csproj" />
-    <ProjectReference Include="..\RayPI.CorsService\RayPI.CorsService.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.Auth\RayPI.Infrastructure.Auth.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.Config\RayPI.Infrastructure.Config.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.Cors\RayPI.Infrastructure.Cors.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Ioc\RayPI.Infrastructure.Ioc.csproj" />
-    <ProjectReference Include="..\RayPI.SwaggerService\RayPI.SwaggerService.csproj" />
-    <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.Swagger\RayPI.Infrastructure.Swagger.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.Treasury\RayPI.Infrastructure.Treasury.csproj" />
   </ItemGroup>
 
   <ItemGroup>

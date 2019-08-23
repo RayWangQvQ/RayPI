@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />
-    <ProjectReference Include="..\RayPI.Treasury\RayPI.Treasury.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.Treasury\RayPI.Infrastructure.Treasury.csproj" />
   </ItemGroup>
 
 </Project>

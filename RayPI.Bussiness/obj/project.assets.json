@@ -200,33 +200,6 @@
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration.FileExtensions/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Configuration": "2.2.0",
-          "Microsoft.Extensions.FileProviders.Physical": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
-        }
-      },
-      "Microsoft.Extensions.Configuration.Json/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Configuration": "2.2.0",
-          "Microsoft.Extensions.Configuration.FileExtensions": "2.2.0",
-          "Newtonsoft.Json": "11.0.2"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Json.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Json.dll": {}
-        }
-      },
       "Microsoft.Extensions.DependencyInjection/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -246,40 +219,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
-        }
-      },
-      "Microsoft.Extensions.FileProviders.Abstractions/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
-        }
-      },
-      "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0",
-          "Microsoft.Extensions.FileSystemGlobbing": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.dll": {}
-        }
-      },
-      "Microsoft.Extensions.FileSystemGlobbing/2.2.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
         }
       },
       "Microsoft.Extensions.Logging/2.2.0": {
@@ -1859,28 +1798,11 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "RayPI.ConfigService/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.2",
-        "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "2.2.0",
-          "Microsoft.Extensions.Configuration.Binder": "2.1.1",
-          "Microsoft.Extensions.Configuration.FileExtensions": "2.2.0",
-          "Microsoft.Extensions.Configuration.Json": "2.2.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0"
-        },
-        "compile": {
-          "bin/placeholder/RayPI.ConfigService.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/RayPI.ConfigService.dll": {}
-        }
-      },
       "RayPI.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
-          "RayPI.Treasury": "1.0.0"
+          "RayPI.Infrastructure.Treasury": "1.0.0"
         },
         "compile": {
           "bin/placeholder/RayPI.Domain.dll": {}
@@ -1897,7 +1819,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "2.2.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.6",
           "RayPI.Domain": "1.0.0",
-          "RayPI.Treasury": "1.0.0"
+          "RayPI.Infrastructure.Treasury": "1.0.0"
         },
         "compile": {
           "bin/placeholder/RayPI.EntityFrameworkRepository.dll": {}
@@ -1906,35 +1828,19 @@
           "bin/placeholder/RayPI.EntityFrameworkRepository.dll": {}
         }
       },
-      "RayPI.SqlSugarRepository/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.2",
-        "dependencies": {
-          "RayPI.Domain": "1.0.0",
-          "RayPI.Treasury": "1.0.0",
-          "SqlSugar": "4.6.4.9"
-        },
-        "compile": {
-          "bin/placeholder/RayPI.SqlSugarRepository.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/RayPI.SqlSugarRepository.dll": {}
-        }
-      },
-      "RayPI.Treasury/1.0.0": {
+      "RayPI.Infrastructure.Treasury/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "Microsoft.IdentityModel.Tokens": "5.5.0",
-          "RayPI.ConfigService": "1.0.0",
           "SqlSugar": "4.6.4.9",
           "System.IdentityModel.Tokens.Jwt": "5.5.0"
         },
         "compile": {
-          "bin/placeholder/RayPI.Treasury.dll": {}
+          "bin/placeholder/RayPI.Infrastructure.Treasury.dll": {}
         },
         "runtime": {
-          "bin/placeholder/RayPI.Treasury.dll": {}
+          "bin/placeholder/RayPI.Infrastructure.Treasury.dll": {}
         }
       },
       "SqlSugar/4.6.4.9": {
@@ -2213,32 +2119,6 @@
         "microsoft.extensions.configuration.binder.nuspec"
       ]
     },
-    "Microsoft.Extensions.Configuration.FileExtensions/2.2.0": {
-      "sha512": "H1qCpWBC8Ed4tguTR/qYkbb3F6DI5Su3t8xyFo3/5MzAd8PwPpHzgX8X04KbBxKmk173Pb64x7xMHarczVFQUA==",
-      "type": "package",
-      "path": "microsoft.extensions.configuration.fileextensions/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.xml",
-        "microsoft.extensions.configuration.fileextensions.2.2.0.nupkg.sha512",
-        "microsoft.extensions.configuration.fileextensions.nuspec"
-      ]
-    },
-    "Microsoft.Extensions.Configuration.Json/2.2.0": {
-      "sha512": "jUDdmLyFmLf9V3mqnMzSAzAv4QigJ67tZh5Q7HBXeBnESL2UyeesNG6jSBti+b63JpxZf+EDyn+anx3gyrNxug==",
-      "type": "package",
-      "path": "microsoft.extensions.configuration.json/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Json.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Json.xml",
-        "microsoft.extensions.configuration.json.2.2.0.nupkg.sha512",
-        "microsoft.extensions.configuration.json.nuspec"
-      ]
-    },
     "Microsoft.Extensions.DependencyInjection/2.2.0": {
       "sha512": "MZtBIwfDFork5vfjpJdG5g8wuJFt7d/y3LOSVVtDK/76wlbtz6cjltfKHqLx2TKVqTj5/c41t77m1+h20zqtPA==",
       "type": "package",
@@ -2267,45 +2147,6 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "microsoft.extensions.dependencyinjection.abstractions.2.2.0.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec"
-      ]
-    },
-    "Microsoft.Extensions.FileProviders.Abstractions/2.2.0": {
-      "sha512": "EcnaSsPTqx2MGnHrmWOD0ugbuuqVT8iICqSqPzi45V5/MA1LjUNb0kwgcxBGqizV1R+WeBK7/Gw25Jzkyk9bIw==",
-      "type": "package",
-      "path": "microsoft.extensions.fileproviders.abstractions/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.xml",
-        "microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
-        "microsoft.extensions.fileproviders.abstractions.nuspec"
-      ]
-    },
-    "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
-      "sha512": "tbDHZnBJkjYd9NjlRZ9ondDiv1Te3KYCTW2RWpR1B0e1Z8+EnFRo7qNnHkkSCixLdlPZzhjlX24d/PixQ7w2dA==",
-      "type": "package",
-      "path": "microsoft.extensions.fileproviders.physical/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.xml",
-        "microsoft.extensions.fileproviders.physical.2.2.0.nupkg.sha512",
-        "microsoft.extensions.fileproviders.physical.nuspec"
-      ]
-    },
-    "Microsoft.Extensions.FileSystemGlobbing/2.2.0": {
-      "sha512": "ZSsHZp3PyW6vk37tDEdypjgGlNtpJ0EixBMOfUod2Thx7GtwfFSAQXUQx8a8BN8vfWKGGMbp7jPWdoHx/At4wQ==",
-      "type": "package",
-      "path": "microsoft.extensions.filesystemglobbing/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.xml",
-        "microsoft.extensions.filesystemglobbing.2.2.0.nupkg.sha512",
-        "microsoft.extensions.filesystemglobbing.nuspec"
       ]
     },
     "Microsoft.Extensions.Logging/2.2.0": {
@@ -6623,11 +6464,6 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "RayPI.ConfigService/1.0.0": {
-      "type": "project",
-      "path": "../Ray.ConfigService/RayPI.ConfigService.csproj",
-      "msbuildProject": "../Ray.ConfigService/RayPI.ConfigService.csproj"
-    },
     "RayPI.Domain/1.0.0": {
       "type": "project",
       "path": "../RayPI.Domain/RayPI.Domain.csproj",
@@ -6638,15 +6474,10 @@
       "path": "../Ray.EntityFrameworkRepository/RayPI.EntityFrameworkRepository.csproj",
       "msbuildProject": "../Ray.EntityFrameworkRepository/RayPI.EntityFrameworkRepository.csproj"
     },
-    "RayPI.SqlSugarRepository/1.0.0": {
+    "RayPI.Infrastructure.Treasury/1.0.0": {
       "type": "project",
-      "path": "../RayPI.Repository/RayPI.SqlSugarRepository.csproj",
-      "msbuildProject": "../RayPI.Repository/RayPI.SqlSugarRepository.csproj"
-    },
-    "RayPI.Treasury/1.0.0": {
-      "type": "project",
-      "path": "../RayPI.Treasury/RayPI.Treasury.csproj",
-      "msbuildProject": "../RayPI.Treasury/RayPI.Treasury.csproj"
+      "path": "../RayPI.Infrastructure.Treasury/RayPI.Infrastructure.Treasury.csproj",
+      "msbuildProject": "../RayPI.Infrastructure.Treasury/RayPI.Infrastructure.Treasury.csproj"
     },
     "SqlSugar/4.6.4.9": {
       "type": "project",
@@ -6658,8 +6489,7 @@
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
       "RayPI.EntityFrameworkRepository >= 1.0.0",
-      "RayPI.SqlSugarRepository >= 1.0.0",
-      "RayPI.Treasury >= 1.0.0"
+      "RayPI.Infrastructure.Treasury >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -6696,11 +6526,8 @@
             "G:\\GitHub\\MyOwnRepos\\RayPI\\Ray.EntityFrameworkRepository\\RayPI.EntityFrameworkRepository.csproj": {
               "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\Ray.EntityFrameworkRepository\\RayPI.EntityFrameworkRepository.csproj"
             },
-            "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Repository\\RayPI.SqlSugarRepository.csproj": {
-              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Repository\\RayPI.SqlSugarRepository.csproj"
-            },
-            "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Treasury\\RayPI.Treasury.csproj": {
-              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Treasury\\RayPI.Treasury.csproj"
+            "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Infrastructure.Treasury\\RayPI.Infrastructure.Treasury.csproj": {
+              "projectPath": "G:\\GitHub\\MyOwnRepos\\RayPI\\RayPI.Infrastructure.Treasury\\RayPI.Infrastructure.Treasury.csproj"
             }
           }
         }
