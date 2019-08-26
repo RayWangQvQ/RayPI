@@ -19,14 +19,14 @@ namespace RayPI.AuthService
     {
         private readonly RequestDelegate _next;
         private TokenModel _tm;
-        private IJwtServicecs _jwtServicecs;
+        private IJwtService _jwtServicecs;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="next"></param>
         public JwtAuthorizationFilter(RequestDelegate next,
-            IJwtServicecs jwtServicecs,
+            IJwtService jwtServicecs,
             IServiceProvider serviceProvider)
         {
             _next = next;

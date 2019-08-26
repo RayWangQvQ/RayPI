@@ -61,6 +61,8 @@ namespace RayPI.OpenApi
             services.AddCorsService();
 
             //自定义注册
+            services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
+
             services.AddMyServices(_config);
         }
 

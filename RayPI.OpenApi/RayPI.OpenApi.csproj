@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RayPI.Bussiness\RayPI.Bussiness.csproj" />
+    <ProjectReference Include="..\RayPI.Bussiness\RayPI.Business.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Auth\RayPI.Infrastructure.Auth.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Config\RayPI.Infrastructure.Config.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Cors\RayPI.Infrastructure.Cors.csproj" />

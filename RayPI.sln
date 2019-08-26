@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar", "SqlSugar\SqlSugar.csproj", "{902C44A9-6D0E-4713-879C-58A927EC967E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Bussiness", "RayPI.Bussiness\RayPI.Bussiness.csproj", "{62976FEE-94AA-4D9A-B8A7-A60976ECD157}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Business", "RayPI.Bussiness\RayPI.Business.csproj", "{62976FEE-94AA-4D9A-B8A7-A60976ECD157}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{1FAFE035-0290-4FBF-93A9-6EA4E2EF7FCC}"
 EndProject
@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Infrastructure", "1.Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Repository", "3.Repository", "{D61A765E-6E01-4AC5-B2C5-CA779814D04F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Bussiness", "4.Bussiness", "{130C845B-81B2-4A3D-B56E-B6EFCE156006}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Business", "4.Business", "{130C845B-81B2-4A3D-B56E-B6EFCE156006}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.OpenApi", "5.OpenApi", "{D97B4127-B8AE-4C8F-B061-15D3202E2DFE}"
 EndProject

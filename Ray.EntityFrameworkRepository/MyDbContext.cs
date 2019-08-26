@@ -11,20 +11,21 @@ using RayPI.Treasury.Helpers;
 using RayPI.Treasury.Interfaces;
 using RayPI.Treasury.Extensions;
 using RayPI.Domain.Entity;
+using RayPI.Infrastructure.Auth;
 
 namespace Ray.EntityFrameworkRepository
 {
     public class MyDbContext : DbContext
     {
-        private readonly TokenModel _tokenModel;
+        private readonly IOperateInfo _operateInfo;
         public MyDbContext(DbContextOptions options)
             : base(options)
         {
         }
-        public MyDbContext(DbContextOptions options, TokenModel tokenModel)
+        public MyDbContext(DbContextOptions options, IOperateInfo operateInfo)
             : base(options)
         {
-            _tokenModel = tokenModel;
+            _operateInfo = operateInfo;
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace Ray.EntityFrameworkRepository
         /// <param name="isAdd">if set to <c>true</c> [is add].</param>
         private void SetEntityBaseInfo<TAggregateRoot>(TAggregateRoot item, bool isAdd = true) where TAggregateRoot : EntityBase
         {
-            IEntityBaseAutoSetter entityBaseAutoSetter = item.AutoSetter ?? new OperateSetter(_tokenModel);
+            IEntityBaseAutoSetter entityBaseAutoSetter = item.AutoSetter ?? new OperateSetter(_operateInfo);
             if (isAdd)//添加
             {
                 if (item.Id <= 0L)

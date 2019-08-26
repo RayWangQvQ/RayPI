@@ -20,14 +20,14 @@ namespace RayPI.OpenApi.Controllers
     [EnableCors("Limit")]
     public class StudentController : Controller
     {
-        private readonly StudentBussiness _studentBussiness;
+        private readonly StudentBusiness _studentBusiness;
 
         /// <summary>
         /// 
         /// </summary>
-        public StudentController(StudentBussiness studentBussiness)
+        public StudentController(StudentBusiness studentBussiness)
         {
-            _studentBussiness = studentBussiness;
+            _studentBusiness = studentBussiness;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace RayPI.OpenApi.Controllers
         [Route("Student")]
         public JsonResult GetStudentPageList(int pageIndex = 1, int pageSize = 10)
         {
-            return Json(_studentBussiness.GetPageList(pageIndex, pageSize));
+            return Json(_studentBusiness.GetPageList(pageIndex, pageSize));
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace RayPI.OpenApi.Controllers
         {
             if (id == 0)
                 throw new MyException("参数id不合法", StatusCodes.Status400BadRequest);
-            return Json(_studentBussiness.GetById(id));
+            return Json(_studentBusiness.GetById(id));
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace RayPI.OpenApi.Controllers
         {
             if (entity == null)
                 throw new ArgumentNullException();
-            return Json(_studentBussiness.Add(entity));
+            return Json(_studentBusiness.Add(entity));
         }
         /// <summary>
         /// 编辑学生
@@ -82,7 +82,7 @@ namespace RayPI.OpenApi.Controllers
         {
             if (entity == null)
                 throw new ArgumentNullException();
-            return Json(_studentBussiness.Update(entity));
+            return Json(_studentBusiness.Update(entity));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace RayPI.OpenApi.Controllers
         {
             if (ids.Length == 0)
                 throw new ArgumentNullException();
-            return Json(_studentBussiness.Dels(ids));
+            return Json(_studentBusiness.Dels(ids));
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace RayPI.OpenApi.Controllers
         {
             if (name == null)
                 throw new ArgumentNullException();
-            return Json(_studentBussiness.GetByName(name));
+            return Json(_studentBusiness.GetByName(name));
         }
     }
 }

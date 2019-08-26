@@ -5,11 +5,11 @@ using RayPI.Domain.IRepository;
 
 namespace RayPI.Bussiness.System
 {
-    public class EntityBussiness
+    public class EntityBusiness
     {
         private IEntityRepository _entityRepository;
 
-        public EntityBussiness()
+        public EntityBusiness()
         {
 
         }

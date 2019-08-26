@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 using Ray.EntityFrameworkRepository;
+using RayPI.Infrastructure.Auth;
 using RayPI.Infrastructure.Ioc.Helpers;
 using RayPI.Treasury.Models;
 using System;
@@ -30,24 +31,17 @@ namespace RayPI.Infrastructure.Ioc.Extensions
             string conn = config.GetConnectionString("SqlServerDatabase");
             services.AddDbContext<MyDbContext>(options => options.UseSqlServer(conn));
 
-            //注册tokenModel
-            services.AddScoped<TokenModel>();
+            //注册IOperateInfo
+            services.AddScoped<IOperateInfo, OperateInfo>();
 
-            var assemblies = new List<Assembly>();
-            DependencyContext dependencyContext = DependencyContext.Default;
-            IEnumerable<CompilationLibrary> libs = dependencyContext.CompileLibraries
-                .Where(lib => !lib.Serviceable && lib.Type != "package" && lib.Name.StartsWith("RayPI"));
-            foreach (var lib in libs)
-            {
-                Assembly assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));
-                assemblies.Add(assembly);
-            }
+
+            List<Assembly> assemblies = IocHelper.GetAllAssembliesCoreWeb();
 
             //注册repository
             Assembly repositoryAssemblies = assemblies.FirstOrDefault(x => x.FullName.Contains("Repository"));
             services.AddAssemblyServices(repositoryAssemblies);
             //注册bussiness
-            Assembly serviceAssemblies = assemblies.FirstOrDefault(x => x.FullName.Contains(".Bussiness"));
+            Assembly serviceAssemblies = assemblies.FirstOrDefault(x => x.FullName.Contains(".Business"));
             services.AddAssemblyServices(serviceAssemblies);
         }
 

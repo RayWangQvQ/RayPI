@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using RayPI.Treasury.Models;
 
 namespace RayPI.AuthService
 {
@@ -17,13 +19,12 @@ namespace RayPI.AuthService
         /// <summary>
         /// 授权方式（cookie, bearer, oauth, openid）
         /// </summary>
-        public IAuthenticationSchemeProvider _schemes;
+        private readonly IAuthenticationSchemeProvider _schemes;
 
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="schemes"></param>
-        /// <param name="jwtApp"></param>
         public PolicyHandler(IAuthenticationSchemeProvider schemes)
         {
             _schemes = schemes;
@@ -62,11 +63,13 @@ namespace RayPI.AuthService
             string url = httpContext.Request.Path.Value.ToLower();
             string role = httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 
-            if (!requirement.RequireRole.Contains(role))
+            if (!requirement.RequireRoles.Contains(role))
             {
                 context.Fail();
                 return;
             }
+
+            string tokenStr = await httpContext.GetTokenAsync(JwtBearerDefaults.AuthenticationScheme, "access_token");
 
             context.Succeed(requirement);
         }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RayPI.AuthService.Jwt
 {
-    public interface IJwtServicecs
+    public interface IJwtService
     {
         /// <summary>
         /// 颁发JWT字符串

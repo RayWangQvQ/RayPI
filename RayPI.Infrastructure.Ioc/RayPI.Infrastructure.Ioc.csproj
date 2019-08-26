@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ray.EntityFrameworkRepository\RayPI.EntityFrameworkRepository.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.Auth\RayPI.Infrastructure.Auth.csproj" />
   </ItemGroup>
 
   <ItemGroup>

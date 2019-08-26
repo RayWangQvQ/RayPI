@@ -7,9 +7,9 @@ namespace RayPI.AuthService
     {
         public PolicyRequirement(string role)
         {
-            this.RequireRole = role.Split(',');
+            this.RequireRoles = role.Split(',');
         }
 
-        public string[] RequireRole { get; set; }
+        public string[] RequireRoles { get; set; }
     }
 }

@@ -5,10 +5,10 @@ using RayPI.Domain.IRepository;
 
 namespace RayPI.Bussiness
 {
-    public class StudentBussiness
+    public class StudentBusiness
     {
         private IStudentRepository _studentRepository;
-        public StudentBussiness(IStudentRepository studentRepository)
+        public StudentBusiness(IStudentRepository studentRepository)
         {
             _studentRepository = studentRepository;
         }

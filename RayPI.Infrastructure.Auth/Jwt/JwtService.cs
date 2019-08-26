@@ -8,10 +8,11 @@ using System.Text;
 using RayPI.Treasury.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using RayPI.AuthService.Jwt;
+using Newtonsoft.Json;
 
 namespace RayPI.AuthService
 {
-    public class JwtService : IJwtServicecs
+    public class JwtService : IJwtService
     {
         /// <summary>
         /// 颁发JWT字符串
@@ -27,7 +28,8 @@ namespace RayPI.AuthService
                 new Claim(JwtRegisteredClaimNames.Jti,tokenModel.Uid.ToString()),//用户Id
                 new Claim(ClaimTypes.Role, tokenModel.Role),//身份
                 new Claim("proj", tokenModel.Project),//项目
-                new Claim(JwtRegisteredClaimNames.Iat,dateTime.ToString(),ClaimValueTypes.Integer64)
+                new Claim(JwtRegisteredClaimNames.Iat,dateTime.ToString(),ClaimValueTypes.Integer64),
+                new Claim("TokenModel",JsonConvert.SerializeObject(tokenModel))
             };
 
             //过期时间
@@ -47,7 +49,6 @@ namespace RayPI.AuthService
                     expMin = jwtConfig.OtherExp;
                     break;
             }
-
             DateTime expTime = dateTime.AddMinutes(expMin);
 
             //秘钥
@@ -75,25 +76,22 @@ namespace RayPI.AuthService
         /// <returns></returns>
         public TokenModel SerializeJWT(string jwtStr)
         {
+            var tm = new TokenModel();
             var jwtHandler = new JwtSecurityTokenHandler();
             JwtSecurityToken jwtToken = jwtHandler.ReadJwtToken(jwtStr);
+
             try
             {
                 jwtToken.Payload.TryGetValue("Role", out object role);
                 jwtToken.Payload.TryGetValue("Project", out object project);
+                jwtToken.Payload.TryGetValue("TokenModel", out object tokenModelObj);
+                tm = JsonConvert.DeserializeObject<TokenModel>(tokenModelObj?.ToString());
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
-                throw;
+                // ignored
             }
-            var tm = new TokenModel
-            {
-                Uid = long.Parse(jwtToken.Id),
-                Role = new object().ToString(),
-                Project = new object().ToString(),
-                //TokenString = jwtStr
-            };
+
             return tm;
         }
     }

@@ -15,7 +15,7 @@ namespace RayPI.AuthService
     {
         public static IServiceCollection AddAuthService(this IServiceCollection services, IConfiguration config)
         {
-            services.AddSingleton<IJwtServicecs,JwtService>();
+            services.AddSingleton<IJwtService,JwtService>();
 
             #region 注册【认证】服务
             services.AddAuthentication(x =>

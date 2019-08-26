@@ -23,11 +23,11 @@ namespace RayPI.OpenApi.Controllers
     //[Authorize(Policy = "RequireAdmin")]
     public class TeacherController : Controller
     {
-        private TeacherBussiness _teacheBussiness;
+        private TeacherBusiness _teacheBusiness;
 
-        public TeacherController(TeacherBussiness teacheBussiness)
+        public TeacherController(TeacherBusiness teacheBussiness)
         {
-            _teacheBussiness = teacheBussiness;
+            _teacheBusiness = teacheBussiness;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace RayPI.OpenApi.Controllers
         [Route("Teacher")]
         public JsonResult GetTeacherPageList(int pageIndex = 1, int pageSize = 10)
         {
-            return Json(_teacheBussiness.GetPageList(pageIndex, pageSize));
+            return Json(_teacheBusiness.GetPageList(pageIndex, pageSize));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace RayPI.OpenApi.Controllers
         [ProducesResponseType(typeof(TeacherEntity), 200)]
         public JsonResult GetTeacherById(long id)
         {
-            return Json(_teacheBussiness.GetById(id));
+            return Json(_teacheBusiness.GetById(id));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace RayPI.OpenApi.Controllers
         {
             if (entity == null)
                 return Json("参数为空");
-            return Json(_teacheBussiness.Add(entity));
+            return Json(_teacheBusiness.Add(entity));
         }
         /// <summary>
         /// 编辑
@@ -80,7 +80,7 @@ namespace RayPI.OpenApi.Controllers
         {
             if (entity == null)
                 return Json("参数为空");
-            return Json(_teacheBussiness.Update(entity));
+            return Json(_teacheBusiness.Update(entity));
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace RayPI.OpenApi.Controllers
         {
             if (ids.Length == 0)
                 return Json("参数为空");
-            return Json(_teacheBussiness.Dels(ids));
+            return Json(_teacheBusiness.Dels(ids));
         }
     }
 }

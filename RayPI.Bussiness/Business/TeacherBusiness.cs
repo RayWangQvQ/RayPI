@@ -8,11 +8,11 @@ using RayPI.Domain.IRepository;
 
 namespace RayPI.Bussiness
 {
-    public class TeacherBussiness
+    public class TeacherBusiness
     {
         private ITeacherRepository _teacherRepository;
 
-        public TeacherBussiness(ITeacherRepository teacherRepository)
+        public TeacherBusiness(ITeacherRepository teacherRepository)
         {
             _teacherRepository = teacherRepository;
         }

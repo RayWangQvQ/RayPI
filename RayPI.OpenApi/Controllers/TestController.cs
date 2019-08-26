@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using RayPI.Bussiness.System;
 using RayPI.ConfigService.ConfigModel;
 using RayPI.Treasury.Models;
-using RayPI.AuthService;
 using RayPI.AuthService.Jwt;
 
 namespace RayPI.OpenApi.Controllers
@@ -20,11 +19,11 @@ namespace RayPI.OpenApi.Controllers
     //[Authorize(Policy = "RequireAdminOrClient")]
     public class TestController : Controller
     {
-        private EntityBussiness _entityBussiness;
+        private EntityBusiness _entityBusiness;
         private IConfiguration _config;
         private IHostingEnvironment _env;
         private JwtAuthConfigModel _jwtAuthConfigModel;
-        private IJwtServicecs _jwtServicecs;
+        private IJwtService _jwtService;
 
         /// <summary>
         /// 
@@ -35,14 +34,14 @@ namespace RayPI.OpenApi.Controllers
         public TestController(IConfiguration configuration,
             IHostingEnvironment env,
             JwtAuthConfigModel jwtAuthConfigModel,
-            EntityBussiness entityBLL,
-            IJwtServicecs jwtServicecs)
+            EntityBusiness entityBLL,
+            IJwtService jwtServicecs)
         {
             _config = configuration;
             _env = env;
             _jwtAuthConfigModel = jwtAuthConfigModel;
-            _entityBussiness = entityBLL;
-            _jwtServicecs = jwtServicecs;
+            _entityBusiness = entityBLL;
+            _jwtService = jwtServicecs;
         }
 
         #region 生成实体类
@@ -55,7 +54,7 @@ namespace RayPI.OpenApi.Controllers
         [Route("Entity/Create")]
         public JsonResult CreateEntity(string entityName)
         {
-            return Json(_entityBussiness.CreateEntity(entityName, _env.ContentRootPath));
+            return Json(_entityBusiness.CreateEntity(entityName, _env.ContentRootPath));
         }
         #endregion
 
@@ -81,7 +80,7 @@ namespace RayPI.OpenApi.Controllers
                 Project = project,
                 TokenType = tokentype
             };
-            return _jwtServicecs.IssueJWT(tm, _jwtAuthConfigModel);
+            return _jwtService.IssueJWT(tm, _jwtAuthConfigModel);
         }
         #endregion
 
