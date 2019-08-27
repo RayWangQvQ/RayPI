@@ -1,15 +1,16 @@
-﻿//
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 //
 using RayPI.ConfigService;
-using RayPI.AuthService;
 using RayPI.SwaggerService;
 using RayPI.CorsService;
 using RayPI.OpenApi.Filters;
-using RayPI.Infrastructure.Ioc.Extensions;
+using RayPI.Business.Di;
+using RayPI.Repository.EFRepository.Di;
+using RayPI.Infrastructure.Auth.Di;
+using RayPI.Infrastructure.Auth.Operate;
 
 namespace RayPI.OpenApi
 {
@@ -60,10 +61,17 @@ namespace RayPI.OpenApi
             //注册Cors跨域
             services.AddCorsService();
 
-            //自定义注册
+            //注册http上下文访问器
             services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
 
-            services.AddMyServices(_config);
+            //注册IOperateInfo
+            services.AddScoped<IOperateInfo, OperateInfo>();
+
+            //注册仓储
+            services.AddRepository(_config);
+
+            //注册业务逻辑
+            services.AddBusiness();
         }
 
         /// <summary>
@@ -78,7 +86,7 @@ namespace RayPI.OpenApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMiddleware<ExceptionFilter>();//自定义异常处理中间件
+            app.UseMiddleware<ExceptionMiddleware>();//自定义异常处理中间件
 
             app.UseAuthService();
 

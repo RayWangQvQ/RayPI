@@ -1,10 +1,11 @@
 ﻿using RayPI.ConfigService.ConfigModel;
+using RayPI.Infrastructure.Auth.Models;
 using RayPI.Treasury.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RayPI.AuthService.Jwt
+namespace RayPI.Infrastructure.Auth.Jwt
 {
     public interface IJwtService
     {

@@ -5,15 +5,22 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using RayPI.Treasury.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using RayPI.AuthService.Jwt;
 using Newtonsoft.Json;
+using RayPI.Infrastructure.Auth.Enums;
+using RayPI.Infrastructure.Auth.Models;
 
-namespace RayPI.AuthService
+namespace RayPI.Infrastructure.Auth.Jwt
 {
     public class JwtService : IJwtService
     {
+        private JwtSecurityTokenHandler _jwtSecurityTokenHandler;
+
+        public JwtService(JwtSecurityTokenHandler jwtSecurityTokenHandler)
+        {
+            _jwtSecurityTokenHandler = jwtSecurityTokenHandler;
+        }
+
         /// <summary>
         /// 颁发JWT字符串
         /// </summary>
@@ -24,25 +31,25 @@ namespace RayPI.AuthService
             var dateTime = DateTime.UtcNow;
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Iss,"RayPI"),//颁发人
-                new Claim(JwtRegisteredClaimNames.Jti,tokenModel.Uid.ToString()),//用户Id
-                new Claim(ClaimTypes.Role, tokenModel.Role),//身份
-                new Claim("proj", tokenModel.Project),//项目
-                new Claim(JwtRegisteredClaimNames.Iat,dateTime.ToString(),ClaimValueTypes.Integer64),
-                new Claim("TokenModel",JsonConvert.SerializeObject(tokenModel))
+                //new Claim(JwtRegisteredClaimNames.Iss,"RayPI"),//颁发人
+                //new Claim(JwtRegisteredClaimNames.Jti,tokenModel.Uid.ToString()),//用户Id
+                //new Claim(ClaimTypes.Role, tokenModel.Role),//身份
+                //new Claim("proj", tokenModel.Project),//项目
+                //new Claim(JwtRegisteredClaimNames.Iat,dateTime.ToString(),ClaimValueTypes.Integer64),
+                new Claim(ClaimEnum.TokenModel.ToString(),JsonConvert.SerializeObject(tokenModel))
             };
 
             //过期时间
             double expMin = 0;
             switch (tokenModel.TokenType)
             {
-                case "Web":
+                case TokenTypeEnum.Web:
                     expMin = jwtConfig.WebExp;
                     break;
-                case "App":
+                case TokenTypeEnum.App:
                     expMin = jwtConfig.AppExp;
                     break;
-                case "MiniProgram":
+                case TokenTypeEnum.MiniProgram:
                     expMin = jwtConfig.MiniProgramExp;
                     break;
                 default:
@@ -55,16 +62,12 @@ namespace RayPI.AuthService
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecurityKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var jwt = new JwtSecurityToken(claims: claims,
+            var jwt = new JwtSecurityToken(issuer: "RayPI",
+                claims: claims,
                 expires: expTime,//过期时间
                 signingCredentials: creds);
 
-            var jwtHandler = new JwtSecurityTokenHandler();
-            var encodedJwt = jwtHandler.WriteToken(jwt);
-
-            //用户标识
-            //var identity = new ClaimsIdentity(JwtBearerDefaults.AuthenticationScheme);
-            //identity.AddClaims(claims);
+            var encodedJwt = _jwtSecurityTokenHandler.WriteToken(jwt);
 
             return $"{JwtBearerDefaults.AuthenticationScheme} {encodedJwt}";
         }
@@ -77,13 +80,10 @@ namespace RayPI.AuthService
         public TokenModel SerializeJWT(string jwtStr)
         {
             var tm = new TokenModel();
-            var jwtHandler = new JwtSecurityTokenHandler();
-            JwtSecurityToken jwtToken = jwtHandler.ReadJwtToken(jwtStr);
+            JwtSecurityToken jwtToken = _jwtSecurityTokenHandler.ReadJwtToken(jwtStr);
 
             try
             {
-                jwtToken.Payload.TryGetValue("Role", out object role);
-                jwtToken.Payload.TryGetValue("Project", out object project);
                 jwtToken.Payload.TryGetValue("TokenModel", out object tokenModelObj);
                 tm = JsonConvert.DeserializeObject<TokenModel>(tokenModelObj?.ToString());
             }

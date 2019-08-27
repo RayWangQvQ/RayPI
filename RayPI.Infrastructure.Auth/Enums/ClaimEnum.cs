@@ -4,10 +4,8 @@ using System.Text;
 
 namespace RayPI.Infrastructure.Auth.Enums
 {
-    public enum PolicyEnum
+    public enum ClaimEnum
     {
-        RequireRoleOfClient,
-        RequireRoleOfAdmin,
-        RequireRoleOfAdminOrClient
+        TokenModel
     }
 }

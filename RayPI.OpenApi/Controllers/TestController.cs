@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 //
-using RayPI.Bussiness.System;
 using RayPI.ConfigService.ConfigModel;
-using RayPI.Treasury.Models;
-using RayPI.AuthService.Jwt;
+using RayPI.Infrastructure.Auth.Models;
+using RayPI.Infrastructure.Auth.Enums;
+using RayPI.Infrastructure.Auth.Jwt;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -19,7 +19,6 @@ namespace RayPI.OpenApi.Controllers
     //[Authorize(Policy = "RequireAdminOrClient")]
     public class TestController : Controller
     {
-        private EntityBusiness _entityBusiness;
         private IConfiguration _config;
         private IHostingEnvironment _env;
         private JwtAuthConfigModel _jwtAuthConfigModel;
@@ -34,29 +33,13 @@ namespace RayPI.OpenApi.Controllers
         public TestController(IConfiguration configuration,
             IHostingEnvironment env,
             JwtAuthConfigModel jwtAuthConfigModel,
-            EntityBusiness entityBLL,
             IJwtService jwtServicecs)
         {
             _config = configuration;
             _env = env;
             _jwtAuthConfigModel = jwtAuthConfigModel;
-            _entityBusiness = entityBLL;
             _jwtService = jwtServicecs;
         }
-
-        #region 生成实体类
-        /// <summary>
-        /// 生成实体类
-        /// </summary>
-        /// <param name="entityName"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("Entity/Create")]
-        public JsonResult CreateEntity(string entityName)
-        {
-            return Json(_entityBusiness.CreateEntity(entityName, _env.ContentRootPath));
-        }
-        #endregion
 
         #region Token
         /// <summary>
@@ -66,11 +49,11 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="uname"></param>
         /// <param name="role"></param>
         /// <param name="project"></param>
-        /// <param name="tokentype"></param>
+        /// <param name="tokenType"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        public string GetJWTStr(long uid = 1, string uname = "Admin", string role = "Admin", string project = "RayPI", string tokentype = "Web")
+        public string GetJWTStr(long uid = 1, string uname = "Admin", string role = "Admin", string project = "RayPI", TokenTypeEnum tokenType = TokenTypeEnum.Web)
         {
             var tm = new TokenModel
             {
@@ -78,7 +61,7 @@ namespace RayPI.OpenApi.Controllers
                 Uname = uname,
                 Role = role,
                 Project = project,
-                TokenType = tokentype
+                TokenType = tokenType
             };
             return _jwtService.IssueJWT(tm, _jwtAuthConfigModel);
         }

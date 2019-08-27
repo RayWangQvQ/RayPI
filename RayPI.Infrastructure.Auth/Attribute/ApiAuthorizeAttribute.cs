@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.DependencyInjection;
-using RayPI.AuthService.Enums;
-using RayPI.Treasury.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using RayPI.Infrastructure.Auth.Enums;
 
-namespace RayPI.AuthService
+namespace RayPI.Infrastructure.Auth.Attribute
 {
     public class ApiAuthorizeAttribute : AuthorizeAttribute
     {
