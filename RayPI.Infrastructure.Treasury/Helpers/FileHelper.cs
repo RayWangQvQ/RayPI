@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//系统包
+using System;
 using System.IO;
-using System.Text;
 
-namespace RayPI.Treasury.Helpers
+namespace RayPI.Infrastructure.Treasury.Helpers
 {
    public class FileHelper
     {

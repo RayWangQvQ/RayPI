@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
-namespace RayPI.Treasury.Extensions
+namespace RayPI.Infrastructure.Treasury.Extensions
 {
     public static class LinqExtension
     {

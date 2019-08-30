@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using RayPI.Infrastructure.Treasury.Helpers;
 
 namespace RayPI.Treasury.Helpers
 {

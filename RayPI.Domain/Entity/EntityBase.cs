@@ -1,6 +1,6 @@
 ﻿using System;
+using RayPI.Infrastructure.Treasury.Interfaces;
 //
-using RayPI.Treasury.Interfaces;
 
 namespace RayPI.Domain.Entity
 {

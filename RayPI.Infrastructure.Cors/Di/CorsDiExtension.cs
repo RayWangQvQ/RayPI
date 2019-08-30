@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//微软包
+using Microsoft.Extensions.DependencyInjection;
 
-namespace RayPI.CorsService
+namespace RayPI.Infrastructure.Cors.Di
 {
-    public static class CorsServiceExtension
+    public static class CorsDiExtension
     {
         public static IServiceCollection AddCorsService(this IServiceCollection services)
         {

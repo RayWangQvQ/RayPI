@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//系统包
+using System;
 
-namespace RayPI.Treasury.Snowflake
+namespace RayPI.Infrastructure.Treasury.Snowflake
 {
     public class IdWorker
     {

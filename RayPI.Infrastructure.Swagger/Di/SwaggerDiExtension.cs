@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.PlatformAbstractions;
-using Swashbuckle.AspNetCore.Swagger;
-using System;
+﻿//系统包
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+//微软包
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
+//三方包
+using Swashbuckle.AspNetCore.Swagger;
 
-namespace RayPI.SwaggerService
+namespace RayPI.Infrastructure.Swagger.Di
 {
-    public static class SwaggerServiceExtension
+    public static class SwaggerDiExtension
     {
         public static IServiceCollection AddSwaggerService(this IServiceCollection services)
         {

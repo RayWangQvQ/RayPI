@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RayPI.Treasury.Enums
+﻿
+namespace RayPI.Infrastructure.Treasury.Enums
 {
     public enum SortEnum
     {

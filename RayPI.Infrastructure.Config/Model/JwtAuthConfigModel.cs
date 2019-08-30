@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//微软包
+using Microsoft.Extensions.Configuration;
 
-namespace RayPI.ConfigService.ConfigModel
+namespace RayPI.Infrastructure.Config.Model
 {
     /// <summary>
     /// 

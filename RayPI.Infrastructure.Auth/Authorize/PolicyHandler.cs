@@ -1,22 +1,22 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿//系统包
+using System.Linq;
+using System.Threading.Tasks;
+//微软包
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using RayPI.Treasury.Models;
-using RayPI.Infrastructure.Auth.Enums;
+//三方包
 using Newtonsoft.Json;
+//本地项目包
+using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Models;
 
 namespace RayPI.Infrastructure.Auth.Authorize
 {
+    /// <summary>
+    /// 自定义授权处理
+    /// </summary>
     public class PolicyHandler : AuthorizationHandler<PolicyRequirement>
     {
         /// <summary>
@@ -64,7 +64,7 @@ namespace RayPI.Infrastructure.Auth.Authorize
 
             //判断角色
             string url = httpContext.Request.Path.Value.ToLower();
-            string tokenModelJsonStr = httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimEnum.TokenModel.ToString())?.Value;
+            string tokenModelJsonStr = httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypeEnum.TokenModel.ToString())?.Value;
             TokenModel tm = JsonConvert.DeserializeObject<TokenModel>(tokenModelJsonStr);
 
             if (!requirement.RequireRoles.Contains(tm.Role))

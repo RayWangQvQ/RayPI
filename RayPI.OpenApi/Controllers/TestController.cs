@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 //
-using RayPI.ConfigService.ConfigModel;
 using RayPI.Infrastructure.Auth.Models;
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
+using RayPI.Infrastructure.Config.Model;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -24,21 +24,15 @@ namespace RayPI.OpenApi.Controllers
         private JwtAuthConfigModel _jwtAuthConfigModel;
         private IJwtService _jwtService;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="configuration"></param>
-        /// <param name="env"></param>
-        /// <param name="jwtAuthConfigModel"></param>
         public TestController(IConfiguration configuration,
             IHostingEnvironment env,
             JwtAuthConfigModel jwtAuthConfigModel,
-            IJwtService jwtServicecs)
+            IJwtService jwtService)
         {
             _config = configuration;
             _env = env;
             _jwtAuthConfigModel = jwtAuthConfigModel;
-            _jwtService = jwtServicecs;
+            _jwtService = jwtService;
         }
 
         #region Token

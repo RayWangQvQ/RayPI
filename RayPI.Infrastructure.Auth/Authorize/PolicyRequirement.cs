@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+﻿//微软包
+using Microsoft.AspNetCore.Authorization;
 
 namespace RayPI.Infrastructure.Auth.Authorize
 {
+    /// <summary>
+    /// 授权策略
+    /// </summary>
     public class PolicyRequirement : IAuthorizationRequirement
     {
         public PolicyRequirement(string role)

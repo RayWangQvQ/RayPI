@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//系统包
+
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
-namespace RayPI.Treasury.Extensions
+namespace RayPI.Infrastructure.Treasury.Extensions
 {
     public static class MemberExtension
     {

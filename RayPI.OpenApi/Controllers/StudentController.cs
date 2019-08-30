@@ -6,7 +6,7 @@ using RayPI.Bussiness;
 using RayPI.Domain.Entity;
 using RayPI.Infrastructure.Auth.Attribute;
 using RayPI.Infrastructure.Auth.Enums;
-using RayPI.Treasury.Models;
+using RayPI.Infrastructure.Treasury.Models;
 
 namespace RayPI.OpenApi.Controllers
 {

@@ -1,11 +1,15 @@
-﻿using Microsoft.Extensions.PlatformAbstractions;
-using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
+﻿//系统包
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+//微软包
+using Microsoft.Extensions.PlatformAbstractions;
+//三方包
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace RayPI.SwaggerHelp
+
+namespace RayPI.Infrastructure.Swagger.Helpers
 {
     /// <summary>
     /// Swagger注释帮助类
@@ -47,10 +51,10 @@ namespace RayPI.SwaggerHelp
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(xmlpath);
 
-            string memberName = string.Empty;//xml三级节点的name属性值
-            string controllerName = string.Empty;//控制器完整名称
-            string key = string.Empty;//控制器去Controller名称
-            string value = string.Empty;//控制器注释
+            var memberName = string.Empty;//xml三级节点的name属性值
+            var controllerName = string.Empty;//控制器完整名称
+            var key = string.Empty;//控制器去Controller名称
+            var value = string.Empty;//控制器注释
 
             foreach (XmlNode node in xmlDoc.SelectNodes("//member"))//循环三级节点member
             {

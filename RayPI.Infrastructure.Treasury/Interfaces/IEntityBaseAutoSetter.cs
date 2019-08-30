@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//系统包
+using System;
 
-namespace RayPI.Treasury.Interfaces
+namespace RayPI.Infrastructure.Treasury.Interfaces
 {
     public interface IEntityBaseAutoSetter
     {

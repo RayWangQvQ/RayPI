@@ -1,17 +1,24 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using RayPI.ConfigService.ConfigModel;
+﻿//系统包
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+//微软包
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+//三方包
 using Newtonsoft.Json;
+//本地项目包
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Models;
+using RayPI.Infrastructure.Config.Model;
 
 namespace RayPI.Infrastructure.Auth.Jwt
 {
+    /// <summary>
+    /// Jwt服务
+    /// </summary>
     public class JwtService : IJwtService
     {
         private JwtSecurityTokenHandler _jwtSecurityTokenHandler;
@@ -36,7 +43,7 @@ namespace RayPI.Infrastructure.Auth.Jwt
                 //new Claim(ClaimTypes.Role, tokenModel.Role),//身份
                 //new Claim("proj", tokenModel.Project),//项目
                 //new Claim(JwtRegisteredClaimNames.Iat,dateTime.ToString(),ClaimValueTypes.Integer64),
-                new Claim(ClaimEnum.TokenModel.ToString(),JsonConvert.SerializeObject(tokenModel))
+                new Claim(ClaimTypeEnum.TokenModel.ToString(),JsonConvert.SerializeObject(tokenModel))
             };
 
             //过期时间

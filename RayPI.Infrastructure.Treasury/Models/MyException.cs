@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//系统包
+using System;
 
-namespace RayPI.Treasury.Models
+namespace RayPI.Infrastructure.Treasury.Models
 {
     /// <summary>
     /// 自定义业务异常类

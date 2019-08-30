@@ -1,11 +1,10 @@
-﻿using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
+﻿//系统包
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+//三方包
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace RayPI.SwaggerHelp
+namespace RayPI.Infrastructure.Swagger.Helpers
 {
     /// <summary>
     /// 

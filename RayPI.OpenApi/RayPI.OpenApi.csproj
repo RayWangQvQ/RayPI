@@ -25,6 +25,7 @@
     <ProjectReference Include="..\RayPI.Infrastructure.Auth\RayPI.Infrastructure.Auth.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Config\RayPI.Infrastructure.Config.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Cors\RayPI.Infrastructure.Cors.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.ExceptionManager\RayPI.Infrastructure.ExceptionManager.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Swagger\RayPI.Infrastructure.Swagger.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Treasury\RayPI.Infrastructure.Treasury.csproj" />
     <ProjectReference Include="..\RayPI.Repository.EFRepository\RayPI.Repository.EFRepository.csproj" />

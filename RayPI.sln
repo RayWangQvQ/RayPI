@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Repository.EFReposito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Repository.SqlSugarRepository", "RayPI.Repository.SqlSugarRepository\RayPI.Repository.SqlSugarRepository.csproj", "{CAECB4C0-EE12-4730-A0F8-31EFB45E648D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayPI.Repository.DapperRepository", "RayPI.Repository.DapperRepository\RayPI.Repository.DapperRepository.csproj", "{DB486A61-8D94-4F76-8FF7-5BB3622A1FF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Repository.DapperRepository", "RayPI.Repository.DapperRepository\RayPI.Repository.DapperRepository.csproj", "{DB486A61-8D94-4F76-8FF7-5BB3622A1FF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Infrastructure.ExceptionManager", "RayPI.Infrastructure.ExceptionManager\RayPI.Infrastructure.ExceptionManager.csproj", "{5E9E006B-2EC3-4823-B397-CABE461F9911}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{DB486A61-8D94-4F76-8FF7-5BB3622A1FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB486A61-8D94-4F76-8FF7-5BB3622A1FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB486A61-8D94-4F76-8FF7-5BB3622A1FF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E9E006B-2EC3-4823-B397-CABE461F9911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E9E006B-2EC3-4823-B397-CABE461F9911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E9E006B-2EC3-4823-B397-CABE461F9911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E9E006B-2EC3-4823-B397-CABE461F9911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{F229751B-2A0B-4726-996B-40433387A2C8} = {D61A765E-6E01-4AC5-B2C5-CA779814D04F}
 		{CAECB4C0-EE12-4730-A0F8-31EFB45E648D} = {D61A765E-6E01-4AC5-B2C5-CA779814D04F}
 		{DB486A61-8D94-4F76-8FF7-5BB3622A1FF1} = {D61A765E-6E01-4AC5-B2C5-CA779814D04F}
+		{5E9E006B-2EC3-4823-B397-CABE461F9911} = {2D48BE4C-9D73-475F-8E71-0DFFAB0C5EC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {538DE4CA-FD39-4EC5-92B6-EF4B4D2B8F2D}

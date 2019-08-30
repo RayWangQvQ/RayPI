@@ -1,7 +1,7 @@
-﻿using RayPI.Treasury.Models;
-using System.Linq;
+﻿using System.Linq;
 using RayPI.Domain.Entity;
 using RayPI.Domain.IRepository;
+using RayPI.Infrastructure.Treasury.Models;
 
 namespace RayPI.Bussiness
 {

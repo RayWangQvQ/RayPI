@@ -1,8 +1,7 @@
-﻿using System;
+﻿//系统包
 using System.Collections.Generic;
-using System.Text;
 
-namespace RayPI.Treasury.Models
+namespace RayPI.Infrastructure.Treasury.Models
 {
     /// <summary>
     /// 分页返回类

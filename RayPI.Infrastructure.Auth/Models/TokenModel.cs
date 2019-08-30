@@ -1,7 +1,11 @@
-﻿using RayPI.Infrastructure.Auth.Enums;
+﻿//本地项目包
+using RayPI.Infrastructure.Auth.Enums;
 
 namespace RayPI.Infrastructure.Auth.Models
 {
+    /// <summary>
+    /// 令牌
+    /// </summary>
     public class TokenModel
     {
         /// <summary>

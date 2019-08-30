@@ -1,15 +1,14 @@
-﻿using System;
+﻿//系统包
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-//
+//微软包
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+//本地项目包
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Auth.Models;
-//
-using RayPI.Treasury.Models;
-
 
 namespace RayPI.Infrastructure.Auth.Authorize
 {
@@ -20,24 +19,21 @@ namespace RayPI.Infrastructure.Auth.Authorize
     {
         private readonly RequestDelegate _next;
         private TokenModel _tm;
-        private IJwtService _jwtServicecs;
+        private readonly IJwtService _jwtService;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="next"></param>
         public JwtAuthorizationMiddleware(RequestDelegate next,
-            IJwtService jwtServicecs,
+            IJwtService jwtService,
             IServiceProvider serviceProvider)
         {
             _next = next;
-            _jwtServicecs = jwtServicecs;
+            _jwtService = jwtService;
             try
             {
                 _tm = serviceProvider.GetService<TokenModel>();
             }
             catch (Exception)
             {
+                // ignored
             }
         }
 
@@ -57,7 +53,7 @@ namespace RayPI.Infrastructure.Auth.Authorize
             string tokenHeader = httpContext.Request.Headers["Authorization"];
             tokenHeader = tokenHeader.Substring("Bearer ".Length).Trim();
 
-            _tm = _jwtServicecs.SerializeJWT(tokenHeader);
+            _tm = _jwtService.SerializeJWT(tokenHeader);
 
             //授权
             var claimList = new List<Claim>();

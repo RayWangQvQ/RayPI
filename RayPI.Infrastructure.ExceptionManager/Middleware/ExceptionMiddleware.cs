@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+﻿//系统包
 using System;
 using System.Threading.Tasks;
+//微软包
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
+//三方包
+using Newtonsoft.Json;
+using RayPI.Infrastructure.Treasury.Models;
+//本地项目包
 using RayPI.Treasury.Helpers;
-using Microsoft.AspNetCore.Hosting;
-using RayPI.Treasury.Models;
 
-namespace RayPI.OpenApi.Filters
+namespace RayPI.Infrastructure.ExceptionManager.Middleware
 {
     /// <summary>
     /// 
@@ -50,7 +54,7 @@ namespace RayPI.OpenApi.Filters
                 else
                 {
                     context.Response.StatusCode = 500;
-                    LogHelper.SetLog(LogLevel.Error, ex, _env.WebRootPath);
+                    LogHelper.SetLog(LogLevel.Error, ex, _env.ContentRootPath);
                 }
                 await HandleExceptionAsync(context, context.Response.StatusCode, ex.Message);
                 isCatched = true;

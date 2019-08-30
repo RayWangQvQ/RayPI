@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace RayPI.Infrastructure.Auth.Enums
 {
-    public enum ClaimEnum
+    /// <summary>
+    /// Claim声明类型名称枚举
+    /// </summary>
+    public enum ClaimTypeEnum
     {
         TokenModel
     }

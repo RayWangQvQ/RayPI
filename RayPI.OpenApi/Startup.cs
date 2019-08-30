@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 //
-using RayPI.ConfigService;
-using RayPI.SwaggerService;
-using RayPI.CorsService;
-using RayPI.OpenApi.Filters;
 using RayPI.Business.Di;
 using RayPI.Repository.EFRepository.Di;
 using RayPI.Infrastructure.Auth.Di;
 using RayPI.Infrastructure.Auth.Operate;
+using RayPI.Infrastructure.ExceptionManager.Di;
+using RayPI.Infrastructure.Config.Di;
+using RayPI.Infrastructure.Cors.Di;
+using RayPI.Infrastructure.Swagger.Di;
 
 namespace RayPI.OpenApi
 {
@@ -86,7 +86,8 @@ namespace RayPI.OpenApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMiddleware<ExceptionMiddleware>();//自定义异常处理中间件
+            //app.UseMiddleware<ExceptionMiddleware>();//自定义异常处理中间件
+            app.UseExceptionService();
 
             app.UseAuthService();
 

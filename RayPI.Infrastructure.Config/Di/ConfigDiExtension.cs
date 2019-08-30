@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿//微软包
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-//
-using RayPI.ConfigService.ConfigModel;
+//本地项目包
+using RayPI.Infrastructure.Config.Model;
 
-
-namespace RayPI.ConfigService
+namespace RayPI.Infrastructure.Config.Di
 {
-    public static class ConfigManagerExtension
+    public static class ConfigDiExtension
     {
         public static IServiceCollection AddConfigService(this IServiceCollection services, IConfiguration config)
         {

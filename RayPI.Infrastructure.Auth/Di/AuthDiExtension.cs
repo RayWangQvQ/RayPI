@@ -1,18 +1,24 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿//系统包
+using System.Text;
+using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
+//微软包
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Threading.Tasks;
-using System.IdentityModel.Tokens.Jwt;
+//本地项目包
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Auth.Authorize;
 
 namespace RayPI.Infrastructure.Auth.Di
 {
+    /// <summary>
+    /// DI扩展
+    /// </summary>
     public static class AuthDiExtension
     {
         public static IServiceCollection AddAuthService(this IServiceCollection services, IConfiguration config)

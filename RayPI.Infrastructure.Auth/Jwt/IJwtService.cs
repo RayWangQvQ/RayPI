@@ -1,12 +1,12 @@
-﻿using RayPI.ConfigService.ConfigModel;
+﻿//本地项目包
 using RayPI.Infrastructure.Auth.Models;
-using RayPI.Treasury.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using RayPI.Infrastructure.Config.Model;
 
 namespace RayPI.Infrastructure.Auth.Jwt
 {
+    /// <summary>
+    /// Jwt服务[Interface]
+    /// </summary>
     public interface IJwtService
     {
         /// <summary>

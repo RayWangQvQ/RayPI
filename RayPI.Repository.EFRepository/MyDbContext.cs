@@ -6,13 +6,13 @@ using System.Linq.Expressions;
 //
 using Microsoft.EntityFrameworkCore;
 //
-using RayPI.Treasury.Models;
 using RayPI.Treasury.Helpers;
-using RayPI.Treasury.Interfaces;
-using RayPI.Treasury.Extensions;
 using RayPI.Domain.Entity;
 using RayPI.Infrastructure.Auth;
 using RayPI.Infrastructure.Auth.Operate;
+using RayPI.Infrastructure.Treasury.Extensions;
+using RayPI.Infrastructure.Treasury.Helpers;
+using RayPI.Infrastructure.Treasury.Interfaces;
 
 namespace RayPI.Repository.EFRepository
 {

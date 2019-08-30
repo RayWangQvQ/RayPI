@@ -1,9 +1,8 @@
-﻿using RayPI.Treasury.Snowflake;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//本地项目包
 
-namespace RayPI.Treasury.Helpers
+using RayPI.Infrastructure.Treasury.Snowflake;
+
+namespace RayPI.Infrastructure.Treasury.Helpers
 {
     public static class IdGenerateHelper
     {

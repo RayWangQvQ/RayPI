@@ -1,9 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RayPI.ConfigService.ConfigModel
+﻿
+namespace RayPI.Infrastructure.Config.Model
 {
     public class AllConfigModel
     {

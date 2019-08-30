@@ -1,21 +1,15 @@
-﻿using RayPI.Infrastructure.Auth.Models;
-using RayPI.Treasury.Interfaces;
-using RayPI.Treasury.Models;
+﻿//系统包
 using System;
-using System.Collections.Generic;
-using System.Text;
+//本地项目包
+using RayPI.Infrastructure.Auth.Models;
+using RayPI.Infrastructure.Treasury.Interfaces;
 
 namespace RayPI.Infrastructure.Auth.Operate
 {
     public class OperateSetter : IEntityBaseAutoSetter
     {
-        /// <summary>The _operate content</summary>
         private readonly TokenModel _tokenModel;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="operateInfo">Content of the operate.</param>
         public OperateSetter(IOperateInfo operateInfo)
         {
             _tokenModel = operateInfo.TokenModel;
