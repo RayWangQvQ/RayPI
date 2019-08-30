@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 namespace RayPI.Infrastructure.Config.Model
 {
     /// <summary>
-    /// 
+    /// Jwt配置
     /// </summary>
     public class JwtAuthConfigModel
     {

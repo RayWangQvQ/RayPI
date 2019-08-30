@@ -57,6 +57,14 @@ namespace RayPI.Infrastructure.Treasury.Di
         }
 
         /// <summary>
+        /// 获取单例注册对象
+        /// </summary>
+        public static T GetSingletonInstanceOrNull<T>(this IServiceCollection services)
+        {
+            return (T)services.FirstOrDefault(x => x.ServiceType == typeof(T))?.ImplementationInstance;
+        }
+
+        /// <summary>
         /// 暴露类型可空注册
         /// （如果暴露类型为null，则自动以其本身类型注册）
         /// </summary>

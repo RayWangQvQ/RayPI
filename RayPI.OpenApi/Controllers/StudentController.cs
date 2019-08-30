@@ -1,7 +1,10 @@
-﻿using System;
+﻿//系统包
+using System;
+//微软包
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+//本地项目包
 using RayPI.Bussiness;
 using RayPI.Domain.Entity;
 using RayPI.Infrastructure.Auth.Attribute;
@@ -21,9 +24,6 @@ namespace RayPI.OpenApi.Controllers
     {
         private readonly StudentBusiness _studentBusiness;
 
-        /// <summary>
-        /// 
-        /// </summary>
         public StudentController(StudentBusiness studentBussiness)
         {
             _studentBusiness = studentBussiness;

@@ -32,7 +32,8 @@ namespace RayPI.OpenApi
 
             IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.Development.json", true, true);
             _config = builder.Build();
         }
 
@@ -63,9 +64,6 @@ namespace RayPI.OpenApi
 
             //注册http上下文访问器
             services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
-
-            //注册IOperateInfo
-            services.AddScoped<IOperateInfo, OperateInfo>();
 
             //注册仓储
             services.AddRepository(_config);

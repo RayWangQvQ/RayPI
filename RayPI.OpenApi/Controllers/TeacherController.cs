@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Reflection;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿//微软包
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Rest.TransientFaultHandling;
+//本地项目包
 using RayPI.Bussiness;
 using RayPI.Domain.Entity;
+using RayPI.Infrastructure.Auth.Attribute;
+using RayPI.Infrastructure.Auth.Enums;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -18,8 +13,7 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Admin")]
-    //[Authorize(Roles = "Admin")]
-    //[Authorize(Policy = "RequireAdmin")]
+    [ApiAuthorize(PolicyEnum.RequireRoleOfAdminOrClient)]
     public class TeacherController : Controller
     {
         private TeacherBusiness _teacheBusiness;

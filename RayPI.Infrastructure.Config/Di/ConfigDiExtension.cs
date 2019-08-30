@@ -11,7 +11,10 @@ namespace RayPI.Infrastructure.Config.Di
         public static IServiceCollection AddConfigService(this IServiceCollection services, IConfiguration config)
         {
             services.AddSingleton(config);
-            services.AddScoped<JwtAuthConfigModel>();
+
+            services.AddSingleton<JwtAuthConfigModel>();
+
+            services.AddSingleton<AllConfigModel>();
 
             return services;
         }

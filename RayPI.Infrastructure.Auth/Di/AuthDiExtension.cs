@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Auth.Authorize;
+using RayPI.Infrastructure.Auth.Operate;
 
 namespace RayPI.Infrastructure.Auth.Di
 {
@@ -76,6 +77,9 @@ namespace RayPI.Infrastructure.Auth.Di
             #endregion
 
             services.AddSingleton<IAuthorizationHandler, PolicyHandler>();
+
+            //注册IOperateInfo
+            services.AddScoped<IOperateInfo, OperateInfo>();
 
             return services;
         }

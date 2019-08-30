@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿//微软包
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-//
+//本地项目包
 using RayPI.Infrastructure.Auth.Models;
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Config.Model;
+using RayPI.Infrastructure.Auth.Attribute;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -16,7 +18,7 @@ namespace RayPI.OpenApi.Controllers
     [Produces("application/json")]
     [Route("api/Test")]
     [EnableCors("Any")]
-    //[Authorize(Policy = "RequireAdminOrClient")]
+    [ApiAuthorize(PolicyEnum.RequireRoleOfAdminOrClient)]
     public class TestController : Controller
     {
         private IConfiguration _config;
