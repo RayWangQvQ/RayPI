@@ -18,22 +18,19 @@ namespace RayPI.OpenApi.Controllers
     [Produces("application/json")]
     [Route("api/Test")]
     [EnableCors("Any")]
-    [ApiAuthorize(PolicyEnum.RequireRoleOfAdminOrClient)]
+    //[ApiAuthorize(PolicyEnum.RequireRoleOfAdminOrClient)]
     public class TestController : Controller
     {
         private IConfiguration _config;
         private IHostingEnvironment _env;
-        private JwtAuthConfigModel _jwtAuthConfigModel;
         private IJwtService _jwtService;
 
         public TestController(IConfiguration configuration,
             IHostingEnvironment env,
-            JwtAuthConfigModel jwtAuthConfigModel,
             IJwtService jwtService)
         {
             _config = configuration;
             _env = env;
-            _jwtAuthConfigModel = jwtAuthConfigModel;
             _jwtService = jwtService;
         }
 
@@ -59,7 +56,7 @@ namespace RayPI.OpenApi.Controllers
                 Project = project,
                 TokenType = tokenType
             };
-            return _jwtService.IssueJWT(tm, _jwtAuthConfigModel);
+            return _jwtService.IssueJwt(tm);
         }
         #endregion
 

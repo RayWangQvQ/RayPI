@@ -6,7 +6,6 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 //本地项目包
@@ -22,10 +21,10 @@ namespace RayPI.Infrastructure.Auth.Di
     /// </summary>
     public static class AuthDiExtension
     {
-        public static IServiceCollection AddAuthService(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddAuthService(this IServiceCollection services, JwtOption jwtOption)
         {
             services.AddSingleton<JwtSecurityTokenHandler>();
-            services.AddSingleton<IJwtService,JwtService>();
+            services.AddSingleton<IJwtService, JwtService>();
 
             #region 注册【认证】服务
             services.AddAuthentication(x =>
@@ -35,11 +34,10 @@ namespace RayPI.Infrastructure.Auth.Di
             })
                 .AddJwtBearer(o =>
                 {
-                    string jwtSecretKey = config["JwtAuth:SecurityKey"] ?? "";
                     o.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidIssuer = "RayPI",
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSecretKey)),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOption.SecurityKey)),
 
                         /***********************************TokenValidationParameters的参数默认值***********************************/
                         RequireSignedTokens = true,

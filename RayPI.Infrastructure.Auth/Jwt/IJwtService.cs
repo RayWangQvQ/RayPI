@@ -1,6 +1,5 @@
 ﻿//本地项目包
 using RayPI.Infrastructure.Auth.Models;
-using RayPI.Infrastructure.Config.Model;
 
 namespace RayPI.Infrastructure.Auth.Jwt
 {
@@ -14,7 +13,7 @@ namespace RayPI.Infrastructure.Auth.Jwt
         /// </summary>
         /// <param name="tokenModel"></param>
         /// <returns></returns>
-        string IssueJWT(TokenModel tokenModel, JwtAuthConfigModel jwtConfig);
+        string IssueJwt(TokenModel tokenModel);
 
         /// <summary>
         /// 解析jwt字符串

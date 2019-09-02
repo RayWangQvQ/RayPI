@@ -8,13 +8,18 @@ namespace RayPI.Infrastructure.Config.Di
 {
     public static class ConfigDiExtension
     {
-        public static IServiceCollection AddConfigService(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddConfigService(this IServiceCollection services, string basePath)
         {
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+                .SetBasePath(basePath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.Development.json", true, true);
+            var config = builder.Build();
+
             services.AddSingleton(config);
 
-            services.AddSingleton<JwtAuthConfigModel>();
-
-            services.AddSingleton<AllConfigModel>();
+            var allConfigModel = new AllConfigModel(config);
+            services.AddSingleton(allConfigModel);
 
             return services;
         }

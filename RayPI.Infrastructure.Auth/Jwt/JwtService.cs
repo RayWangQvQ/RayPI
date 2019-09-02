@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 //本地项目包
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Models;
-using RayPI.Infrastructure.Config.Model;
 
 namespace RayPI.Infrastructure.Auth.Jwt
 {
@@ -21,19 +20,22 @@ namespace RayPI.Infrastructure.Auth.Jwt
     /// </summary>
     public class JwtService : IJwtService
     {
-        private JwtSecurityTokenHandler _jwtSecurityTokenHandler;
+        private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler;
+        private readonly JwtOption _jwtConfig;
 
-        public JwtService(JwtSecurityTokenHandler jwtSecurityTokenHandler)
+        public JwtService(JwtSecurityTokenHandler jwtSecurityTokenHandler, JwtOption jwtConfig)
         {
             _jwtSecurityTokenHandler = jwtSecurityTokenHandler;
+            _jwtConfig = jwtConfig;
         }
 
         /// <summary>
         /// 颁发JWT字符串
         /// </summary>
         /// <param name="tokenModel"></param>
+        /// <param name="jwtConfig"></param>
         /// <returns></returns>
-        public string IssueJWT(TokenModel tokenModel, JwtAuthConfigModel jwtConfig)
+        public string IssueJwt(TokenModel tokenModel)
         {
             var dateTime = DateTime.UtcNow;
             var claims = new List<Claim>
@@ -47,26 +49,26 @@ namespace RayPI.Infrastructure.Auth.Jwt
             };
 
             //过期时间
-            double expMin = 0;
+            double expMin;
             switch (tokenModel.TokenType)
             {
                 case TokenTypeEnum.Web:
-                    expMin = jwtConfig.WebExp;
+                    expMin = _jwtConfig.WebExp;
                     break;
                 case TokenTypeEnum.App:
-                    expMin = jwtConfig.AppExp;
+                    expMin = _jwtConfig.AppExp;
                     break;
                 case TokenTypeEnum.MiniProgram:
-                    expMin = jwtConfig.MiniProgramExp;
+                    expMin = _jwtConfig.MiniProgramExp;
                     break;
                 default:
-                    expMin = jwtConfig.OtherExp;
+                    expMin = _jwtConfig.OtherExp;
                     break;
             }
             DateTime expTime = dateTime.AddMinutes(expMin);
 
             //秘钥
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecurityKey));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.SecurityKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var jwt = new JwtSecurityToken(issuer: "RayPI",

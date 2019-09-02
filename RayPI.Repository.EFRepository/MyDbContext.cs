@@ -126,7 +126,7 @@ namespace RayPI.Repository.EFRepository
         {
             if (entity == null) return -1;
             this.SetEntityBaseInfo(entity);
-            CreateSet<TAggregateRoot>().Add(entity);
+            this.CreateSet<TAggregateRoot>().Add(entity);
             return entity.Id;
         }
         /// <summary>批量新增</summary>
@@ -134,7 +134,7 @@ namespace RayPI.Repository.EFRepository
         /// <returns>IEnumerable&lt;System.Int64&gt;.</returns>
         public virtual IEnumerable<long> Add<TAggregateRoot>(IEnumerable<TAggregateRoot> entityList) where TAggregateRoot : EntityBase
         {
-            List<long> ids = new List<long>();
+            var ids = new List<long>();
             if (entityList.Any())
             {
                 entityList.Each(x => this.Add(x));
