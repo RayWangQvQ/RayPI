@@ -1,34 +1,31 @@
 ﻿//系统包
 using System;
 
-namespace RayPI.Infrastructure.Treasury.Models
+namespace RayPI.Infrastructure.ExceptionManager
 {
     /// <summary>
     /// 自定义业务异常类
     /// </summary>
     [Serializable]
-    public class MyException : ApplicationException
+    public class RayAppException : ApplicationException
     {
+
         /// <summary>
         /// 
         /// </summary>
-        private int _code;
-        /// <summary>
-        /// 
-        /// </summary>
-        public MyException()
+        public RayAppException()
         {
-            _code = 400;
+            Code = 500;
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="message"></param>
         /// <param name="code"></param>
-        public MyException(string message, int code=400)
+        public RayAppException(string message, int code = 500)
             : base(message)
         {
-            _code = code;
+            Code = code;
         }
         /// <summary>
         /// 
@@ -36,18 +33,15 @@ namespace RayPI.Infrastructure.Treasury.Models
         /// <param name="message"></param>
         /// <param name="inner"></param>
         /// <param name="code"></param>
-        public MyException(string message, Exception inner, int code=400)
+        public RayAppException(string message, Exception inner, int code = 500)
             : base(message, inner)
         {
-            _code = code;
+            Code = code;
         }
+
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public int GetCode()
-        {
-            return _code;
-        }
+        public int Code { get; set; }
     }
 }

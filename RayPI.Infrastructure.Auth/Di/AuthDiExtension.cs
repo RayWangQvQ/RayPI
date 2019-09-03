@@ -24,6 +24,7 @@ namespace RayPI.Infrastructure.Auth.Di
         public static IServiceCollection AddAuthService(this IServiceCollection services, JwtOption jwtOption)
         {
             services.AddSingleton<JwtSecurityTokenHandler>();
+            services.AddSingleton(jwtOption);
             services.AddSingleton<IJwtService, JwtService>();
 
             #region 注册【认证】服务

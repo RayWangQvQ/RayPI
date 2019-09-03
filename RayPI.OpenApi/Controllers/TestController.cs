@@ -8,7 +8,8 @@ using RayPI.Infrastructure.Auth.Models;
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Config.Model;
-using RayPI.Infrastructure.Auth.Attribute;
+using RayPI.Infrastructure.Auth.Attributes;
+using RayPI.Infrastructure.ExceptionManager;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -70,6 +71,28 @@ namespace RayPI.OpenApi.Controllers
         {
             string s = null;
             return Json(s.Length);
+        }
+
+        /// <summary>
+        /// 测试异常2
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("TestException2")]
+        public JsonResult TestException2()
+        {
+            throw new System.Exception("测试");
+        }
+
+        /// <summary>
+        /// 测试异常3
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("TestException3")]
+        public JsonResult TestException3()
+        {
+            throw new RayAppException();
         }
     }
 }

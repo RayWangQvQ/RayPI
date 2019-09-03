@@ -17,6 +17,7 @@ using RayPI.Infrastructure.Swagger.Di;
 using RayPI.Infrastructure.Treasury.Di;
 using RayPI.Infrastructure.Config.Model;
 using RayPI.Infrastructure.Auth.Jwt;
+using RayPI.OpenApi.Filters;
 
 namespace RayPI.OpenApi
 {
@@ -43,7 +44,11 @@ namespace RayPI.OpenApi
         public void ConfigureServices(IServiceCollection services)
         {
             //注册MVC
-            services.AddMvc()
+            services.AddMvc(options =>
+                {
+                    options.Filters.Add(typeof(WebApiResultFilterAttribute));
+                    options.RespectBrowserAcceptHeader = true;
+                })
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
@@ -94,8 +99,7 @@ namespace RayPI.OpenApi
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseMiddleware<ExceptionMiddleware>();//自定义异常处理中间件
-            app.UseExceptionService();
+            app.UseExceptionService();//自定义异常处理中间件
 
             app.UseAuthService();
 

@@ -18,23 +18,13 @@ namespace RayPI.Infrastructure.Auth.Authorize
     public class JwtAuthorizationMiddleware
     {
         private readonly RequestDelegate _next;
-        private TokenModel _tm;
         private readonly IJwtService _jwtService;
 
         public JwtAuthorizationMiddleware(RequestDelegate next,
-            IJwtService jwtService,
-            IServiceProvider serviceProvider)
+            IJwtService jwtService)
         {
             _next = next;
             _jwtService = jwtService;
-            try
-            {
-                _tm = serviceProvider.GetService<TokenModel>();
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
         }
 
         /// <summary>
@@ -53,11 +43,11 @@ namespace RayPI.Infrastructure.Auth.Authorize
             string tokenHeader = httpContext.Request.Headers["Authorization"];
             tokenHeader = tokenHeader.Substring("Bearer ".Length).Trim();
 
-            _tm = _jwtService.SerializeJWT(tokenHeader);
+            TokenModel tm = _jwtService.SerializeJWT(tokenHeader);
 
             //授权
             var claimList = new List<Claim>();
-            var claim = new Claim(ClaimTypes.Role, _tm.Role);
+            var claim = new Claim(ClaimTypes.Role, tm.Role);
             claimList.Add(claim);
             var identity = new ClaimsIdentity(claimList);
             var principal = new ClaimsPrincipal(identity);

@@ -106,7 +106,7 @@ namespace RayPI.Repository.EFRepository
         /// <summary>查询所有匹配项</summary>
         /// <param name="filter">查询条件</param>
         /// <param name="exceptDeleted">排除被逻辑删除的</param>
-        /// <returns>IQueryable<TAggregateRoot></T></returns>
+        /// <returns>IQueryable<TAggregateRoot></returns>
         public IQueryable<TAggregateRoot> GetAllMatching<TAggregateRoot>(Expression<Func<TAggregateRoot, bool>> filter = null, bool exceptDeleted = true) where TAggregateRoot : EntityBase
         {
             IQueryable<TAggregateRoot> source;

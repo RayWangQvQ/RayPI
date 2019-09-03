@@ -1,9 +1,9 @@
 ﻿//微软包
 using Microsoft.AspNetCore.Authorization;
-//本地项目包
 using RayPI.Infrastructure.Auth.Enums;
+//本地项目包
 
-namespace RayPI.Infrastructure.Auth.Attribute
+namespace RayPI.Infrastructure.Auth.Attributes
 {
     /// <summary>
     /// 自定义授权特性

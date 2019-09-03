@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 //本地项目包
 using RayPI.Bussiness;
 using RayPI.Domain.Entity;
-using RayPI.Infrastructure.Auth.Attribute;
+using RayPI.Infrastructure.Auth.Attributes;
 using RayPI.Infrastructure.Auth.Enums;
+using RayPI.Infrastructure.ExceptionManager;
 using RayPI.Infrastructure.Treasury.Models;
 
 namespace RayPI.OpenApi.Controllers
@@ -53,7 +54,7 @@ namespace RayPI.OpenApi.Controllers
         public JsonResult GetStudentById(long id = 0)
         {
             if (id == 0)
-                throw new MyException("参数id不合法", StatusCodes.Status400BadRequest);
+                throw new RayAppException("参数id不合法", StatusCodes.Status400BadRequest);
             return Json(_studentBusiness.GetById(id));
         }
 
