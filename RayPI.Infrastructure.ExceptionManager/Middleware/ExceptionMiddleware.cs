@@ -7,10 +7,10 @@ using Microsoft.Extensions.Hosting;
 //三方包
 using Newtonsoft.Json;
 //本地项目包
-using RayPI.Treasury.Helpers;
 using RayPI.Infrastructure.Treasury.Models;
+using RayPI.Treasury.Helpers;
 
-namespace RayPI.Infrastructure.ExceptionManager.Middleware
+namespace RayPI.Infrastructure.RayException.Middleware
 {
     /// <summary>
     /// 异常处理中间件

@@ -1,9 +1,9 @@
 ﻿//微软包
 using Microsoft.AspNetCore.Builder;
 //本地项目包
-using RayPI.Infrastructure.ExceptionManager.Middleware;
+using RayPI.Infrastructure.RayException.Middleware;
 
-namespace RayPI.Infrastructure.ExceptionManager.Di
+namespace RayPI.Infrastructure.RayException.Di
 {
     public static class ExceptionDiExtension
     {

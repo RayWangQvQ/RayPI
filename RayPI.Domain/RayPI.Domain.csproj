@@ -12,4 +12,8 @@
     <ProjectReference Include="..\RayPI.Infrastructure.Treasury\RayPI.Infrastructure.Treasury.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DomainService\" />
+  </ItemGroup>
+
 </Project>

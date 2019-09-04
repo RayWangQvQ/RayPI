@@ -23,7 +23,7 @@ namespace RayPI.Infrastructure.Treasury.Di
 
             //筛选当前程序集下符合条件的类
             List<Type> types = assembly.GetTypes()
-                .Where( t => t.IsClass && !t.IsGenericType)//排除了泛型类
+                .Where(t => t.IsClass && !t.IsGenericType)//排除了泛型类
                 .Where(filter)
                 .ToList();
 

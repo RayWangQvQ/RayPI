@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Repository.SqlSugarRe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Repository.DapperRepository", "RayPI.Repository.DapperRepository\RayPI.Repository.DapperRepository.csproj", "{DB486A61-8D94-4F76-8FF7-5BB3622A1FF1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Infrastructure.ExceptionManager", "RayPI.Infrastructure.ExceptionManager\RayPI.Infrastructure.ExceptionManager.csproj", "{5E9E006B-2EC3-4823-B397-CABE461F9911}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Infrastructure.RayException", "RayPI.Infrastructure.ExceptionManager\RayPI.Infrastructure.RayException.csproj", "{5E9E006B-2EC3-4823-B397-CABE461F9911}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

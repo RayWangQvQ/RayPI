@@ -1,7 +1,8 @@
 ﻿//微软包
+
 using Microsoft.Extensions.Configuration;
 
-namespace RayPI.Infrastructure.Config.Model
+namespace RayPI.Infrastructure.Config.FrameConfigModel
 {
     /// <summary>
     /// Jwt配置

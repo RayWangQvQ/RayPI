@@ -8,10 +8,17 @@ namespace RayPI.Infrastructure.Auth.Authorize
     /// </summary>
     public class PolicyRequirement : IAuthorizationRequirement
     {
-        public PolicyRequirement(string role)
+        public PolicyRequirement(bool isNeedAuthorizeds = true)
+        {
+            this.IsNeedAuthorized = isNeedAuthorizeds;
+        }
+        public PolicyRequirement(string role, bool isNeedAuthorizeds = true)
         {
             this.RequireRoles = role.Split(',');
+            this.IsNeedAuthorized = isNeedAuthorizeds;
         }
+
+        public bool IsNeedAuthorized { get; set; }
 
         public string[] RequireRoles { get; set; }
     }

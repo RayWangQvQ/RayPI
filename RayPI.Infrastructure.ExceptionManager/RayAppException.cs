@@ -1,7 +1,7 @@
 ﻿//系统包
 using System;
 
-namespace RayPI.Infrastructure.ExceptionManager
+namespace RayPI.Infrastructure.RayException
 {
     /// <summary>
     /// 自定义业务异常类

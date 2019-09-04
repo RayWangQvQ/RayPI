@@ -1,4 +1,5 @@
 ﻿//微软包
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 //本地项目包
 using RayPI.Bussiness;
@@ -31,6 +32,8 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Teacher")]
+        //[AllowAnonymous]
+        [ApiAuthorizeFree]
         public JsonResult GetTeacherPageList(int pageIndex = 1, int pageSize = 10)
         {
             return Json(_teacheBusiness.GetPageList(pageIndex, pageSize));

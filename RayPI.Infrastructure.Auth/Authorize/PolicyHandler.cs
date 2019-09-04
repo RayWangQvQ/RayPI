@@ -44,6 +44,12 @@ namespace RayPI.Infrastructure.Auth.Authorize
             HttpContext httpContext = (context.Resource as AuthorizationFilterContext)?.HttpContext;
             if (httpContext == null) return;
 
+            if (!requirement.IsNeedAuthorized)
+            {
+                context.Succeed(requirement);
+                return;
+            }
+
             //获取授权方式
             AuthenticationScheme defaultAuthenticate = await _schemes.GetDefaultAuthenticateSchemeAsync();
             if (defaultAuthenticate == null)

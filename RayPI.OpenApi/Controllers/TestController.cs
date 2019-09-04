@@ -7,9 +7,10 @@ using Microsoft.Extensions.Configuration;
 using RayPI.Infrastructure.Auth.Models;
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
-using RayPI.Infrastructure.Config.Model;
 using RayPI.Infrastructure.Auth.Attributes;
-using RayPI.Infrastructure.ExceptionManager;
+using RayPI.Infrastructure.Config;
+using RayPI.Infrastructure.Config.FrameConfigModel;
+using RayPI.Infrastructure.RayException;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -22,20 +23,22 @@ namespace RayPI.OpenApi.Controllers
     //[ApiAuthorize(PolicyEnum.RequireRoleOfAdminOrClient)]
     public class TestController : Controller
     {
-        private IConfiguration _config;
-        private IHostingEnvironment _env;
-        private IJwtService _jwtService;
+        private readonly IConfiguration _config;
+        private readonly AllConfigModel _allConfigModel;
+        private readonly IHostingEnvironment _env;
+        private readonly IJwtService _jwtService;
 
         public TestController(IConfiguration configuration,
+            AllConfigModel allConfigModel,
             IHostingEnvironment env,
             IJwtService jwtService)
         {
             _config = configuration;
+            _allConfigModel = allConfigModel;
             _env = env;
             _jwtService = jwtService;
         }
 
-        #region Token
         /// <summary>
         /// 模拟登录，获取JWT
         /// </summary>
@@ -47,6 +50,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
+        [ApiAuthorize(PolicyEnum.Free)]
         public string GetJWTStr(long uid = 1, string uname = "Admin", string role = "Admin", string project = "RayPI", TokenTypeEnum tokenType = TokenTypeEnum.Web)
         {
             var tm = new TokenModel
@@ -59,7 +63,6 @@ namespace RayPI.OpenApi.Controllers
             };
             return _jwtService.IssueJwt(tm);
         }
-        #endregion
 
         /// <summary>
         /// 测试异常
@@ -93,6 +96,28 @@ namespace RayPI.OpenApi.Controllers
         public JsonResult TestException3()
         {
             throw new RayAppException();
+        }
+
+        /// <summary>
+        /// 测试配置1
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("TestConfig1")]
+        public string TestConfig1()
+        {
+            return _allConfigModel.TestConfigModel.Key1;
+        }
+
+        /// <summary>
+        /// 测试配置2
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("TestConfig2")]
+        public string TestConfig2()
+        {
+            return _config["Test:Key1"];
         }
     }
 }

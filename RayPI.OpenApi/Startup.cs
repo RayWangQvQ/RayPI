@@ -10,13 +10,14 @@ using RayPI.Business.Di;
 using RayPI.Repository.EFRepository.Di;
 using RayPI.Infrastructure.Auth.Di;
 using RayPI.Infrastructure.Auth.Operate;
-using RayPI.Infrastructure.ExceptionManager.Di;
 using RayPI.Infrastructure.Config.Di;
 using RayPI.Infrastructure.Cors.Di;
 using RayPI.Infrastructure.Swagger.Di;
 using RayPI.Infrastructure.Treasury.Di;
-using RayPI.Infrastructure.Config.Model;
 using RayPI.Infrastructure.Auth.Jwt;
+using RayPI.Infrastructure.Config;
+using RayPI.Infrastructure.Config.FrameConfigModel;
+using RayPI.Infrastructure.RayException.Di;
 using RayPI.OpenApi.Filters;
 
 namespace RayPI.OpenApi

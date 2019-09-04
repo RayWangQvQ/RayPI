@@ -9,7 +9,7 @@ using RayPI.Bussiness;
 using RayPI.Domain.Entity;
 using RayPI.Infrastructure.Auth.Attributes;
 using RayPI.Infrastructure.Auth.Enums;
-using RayPI.Infrastructure.ExceptionManager;
+using RayPI.Infrastructure.RayException;
 using RayPI.Infrastructure.Treasury.Models;
 
 namespace RayPI.OpenApi.Controllers
@@ -25,9 +25,9 @@ namespace RayPI.OpenApi.Controllers
     {
         private readonly StudentBusiness _studentBusiness;
 
-        public StudentController(StudentBusiness studentBussiness)
+        public StudentController(StudentBusiness studentBusiness)
         {
-            _studentBusiness = studentBussiness;
+            _studentBusiness = studentBusiness;
         }
 
         /// <summary>
@@ -38,6 +38,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Student")]
+        [ApiAuthorize(PolicyEnum.Free)]
         public JsonResult GetStudentPageList(int pageIndex = 1, int pageSize = 10)
         {
             return Json(_studentBusiness.GetPageList(pageIndex, pageSize));
