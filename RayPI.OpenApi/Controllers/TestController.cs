@@ -11,6 +11,8 @@ using RayPI.Infrastructure.Auth.Attributes;
 using RayPI.Infrastructure.Config;
 using RayPI.Infrastructure.Config.FrameConfigModel;
 using RayPI.Infrastructure.RayException;
+using RayPI.Infrastructure.Cors.Attributes;
+using RayPI.Infrastructure.Cors.Enums;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -19,8 +21,8 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Test")]
-    [EnableCors("Any")]
-    //[ApiAuthorize(PolicyEnum.RequireRoleOfAdminOrClient)]
+    [RayCors(CorsPolicyEnum.Free)]
+    //[RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
     public class TestController : Controller
     {
         private readonly IConfiguration _config;
@@ -50,7 +52,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        [ApiAuthorize(PolicyEnum.Free)]
+        [RayAuthorize(AuthPolicyEnum.Free)]
         public string GetJWTStr(long uid = 1, string uname = "Admin", string role = "Admin", string project = "RayPI", TokenTypeEnum tokenType = TokenTypeEnum.Web)
         {
             var tm = new TokenModel

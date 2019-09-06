@@ -69,11 +69,11 @@ namespace RayPI.Infrastructure.Auth.Di
             #region 注册【授权】服务
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(PolicyEnum.Free.ToString(), policy => policy.AddRequirements(new PolicyRequirement(false)));
+                options.AddPolicy(AuthPolicyEnum.Free.ToString(), policy => policy.AddRequirements(new PolicyRequirement(false)));
 
-                options.AddPolicy(PolicyEnum.RequireRoleOfClient.ToString(), policy => policy.AddRequirements(new PolicyRequirement("Client")));
-                options.AddPolicy(PolicyEnum.RequireRoleOfAdmin.ToString(), policy => policy.AddRequirements(new PolicyRequirement("Admin")));
-                options.AddPolicy(PolicyEnum.RequireRoleOfAdminOrClient.ToString(), policy => policy.AddRequirements(new PolicyRequirement("Admin,Client")));
+                options.AddPolicy(AuthPolicyEnum.RequireRoleOfClient.ToString(), policy => policy.AddRequirements(new PolicyRequirement("Client")));
+                options.AddPolicy(AuthPolicyEnum.RequireRoleOfAdmin.ToString(), policy => policy.AddRequirements(new PolicyRequirement("Admin")));
+                options.AddPolicy(AuthPolicyEnum.RequireRoleOfAdminOrClient.ToString(), policy => policy.AddRequirements(new PolicyRequirement("Admin,Client")));
             });
             #endregion
 

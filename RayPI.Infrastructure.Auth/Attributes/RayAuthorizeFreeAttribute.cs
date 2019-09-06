@@ -2,7 +2,7 @@
 
 namespace RayPI.Infrastructure.Auth.Attributes
 {
-    public class ApiAuthorizeFreeAttribute : AllowAnonymousAttribute
+    public class RayAuthorizeFreeAttribute : AllowAnonymousAttribute
     {
     }
 }

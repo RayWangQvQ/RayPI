@@ -8,11 +8,11 @@ namespace RayPI.Infrastructure.Auth.Attributes
     /// <summary>
     /// 自定义授权特性
     /// </summary>
-    public class ApiAuthorizeAttribute : AuthorizeAttribute
+    public class RayAuthorizeAttribute : AuthorizeAttribute
     {
-        public ApiAuthorizeAttribute(PolicyEnum policyEnum)
+        public RayAuthorizeAttribute(AuthPolicyEnum authPolicyEnum)
         {
-            this.Policy = policyEnum.ToString();
+            this.Policy = authPolicyEnum.ToString();
         }
     }
 }

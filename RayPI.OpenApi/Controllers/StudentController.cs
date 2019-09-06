@@ -9,6 +9,8 @@ using RayPI.Bussiness;
 using RayPI.Domain.Entity;
 using RayPI.Infrastructure.Auth.Attributes;
 using RayPI.Infrastructure.Auth.Enums;
+using RayPI.Infrastructure.Cors.Attributes;
+using RayPI.Infrastructure.Cors.Enums;
 using RayPI.Infrastructure.RayException;
 using RayPI.Infrastructure.Treasury.Models;
 
@@ -19,8 +21,8 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Student")]
-    [ApiAuthorize(PolicyEnum.RequireRoleOfAdminOrClient)]
-    [EnableCors("Limit")]
+    [RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
+    [RayCors(CorsPolicyEnum.Free)]
     public class StudentController : Controller
     {
         private readonly StudentBusiness _studentBusiness;
@@ -38,7 +40,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Student")]
-        [ApiAuthorize(PolicyEnum.Free)]
+        [RayAuthorize(AuthPolicyEnum.Free)]
         public JsonResult GetStudentPageList(int pageIndex = 1, int pageSize = 10)
         {
             return Json(_studentBusiness.GetPageList(pageIndex, pageSize));

@@ -1,5 +1,7 @@
 ﻿//微软包
 using Microsoft.Extensions.DependencyInjection;
+//本地项目包
+using RayPI.Infrastructure.Cors.Enums;
 
 namespace RayPI.Infrastructure.Cors.Di
 {
@@ -9,7 +11,7 @@ namespace RayPI.Infrastructure.Cors.Di
         {
             services.AddCors(c =>
             {
-                c.AddPolicy("Any", policy =>
+                c.AddPolicy(CorsPolicyEnum.Free.ToString(), policy =>
                 {
                     policy.AllowAnyOrigin()
                     .AllowAnyMethod()
@@ -17,14 +19,13 @@ namespace RayPI.Infrastructure.Cors.Di
                     .AllowCredentials();
                 });
 
-                c.AddPolicy("Limit", policy =>
+                c.AddPolicy(CorsPolicyEnum.Limit.ToString(), policy =>
                 {
-                    policy
-                    .WithOrigins("localhost:8083")
+                    policy.WithOrigins("localhost:8083")
                     .WithMethods("get", "post", "put", "delete")
                     //.WithHeaders("Authorization");
                     .AllowAnyHeader();
-                });
+                }); ;
             });
             return services;
         }

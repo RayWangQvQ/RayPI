@@ -33,7 +33,6 @@ namespace RayPI.Infrastructure.Auth.Jwt
         /// 颁发JWT字符串
         /// </summary>
         /// <param name="tokenModel"></param>
-        /// <param name="jwtConfig"></param>
         /// <returns></returns>
         public string IssueJwt(TokenModel tokenModel)
         {

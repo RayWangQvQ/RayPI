@@ -4,7 +4,7 @@ namespace RayPI.Infrastructure.Auth.Enums
     /// <summary>
     /// 授权策略模式枚举
     /// </summary>
-    public enum PolicyEnum
+    public enum AuthPolicyEnum
     {
         /// <summary>
         /// 开放接口，不需要授权
