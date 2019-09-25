@@ -17,8 +17,11 @@ namespace RayPI.OpenApi.Controllers
     [RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
     public class TeacherController : Controller
     {
-        private TeacherBusiness _teacheBusiness;
+        private readonly TeacherBusiness _teacheBusiness;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public TeacherController(TeacherBusiness teacheBussiness)
         {
             _teacheBusiness = teacheBussiness;

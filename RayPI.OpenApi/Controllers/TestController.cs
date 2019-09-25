@@ -27,17 +27,17 @@ namespace RayPI.OpenApi.Controllers
     {
         private readonly IConfiguration _config;
         private readonly AllConfigModel _allConfigModel;
-        private readonly IHostingEnvironment _env;
         private readonly IJwtService _jwtService;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public TestController(IConfiguration configuration,
             AllConfigModel allConfigModel,
-            IHostingEnvironment env,
             IJwtService jwtService)
         {
             _config = configuration;
             _allConfigModel = allConfigModel;
-            _env = env;
             _jwtService = jwtService;
         }
 

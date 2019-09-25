@@ -57,7 +57,7 @@ namespace RayPI.Domain.IRepository
         #region 添加
         long Add(T entity);
         /// <summary>批量新增</summary>
-        /// <param name="tAggregateRoots">实体集合</param>
+        /// <param name="entityList">实体集合</param>
         /// <returns>IEnumerable&lt;System.Int64&gt;.</returns>
         IEnumerable<long> Add(IEnumerable<T> entityList);
         #endregion
@@ -81,7 +81,7 @@ namespace RayPI.Domain.IRepository
         void Remove(T entity);
 
         /// <summary>批量物理移除</summary>
-        /// <param name="tAggregateRoots">批量实体</param>
+        /// <param name="entityList">批量实体</param>
         void Remove(IQueryable<T> entityList);
 
         /// <summary>批量物理移除</summary>

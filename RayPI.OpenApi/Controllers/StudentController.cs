@@ -27,6 +27,9 @@ namespace RayPI.OpenApi.Controllers
     {
         private readonly StudentBusiness _studentBusiness;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public StudentController(StudentBusiness studentBusiness)
         {
             _studentBusiness = studentBusiness;
