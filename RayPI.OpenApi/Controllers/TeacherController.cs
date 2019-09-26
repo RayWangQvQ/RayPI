@@ -14,7 +14,8 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Admin")]
-    [RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
+    //[RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
+    [RayAuthorizeFree]
     public class TeacherController : Controller
     {
         private readonly TeacherBusiness _teacheBusiness;

@@ -52,7 +52,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        [RayAuthorize(AuthPolicyEnum.Free)]
+        [RayAuthorizeFree]
         public string GetJWTStr(long uid = 1, string uname = "Admin", string role = "Admin", string project = "RayPI", TokenTypeEnum tokenType = TokenTypeEnum.Web)
         {
             var tm = new TokenModel

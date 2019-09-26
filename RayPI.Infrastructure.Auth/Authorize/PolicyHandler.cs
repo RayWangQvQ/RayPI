@@ -41,6 +41,7 @@ namespace RayPI.Infrastructure.Auth.Authorize
         /// <returns></returns>
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PolicyRequirement requirement)
         {
+            object resource = context.Resource;
             HttpContext httpContext = (context.Resource as AuthorizationFilterContext)?.HttpContext;
             if (httpContext == null) return;
 

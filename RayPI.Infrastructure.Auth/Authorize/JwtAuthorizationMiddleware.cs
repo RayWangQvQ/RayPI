@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 //微软包
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 //本地项目包
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Auth.Models;

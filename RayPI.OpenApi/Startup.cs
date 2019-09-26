@@ -45,16 +45,15 @@ namespace RayPI.OpenApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            //注册MVC
-            services.AddMvc(options =>
-                {
-                    options.Filters.Add(typeof(WebApiResultFilterAttribute));
-                    options.RespectBrowserAcceptHeader = true;
-                })
-                .AddJsonOptions(options =>
-                {
-                    //options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
-                });
+            //注册控制器
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(WebApiResultFilterAttribute));
+                options.RespectBrowserAcceptHeader = true;
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
+            });
 
             //注册配置管理服务
             services.AddConfigService(_env.ContentRootPath);
@@ -73,7 +72,7 @@ namespace RayPI.OpenApi
                 OtherExp = jwtConfig.OtherExp,
                 SecurityKey = jwtConfig.SecurityKey
             };
-            services.AddAuthService(jwtOption);
+            services.AddRayAuthService(jwtOption);
 
             //注册Cors跨域
             services.AddCorsService();
@@ -100,12 +99,14 @@ namespace RayPI.OpenApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseExceptionService();//自定义异常处理中间件
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();//用于访问wwwroot下的文件
             app.UseRouting();
 
-            app.UseExceptionService();//自定义异常处理中间件
+            app.UseCors();
 
             app.UseAuthService();
 
@@ -116,8 +117,6 @@ namespace RayPI.OpenApi
             });
 
             app.UseSwaggerService();
-
-            app.UseStaticFiles();//用于访问wwwroot下的文件
         }
 
     }

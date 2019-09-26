@@ -21,7 +21,7 @@ namespace RayPI.Infrastructure.Auth.Di
     /// </summary>
     public static class AuthDiExtension
     {
-        public static IServiceCollection AddAuthService(this IServiceCollection services, JwtOption jwtOption)
+        public static IServiceCollection AddRayAuthService(this IServiceCollection services, JwtOption jwtOption)
         {
             services.AddSingleton<JwtSecurityTokenHandler>();
             services.AddSingleton(jwtOption);
@@ -92,6 +92,7 @@ namespace RayPI.Infrastructure.Auth.Di
 
             //授权
             //app.UseMiddleware<JwtAuthorizationMiddleware>();
+            app.UseAuthorization();
         }
     }
 }
