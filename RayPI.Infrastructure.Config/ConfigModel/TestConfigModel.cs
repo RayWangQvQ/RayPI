@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace RayPI.Infrastructure.Config.FrameConfigModel
+namespace RayPI.Infrastructure.Config.ConfigModel
 {
     public class TestConfigModel
     {

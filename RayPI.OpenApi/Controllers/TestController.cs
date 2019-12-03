@@ -9,7 +9,6 @@ using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Auth.Attributes;
 using RayPI.Infrastructure.Config;
-using RayPI.Infrastructure.Config.FrameConfigModel;
 using RayPI.Infrastructure.RayException;
 using RayPI.Infrastructure.Cors.Attributes;
 using RayPI.Infrastructure.Cors.Enums;

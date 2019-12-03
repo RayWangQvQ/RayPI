@@ -1,8 +1,9 @@
 ﻿
 //微软包
+
 using Microsoft.Extensions.Configuration;
 
-namespace RayPI.Infrastructure.Config.BusinessConfigModel
+namespace RayPI.Infrastructure.Config.ConfigModel
 {
     public class RayPIConfigModel
     {

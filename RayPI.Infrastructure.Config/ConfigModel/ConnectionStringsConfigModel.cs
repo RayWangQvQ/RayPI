@@ -2,16 +2,16 @@
 
 using Microsoft.Extensions.Configuration;
 
-namespace RayPI.Infrastructure.Config.FrameConfigModel
+namespace RayPI.Infrastructure.Config.ConfigModel
 {
     /// <summary>
     /// 连接字符串配置
     /// </summary>
-    public class ConnectionStringsModel
+    public class ConnectionStringsConfigModel
     {
         private readonly IConfigurationSection _configSection;
 
-        public ConnectionStringsModel(IConfiguration configuration)
+        public ConnectionStringsConfigModel(IConfiguration configuration)
         {
             _configSection = configuration.GetSection("ConnectionStrings");
         }

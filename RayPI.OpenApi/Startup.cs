@@ -17,7 +17,7 @@ using RayPI.Infrastructure.Swagger.Di;
 using RayPI.Infrastructure.Treasury.Di;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Config;
-using RayPI.Infrastructure.Config.FrameConfigModel;
+using RayPI.Infrastructure.Config.ConfigModel;
 using RayPI.Infrastructure.RayException.Di;
 using RayPI.OpenApi.Filters;
 
@@ -40,7 +40,7 @@ namespace RayPI.OpenApi
         }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// 注册服务到[依赖注入容器]
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
@@ -57,7 +57,7 @@ namespace RayPI.OpenApi
 
             //注册配置管理服务
             services.AddConfigService(_env.ContentRootPath);
-            AllConfigModel allConfig = services.GetSingletonInstanceOrNull<AllConfigModel>();
+            AllConfigModel allConfig = services.GetImplementationInstanceOrNull<AllConfigModel>();
 
             //注册Swagger
             services.AddSwaggerService();
@@ -89,7 +89,7 @@ namespace RayPI.OpenApi
         }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// 配置管道
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
@@ -110,13 +110,13 @@ namespace RayPI.OpenApi
 
             app.UseAuthService();
 
+            app.UseSwaggerService();
+
             //app.UseMvc();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-            app.UseSwaggerService();
         }
 
     }

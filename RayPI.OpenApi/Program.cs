@@ -17,7 +17,7 @@ namespace RayPI.OpenApi
     public class Program
     {
         /// <summary>
-        /// 
+        /// 启动
         /// </summary>
         /// <param name="args"></param>
         public static void Main(string[] args)
@@ -25,7 +25,7 @@ namespace RayPI.OpenApi
             CreateHostBuilder(args).Build().Run();
         }
         /// <summary>
-        /// 
+        /// 生成IHost构建器
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
