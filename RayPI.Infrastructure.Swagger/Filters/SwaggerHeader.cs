@@ -5,7 +5,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace RayPI.Infrastructure.Swagger.Helpers
+namespace RayPI.Infrastructure.Swagger.Filters
 {
     /// <summary>
     /// 

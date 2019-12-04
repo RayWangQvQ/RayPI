@@ -10,28 +10,28 @@ using Microsoft.OpenApi.Models;
 //三方包
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace RayPI.Infrastructure.Swagger.Di
+namespace RayPI.Infrastructure.Swagger
 {
-    public static class SwaggerDiExtension
+    public static class StartupExtension
     {
         public static IServiceCollection AddSwaggerService(this IServiceCollection services)
         {
             var apiInfo = new OpenApiInfo
             {
-                Version = "v2.0.0",
+                Version = "v3.0.0",
                 Title = "Ray WebAPI",
-                Description = "框架集合",
+                Description = "基于.NET Core3.0的接口框架",
                 Contact = new OpenApiContact
                 {
                     Name = "RayWang",
                     Email = "2271272653@qq.com",
-                    Url = new System.Uri("http://www.cnblogs.com/RayWang")
+                    Url = new Uri("http://www.cnblogs.com/RayWang")
                 }
             };
             #region 注册Swagger服务
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", apiInfo);
+                c.SwaggerDoc("v3", apiInfo);
 
                 //添加注释服务
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
@@ -46,6 +46,7 @@ namespace RayPI.Infrastructure.Swagger.Di
                 //添加header验证信息
                 //c.OperationFilter<SwaggerHeader>();
                 //var security = new Dictionary<string, IEnumerable<string>> { { "Bearer", new string[] { } }, };
+
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Description = "Please enter into field the word 'Bearer' followed by a space and the JWT value",
@@ -75,7 +76,7 @@ namespace RayPI.Infrastructure.Swagger.Di
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiHelp V1");
+                c.SwaggerEndpoint("/swagger/v3/swagger.json", "ApiHelp V3");
             });
         }
     }

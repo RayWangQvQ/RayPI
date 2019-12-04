@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 
-namespace RayPI.Infrastructure.Swagger.Helpers
+namespace RayPI.Infrastructure.Swagger.Filters
 {
     /// <summary>
     /// Swagger注释帮助类
@@ -24,7 +24,7 @@ namespace RayPI.Infrastructure.Swagger.Helpers
         /// <param name="context"></param>
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
-            //swaggerDoc.Tags = GetControllerDesc();
+            swaggerDoc.Tags = GetControllerDesc();
         }
 
         /// <summary>

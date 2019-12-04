@@ -13,7 +13,7 @@ using RayPI.Infrastructure.Auth.Di;
 using RayPI.Infrastructure.Auth.Operate;
 using RayPI.Infrastructure.Config.Di;
 using RayPI.Infrastructure.Cors.Di;
-using RayPI.Infrastructure.Swagger.Di;
+using RayPI.Infrastructure.Swagger;
 using RayPI.Infrastructure.Treasury.Di;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Config;
