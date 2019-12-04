@@ -1,4 +1,5 @@
 ﻿//系统包
+using System;
 using System.Collections.Generic;
 using System.IO;
 //微软包
@@ -15,15 +16,6 @@ namespace RayPI.Infrastructure.Swagger.Di
     {
         public static IServiceCollection AddSwaggerService(this IServiceCollection services)
         {
-            var securityScheme = new OpenApiSecurityScheme
-            {
-                Type = SecuritySchemeType.ApiKey,
-                Description = "JWT授权(数据将在请求头中进行传输) 参数结构: \"Authorization: Bearer {token}\"",
-                Name = "Authorization", //jwt默认的参数名称
-                Scheme = "Authorization",
-                In = ParameterLocation.Header, //jwt默认存放Authorization信息的位置(请求头中)
-            };
-
             var apiInfo = new OpenApiInfo
             {
                 Version = "v2.0.0",
@@ -54,7 +46,24 @@ namespace RayPI.Infrastructure.Swagger.Di
                 //添加header验证信息
                 //c.OperationFilter<SwaggerHeader>();
                 //var security = new Dictionary<string, IEnumerable<string>> { { "Bearer", new string[] { } }, };
-                c.AddSecurityDefinition("oauth2", securityScheme);
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Description = "Please enter into field the word 'Bearer' followed by a space and the JWT value",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference()
+                        {
+                            Id = "Bearer",
+                            Type = ReferenceType.SecurityScheme
+                        }
+                    }, Array.Empty<string>() }
+                });
             });
             #endregion
 
