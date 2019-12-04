@@ -1,5 +1,6 @@
 ﻿//系统包
 using System;
+using Microsoft.AspNetCore.Authorization;
 //微软包
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +23,8 @@ namespace RayPI.OpenApi.Controllers
     [Produces("application/json")]
     [Route("api/Student")]
     //[RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
-    [RayAuthorizeFree]
+    //[RayAuthorizeFree]
+    [Authorize]
     [RayCors(CorsPolicyEnum.Free)]
     public class StudentController : Controller
     {
@@ -43,7 +45,6 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="pageSize">条/页</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("Student")]
         public JsonResult GetStudentPageList(int pageIndex = 1, int pageSize = 10)
         {
             return Json(_studentBusiness.GetPageList(pageIndex, pageSize));
@@ -54,8 +55,7 @@ namespace RayPI.OpenApi.Controllers
         /// </summary>
         /// <param name="id">Id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("Student/{id}")]
+        [HttpGet("id")]
         [ProducesResponseType(typeof(StudentEntity), 200)]
         public JsonResult GetStudentById(long id = 0)
         {
@@ -65,12 +65,26 @@ namespace RayPI.OpenApi.Controllers
         }
 
         /// <summary>
+        /// 根据姓名获取学生
+        /// </summary>
+        /// <remarks>精确查询</remarks>
+        /// <param name="name">学生姓名</param>
+        /// <returns></returns>
+        [HttpGet("name")]
+        [Produces(typeof(StudentEntity))]
+        public JsonResult GetByName(string name = null)
+        {
+            if (name == null)
+                throw new ArgumentNullException();
+            return Json(_studentBusiness.GetByName(name));
+        }
+
+        /// <summary>
         /// 添加
         /// </summary>
         /// <param name="entity">学生实体</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("Student")]
         public JsonResult Add(StudentEntity entity = null)
         {
             if (entity == null)
@@ -83,7 +97,6 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="entity">学生实体</param>
         /// <returns></returns>
         [HttpPut]
-        [Route("Student")]
         public JsonResult Update(StudentEntity entity = null)
         {
             if (entity == null)
@@ -97,28 +110,11 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="ids">id集合</param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("Student")]
         public JsonResult Dels(long[] ids = null)
         {
             if (ids.Length == 0)
                 throw new ArgumentNullException();
             return Json(_studentBusiness.Dels(ids));
-        }
-
-        /// <summary>
-        /// 根据姓名获取学生
-        /// </summary>
-        /// <remarks>精确查询</remarks>
-        /// <param name="name">学生姓名</param>
-        /// <returns></returns>
-        [HttpGet()]
-        [Route("Student/GetByName")]
-        [Produces(typeof(StudentEntity))]
-        public JsonResult GetByName(string name = null)
-        {
-            if (name == null)
-                throw new ArgumentNullException();
-            return Json(_studentBusiness.GetByName(name));
         }
     }
 }

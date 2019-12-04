@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar", "SqlSugar\SqlSug
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Business", "RayPI.Bussiness\RayPI.Business.csproj", "{62976FEE-94AA-4D9A-B8A7-A60976ECD157}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{1FAFE035-0290-4FBF-93A9-6EA4E2EF7FCC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Domain", "3.Domain", "{1FAFE035-0290-4FBF-93A9-6EA4E2EF7FCC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Infrastructure", "1.Infrastructure", "{2D48BE4C-9D73-475F-8E71-0DFFAB0C5EC5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Repository", "3.Repository", "{D61A765E-6E01-4AC5-B2C5-CA779814D04F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Repository", "2.Repository", "{D61A765E-6E01-4AC5-B2C5-CA779814D04F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Business", "4.Business", "{130C845B-81B2-4A3D-B56E-B6EFCE156006}"
 EndProject
@@ -38,6 +38,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Repository.DapperRepository", "RayPI.Repository.DapperRepository\RayPI.Repository.DapperRepository.csproj", "{DB486A61-8D94-4F76-8FF7-5BB3622A1FF1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Infrastructure.RayException", "RayPI.Infrastructure.ExceptionManager\RayPI.Infrastructure.RayException.csproj", "{5E9E006B-2EC3-4823-B397-CABE461F9911}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayPI.Infrastructure.Security", "RayPI.Infrastructure.Security\RayPI.Infrastructure.Security.csproj", "{F297FAAF-C5FE-49BE-BF49-B9E8FE5CDB1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +99,10 @@ Global
 		{5E9E006B-2EC3-4823-B397-CABE461F9911}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E9E006B-2EC3-4823-B397-CABE461F9911}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E9E006B-2EC3-4823-B397-CABE461F9911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F297FAAF-C5FE-49BE-BF49-B9E8FE5CDB1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F297FAAF-C5FE-49BE-BF49-B9E8FE5CDB1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F297FAAF-C5FE-49BE-BF49-B9E8FE5CDB1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F297FAAF-C5FE-49BE-BF49-B9E8FE5CDB1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +121,7 @@ Global
 		{CAECB4C0-EE12-4730-A0F8-31EFB45E648D} = {D61A765E-6E01-4AC5-B2C5-CA779814D04F}
 		{DB486A61-8D94-4F76-8FF7-5BB3622A1FF1} = {D61A765E-6E01-4AC5-B2C5-CA779814D04F}
 		{5E9E006B-2EC3-4823-B397-CABE461F9911} = {2D48BE4C-9D73-475F-8E71-0DFFAB0C5EC5}
+		{F297FAAF-C5FE-49BE-BF49-B9E8FE5CDB1B} = {2D48BE4C-9D73-475F-8E71-0DFFAB0C5EC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {538DE4CA-FD39-4EC5-92B6-EF4B4D2B8F2D}

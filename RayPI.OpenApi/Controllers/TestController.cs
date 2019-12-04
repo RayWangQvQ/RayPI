@@ -1,4 +1,6 @@
 ﻿//微软包
+
+using System.Security.Claims;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +14,10 @@ using RayPI.Infrastructure.Config;
 using RayPI.Infrastructure.RayException;
 using RayPI.Infrastructure.Cors.Attributes;
 using RayPI.Infrastructure.Cors.Enums;
+using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using RayPI.Infrastructure.Security.Models;
+using RayPI.Infrastructure.Security.Services;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -26,18 +32,18 @@ namespace RayPI.OpenApi.Controllers
     {
         private readonly IConfiguration _config;
         private readonly AllConfigModel _allConfigModel;
-        private readonly IJwtService _jwtService;
+        //private readonly IJwtService _jwtService;
 
         /// <summary>
         /// 
         /// </summary>
         public TestController(IConfiguration configuration,
-            AllConfigModel allConfigModel,
-            IJwtService jwtService)
+            AllConfigModel allConfigModel)//,
+                                          //IJwtService jwtService)
         {
             _config = configuration;
             _allConfigModel = allConfigModel;
-            _jwtService = jwtService;
+            //_jwtService = jwtService;
         }
 
         /// <summary>
@@ -51,7 +57,8 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        [RayAuthorizeFree]
+        //[RayAuthorizeFree]
+        [Authorize]
         public string GetJWTStr(long uid = 1, string uname = "Admin", string role = "Admin", string project = "RayPI", TokenTypeEnum tokenType = TokenTypeEnum.Web)
         {
             var tm = new TokenModel
@@ -62,7 +69,8 @@ namespace RayPI.OpenApi.Controllers
                 Project = project,
                 TokenType = tokenType
             };
-            return _jwtService.IssueJwt(tm);
+            //return _jwtService.IssueJwt(tm);
+            return "";
         }
 
         /// <summary>

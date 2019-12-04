@@ -13,7 +13,7 @@ namespace RayPI.OpenApi.Controllers
     /// 教师接口
     /// </summary>
     [Produces("application/json")]
-    [Route("api/Admin")]
+    [Route("api/Teacher")]
     //[RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
     [RayAuthorizeFree]
     public class TeacherController : Controller
@@ -35,7 +35,6 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="pageSize">条/页</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("Teacher")]
         //[AllowAnonymous]
         [RayAuthorizeFree]
         public JsonResult GetTeacherPageList(int pageIndex = 1, int pageSize = 10)
@@ -48,8 +47,7 @@ namespace RayPI.OpenApi.Controllers
         /// </summary>
         /// <param name="id">Id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("Teacher/{id}")]
+        [HttpGet("id")]
         [ProducesResponseType(typeof(TeacherEntity), 200)]
         public JsonResult GetTeacherById(long id)
         {
@@ -62,7 +60,6 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="entity">学生实体</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("Teacher")]
         public JsonResult AddTeacher(TeacherEntity entity = null)
         {
             if (entity == null)
@@ -75,7 +72,6 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="entity">学生实体</param>
         /// <returns></returns>
         [HttpPut]
-        [Route("Teacher")]
         public JsonResult UpdateTeacher(TeacherEntity entity = null)
         {
             if (entity == null)
@@ -89,7 +85,6 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="ids">id集合</param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("Teacher")]
         public JsonResult DelsTeacher(long[] ids = null)
         {
             if (ids.Length == 0)

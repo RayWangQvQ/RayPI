@@ -20,6 +20,11 @@ using RayPI.Infrastructure.Config;
 using RayPI.Infrastructure.Config.ConfigModel;
 using RayPI.Infrastructure.RayException.Di;
 using RayPI.OpenApi.Filters;
+using System;
+using RayPI.Infrastructure.Security.Interface;
+using RayPI.Infrastructure.Security.Models;
+using RayPI.Infrastructure.Security.Services;
+using RayPI.Infrastructure.Security;
 
 namespace RayPI.OpenApi
 {
@@ -63,6 +68,7 @@ namespace RayPI.OpenApi
             services.AddSwaggerService();
 
             //注册授权认证
+            /*
             JwtAuthConfigModel jwtConfig = allConfig.JwtAuthConfigModel;
             var jwtOption = new JwtOption//todo:使用AutoMapper替换
             {
@@ -73,6 +79,8 @@ namespace RayPI.OpenApi
                 SecurityKey = jwtConfig.SecurityKey
             };
             services.AddRayAuthService(jwtOption);
+            */
+            services.AddSecurityService();
 
             //注册Cors跨域
             services.AddCorsService();
@@ -108,7 +116,8 @@ namespace RayPI.OpenApi
 
             app.UseCors();
 
-            app.UseAuthService();
+            //app.UseAuthService();
+            app.UseSecurityService();
 
             app.UseSwaggerService();
 
