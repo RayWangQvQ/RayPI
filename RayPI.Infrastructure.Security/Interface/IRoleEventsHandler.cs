@@ -6,9 +6,8 @@ namespace RayPI.Infrastructure.Security.Interface
     /// <summary>
     /// 授权时事件接口，必须使用异步且返回Task
     /// </summary>
-    public interface IRoleEventsHadner
+    public interface IRoleEventsHandler
     {
-
         /// <summary>
         /// 授权开始前
         /// </summary>
@@ -21,7 +20,7 @@ namespace RayPI.Infrastructure.Security.Interface
         /// </summary>
         /// <param name="eventsInfo">EventsInfo类型</param>
         /// <returns></returns>
-        void TokenEbnormal(object eventsInfo);
+        void TokenAbnormal(object eventsInfo);
 
         /// <summary>
         /// 令牌解码后，issuer 或 audience不正确
@@ -31,7 +30,7 @@ namespace RayPI.Infrastructure.Security.Interface
         void TokenIssued(object eventsInfo);
 
         /// <summary>
-        /// 用户所属的角色中，均无访问API的权限，即无访问此API的权限
+        /// 用户所属的角色中，均无访问API的权限
         /// </summary>
         /// <param name="eventsInfo">EventsInfo类型</param>
         /// <returns></returns>

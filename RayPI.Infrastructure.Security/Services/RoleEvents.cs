@@ -4,14 +4,14 @@ using RayPI.Infrastructure.Security.Interface;
 
 namespace RayPI.Infrastructure.Security.Services
 {
-    public class RoleEvents : IRoleEventsHadner
+    public class RoleEvents : IRoleEventsHandler
     {
         public async Task Start(HttpContext httpContext)
         {
             await Task.CompletedTask;
         }
 
-        public void TokenEbnormal(object eventsInfo)
+        public void TokenAbnormal(object eventsInfo)
         {
 
         }

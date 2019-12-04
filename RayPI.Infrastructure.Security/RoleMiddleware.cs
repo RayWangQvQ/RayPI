@@ -17,7 +17,7 @@ namespace RayPI.Infrastructure.Security
         private readonly RequestDelegate _next;
 
         private readonly EncryptionHash hash = new EncryptionHash();
-        private IRoleEventsHadner _roleEventsHadner;
+        private IRoleEventsHandler _roleEventsHandler;
         private ManaRole _manaRole = new ManaRole();
 
         int StatusCode = 401;
@@ -26,7 +26,7 @@ namespace RayPI.Infrastructure.Security
         {
             _next = next;
         }
-        public async Task Invoke(HttpContext context, IRoleEventsHadner roleEventsHadner)
+        public async Task Invoke(HttpContext context, IRoleEventsHandler roleEventsHandler)
         {
             if (context == null)
             {
@@ -51,7 +51,7 @@ namespace RayPI.Infrastructure.Security
                 return;
             }
 
-            _roleEventsHadner = roleEventsHadner;
+            _roleEventsHandler = roleEventsHandler;
             // 进来时
             var result = await AuthorizationService(context);
             if (result == false)
@@ -104,7 +104,7 @@ namespace RayPI.Infrastructure.Security
             //    {
             //        context.Response.Redirect(AuthConfig.model.LoginAction);
             //    }
-            //    Thread NoToken = new Thread(new ParameterizedThreadStart(_roleEventsHadner.NoToken));
+            //    Thread NoToken = new Thread(new ParameterizedThreadStart(_roleEventsHandler.NoToken));
             //    NoToken.Start(info);
             //    return false;
             //}
@@ -114,13 +114,13 @@ namespace RayPI.Infrastructure.Security
             if (!isCan)
             {
                 loginfailed = AuthConfig.model.scheme.TokenEbnormal;
-                Thread TokenEbnormal = new Thread(new ParameterizedThreadStart(_roleEventsHadner.TokenEbnormal));
+                Thread TokenEbnormal = new Thread(new ParameterizedThreadStart(_roleEventsHandler.TokenAbnormal));
                 TokenEbnormal.Start(info);
                 return false;
             }
             if (!isDecryption)
             {
-                Thread TokenEbnormal = new Thread(new ParameterizedThreadStart(_roleEventsHadner.TokenEbnormal));
+                Thread TokenEbnormal = new Thread(new ParameterizedThreadStart(_roleEventsHandler.TokenAbnormal));
                 TokenEbnormal.Start(info);
                 return false;
             }
@@ -131,7 +131,7 @@ namespace RayPI.Infrastructure.Security
             if (!(jst.Issuer == AuthConfig.model.Issuer || aud != AuthConfig.model.Audience))
             {
                 loginfailed = AuthConfig.model.scheme.TokenIssued;
-                Thread TokenIssued = new Thread(new ParameterizedThreadStart(_roleEventsHadner.TokenIssued));
+                Thread TokenIssued = new Thread(new ParameterizedThreadStart(_roleEventsHandler.TokenIssued));
                 TokenIssued.Start(info);
                 return false;
             }
@@ -147,7 +147,7 @@ namespace RayPI.Infrastructure.Security
             //// 令牌已过期
             //if (issued < nowTime)
             //{
-            //    await _roleEventsHadner.TokenTime(requestUrl, issued, expiration);
+            //    await _roleEventsHandler.TokenTime(requestUrl, issued, expiration);
             //    return false;
             //}
 
@@ -158,7 +158,7 @@ namespace RayPI.Infrastructure.Security
             if (!_manaRole.IsUserToRole(userName, roleName))
             {
                 loginfailed = AuthConfig.model.scheme.NoPermissions;
-                Thread NoPermissions = new Thread(new ParameterizedThreadStart(_roleEventsHadner.NoPermissions));
+                Thread NoPermissions = new Thread(new ParameterizedThreadStart(_roleEventsHandler.NoPermissions));
                 NoPermissions.Start(info);
                 return false;
             }
@@ -168,7 +168,7 @@ namespace RayPI.Infrastructure.Security
             if (apiResource == null)
             {
                 loginfailed = AuthConfig.model.scheme.NoPermissions;
-                Thread NoPermissions = new Thread(new ParameterizedThreadStart(_roleEventsHadner.NoPermissions));
+                Thread NoPermissions = new Thread(new ParameterizedThreadStart(_roleEventsHandler.NoPermissions));
                 NoPermissions.Start(info);
                 return false;
             }
@@ -184,8 +184,8 @@ namespace RayPI.Infrastructure.Security
                 }
                 return false;
             }
-            new Thread(new ParameterizedThreadStart(_roleEventsHadner.Success)).Start(info);
-            await _roleEventsHadner.End(context);
+            new Thread(new ParameterizedThreadStart(_roleEventsHandler.Success)).Start(info);
+            await _roleEventsHandler.End(context);
             return true;
         }
     }

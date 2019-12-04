@@ -26,7 +26,7 @@ namespace RayPI.Infrastructure.Security
                     TokenIssued = "Login authentication failed!2",
                     NoPermissions = "Login authentication failed!3"
                 }).Build();
-            services.AddSingleton<IRoleEventsHadner, RoleEvents>();
+            services.AddSingleton<IRoleEventsHandler, RoleEvents>();
             services.AddRoleService(authOptions);
 
             return services;

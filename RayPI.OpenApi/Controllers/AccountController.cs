@@ -48,7 +48,7 @@ namespace RayPI.OpenApi.Controllers
             }
 
             // 你自己定义的角色/用户信息服务
-            RoleService roleService = new RoleService();
+            ManaRole roleService = new ManaRole();
 
             // 检验用户是否属于此角色
             var role = roleService.IsUserToRole(userName, roleName);
