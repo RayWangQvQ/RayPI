@@ -3,7 +3,7 @@
     /// <summary>
     /// 一个 API
     /// </summary>
-    public  class OneApiModel
+    public  class ApiInfoModel
     {
         public string ApiName { get; set; }
         public string ApiUrl { get; set; }

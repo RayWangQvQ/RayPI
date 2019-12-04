@@ -6,9 +6,9 @@ namespace RayPI.Infrastructure.Security.Services
 {
     public class ManaRole
     {
-        private static Dictionary<string, List<OneApiModel>> roleModel = new Dictionary<string, List<OneApiModel>>()
+        private static Dictionary<string, List<ApiInfoModel>> roleModel = new Dictionary<string, List<ApiInfoModel>>()
         {
-            {"学生管理员",new List<OneApiModel>{new OneApiModel { ApiName="Student接口", ApiUrl= "/api/Student/Student" } } },
+            {"学生管理员",new List<ApiInfoModel>{new ApiInfoModel { ApiName="Student接口", ApiUrl= "/api/Student/Student" } } },
         };
         private static Dictionary<string, List<string>> userModel = new Dictionary<string, List<string>>()
         {
