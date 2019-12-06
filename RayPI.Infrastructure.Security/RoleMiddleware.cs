@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -22,30 +23,29 @@ namespace RayPI.Infrastructure.Security
 
         int StatusCode = 401;
         string loginfailed;
+
         public RoleMiddleware(RequestDelegate next)
         {
             _next = next;
         }
+
         public async Task Invoke(HttpContext context, IRoleEventsHandler roleEventsHandler)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
-            var endpoint = context.GetEndpoint();
+            Endpoint endpoint = context.GetEndpoint();
             // IMPORTANT: Changes to authorization logic should be mirrored in MVC's AuthorizeFilter
-            var authorizeData = endpoint?.Metadata.GetOrderedMetadata<IAuthorizeData>() ?? Array.Empty<IAuthorizeData>();
+            IReadOnlyList<IAuthorizeData> authorizeData = endpoint?.Metadata.GetOrderedMetadata<IAuthorizeData>() ?? Array.Empty<IAuthorizeData>();
 
-            // 如果没有 [Authorize] 就不需要拦截
-            if (authorizeData == null || authorizeData.Count == 0)
+            // 没 [Authorize]， 不拦截
+            if (authorizeData.Count == 0)
             {
                 await _next(context);
                 return;
             }
 
-            // 如果有 [AllowAnonymous]，那也不需要拦截
-            if (endpoint?.Metadata.GetMetadata<IAllowAnonymous>() != null)
+            // 有 [AllowAnonymous]，也不拦截
+            if (endpoint.Metadata.GetMetadata<IAllowAnonymous>() != null)
             {
                 await _next(context);
                 return;
@@ -79,7 +79,8 @@ namespace RayPI.Infrastructure.Security
                 // 从 Token 里面解码出 JwtSecurityToken
                 jst = hash.GetJwtSecurityToken(tokenStr);
                 isDecryption = true;
-            }catch { }
+            }
+            catch { }
 
             var claims = hash.GetClaims(jst);
             var aud = claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Aud).Value;
@@ -127,7 +128,6 @@ namespace RayPI.Infrastructure.Security
 
 
             // 校验 颁发主体
-
             if (!(jst.Issuer == AuthConfig.model.Issuer || aud != AuthConfig.model.Audience))
             {
                 loginfailed = AuthConfig.model.scheme.TokenIssued;

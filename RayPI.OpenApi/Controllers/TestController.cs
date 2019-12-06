@@ -32,14 +32,15 @@ namespace RayPI.OpenApi.Controllers
     {
         private readonly IConfiguration _config;
         private readonly AllConfigModel _allConfigModel;
-        //private readonly IJwtService _jwtService;
+        private readonly IJwtService _jwtService;
 
         /// <summary>
         /// 
         /// </summary>
-        public TestController(IConfiguration configuration,
-            AllConfigModel allConfigModel)//,
-                                          //IJwtService jwtService)
+        public TestController(//IJwtService jwtService,
+            IConfiguration configuration,
+            AllConfigModel allConfigModel
+            )
         {
             _config = configuration;
             _allConfigModel = allConfigModel;
@@ -58,7 +59,6 @@ namespace RayPI.OpenApi.Controllers
         [HttpGet]
         [Route("Token")]
         //[RayAuthorizeFree]
-        [Authorize]
         public string GetJWTStr(long uid = 1, string uname = "Admin", string role = "Admin", string project = "RayPI", TokenTypeEnum tokenType = TokenTypeEnum.Web)
         {
             var tm = new TokenModel
@@ -69,8 +69,7 @@ namespace RayPI.OpenApi.Controllers
                 Project = project,
                 TokenType = tokenType
             };
-            //return _jwtService.IssueJwt(tm);
-            return "";
+            return _jwtService.IssueJwt(tm);
         }
 
         /// <summary>

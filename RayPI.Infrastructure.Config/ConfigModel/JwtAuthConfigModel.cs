@@ -1,5 +1,4 @@
 ﻿//微软包
-
 using Microsoft.Extensions.Configuration;
 
 namespace RayPI.Infrastructure.Config.ConfigModel

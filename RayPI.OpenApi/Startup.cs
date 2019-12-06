@@ -68,7 +68,7 @@ namespace RayPI.OpenApi
             services.AddSwaggerService();
 
             //注册授权认证
-            /*
+            
             JwtAuthConfigModel jwtConfig = allConfig.JwtAuthConfigModel;
             var jwtOption = new JwtOption//todo:使用AutoMapper替换
             {
@@ -78,8 +78,8 @@ namespace RayPI.OpenApi
                 OtherExp = jwtConfig.OtherExp,
                 SecurityKey = jwtConfig.SecurityKey
             };
-            services.AddRayAuthService(jwtOption);
-            */
+            //services.AddRayAuthService(jwtOption);
+            
             services.AddSecurityService();
 
             //注册Cors跨域
@@ -107,7 +107,7 @@ namespace RayPI.OpenApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseExceptionService();//自定义异常处理中间件
+            //app.UseExceptionService();//自定义异常处理中间件
 
             app.UseHttpsRedirection();
 

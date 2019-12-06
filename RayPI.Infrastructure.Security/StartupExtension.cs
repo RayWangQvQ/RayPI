@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using RayPI.Infrastructure.Security.Interface;
 using RayPI.Infrastructure.Security.Models;
@@ -28,6 +29,13 @@ namespace RayPI.Infrastructure.Security
                 }).Build();
             services.AddSingleton<IRoleEventsHandler, RoleEvents>();
             services.AddRoleService(authOptions);
+
+            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Test", policy => policy.AddRequirements(new PolicyRequirement(Enums.OperateEnum.Retrieve, Enums.ResourceEnum.Student)));
+            });
+            services.AddSingleton<IAuthorizationHandler, PolicyHandler>();
 
             return services;
         }

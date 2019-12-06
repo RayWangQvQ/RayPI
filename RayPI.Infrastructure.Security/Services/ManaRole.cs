@@ -1,18 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using RayPI.Infrastructure.Security.Enums;
 using RayPI.Infrastructure.Security.Models;
 
 namespace RayPI.Infrastructure.Security.Services
 {
     public class ManaRole
     {
+        /// <summary>
+        /// role-List<api>
+        /// </summary>
         private static Dictionary<string, List<ApiInfoModel>> roleModel = new Dictionary<string, List<ApiInfoModel>>()
         {
             {"学生管理员",new List<ApiInfoModel>{new ApiInfoModel { ApiName="Student接口", ApiUrl= "/api/Student/Student" } } },
         };
+        /// <summary>
+        /// userName-List<role>
+        /// </summary>
         private static Dictionary<string, List<string>> userModel = new Dictionary<string, List<string>>()
         {
             {"stuAdmin",new List<string>{ "学生管理员" } }
+        };
+
+        /// <summary>
+        /// role-List<Permission>
+        /// </summary>
+        private static Dictionary<string, List<string>> roleActionDic = new Dictionary<string, List<string>>
+        {
+            ["stuAdmin"] = new List<string> { OperateEnum.Retrieve.ToString() + ResourceEnum.Student.ToString() }
         };
 
         public List<RoleModel> Roles
@@ -22,7 +37,7 @@ namespace RayPI.Infrastructure.Security.Services
                 List<RoleModel> roles = new List<RoleModel>();
                 foreach (var item in roleModel)
                 {
-                    roles.Add(new RoleModel() { RoleName = item.Key.ToLower(), Apis = item.Value });
+                    roles.Add(new RoleModel { RoleName = item.Key.ToLower(), Apis = item.Value });
                 }
                 return roles;
             }
