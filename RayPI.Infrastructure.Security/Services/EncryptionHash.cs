@@ -195,9 +195,9 @@ namespace RayPI.Infrastructure.Security.Services
             {
                 new Claim(ClaimTypes.Name,userName),
                 new Claim(ClaimTypes.Role,roleName),
-                new Claim(JwtRegisteredClaimNames.Aud,AuthConfig.model.Audience),
-                new Claim(ClaimTypes.Expiration,AuthConfig.model.TimeSpan.TotalSeconds.ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat,new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString())
+                //new Claim(JwtRegisteredClaimNames.Aud,AuthConfig.model.Audience),
+                //new Claim(ClaimTypes.Expiration,AuthConfig.model.TimeSpan.TotalSeconds.ToString()),
+                //new Claim(JwtRegisteredClaimNames.Iat,new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString())
             };
             /*
              iss (issuer)：签发人

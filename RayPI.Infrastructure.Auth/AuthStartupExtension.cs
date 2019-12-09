@@ -65,6 +65,7 @@ namespace RayPI.Infrastructure.Auth
             #endregion
 
             #region 注册【授权】服务
+            /*
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(AuthPolicyEnum.Free.ToString(), policy => policy.AddRequirements(new RayRequirement(false)));
@@ -73,9 +74,10 @@ namespace RayPI.Infrastructure.Auth
                 options.AddPolicy(AuthPolicyEnum.RequireRoleOfAdmin.ToString(), policy => policy.AddRequirements(new RayRequirement("Admin")));
                 options.AddPolicy(AuthPolicyEnum.RequireRoleOfAdminOrClient.ToString(), policy => policy.AddRequirements(new RayRequirement("Admin,Client")));
             });
-            #endregion
-
+            */
+            services.AddSingleton<IAuthorizationPolicyProvider, RayPolicyProvider>();
             services.AddSingleton<IAuthorizationHandler, PolicyHandler>();
+            #endregion
 
             //注册IOperateInfo
             services.AddScoped<IOperateInfo, OperateInfo>();

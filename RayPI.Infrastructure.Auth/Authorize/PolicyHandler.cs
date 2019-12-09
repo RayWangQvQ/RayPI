@@ -41,34 +41,9 @@ namespace RayPI.Infrastructure.Auth.Authorize
         /// <returns></returns>
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, RayRequirement requirement)
         {
-            object resource = context.Resource;
-            HttpContext httpContext = (context.Resource as AuthorizationFilterContext)?.HttpContext;
-            if (httpContext == null) return;
+            var principal = context.User;
 
-            if (!requirement.IsNeedAuthorized)
-            {
-                context.Succeed(requirement);
-                return;
-            }
-
-            //获取授权方式
-            AuthenticationScheme defaultAuthenticate = await _schemes.GetDefaultAuthenticateSchemeAsync();
-            if (defaultAuthenticate == null)
-            {
-                context.Fail();
-                return;
-            }
-
-            //验证token（包括过期时间）
-            AuthenticateResult result = await httpContext.AuthenticateAsync(defaultAuthenticate.Name);
-            if (!result.Succeeded)
-            {
-                context.Fail();
-                return;
-            }
-
-            httpContext.User = result.Principal;
-
+            /*
             //判断角色
             string url = httpContext.Request.Path.Value.ToLower();
             string tokenModelJsonStr = httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypeEnum.TokenModel.ToString())?.Value;
@@ -79,6 +54,7 @@ namespace RayPI.Infrastructure.Auth.Authorize
                 context.Fail();
                 return;
             }
+            */
 
             context.Succeed(requirement);
         }

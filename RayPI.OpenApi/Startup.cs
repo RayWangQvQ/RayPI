@@ -24,6 +24,7 @@ using RayPI.Infrastructure.Security.Interface;
 using RayPI.Infrastructure.Security.Models;
 using RayPI.Infrastructure.Security.Services;
 using RayPI.Infrastructure.Security;
+using RayPI.Infrastructure.Auth;
 
 namespace RayPI.OpenApi
 {
@@ -77,9 +78,9 @@ namespace RayPI.OpenApi
                 OtherExp = jwtConfig.OtherExp,
                 SecurityKey = jwtConfig.SecurityKey
             };
-            //services.AddRayAuthService(jwtOption);
+            services.AddRayAuthService(jwtOption);
             
-            services.AddSecurityService();
+            //services.AddSecurityService();
 
             //注册Cors跨域
             services.AddCorsService();
@@ -115,8 +116,8 @@ namespace RayPI.OpenApi
 
             app.UseCors();
 
-            //app.UseAuthService();
-            app.UseSecurityService();
+            app.UseAuthService();
+            //app.UseSecurityService();
 
             app.UseSwaggerService();
 

@@ -25,7 +25,7 @@ namespace RayPI.OpenApi.Controllers
     //[RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
     //[RayAuthorizeFree]
     //[Authorize]
-    [Authorize("Test")]
+    //[Authorize("Test")]
     [RayCors(CorsPolicyEnum.Free)]
     public class StudentController : Controller
     {
@@ -46,6 +46,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="pageSize">条/页</param>
         /// <returns></returns>
         [HttpGet]
+        [RayAuthorize(OperateEnum.Retrieve, ResourceEnum.Student)]
         public JsonResult GetStudentPageList(int pageIndex = 1, int pageSize = 10)
         {
             return Json(_studentBusiness.GetPageList(pageIndex, pageSize));
