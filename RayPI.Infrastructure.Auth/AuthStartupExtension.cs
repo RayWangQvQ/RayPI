@@ -1,25 +1,23 @@
 ﻿//系统包
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Threading.Tasks;
-using System.IdentityModel.Tokens.Jwt;
-//微软包
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-//本地项目包
+using RayPI.Infrastructure.Auth.Authorize;
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
-using RayPI.Infrastructure.Auth.Authorize;
 using RayPI.Infrastructure.Auth.Operate;
 
-namespace RayPI.Infrastructure.Auth.Di
+namespace RayPI.Infrastructure.Auth
 {
     /// <summary>
-    /// DI扩展
+    /// 扩展
     /// </summary>
-    public static class AuthDiExtension
+    public static class AuthStartupExtension
     {
         public static IServiceCollection AddRayAuthService(this IServiceCollection services, JwtOption jwtOption)
         {
@@ -29,10 +27,10 @@ namespace RayPI.Infrastructure.Auth.Di
 
             #region 注册【认证】服务
             services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddJwtBearer(o =>
                 {
                     o.TokenValidationParameters = new TokenValidationParameters
@@ -69,11 +67,11 @@ namespace RayPI.Infrastructure.Auth.Di
             #region 注册【授权】服务
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(AuthPolicyEnum.Free.ToString(), policy => policy.AddRequirements(new PolicyRequirement(false)));
+                options.AddPolicy(AuthPolicyEnum.Free.ToString(), policy => policy.AddRequirements(new RayRequirement(false)));
 
-                options.AddPolicy(AuthPolicyEnum.RequireRoleOfClient.ToString(), policy => policy.AddRequirements(new PolicyRequirement("Client")));
-                options.AddPolicy(AuthPolicyEnum.RequireRoleOfAdmin.ToString(), policy => policy.AddRequirements(new PolicyRequirement("Admin")));
-                options.AddPolicy(AuthPolicyEnum.RequireRoleOfAdminOrClient.ToString(), policy => policy.AddRequirements(new PolicyRequirement("Admin,Client")));
+                options.AddPolicy(AuthPolicyEnum.RequireRoleOfClient.ToString(), policy => policy.AddRequirements(new RayRequirement("Client")));
+                options.AddPolicy(AuthPolicyEnum.RequireRoleOfAdmin.ToString(), policy => policy.AddRequirements(new RayRequirement("Admin")));
+                options.AddPolicy(AuthPolicyEnum.RequireRoleOfAdminOrClient.ToString(), policy => policy.AddRequirements(new RayRequirement("Admin,Client")));
             });
             #endregion
 

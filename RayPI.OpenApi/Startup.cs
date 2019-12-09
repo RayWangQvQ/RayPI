@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 //本地项目包
 using RayPI.Business.Di;
 using RayPI.Repository.EFRepository.Di;
-using RayPI.Infrastructure.Auth.Di;
 using RayPI.Infrastructure.Auth.Operate;
 using RayPI.Infrastructure.Config.Di;
 using RayPI.Infrastructure.Cors.Di;

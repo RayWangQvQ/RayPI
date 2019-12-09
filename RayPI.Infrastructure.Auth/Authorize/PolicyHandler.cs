@@ -17,7 +17,7 @@ namespace RayPI.Infrastructure.Auth.Authorize
     /// <summary>
     /// 自定义授权处理
     /// </summary>
-    public class PolicyHandler : AuthorizationHandler<PolicyRequirement>
+    public class PolicyHandler : AuthorizationHandler<RayRequirement>
     {
         /// <summary>
         /// 授权方式（cookie, bearer, oauth, openid）
@@ -39,7 +39,7 @@ namespace RayPI.Infrastructure.Auth.Authorize
         /// <param name="context"></param>
         /// <param name="requirement"></param>
         /// <returns></returns>
-        protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PolicyRequirement requirement)
+        protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, RayRequirement requirement)
         {
             object resource = context.Resource;
             HttpContext httpContext = (context.Resource as AuthorizationFilterContext)?.HttpContext;
