@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 //本地项目包
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Models;
+using System.Security.Claims;
 
 namespace RayPI.Infrastructure.Auth.Authorize
 {
@@ -24,13 +25,16 @@ namespace RayPI.Infrastructure.Auth.Authorize
         /// </summary>
         private readonly IAuthenticationSchemeProvider _schemes;
 
+        private readonly IRolePermissionService _rolePermissionService;
+
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="schemes"></param>
-        public PolicyHandler(IAuthenticationSchemeProvider schemes)
+        public PolicyHandler(IAuthenticationSchemeProvider schemes, IRolePermissionService rolePermissionService)
         {
             _schemes = schemes;
+            _rolePermissionService = rolePermissionService;
         }
 
         /// <summary>
@@ -41,20 +45,16 @@ namespace RayPI.Infrastructure.Auth.Authorize
         /// <returns></returns>
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, RayRequirement requirement)
         {
-            var principal = context.User;
+            var claims = context.User.Claims;
+            string roleCode = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role.ToString())?.Value;
 
-            /*
-            //判断角色
-            string url = httpContext.Request.Path.Value.ToLower();
-            string tokenModelJsonStr = httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypeEnum.TokenModel.ToString())?.Value;
-            TokenModel tm = JsonConvert.DeserializeObject<TokenModel>(tokenModelJsonStr);
+            var permissions = _rolePermissionService.GetPermissions(roleCode);
 
-            if (!requirement.RequireRoles.Contains(tm.Role))
+            if (!permissions.Any(x => x.OperateCode == requirement.Operate && x.ResourceCode == requirement.Resource))
             {
                 context.Fail();
                 return;
             }
-            */
 
             context.Succeed(requirement);
         }

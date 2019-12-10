@@ -30,16 +30,16 @@ namespace RayPI.OpenApi.Controllers
         /// <summary>
         /// 登录获取token
         /// </summary>
-        /// <param name="userName"></param>
+        /// <param name="userCode"></param>
         /// <param name="pwd"></param>
         /// <param name="roleName"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        public async Task<JsonResult> Login(string userName = "stuAdmin", string pwd = "123456", string roleName = "学生管理员")
+        public async Task<JsonResult> Login(string userCode = "stuAdmin", string pwd = "123456", string roleCode = "stuAdmin")
         {
             // 用户名是否正确
-            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(pwd) || string.IsNullOrWhiteSpace(roleName))
+            if (string.IsNullOrWhiteSpace(userCode) || string.IsNullOrWhiteSpace(pwd) || string.IsNullOrWhiteSpace(roleCode))
             {
                 return new JsonResult(new
                 {
@@ -48,7 +48,7 @@ namespace RayPI.OpenApi.Controllers
                 });
             }
             //密码是否正确
-            if (!((userName == "stuAdmin" || userName == "bb" || userName == "cc") && pwd == "123456"))
+            if (!((userCode == "stuAdmin" || userCode == "bb" || userCode == "cc") && pwd == "123456"))
             {
                 return new JsonResult(new
                 {
@@ -58,7 +58,7 @@ namespace RayPI.OpenApi.Controllers
             }
 
             // 设置用户标识
-            Claim[] userClaims = _jwtService.BuildClaims(userName, roleName);
+            Claim[] userClaims = _jwtService.BuildClaims(userCode, roleCode);
 
             string tokenStr = _jwtService.BuildToken(userClaims);
 

@@ -80,18 +80,18 @@ namespace RayPI.Infrastructure.Auth
             #endregion
 
             //注册IOperateInfo
-            services.AddScoped<IOperateInfo, OperateInfo>();
+            //services.AddScoped<IOperateInfo, OperateInfo>();
+            services.AddSingleton<IRolePermissionService, RolePermissionService>();
 
             return services;
         }
 
         public static void UseAuthService(this IApplicationBuilder app)
         {
-            //认证
+            //认证中间件
             app.UseAuthentication();
 
-            //授权
-            //app.UseMiddleware<JwtAuthorizationMiddleware>();
+            //授权中间件
             app.UseAuthorization();
         }
     }
