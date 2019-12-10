@@ -68,18 +68,21 @@ namespace RayPI.OpenApi
             services.AddSwaggerService();
 
             //注册授权认证
-            
+
             JwtAuthConfigModel jwtConfig = allConfig.JwtAuthConfigModel;
             var jwtOption = new JwtOption//todo:使用AutoMapper替换
             {
+                Issuer = jwtConfig.Issuer,
+                Audience = jwtConfig.Audience,
                 WebExp = jwtConfig.WebExp,
                 AppExp = jwtConfig.AppExp,
                 MiniProgramExp = jwtConfig.MiniProgramExp,
                 OtherExp = jwtConfig.OtherExp,
                 SecurityKey = jwtConfig.SecurityKey
             };
+            services.AddSingleton(jwtOption);
             services.AddRayAuthService(jwtOption);
-            
+
             //services.AddSecurityService();
 
             //注册Cors跨域

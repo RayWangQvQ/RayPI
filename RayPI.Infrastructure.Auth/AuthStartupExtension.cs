@@ -11,6 +11,8 @@ using RayPI.Infrastructure.Auth.Authorize;
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Auth.Operate;
+using RayPI.Infrastructure.Config;
+using RayPI.Infrastructure.Treasury.Di;
 
 namespace RayPI.Infrastructure.Auth
 {
@@ -22,7 +24,6 @@ namespace RayPI.Infrastructure.Auth
         public static IServiceCollection AddRayAuthService(this IServiceCollection services, JwtOption jwtOption)
         {
             services.AddSingleton<JwtSecurityTokenHandler>();
-            services.AddSingleton(jwtOption);
             services.AddSingleton<IJwtService, JwtService>();
 
             #region 注册【认证】服务
@@ -35,10 +36,9 @@ namespace RayPI.Infrastructure.Auth
                 {
                     o.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidIssuer = "RayPI",
+                        ValidIssuer = jwtOption.Issuer,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOption.SecurityKey)),
 
-                        /***********************************TokenValidationParameters的参数默认值***********************************/
                         RequireSignedTokens = true,
                         RequireExpirationTime = true,
                         // SaveSigninToken = false,

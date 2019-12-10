@@ -22,10 +22,6 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Student")]
-    //[RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
-    //[RayAuthorizeFree]
-    //[Authorize]
-    //[Authorize("Test")]
     [RayCors(CorsPolicyEnum.Free)]
     public class StudentController : Controller
     {

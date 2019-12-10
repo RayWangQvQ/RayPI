@@ -1,5 +1,6 @@
 ﻿//本地项目包
 using RayPI.Infrastructure.Auth.Models;
+using System.Security.Claims;
 
 namespace RayPI.Infrastructure.Auth.Jwt
 {
@@ -8,6 +9,8 @@ namespace RayPI.Infrastructure.Auth.Jwt
     /// </summary>
     public interface IJwtService
     {
+        Claim[] BuildClaims(string userName, string roleName);
+        string BuildToken(Claim[] claims);
         /// <summary>
         /// 颁发JWT字符串
         /// </summary>

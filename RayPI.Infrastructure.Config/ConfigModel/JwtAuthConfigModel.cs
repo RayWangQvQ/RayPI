@@ -14,6 +14,8 @@ namespace RayPI.Infrastructure.Config.ConfigModel
         {
             _configSection = configuration.GetSection("JwtAuth");
         }
+        public string Issuer => _configSection.GetValue("Issuer", "RayPI");
+        public string Audience => _configSection.GetValue("Audience", "MyAudience");
 
         /// <summary>
         /// 安全密钥
