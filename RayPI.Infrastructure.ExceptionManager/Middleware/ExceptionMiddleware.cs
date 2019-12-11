@@ -63,25 +63,14 @@ namespace RayPI.Infrastructure.RayException.Middleware
             {
                 if (!isCatched && context.Response.StatusCode != 200)//未捕捉过并且状态码不为200
                 {
-                    string msg;
-                    switch (context.Response.StatusCode)
+                    var msg = context.Response.StatusCode switch
                     {
-                        case 401:
-                            msg = "未授权";
-                            break;
-                        case 404:
-                            msg = "未找到服务";
-                            break;
-                        case 403:
-                            msg = "访问被拒绝";
-                            break;
-                        case 502:
-                            msg = "请求错误";
-                            break;
-                        default:
-                            msg = "未知错误";
-                            break;
-                    }
+                        401 => "未授权",
+                        404 => "未找到服务",
+                        403 => "访问被拒绝",
+                        502 => "请求错误",
+                        _ => "未知错误",
+                    };
                     await HandleExceptionAsync(context, context.Response.StatusCode, msg);
                 }
             }

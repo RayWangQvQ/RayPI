@@ -59,7 +59,7 @@ namespace RayPI.Infrastructure.Treasury.Di
         /// <summary>
         /// 获取单例注册对象
         /// </summary>
-        public static T GetSingletonInstanceOrNull<T>(this IServiceCollection services)
+        public static T GetImplementationInstanceOrNull<T>(this IServiceCollection services)
         {
             return (T)services.FirstOrDefault(x => x.ServiceType == typeof(T))?.ImplementationInstance;
         }

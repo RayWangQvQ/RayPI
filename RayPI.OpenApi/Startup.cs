@@ -3,22 +3,28 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 //三方包
 using Newtonsoft.Json;
 //本地项目包
 using RayPI.Business.Di;
 using RayPI.Repository.EFRepository.Di;
-using RayPI.Infrastructure.Auth.Di;
 using RayPI.Infrastructure.Auth.Operate;
 using RayPI.Infrastructure.Config.Di;
 using RayPI.Infrastructure.Cors.Di;
-using RayPI.Infrastructure.Swagger.Di;
+using RayPI.Infrastructure.Swagger;
 using RayPI.Infrastructure.Treasury.Di;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Config;
-using RayPI.Infrastructure.Config.FrameConfigModel;
+using RayPI.Infrastructure.Config.ConfigModel;
 using RayPI.Infrastructure.RayException.Di;
 using RayPI.OpenApi.Filters;
+using System;
+using RayPI.Infrastructure.Security.Interface;
+using RayPI.Infrastructure.Security.Models;
+using RayPI.Infrastructure.Security.Services;
+using RayPI.Infrastructure.Security;
+using RayPI.Infrastructure.Auth;
 
 namespace RayPI.OpenApi
 {
@@ -27,52 +33,57 @@ namespace RayPI.OpenApi
     /// </summary>
     public class Startup
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
         /// <summary>
         /// 构造
         /// </summary>
         /// <param name="env"></param>
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             _env = env;
         }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// 注册服务到[依赖注入容器]
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            //注册MVC
-            services.AddMvc(options =>
-                {
-                    options.Filters.Add(typeof(WebApiResultFilterAttribute));
-                    options.RespectBrowserAcceptHeader = true;
-                })
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
-                });
+            //注册控制器
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(WebApiResultFilterAttribute));
+                options.RespectBrowserAcceptHeader = true;
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
+            });
 
             //注册配置管理服务
             services.AddConfigService(_env.ContentRootPath);
-            AllConfigModel allConfig = services.GetSingletonInstanceOrNull<AllConfigModel>();
+            AllConfigModel allConfig = services.GetImplementationInstanceOrNull<AllConfigModel>();
 
             //注册Swagger
             services.AddSwaggerService();
 
             //注册授权认证
+
             JwtAuthConfigModel jwtConfig = allConfig.JwtAuthConfigModel;
             var jwtOption = new JwtOption//todo:使用AutoMapper替换
             {
+                Issuer = jwtConfig.Issuer,
+                Audience = jwtConfig.Audience,
                 WebExp = jwtConfig.WebExp,
                 AppExp = jwtConfig.AppExp,
                 MiniProgramExp = jwtConfig.MiniProgramExp,
                 OtherExp = jwtConfig.OtherExp,
                 SecurityKey = jwtConfig.SecurityKey
             };
-            services.AddAuthService(jwtOption);
+            services.AddSingleton(jwtOption);
+            services.AddRayAuthService(jwtOption);
+
+            //services.AddSecurityService();
 
             //注册Cors跨域
             services.AddCorsService();
@@ -89,26 +100,35 @@ namespace RayPI.OpenApi
         }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// 配置管道
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            //app.UseExceptionService();//自定义异常处理中间件
 
-            app.UseExceptionService();//自定义异常处理中间件
+            app.UseHttpsRedirection();
+
+            app.UseStaticFiles();//用于访问wwwroot下的文件
+            app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthService();
-
-            app.UseMvc();
+            //app.UseSecurityService();
 
             app.UseSwaggerService();
 
-            app.UseStaticFiles();//用于访问wwwroot下的文件
+            //app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
 
     }

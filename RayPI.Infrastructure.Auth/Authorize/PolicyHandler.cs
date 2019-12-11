@@ -1,4 +1,6 @@
 ﻿//系统包
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 //微软包
@@ -11,26 +13,30 @@ using Newtonsoft.Json;
 //本地项目包
 using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Models;
+using System.Security.Claims;
 
 namespace RayPI.Infrastructure.Auth.Authorize
 {
     /// <summary>
     /// 自定义授权处理
     /// </summary>
-    public class PolicyHandler : AuthorizationHandler<PolicyRequirement>
+    public class PolicyHandler : AuthorizationHandler<RayRequirement>
     {
         /// <summary>
         /// 授权方式（cookie, bearer, oauth, openid）
         /// </summary>
         private readonly IAuthenticationSchemeProvider _schemes;
 
+        private readonly IAuthService _rolePermissionService;
+
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="schemes"></param>
-        public PolicyHandler(IAuthenticationSchemeProvider schemes)
+        public PolicyHandler(IAuthenticationSchemeProvider schemes, IAuthService rolePermissionService)
         {
             _schemes = schemes;
+            _rolePermissionService = rolePermissionService;
         }
 
         /// <summary>
@@ -39,41 +45,15 @@ namespace RayPI.Infrastructure.Auth.Authorize
         /// <param name="context"></param>
         /// <param name="requirement"></param>
         /// <returns></returns>
-        protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PolicyRequirement requirement)
+        protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, RayRequirement requirement)
         {
-            HttpContext httpContext = (context.Resource as AuthorizationFilterContext)?.HttpContext;
-            if (httpContext == null) return;
+            var claims = context.User.Claims;
+            string roleCodes = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role.ToString())?.Value;
+            List<string> roleCodeList = roleCodes?.Split(",").ToList();
 
-            if (!requirement.IsNeedAuthorized)
-            {
-                context.Succeed(requirement);
-                return;
-            }
+            var permissions = _rolePermissionService.GetPermissions(roleCodeList);
 
-            //获取授权方式
-            AuthenticationScheme defaultAuthenticate = await _schemes.GetDefaultAuthenticateSchemeAsync();
-            if (defaultAuthenticate == null)
-            {
-                context.Fail();
-                return;
-            }
-
-            //验证token（包括过期时间）
-            AuthenticateResult result = await httpContext.AuthenticateAsync(defaultAuthenticate.Name);
-            if (!result.Succeeded)
-            {
-                context.Fail();
-                return;
-            }
-
-            httpContext.User = result.Principal;
-
-            //判断角色
-            string url = httpContext.Request.Path.Value.ToLower();
-            string tokenModelJsonStr = httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypeEnum.TokenModel.ToString())?.Value;
-            TokenModel tm = JsonConvert.DeserializeObject<TokenModel>(tokenModelJsonStr);
-
-            if (!requirement.RequireRoles.Contains(tm.Role))
+            if (!permissions.Any(x => x.OperateCode == requirement.Operate && x.ResourceCode == requirement.Resource))
             {
                 context.Fail();
                 return;

@@ -1,4 +1,6 @@
 ﻿//微软包
+
+using System.Security.Claims;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +11,13 @@ using RayPI.Infrastructure.Auth.Enums;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Auth.Attributes;
 using RayPI.Infrastructure.Config;
-using RayPI.Infrastructure.Config.FrameConfigModel;
 using RayPI.Infrastructure.RayException;
 using RayPI.Infrastructure.Cors.Attributes;
 using RayPI.Infrastructure.Cors.Enums;
+using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using RayPI.Infrastructure.Security.Models;
+using RayPI.Infrastructure.Security.Services;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -27,18 +32,19 @@ namespace RayPI.OpenApi.Controllers
     {
         private readonly IConfiguration _config;
         private readonly AllConfigModel _allConfigModel;
-        private readonly IHostingEnvironment _env;
         private readonly IJwtService _jwtService;
 
-        public TestController(IConfiguration configuration,
-            AllConfigModel allConfigModel,
-            IHostingEnvironment env,
-            IJwtService jwtService)
+        /// <summary>
+        /// 
+        /// </summary>
+        public TestController(//IJwtService jwtService,
+            IConfiguration configuration,
+            AllConfigModel allConfigModel
+            )
         {
             _config = configuration;
             _allConfigModel = allConfigModel;
-            _env = env;
-            _jwtService = jwtService;
+            //_jwtService = jwtService;
         }
 
         /// <summary>
@@ -52,7 +58,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        [RayAuthorize(AuthPolicyEnum.Free)]
+        //[RayAuthorizeFree]
         public string GetJWTStr(long uid = 1, string uname = "Admin", string role = "Admin", string project = "RayPI", TokenTypeEnum tokenType = TokenTypeEnum.Web)
         {
             var tm = new TokenModel

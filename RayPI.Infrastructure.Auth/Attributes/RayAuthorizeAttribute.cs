@@ -14,5 +14,10 @@ namespace RayPI.Infrastructure.Auth.Attributes
         {
             this.Policy = authPolicyEnum.ToString();
         }
+
+        public RayAuthorizeAttribute(OperateEnum operateEnum, ResourceEnum resourceEnum)
+        {
+            this.Policy = $"Ray_{operateEnum}_{resourceEnum}";
+        }
     }
 }

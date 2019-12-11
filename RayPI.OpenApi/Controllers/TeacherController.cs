@@ -13,12 +13,14 @@ namespace RayPI.OpenApi.Controllers
     /// 教师接口
     /// </summary>
     [Produces("application/json")]
-    [Route("api/Admin")]
-    [RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
+    [Route("api/Teacher")]
     public class TeacherController : Controller
     {
-        private TeacherBusiness _teacheBusiness;
+        private readonly TeacherBusiness _teacheBusiness;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public TeacherController(TeacherBusiness teacheBussiness)
         {
             _teacheBusiness = teacheBussiness;
@@ -31,9 +33,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="pageSize">条/页</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("Teacher")]
-        //[AllowAnonymous]
-        [RayAuthorizeFree]
+        [RayAuthorize(OperateEnum.Retrieve, ResourceEnum.Teacher)]
         public JsonResult GetTeacherPageList(int pageIndex = 1, int pageSize = 10)
         {
             return Json(_teacheBusiness.GetPageList(pageIndex, pageSize));
@@ -44,8 +44,7 @@ namespace RayPI.OpenApi.Controllers
         /// </summary>
         /// <param name="id">Id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("Teacher/{id}")]
+        [HttpGet("id")]
         [ProducesResponseType(typeof(TeacherEntity), 200)]
         public JsonResult GetTeacherById(long id)
         {
@@ -58,7 +57,6 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="entity">学生实体</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("Teacher")]
         public JsonResult AddTeacher(TeacherEntity entity = null)
         {
             if (entity == null)
@@ -71,7 +69,6 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="entity">学生实体</param>
         /// <returns></returns>
         [HttpPut]
-        [Route("Teacher")]
         public JsonResult UpdateTeacher(TeacherEntity entity = null)
         {
             if (entity == null)
@@ -85,7 +82,6 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="ids">id集合</param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("Teacher")]
         public JsonResult DelsTeacher(long[] ids = null)
         {
             if (ids.Length == 0)

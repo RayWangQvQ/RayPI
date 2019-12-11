@@ -14,9 +14,9 @@ namespace RayPI.Infrastructure.Cors.Di
                 c.AddPolicy(CorsPolicyEnum.Free.ToString(), policy =>
                 {
                     policy.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    //.AllowCredentials();//Core3.0之后不允许Origin和Credentials都不做限制
                 });
 
                 c.AddPolicy(CorsPolicyEnum.Limit.ToString(), policy =>
