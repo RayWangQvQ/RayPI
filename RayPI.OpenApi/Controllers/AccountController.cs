@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RayPI.Infrastructure.Auth;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Config;
 using RayPI.Infrastructure.Security.Models;
@@ -19,11 +20,13 @@ namespace RayPI.OpenApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        private readonly IAuthService _authService;
         private readonly IJwtService _jwtService;
         private readonly AllConfigModel _allConfigModel;
 
-        public AccountController(IJwtService jwtService, AllConfigModel allConfigModel)
+        public AccountController(IAuthService authService, IJwtService jwtService, AllConfigModel allConfigModel)
         {
+            _authService = authService;
             _jwtService = jwtService;
             _allConfigModel = allConfigModel;
         }
@@ -36,31 +39,22 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Token")]
-        public async Task<JsonResult> Login(string userCode = "stuAdmin", string pwd = "123456", string roleCode = "stuAdmin")
+        public JsonResult Login(string userName = "StuAdmin", string pwd = "123456")
         {
-            // 用户名是否正确
-            if (string.IsNullOrWhiteSpace(userCode) || string.IsNullOrWhiteSpace(pwd) || string.IsNullOrWhiteSpace(roleCode))
+            List<string> GetRoleCodeList()
             {
-                return new JsonResult(new
+                switch (userName)
                 {
-                    Code = 0,
-                    Message = "账号不存在",
-                });
+                    case "Admin": return new List<string> { "Admin" };
+                    case "StuAdmin": return new List<string> { "StudentAdmin" };
+                    case "TeacherAdmin": return new List<string> { "TeacherAdmin" };
+                    case "Test":
+                        return new List<string> { "StuAdmin", "TeacherAdmin" };
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
-            //密码是否正确
-            if (!((userCode == "stuAdmin" || userCode == "bb" || userCode == "cc") && pwd == "123456"))
-            {
-                return new JsonResult(new
-                {
-                    Code = 0,
-                    Message = "密码错误",
-                });
-            }
-
-            // 设置用户标识
-            Claim[] userClaims = _jwtService.BuildClaims(userCode, roleCode);
-
-            string tokenStr = _jwtService.BuildToken(userClaims);
+            string tokenStr = _authService.GetToken(userName, GetRoleCodeList());
 
             return new JsonResult(tokenStr);
         }

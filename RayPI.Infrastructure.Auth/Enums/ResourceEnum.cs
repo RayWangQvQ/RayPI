@@ -3,6 +3,7 @@
     public enum ResourceEnum
     {
         All,
-        Student
+        Student,
+        Teacher
     }
 }

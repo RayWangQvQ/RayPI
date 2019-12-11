@@ -35,13 +35,13 @@ namespace RayPI.Infrastructure.Auth.Jwt
         /// <param name="userName">用户名</param>
         /// <param name="roleName">登录时的角色</param>
         /// <returns></returns>
-        public Claim[] BuildClaims(string userName, string roleName)
+        public Claim[] BuildClaims(string userName, List<string> roleName)
         {
             // 配置用户标识
             var userClaims = new Claim[]
             {
                 new Claim(ClaimTypes.Name,userName),
-                new Claim(ClaimTypes.Role,roleName),
+                new Claim(ClaimTypes.Role,string.Join(',', roleName)),
                 new Claim(JwtRegisteredClaimNames.Iss,_jwtConfig.Issuer),
                 new Claim(JwtRegisteredClaimNames.Aud,_jwtConfig.Audience),
                 new Claim(ClaimTypes.Expiration,_jwtConfig.WebExp.ToString()),

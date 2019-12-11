@@ -14,8 +14,6 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Teacher")]
-    //[RayAuthorize(AuthPolicyEnum.RequireRoleOfAdminOrClient)]
-    [RayAuthorizeFree]
     public class TeacherController : Controller
     {
         private readonly TeacherBusiness _teacheBusiness;
@@ -35,8 +33,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="pageSize">条/页</param>
         /// <returns></returns>
         [HttpGet]
-        //[AllowAnonymous]
-        [RayAuthorizeFree]
+        [RayAuthorize(OperateEnum.Retrieve, ResourceEnum.Teacher)]
         public JsonResult GetTeacherPageList(int pageIndex = 1, int pageSize = 10)
         {
             return Json(_teacheBusiness.GetPageList(pageIndex, pageSize));

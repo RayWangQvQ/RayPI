@@ -81,7 +81,7 @@ namespace RayPI.Infrastructure.Auth
 
             //注册IOperateInfo
             //services.AddScoped<IOperateInfo, OperateInfo>();
-            services.AddSingleton<IRolePermissionService, RolePermissionService>();
+            services.AddSingleton<IAuthService, AuthService>();
 
             return services;
         }

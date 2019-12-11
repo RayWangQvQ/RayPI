@@ -1,4 +1,6 @@
 ﻿//系统包
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 //微软包
@@ -25,13 +27,13 @@ namespace RayPI.Infrastructure.Auth.Authorize
         /// </summary>
         private readonly IAuthenticationSchemeProvider _schemes;
 
-        private readonly IRolePermissionService _rolePermissionService;
+        private readonly IAuthService _rolePermissionService;
 
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="schemes"></param>
-        public PolicyHandler(IAuthenticationSchemeProvider schemes, IRolePermissionService rolePermissionService)
+        public PolicyHandler(IAuthenticationSchemeProvider schemes, IAuthService rolePermissionService)
         {
             _schemes = schemes;
             _rolePermissionService = rolePermissionService;
@@ -46,9 +48,10 @@ namespace RayPI.Infrastructure.Auth.Authorize
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, RayRequirement requirement)
         {
             var claims = context.User.Claims;
-            string roleCode = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role.ToString())?.Value;
+            string roleCodes = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role.ToString())?.Value;
+            List<string> roleCodeList = roleCodes?.Split(",").ToList();
 
-            var permissions = _rolePermissionService.GetPermissions(roleCode);
+            var permissions = _rolePermissionService.GetPermissions(roleCodeList);
 
             if (!permissions.Any(x => x.OperateCode == requirement.Operate && x.ResourceCode == requirement.Resource))
             {
