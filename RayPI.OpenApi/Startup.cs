@@ -25,6 +25,9 @@ using RayPI.Infrastructure.Security.Models;
 using RayPI.Infrastructure.Security.Services;
 using RayPI.Infrastructure.Security;
 using RayPI.Infrastructure.Auth;
+using MediatR;
+using System.Reflection;
+using RayPI.AppService.Commands;
 
 namespace RayPI.OpenApi
 {
@@ -66,6 +69,9 @@ namespace RayPI.OpenApi
 
             //注册Swagger
             services.AddSwaggerService();
+
+            //注册MediatR
+            services.AddMediatR(typeof(CreateArticleCmd));
 
             //注册授权认证
 

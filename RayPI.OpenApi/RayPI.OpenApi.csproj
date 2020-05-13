@@ -11,13 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RayPI.Bussiness\RayPI.Business.csproj" />
+    <ProjectReference Include="..\RayPI.AppService\RayPI.AppService.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Auth\RayPI.Infrastructure.Auth.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Config\RayPI.Infrastructure.Config.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Cors\RayPI.Infrastructure.Cors.csproj" />

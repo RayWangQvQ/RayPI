@@ -17,6 +17,13 @@
 
   <ItemGroup>
     <Folder Include="Dto\" />
+    <Folder Include="Queries\" />
+    <Folder Include="DomainEventHandlers\" />
+    <Folder Include="IntegrationEvents\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.1" />
   </ItemGroup>
 
 </Project>
