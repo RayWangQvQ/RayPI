@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\RayPI.OpenApi\bin\Debug\netcoreapp2.2\EntityDoc.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DomainService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Ray.Domain\Ray.Domain.csproj" />
+    <ProjectReference Include="..\RayPI.Infrastructure.Treasury\RayPI.Infrastructure.Treasury.csproj" />
+  </ItemGroup>
+
+</Project>
