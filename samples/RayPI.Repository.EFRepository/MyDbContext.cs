@@ -3,50 +3,67 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Linq.Expressions;
-//
 using Microsoft.EntityFrameworkCore;
-//
-using RayPI.Treasury.Helpers;
 using RayPI.Domain.Entity;
-using RayPI.Infrastructure.Auth;
 using RayPI.Infrastructure.Auth.Operate;
 using RayPI.Infrastructure.Treasury.Extensions;
 using RayPI.Infrastructure.Treasury.Helpers;
 using RayPI.Infrastructure.Treasury.Interfaces;
+using Ray.Infrastructure.EFRepository;
+using MediatR;
+using DotNetCore.CAP;
+using Microsoft.Extensions.Logging;
 
 namespace RayPI.Repository.EFRepository
 {
-    public class MyDbContext : DbContext
+    public class MyDbContext : EFContext
     {
         private readonly IOperateInfo _operateInfo;
+        private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+
         public MyDbContext(DbContextOptions options)
-            : base(options)
+            : base(options, null, null)
         {
         }
-        public MyDbContext(DbContextOptions options, IOperateInfo operateInfo)
-            : base(options)
+
+        public MyDbContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus, IOperateInfo operateInfo)
+            : base(options, mediator, capBus)
         {
             _operateInfo = operateInfo;
         }
 
+        #region 数据库配置
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //日志：
+            optionsBuilder.UseLoggerFactory(MyLoggerFactory);
+        }
+        #endregion
+
+        #region OnModelCreating
         /// <summary>
-        /// 配置实体生成表属性
+        /// 映射类所在程序集
         /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        }
+        protected override Assembly EntityTypeConfigurationAssembly => Assembly.GetExecutingAssembly();
 
-
-        /// <summary>Creates the set.</summary>
-        /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
-        /// <returns>IQueryable&lt;TAggregateRoot&gt;.</returns>
-        public DbSet<TAggregateRoot> CreateSet<TAggregateRoot>() where TAggregateRoot : class
+        protected override void RayOnModelCreating(ModelBuilder modelBuilder)
         {
-            return this.Set<TAggregateRoot>();
+            //映射关系
+            base.RayOnModelCreating(modelBuilder);
+
+            //设置全局默认的数据库敢纲要（不设置的话默认为dbo）
+            modelBuilder.HasDefaultSchema("ray");
+
+            //初始化一条数据
+            modelBuilder.Entity<ArticleEntity>().HasData(new ArticleEntity
+            {
+                Id = 1,
+                Title = "这是一条初始化的数据",
+                SubTitle = "来自DbContext的OnModelCreating",
+                Content = "这是内容"
+            });
         }
+        #endregion
 
         /// <summary>Sets the modified.</summary>
         /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
@@ -62,21 +79,6 @@ namespace RayPI.Repository.EFRepository
         public void SetDeleted<TAggregateRoot>(TAggregateRoot entity) where TAggregateRoot : class
         {
             this.Entry(entity).State = EntityState.Deleted;
-        }
-
-        /// <summary>保存</summary>
-        /// <exception cref="T:System.Data.Entity.Validation.DbEntityValidationException">Entity Validation Failed - errors follow:\n +
-        /// sb.ToString()</exception>
-        public void MySaveChanges()
-        {
-            try
-            {
-                base.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
 
         /// <summary>Sets the base.</summary>
@@ -111,9 +113,9 @@ namespace RayPI.Repository.EFRepository
         {
             IQueryable<TAggregateRoot> source;
             if (filter == null)
-                source = this.CreateSet<TAggregateRoot>().Where(x => true);
+                source = this.RayDbSet<TAggregateRoot>().Where(x => true);
             else
-                source = this.CreateSet<TAggregateRoot>().Where(filter);
+                source = this.RayDbSet<TAggregateRoot>().Where(filter);
 
             if (exceptDeleted)
                 source = source.Where(x => x.IsDeleted == false);
@@ -126,7 +128,7 @@ namespace RayPI.Repository.EFRepository
         {
             if (entity == null) return -1;
             this.SetEntityBaseInfo(entity);
-            this.CreateSet<TAggregateRoot>().Add(entity);
+            this.RayDbSet<TAggregateRoot>().Add(entity);
             return entity.Id;
         }
         /// <summary>批量新增</summary>
@@ -209,7 +211,7 @@ namespace RayPI.Repository.EFRepository
         /// <param name="filter">移除条件</param>
         public virtual void Remove<TAggregateRoot>(Expression<Func<TAggregateRoot, bool>> filter) where TAggregateRoot : EntityBase
         {
-            CreateSet<TAggregateRoot>().Where(filter).Each(x => this.Remove(x));
+            RayDbSet<TAggregateRoot>().Where(filter).Each(x => this.Remove(x));
         }
         #endregion
 
@@ -234,7 +236,7 @@ namespace RayPI.Repository.EFRepository
         /// <param name="filter">移除条件</param>
         public virtual void Delete<TAggregateRoot>(Expression<Func<TAggregateRoot, bool>> filter) where TAggregateRoot : EntityBase, new()
         {
-            IQueryable<TAggregateRoot> list = this.CreateSet<TAggregateRoot>().Where(filter);
+            IQueryable<TAggregateRoot> list = this.RayDbSet<TAggregateRoot>().Where(filter);
             list.Each(x =>
             {
                 x.IsDeleted = true;

@@ -1,18 +1,11 @@
-﻿//系统包
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-//微软包
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
-//三方包
-using Swashbuckle.AspNetCore.Swagger;
 
-namespace RayPI.Infrastructure.Swagger
+namespace RayPI.Infrastructure.Swagger.Extensions
 {
-    public static class StartupExtension
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddSwaggerService(this IServiceCollection services)
         {
@@ -20,10 +13,10 @@ namespace RayPI.Infrastructure.Swagger
             {
                 Version = "v3.0.0",
                 Title = "Ray WebAPI",
-                Description = "基于.NET Core3.0的接口框架",
+                Description = "基于.NET Core3.1的接口框架",
                 Contact = new OpenApiContact
                 {
-                    Name = "RayWang",
+                    Name = "Ray",
                     Email = "2271272653@qq.com",
                     Url = new Uri("http://www.cnblogs.com/RayWang")
                 }
@@ -33,12 +26,17 @@ namespace RayPI.Infrastructure.Swagger
             {
                 c.SwaggerDoc("v3", apiInfo);
 
-                //添加注释服务
-                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var apiXmlPath = Path.Combine(basePath, "ApiDoc.xml");//控制器层注释
-                var entityXmlPath = Path.Combine(basePath, "EntityDoc.xml");//实体注释
-                c.IncludeXmlComments(apiXmlPath, true);//true表示显示控制器注释
-                //c.IncludeXmlComments(entityXmlPath);
+                //添加注释
+                try
+                {
+                    c.IncludeXmlComments(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RayPI.OpenApi.xml"), true);
+                    c.IncludeXmlComments(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RayPI.AppService.xml"));
+                }
+                catch (Exception)
+                {
+                    //todo:记录日志
+                }
+
 
                 //添加控制器注释
                 //c.DocumentFilter<SwaggerDocTag>();
@@ -69,15 +67,6 @@ namespace RayPI.Infrastructure.Swagger
             #endregion
 
             return services;
-        }
-
-        public static void UseSwaggerService(this IApplicationBuilder app)
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v3/swagger.json", "ApiHelp V3");
-            });
         }
     }
 }

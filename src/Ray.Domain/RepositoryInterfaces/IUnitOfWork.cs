@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Ray.Infrastructure.Repository
+namespace Ray.Domain.RepositoryInterfaces
 {
     /// <summary>
     /// 工作单元interface

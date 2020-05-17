@@ -1,12 +1,10 @@
-﻿//微软包
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RayPI.Infrastructure.Config.Di;
 using RayPI.Infrastructure.Cors.Di;
-using RayPI.Infrastructure.Swagger;
 using RayPI.Infrastructure.Auth.Jwt;
 using RayPI.Infrastructure.Config;
 using RayPI.Infrastructure.Config.ConfigModel;
@@ -16,6 +14,8 @@ using RayPI.AppService.Extensions;
 using Autofac;
 using Ray.Infrastructure.DI;
 using RayPI.Repository.EFRepository.Extensions;
+using RayPI.Infrastructure.Config.Extensions;
+using RayPI.Infrastructure.Swagger.Extensions;
 
 namespace RayPI.OpenApi
 {
@@ -54,6 +54,8 @@ namespace RayPI.OpenApi
             });
 
             //注册配置管理服务
+            services.AddSingleton<IConfiguration>(_configuration);
+            services.AddMyOptions();
             services.AddConfigService(_env.ContentRootPath);
             AllConfigModel allConfig = services.GetImplementationInstanceOrNull<AllConfigModel>();
 

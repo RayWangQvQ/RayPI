@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ray.Infrastructure.Repository\Ray.Infrastructure.Repository.csproj" />
+    <ProjectReference Include="..\Ray.Domain\Ray.Domain.csproj" />
     <ProjectReference Include="..\Ray.Infrastructure\Ray.Infrastructure.csproj" />
   </ItemGroup>
 

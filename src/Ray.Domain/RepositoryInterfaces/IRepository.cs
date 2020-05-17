@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Ray.Domain;
 
-namespace Ray.Infrastructure.Repository
+namespace Ray.Domain.RepositoryInterfaces
 {
     /// <summary>
     /// 无主键的实体仓储interface

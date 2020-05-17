@@ -10,6 +10,7 @@ namespace RayPI.Repository.EFRepository.Extensions
     {
         public static void UseMyRepository(this IApplicationBuilder app)
         {
+            //初始化数据库
             using var scope = app.ApplicationServices.CreateScope();
             var dc = scope.ServiceProvider.GetService<MyDbContext>();
             dc.Database.EnsureCreated();

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-//
 using RayPI.Domain.Entity;
 using RayPI.Domain.IRepository;
 using RayPI.Infrastructure.Treasury.Enums;
@@ -128,7 +127,7 @@ namespace RayPI.Repository.EFRepository.Repository
         {
             //todo:设置操作人信息
             _myDbContext.Add(entity);
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
             return entity.Id;
         }
         /// <summary>批量新增</summary>
@@ -138,7 +137,7 @@ namespace RayPI.Repository.EFRepository.Repository
         {
             //todo
             _myDbContext.Add(entityList);
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
             return entityList.Select(x => x.Id);
         }
         #endregion
@@ -150,7 +149,7 @@ namespace RayPI.Repository.EFRepository.Repository
         public virtual void Update(T entity)
         {
             _myDbContext.Update(entity);
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>批量修改</summary>
@@ -158,7 +157,7 @@ namespace RayPI.Repository.EFRepository.Repository
         public virtual void Update(IQueryable<T> entityList)
         {
             _myDbContext.Update(entityList);
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
         }
         #endregion
 
@@ -169,7 +168,7 @@ namespace RayPI.Repository.EFRepository.Repository
         public virtual void Remove(T entity)
         {
             _myDbContext.Remove(entity);
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>批量物理移除</summary>
@@ -177,7 +176,7 @@ namespace RayPI.Repository.EFRepository.Repository
         public void Remove(IQueryable<T> entityList)
         {
             _myDbContext.RemoveRange(entityList);
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>批量物理移除</summary>
@@ -185,7 +184,7 @@ namespace RayPI.Repository.EFRepository.Repository
         public virtual void Remove(Expression<Func<T, bool>> filter)
         {
             _myDbContext.Remove(Find(filter));
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
         }
         /// <summary>物理移除</summary>
         /// <param name="id">主键</param>
@@ -201,7 +200,7 @@ namespace RayPI.Repository.EFRepository.Repository
         public virtual void Delete(T entity)
         {
             _myDbContext.Delete(entity);
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>逻辑删除</summary>
@@ -209,7 +208,7 @@ namespace RayPI.Repository.EFRepository.Repository
         public void Delete(IQueryable<T> entityList)
         {
             _myDbContext.Delete(entityList);
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
         }
 
         /// <summary>逻辑删除</summary>
@@ -217,7 +216,7 @@ namespace RayPI.Repository.EFRepository.Repository
         public virtual void Delete(Expression<Func<T, bool>> filter)
         {
             _myDbContext.Delete(filter);
-            _myDbContext.MySaveChanges();
+            _myDbContext.SaveChanges();
         }
         /// <summary>逻辑删除</summary>
         /// <param name="id">The item.</param>

@@ -28,9 +28,10 @@ namespace Ray.Infrastructure.EFRepository
         }
 
         /// <summary>
-        /// 实体对应数据库表名
+        /// 实体对应数据库的表名
+        /// （默认为实体类名称）
         /// </summary>
-        public abstract string TableName { get; }
+        public virtual string TableName => typeof(TEntity).Name;
 
         /// <summary>
         /// 字段的配置映射

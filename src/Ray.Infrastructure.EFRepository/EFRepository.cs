@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ray.Domain;
-using Ray.Infrastructure.Repository;
+using Ray.Domain.RepositoryInterfaces;
 
 namespace Ray.Infrastructure.EFRepository
 {

@@ -19,11 +19,11 @@ namespace Ray.Infrastructure.EFRepository.Behaviors
         /// <summary>
         /// 构造
         /// </summary>
-        /// <param name="dbContext"></param>
+        /// <param name="efContext"></param>
         /// <param name="logger"></param>
-        public TransactionBehavior(TEFContext dbContext, ILogger logger)
+        public TransactionBehavior(TEFContext efContext, ILogger logger)
         {
-            _efContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _efContext = efContext ?? throw new ArgumentNullException(nameof(efContext));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 

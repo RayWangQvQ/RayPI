@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,14 +8,14 @@ using DotNetCore.CAP;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Ray.Infrastructure.Repository;
+using Ray.Domain.RepositoryInterfaces;
 
 namespace Ray.Infrastructure.EFRepository
 {
     /// <summary>
     /// EF的数据库上下文
     /// </summary>
-    public class EFContext : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
+    public abstract class EFContext : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
     {
         protected IMediator _mediator;
         ICapPublisher _capBus;
@@ -22,18 +23,66 @@ namespace Ray.Infrastructure.EFRepository
         /// <summary>
         /// 构造
         /// </summary>
+        public EFContext() : base()
+        {
+
+        }
+
+        /// <summary>
+        /// 构造
+        /// </summary>
         /// <param name="options"></param>
         /// <param name="mediator"></param>
         /// <param name="capBus"></param>
-        public EFContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus) 
+        public EFContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus)
             : base(options)
         {
             _mediator = mediator;
             _capBus = capBus;
         }
 
-        #region IUnitOfWork
-        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
+        #region 封装OnModelCreating
+        /// <summary>
+        /// 实体映射配置类所在程序集
+        /// (用于OnModelCreating方法利用反射批量关联映射类)
+        /// </summary>
+        protected abstract Assembly EntityTypeConfigurationAssembly { get; }
+
+        /// <summary>
+        /// 创建Model时执行操作
+        /// （如：配置实体映射、向表初始化数据等）
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected sealed override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            RayOnModelCreating(modelBuilder);
+        }
+        /// <summary>
+        /// 创建Model时执行操作
+        /// (默认会利用反射读取EntityTypeConfigurationAssembly程序集内所有的IEntityTypeConfiguration<TEntity>配置类)
+        /// (如果不想自动化添加,可以重写后自己添加)
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected virtual void RayOnModelCreating(ModelBuilder modelBuilder)
+        {
+            if (EntityTypeConfigurationAssembly != null)
+                modelBuilder.ApplyConfigurationsFromAssembly(this.EntityTypeConfigurationAssembly);
+        }
+        #endregion
+
+        #region 封装DbSet
+        /// <summary>DbSet</summary>
+        /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
+        /// <returns>IQueryable&lt;TAggregateRoot&gt;.</returns>
+        public DbSet<TAggregateRoot> RayDbSet<TAggregateRoot>() where TAggregateRoot : class
+        {
+            //Set方法会做GetOrAdd,所以可以利用传入泛型实体来获取任意实体的DbSet
+            return this.Set<TAggregateRoot>();
+        }
+        #endregion
+
+        #region IUnitOfWork工作单元
+        public virtual async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
             var result = await base.SaveChangesAsync(cancellationToken);
             await _mediator.PublishDomainEventsAsync(this);
@@ -41,19 +90,19 @@ namespace Ray.Infrastructure.EFRepository
         }
         #endregion
 
-        #region ITransaction
-        public IDbContextTransaction CurrentTransaction { get; private set; }
+        #region ITransaction事务
+        public virtual IDbContextTransaction CurrentTransaction { get; private set; }
 
-        public bool HasActiveTransaction => CurrentTransaction != null;
+        public virtual bool HasActiveTransaction => CurrentTransaction != null;
 
-        public Task<IDbContextTransaction> BeginTransactionAsync()
+        public virtual Task<IDbContextTransaction> BeginTransactionAsync()
         {
             if (CurrentTransaction != null) return null;
             CurrentTransaction = Database.BeginTransaction(_capBus, autoCommit: false);//包DotNetCore.CAP.MySql
             return Task.FromResult(CurrentTransaction);
         }
 
-        public async Task CommitTransactionAsync(IDbContextTransaction transaction)
+        public virtual async Task CommitTransactionAsync(IDbContextTransaction transaction)
         {
             if (transaction == null) throw new ArgumentNullException(nameof(transaction));
             if (transaction != CurrentTransaction) throw new InvalidOperationException($"Transaction {transaction.TransactionId} is not current");
@@ -78,7 +127,7 @@ namespace Ray.Infrastructure.EFRepository
             }
         }
 
-        public void RollbackTransaction()
+        public virtual void RollbackTransaction()
         {
             try
             {
