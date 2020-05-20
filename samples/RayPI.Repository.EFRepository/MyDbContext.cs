@@ -5,34 +5,49 @@ using System.Reflection;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using RayPI.Domain.Entity;
-using RayPI.Infrastructure.Auth.Operate;
 using RayPI.Infrastructure.Treasury.Extensions;
 using RayPI.Infrastructure.Treasury.Helpers;
-using RayPI.Infrastructure.Treasury.Interfaces;
 using Ray.Infrastructure.EFRepository;
 using MediatR;
 using DotNetCore.CAP;
 using Microsoft.Extensions.Logging;
+using Ray.Domain;
+using Ray.Domain.OperatorInfo;
 
 namespace RayPI.Repository.EFRepository
 {
     public class MyDbContext : EFContext
     {
-        private readonly IOperateInfo _operateInfo;
+        private readonly IEntityOperatorInfoBuilder _entityOperatorInfoBuilder;
         private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
+        public MyDbContext()
+        {
+
+        }
         public MyDbContext(DbContextOptions options)
             : base(options, null, null)
         {
         }
 
-        public MyDbContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus, IOperateInfo operateInfo)
-            : base(options, mediator, capBus)
+        public MyDbContext(DbContextOptions options, IEntityOperatorInfoBuilder entityOperatorInfoBuilder)
+            : base(options, null, null)
         {
-            _operateInfo = operateInfo;
+            _entityOperatorInfoBuilder = entityOperatorInfoBuilder;
         }
 
-        #region 数据库配置
+        public MyDbContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus, IEntityOperatorInfoBuilder entityOperatorInfoBuilder)
+            : base(options, mediator, capBus)
+        {
+            _entityOperatorInfoBuilder = entityOperatorInfoBuilder;
+        }
+
+        #region OnConfiguring
+        /// <summary>
+        /// 配置数据库
+        /// （该方法内配置会覆盖构造函数中传入的DbContextOptions）
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //日志：
@@ -65,42 +80,27 @@ namespace RayPI.Repository.EFRepository
         }
         #endregion
 
-        /// <summary>Sets the modified.</summary>
-        /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
-        /// <param name="entity">The entity.</param>
-        public void SetModified<TAggregateRoot>(TAggregateRoot entity) where TAggregateRoot : class
-        {
-            this.Entry(entity).State = EntityState.Modified;
-        }
-
-        /// <summary>Sets the deleted.</summary>
-        /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
-        /// <param name="entity">The entity.</param>
-        public void SetDeleted<TAggregateRoot>(TAggregateRoot entity) where TAggregateRoot : class
-        {
-            this.Entry(entity).State = EntityState.Deleted;
-        }
-
         /// <summary>Sets the base.</summary>
         /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
         /// <param name="item">The item.</param>
         /// <param name="isAdd">if set to <c>true</c> [is add].</param>
         private void SetEntityBaseInfo<TAggregateRoot>(TAggregateRoot item, bool isAdd = true) where TAggregateRoot : EntityBase
         {
-            IEntityBaseAutoSetter entityBaseAutoSetter = item.AutoSetter ?? new OperateSetter(_operateInfo);
+            var entityOperatorInfoBuilder = _entityOperatorInfoBuilder ?? new DefaultEntityOperatorInfoBuilder();
+            IEntityOperatorInfo entityOperatorInfo = entityOperatorInfoBuilder.Build();
             if (isAdd)//添加
             {
                 if (item.Id <= 0L)
                     item.Id = IdGenerateHelper.NewId;
-                item.CreateId = entityBaseAutoSetter.CreateId;
-                item.CreateTime = entityBaseAutoSetter.CreateTime;
-                item.CreateName = entityBaseAutoSetter.CreateName;
+                item.CreateId = entityOperatorInfo?.CreateId;
+                item.CreateTime = entityOperatorInfo?.CreateTime;
+                item.CreateName = entityOperatorInfo?.CreateName;
             }
             else//编辑
             {
-                item.UpdateId = entityBaseAutoSetter.UpdateId;
-                item.UpdateTime = entityBaseAutoSetter.UpdateTime;
-                item.UpdateName = entityBaseAutoSetter.UpdateName;
+                item.UpdateId = entityOperatorInfo?.UpdateId;
+                item.UpdateTime = entityOperatorInfo?.UpdateTime;
+                item.UpdateName = entityOperatorInfo?.UpdateName;
             }
         }
 

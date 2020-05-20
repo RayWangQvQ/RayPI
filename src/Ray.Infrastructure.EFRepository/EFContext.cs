@@ -8,6 +8,7 @@ using DotNetCore.CAP;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Ray.Domain;
 using Ray.Domain.RepositoryInterfaces;
 
 namespace Ray.Infrastructure.EFRepository
@@ -55,6 +56,7 @@ namespace Ray.Infrastructure.EFRepository
         /// <param name="modelBuilder"></param>
         protected sealed override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             RayOnModelCreating(modelBuilder);
         }
         /// <summary>
@@ -70,7 +72,7 @@ namespace Ray.Infrastructure.EFRepository
         }
         #endregion
 
-        #region 封装DbSet
+        #region 封装DbSet，使可以使用泛型读取
         /// <summary>DbSet</summary>
         /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
         /// <returns>IQueryable&lt;TAggregateRoot&gt;.</returns>
@@ -80,6 +82,22 @@ namespace Ray.Infrastructure.EFRepository
             return this.Set<TAggregateRoot>();
         }
         #endregion
+
+        /// <summary>Sets the modified.</summary>
+        /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
+        /// <param name="entity">The entity.</param>
+        public void SetModified<TAggregateRoot>(TAggregateRoot entity) where TAggregateRoot : IAggregateRoot
+        {
+            this.Entry(entity).State = EntityState.Modified;
+        }
+
+        /// <summary>Sets the deleted.</summary>
+        /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
+        /// <param name="entity">The entity.</param>
+        public void SetDeleted<TAggregateRoot>(TAggregateRoot entity) where TAggregateRoot : IAggregateRoot
+        {
+            this.Entry(entity).State = EntityState.Deleted;
+        }
 
         #region IUnitOfWork工作单元
         public virtual async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
