@@ -7,7 +7,7 @@ namespace RayPI.Domain.Entity
     /// <summary>
     /// 实体基类
     /// </summary>
-    public class EntityBase : Entity<long>, IAggregateRoot, IEntityLogicDeletable, IEntityOperatorInfo
+    public class EntityBase : IntegratedEntity, IAggregateRoot
     {
         #region 创建信息
         /// <summary>创建人姓名</summary>

@@ -19,7 +19,7 @@ namespace RayPI.AppService.Commands
 
         protected override long Handle(UpdateArticleCmd request)
         {
-            var entity = _articleRepository.FindById(request.Id);
+            var entity = _articleRepository.Find(request.Id);
             if (entity == null) throw new Exception("不存在");
 
             entity.Title = request.Title;

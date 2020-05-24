@@ -10,51 +10,10 @@ using RayPI.Infrastructure.Treasury.Models;
 
 namespace RayPI.Domain.IRepository
 {
-    public interface IBaseRepository<TEntity> //: IRepository<TEntity, long>
+    public interface IBaseRepository<TEntity> : IIntegratedRepository<TEntity>
         where TEntity : EntityBase, new()
     {
-        #region 查询
-        /// <summary>查询所有匹配项</summary>
-        /// <param name="filter">查询条件</param>
-        /// <param name="exceptDeleted">排除被逻辑删除的</param>
-        /// <returns>IQueryable<T></T></returns>
-        IQueryable<TEntity> GetAllMatching(Expression<Func<TEntity, bool>> filter = null, bool exceptDeleted = true);
-
-        /// <summary>
-        /// 分页查询
-        /// </summary>
-        /// <typeparam name="TK"></typeparam>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="exceptDeleted"></param>
-        /// <param name="filterExpression"></param>
-        /// <param name="orderByExpression"></param>
-        /// <param name="sortOrder"></param>
-        /// <returns></returns>
-        PageResult<TEntity> GetPageList<TK>(int pageIndex, int pageSize,
-            bool exceptDeleted = true, Expression<Func<TEntity, bool>> filterExpression = null,
-            Expression<Func<TEntity, TK>> orderByExpression = null, SortEnum sortOrder = SortEnum.Asc);
-
-        /// <summary>判断是否存在</summary>
-        /// <param name="filter">查询条件</param>
-        /// <param name="exceptDeleted">是否忽略已逻辑删除的数据</param>
-        /// <returns>true=存在，false=不存在</returns>
-        bool Any(Expression<Func<TEntity, bool>> filter, bool exceptDeleted);
-
-        /// <summary>根据条件获取</summary>
-        /// <param name="filter">查询条件</param>
-        /// <returns>T.</returns>
-        TEntity Find(Expression<Func<TEntity, bool>> filter, bool exceptDeleted = true);
-
-        /// <summary>
-        /// 根据Id获取单个
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="exceptDeleted"></param>
-        /// <returns></returns>
-        TEntity FindById(long id, bool exceptDeleted = true);
-        #endregion
-
+        /*
         #region 添加
         long Add(TEntity entity);
         /// <summary>批量新增</summary>
@@ -111,5 +70,6 @@ namespace RayPI.Domain.IRepository
         void Delete(long id);
         #endregion
         #endregion
+        */
     }
 }

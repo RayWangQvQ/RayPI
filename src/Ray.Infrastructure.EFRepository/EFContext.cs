@@ -33,6 +33,16 @@ namespace Ray.Infrastructure.EFRepository
         /// 构造
         /// </summary>
         /// <param name="options"></param>
+        public EFContext(DbContextOptions options)
+            : base(options)
+        {
+
+        }
+
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <param name="options"></param>
         /// <param name="mediator"></param>
         /// <param name="capBus"></param>
         public EFContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus)

@@ -27,7 +27,7 @@ namespace RayPI.AppService.Commands
                 Content = request.Content
             };
 
-            long id = _articleRepository.Add(entity);
+            long id = _articleRepository.Add(entity).Id;
             return id;
         }
     }

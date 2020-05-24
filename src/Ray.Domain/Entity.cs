@@ -114,4 +114,27 @@ namespace Ray.Domain
             return !(left == right);
         }
     }
+
+
+    /// <summary>
+    /// 集成的实体抽象基类
+    /// （主键为long型Id，可逻辑删除，附带操作信息）
+    /// </summary>
+    public class IntegratedEntity : Entity<long>, IEntityOperatorInfo, IEntityLogicDeletable
+    {
+        public IntegratedEntity()
+        {
+
+        }
+
+        public string CreateName { get; set; }
+        public long? CreateId { get; set; }
+        public DateTime? CreateTime { get; set; }
+        public string UpdateName { get; set; }
+        public long? UpdateId { get; set; }
+        public DateTime? UpdateTime { get; set; }
+
+        public bool IsDeleted { get; set; }
+        public DateTime? DeleteTime { get; set; }
+    }
 }

@@ -24,7 +24,7 @@ namespace RayPI.AppService.Queries
 
         protected override List<ArticleQueryViewModel> Handle(ArticlePageQuery request)
         {
-            IQueryable<ArticleEntity> entityQuerable = _articleRepository.GetAllMatching();
+            IQueryable<ArticleEntity> entityQuerable = _articleRepository.GetAll();
             if (!string.IsNullOrWhiteSpace(request.Title))
                 entityQuerable = entityQuerable.Where(x => x.Title.Contains(request.Title));
 

@@ -32,14 +32,6 @@ namespace RayPI.Infrastructure.Treasury.Snowflake
         /// <summary>The _sequence</summary>
         private long _sequence;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:NLC.Treasury.Snowflake.IdWorker" /> class.
-        /// </summary>
-        /// <param name="workerId">The worker identifier.</param>
-        /// <param name="datacenterId">The datacenter identifier.</param>
-        /// <param name="sequence">The sequence.</param>
-        /// <exception cref="!:System.ArgumentException">
-        /// </exception>
         public IdWorker(long workerId, long datacenterId, long sequence = 0)
         {
             this.WorkerId = workerId;
@@ -73,9 +65,6 @@ namespace RayPI.Infrastructure.Treasury.Snowflake
             }
         }
 
-        /// <summary>Nexts the identifier.</summary>
-        /// <returns>System.Int64.</returns>
-        /// <exception cref="T:NLC.Treasury.Snowflake.InvalidSystemClock"></exception>
         public virtual long NextId()
         {
             lock (this._lock)
