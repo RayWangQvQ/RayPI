@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -7,10 +8,13 @@ using System.Threading.Tasks;
 using DotNetCore.CAP;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 using Ray.Domain;
 using Ray.Domain.Entities;
+using Ray.Domain.Helpers;
 using Ray.Domain.Repositories;
+using Ray.Infrastructure.Helpers;
 
 namespace Ray.Infrastructure.EFRepository
 {
@@ -21,6 +25,8 @@ namespace Ray.Infrastructure.EFRepository
     {
         protected IMediator _mediator;
         ICapPublisher _capBus;
+
+        public IGuidGenerator GuidGenerator { get; set; }
 
         /// <summary>
         /// 构造
@@ -117,6 +123,98 @@ namespace Ray.Infrastructure.EFRepository
         {
             this.Entry(entity).State = EntityState.Deleted;
         }
+
+        public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var changeReport = ApplyAbpConcepts();
+
+                var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+
+                return result;
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                ChangeTracker.AutoDetectChangesEnabled = true;
+            }
+        }
+
+        protected virtual EntityChangeReport ApplyAbpConcepts()
+        {
+            var changeReport = new EntityChangeReport();
+
+            foreach (var entry in ChangeTracker.Entries().ToList())
+            {
+                ApplyAbpConcepts(entry, changeReport);
+            }
+
+            return changeReport;
+        }
+
+        protected virtual void ApplyConcepts(EntityEntry entry, EntityChangeReport changeReport)
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    ApplyConceptsForAddedEntity(entry, changeReport);
+                    break;
+                case EntityState.Modified:
+                    ApplyConceptsForModifiedEntity(entry, changeReport);
+                    break;
+                case EntityState.Deleted:
+                    ApplyConceptsForDeletedEntity(entry, changeReport);
+                    break;
+            }
+        }
+
+        protected virtual void ApplyConceptsForAddedEntity(EntityEntry entry, EntityChangeReport changeReport)
+        {
+            CheckAndSetId(entry);
+            SetConcurrencyStampIfNull(entry);
+            SetCreationAuditProperties(entry);
+            changeReport.ChangedEntities.Add(new EntityChangeEntry(entry.Entity, EntityChangeType.Created));
+        }
+
+        protected virtual void CheckAndSetId(EntityEntry entry)
+        {
+            if (entry.Entity is IEntity<Guid> entityWithGuidId)
+            {
+                TrySetGuidId(entry, entityWithGuidId);
+            }
+        }
+
+        protected virtual void TrySetGuidId(EntityEntry entry, IEntity<Guid> entity)
+        {
+            if (entity.Id != default)
+            {
+                return;
+            }
+
+            var idProperty = entry.Property("Id").Metadata.PropertyInfo;
+
+            //Check for DatabaseGeneratedAttribute
+            var dbGeneratedAttr = ReflectionHelper
+                .GetSingleAttributeOrDefault<DatabaseGeneratedAttribute>(
+                    idProperty
+                );
+
+            if (dbGeneratedAttr != null && dbGeneratedAttr.DatabaseGeneratedOption != DatabaseGeneratedOption.None)
+            {
+                return;
+            }
+
+            EntityHelper.TrySetId(
+                entity,
+                () => GuidGenerator.Create(),
+                true
+            );
+        }
+
 
         #region IUnitOfWork工作单元
         public virtual async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
