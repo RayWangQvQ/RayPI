@@ -11,16 +11,16 @@ namespace RayPI.AppService.Commands
 {
     public class CreateArticleCmdHandler : RequestHandler<CreateArticleCmd, long>
     {
-        private readonly IBaseRepository<ArticleEntity> _articleRepository;
+        private readonly IBaseRepository<Article> _articleRepository;
 
-        public CreateArticleCmdHandler(IBaseRepository<ArticleEntity> baseRepository)
+        public CreateArticleCmdHandler(IBaseRepository<Article> baseRepository)
         {
             this._articleRepository = baseRepository;
         }
 
         protected override long Handle(CreateArticleCmd request)
         {
-            var entity = new ArticleEntity
+            var entity = new Article
             {
                 Title = request.Title,
                 SubTitle = request.SubTitle,

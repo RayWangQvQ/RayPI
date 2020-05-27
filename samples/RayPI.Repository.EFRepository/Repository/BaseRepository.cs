@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Ray.Domain.RepositoryInterfaces;
 using Ray.Infrastructure.EFRepository;
 using RayPI.Domain.Entity;
 using RayPI.Domain.IRepository;

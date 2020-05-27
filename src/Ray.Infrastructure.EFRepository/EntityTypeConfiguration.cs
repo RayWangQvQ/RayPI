@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Ray.Domain;
+using Ray.Domain.Entities;
 
 namespace Ray.Infrastructure.EFRepository
 {

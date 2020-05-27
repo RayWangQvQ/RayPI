@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Ray.Domain;
-using Ray.Domain.RepositoryInterfaces;
+using Ray.Domain.Entities;
+using Ray.Domain.Repositories;
 using Ray.Infrastructure.Extensions;
 using Ray.Infrastructure.Extensions.Linq;
 using Ray.Infrastructure.Helpers.Page;
@@ -23,7 +24,7 @@ namespace Ray.Infrastructure.EFRepository
     /// <typeparam name="TEFContext"></typeparam>
     public abstract class EFRepository<TEntity, TEFContext> : IRepository<TEntity>
         where TEntity : Entity, IAggregateRoot
-        where TEFContext : EFContext
+        where TEFContext : EfDbContext<TEFContext>
     {
         /// <summary>
         /// 构造
@@ -41,6 +42,7 @@ namespace Ray.Infrastructure.EFRepository
 
         /// <summary>
         /// 工作单元
+        /// （这里直接利用EF的DbContext实现）
         /// </summary>
         public virtual IUnitOfWork UnitOfWork => EFContext;
 
@@ -269,7 +271,9 @@ namespace Ray.Infrastructure.EFRepository
     }
 
 
-    public abstract class EFRepository<TEntity, TKey, TEFContext> : EFRepository<TEntity, TEFContext>, IRepository<TEntity, TKey> where TEntity : Entity<TKey>, IAggregateRoot where TEFContext : EFContext
+    public abstract class EFRepository<TEntity, TKey, TEFContext> : EFRepository<TEntity, TEFContext>, IRepository<TEntity, TKey>
+        where TEntity : Entity<TKey>, IAggregateRoot
+        where TEFContext : EfDbContext<TEFContext>
     {
         public EFRepository(TEFContext context) : base(context)
         {
@@ -363,7 +367,7 @@ namespace Ray.Infrastructure.EFRepository
 
     public abstract class IntegratedRepository<TEntity, TEFContext> : EFRepository<TEntity, long, TEFContext>, IIntegratedRepository<TEntity>
         where TEntity : IntegratedEntity, IAggregateRoot
-        where TEFContext : EFContext
+        where TEFContext : EfDbContext<TEFContext>
     {
         public IntegratedRepository(TEFContext context) : base(context)
         {

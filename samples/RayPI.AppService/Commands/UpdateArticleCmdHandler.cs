@@ -10,9 +10,9 @@ namespace RayPI.AppService.Commands
 {
     public class UpdateArticleCmdHandler : RequestHandler<UpdateArticleCmd, long>
     {
-        private readonly IBaseRepository<ArticleEntity> _articleRepository;
+        private readonly IBaseRepository<Article> _articleRepository;
 
-        public UpdateArticleCmdHandler(IBaseRepository<ArticleEntity> baseRepository)
+        public UpdateArticleCmdHandler(IBaseRepository<Article> baseRepository)
         {
             this._articleRepository = baseRepository;
         }

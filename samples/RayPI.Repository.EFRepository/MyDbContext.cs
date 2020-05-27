@@ -16,7 +16,7 @@ using Ray.Domain.OperatorInfo;
 
 namespace RayPI.Repository.EFRepository
 {
-    public class MyDbContext : EFContext
+    public class MyDbContext : EfDbContext<MyDbContext>
     {
         private readonly IEntityOperatorInfoBuilder _entityOperatorInfoBuilder;
         private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
@@ -61,10 +61,10 @@ namespace RayPI.Repository.EFRepository
         /// </summary>
         protected override Assembly EntityTypeConfigurationAssembly => Assembly.GetExecutingAssembly();
 
-        protected override void RayOnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //映射关系
-            base.RayOnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
 
             //设置全局默认的数据库敢纲要（不设置的话默认为dbo）
             modelBuilder.HasDefaultSchema("ray");

@@ -13,12 +13,12 @@ namespace RayPI.AppService.Queries
 {
     public class ArticleQueryHandler : RequestHandler<ArticleQuery, ArticleQueryViewModel>
     {
-        private readonly IBaseRepository<ArticleEntity> _articleRepository;
+        private readonly IBaseRepository<Article> _articleRepository;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public ArticleQueryHandler(IBaseRepository<ArticleEntity> baseRepository)
+        public ArticleQueryHandler(IBaseRepository<Article> baseRepository)
         {
             this._articleRepository = baseRepository;
         }
@@ -26,7 +26,7 @@ namespace RayPI.AppService.Queries
         protected override ArticleQueryViewModel Handle(ArticleQuery request)
         {
             var entity = _articleRepository.Find(request.Id);
-            return AutoMapperHelper.Map<ArticleEntity, ArticleQueryViewModel>(entity);
+            return AutoMapperHelper.Map<Article, ArticleQueryViewModel>(entity);
         }
     }
 }

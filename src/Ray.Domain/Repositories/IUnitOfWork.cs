@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Ray.Domain.RepositoryInterfaces
+namespace Ray.Domain.Repositories
 {
     /// <summary>
     /// 工作单元interface
-    /// 【职责：持久化到数据库】
+    /// 【职责：将一组操作事务性地一次性持久化到数据库】
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {

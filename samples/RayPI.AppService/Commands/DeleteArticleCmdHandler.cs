@@ -9,9 +9,9 @@ namespace RayPI.AppService.Commands
 {
     public class DeleteArticleCmdHandler : RequestHandler<DeleteArticleCmd>
     {
-        private readonly IBaseRepository<ArticleEntity> _articleRepository;
+        private readonly IBaseRepository<Article> _articleRepository;
 
-        public DeleteArticleCmdHandler(IBaseRepository<ArticleEntity> baseRepository)
+        public DeleteArticleCmdHandler(IBaseRepository<Article> baseRepository)
         {
             this._articleRepository = baseRepository;
         }

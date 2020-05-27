@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Ray.Domain;
+using Ray.Domain.Entities;
 
 namespace Ray.Infrastructure.EFRepository
 {

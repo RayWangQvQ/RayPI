@@ -5,9 +5,9 @@ using RayPI.Infrastructure.Treasury.Helpers;
 
 namespace RayPI.Domain.Entity
 {
-    public class ArticleEntity : EntityBase
+    public class Article : EntityBase
     {
-        public ArticleEntity()
+        public Article()
         {
             this.Id = IdGenerateHelper.NewId;
         }
@@ -17,7 +17,7 @@ namespace RayPI.Domain.Entity
         /// <param name="title"></param>
         /// <param name="subTitle"></param>
         /// <param name="content"></param>
-        public ArticleEntity(string title, string subTitle, string content)
+        public Article(string title, string subTitle, string content)
         {
             this.Id = IdGenerateHelper.NewId;
             this.Title = title;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ray.Domain
+namespace Ray.Domain.Entities
 {
     /// <summary>
     /// 无主键的抽象实体基类
@@ -41,13 +41,21 @@ namespace Ray.Domain
     /// 有泛型主键的抽象实体基类
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
-    public abstract class Entity<TKey> : Entity, IEntity<TKey>
+    public abstract class Entity<TPrimaryKey> : Entity, IEntity<TPrimaryKey>
     {
-        int? _requestedHashCode;
-        /// <summary>
-        /// Id
-        /// </summary>
-        public virtual TKey Id { get; set; }
+        private int? _requestedHashCode;
+
+        protected Entity()
+        {
+
+        }
+
+        protected Entity(TPrimaryKey id)
+        {
+            Id = id;
+        }
+
+        public virtual TPrimaryKey Id { get; set; }
 
         public override object[] GetKeys()
         {
@@ -56,7 +64,7 @@ namespace Ray.Domain
 
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is Entity<TKey>))
+            if (obj == null || !(obj is Entity<TPrimaryKey>))
                 return false;
 
             if (Object.ReferenceEquals(this, obj))
@@ -65,7 +73,7 @@ namespace Ray.Domain
             if (this.GetType() != obj.GetType())
                 return false;
 
-            Entity<TKey> item = (Entity<TKey>)obj;
+            Entity<TPrimaryKey> item = (Entity<TPrimaryKey>)obj;
 
             if (item.IsTransient() || this.IsTransient())
                 return false;
@@ -92,7 +100,7 @@ namespace Ray.Domain
         /// <returns></returns>
         public bool IsTransient()
         {
-            return EqualityComparer<TKey>.Default.Equals(Id, default);
+            return EqualityComparer<TPrimaryKey>.Default.Equals(Id, default);
         }
 
         public override string ToString()
@@ -100,8 +108,7 @@ namespace Ray.Domain
             return $"[Entity: {GetType().Name}] Id = {Id}";
         }
 
-
-        public static bool operator ==(Entity<TKey> left, Entity<TKey> right)
+        public static bool operator ==(Entity<TPrimaryKey> left, Entity<TPrimaryKey> right)
         {
             if (Object.Equals(left, null))
                 return (Object.Equals(right, null)) ? true : false;
@@ -109,7 +116,7 @@ namespace Ray.Domain
                 return left.Equals(right);
         }
 
-        public static bool operator !=(Entity<TKey> left, Entity<TKey> right)
+        public static bool operator !=(Entity<TPrimaryKey> left, Entity<TPrimaryKey> right)
         {
             return !(left == right);
         }

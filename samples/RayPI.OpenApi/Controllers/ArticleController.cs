@@ -7,6 +7,7 @@ using RayPI.AppService.Commands;
 using RayPI.AppService.Queries;
 using System.Collections.Generic;
 using RayPI.AppService.Queries.ViewModels;
+using Microsoft.AspNetCore.Routing;
 
 namespace RayPI.OpenApi.Controllers
 {

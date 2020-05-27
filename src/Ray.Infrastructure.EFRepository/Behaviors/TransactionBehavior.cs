@@ -11,7 +11,7 @@ using Ray.Infrastructure.Extensions;
 namespace Ray.Infrastructure.EFRepository.Behaviors
 {
     public class TransactionBehavior<TEFContext, TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TEFContext : EFContext
+        where TEFContext : EfDbContext<TEFContext>
     {
         ILogger _logger;
         TEFContext _efContext;

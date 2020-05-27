@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Ray.Domain.RepositoryInterfaces
+namespace Ray.Domain.Repositories
 {
     /// <summary>
     /// 事务

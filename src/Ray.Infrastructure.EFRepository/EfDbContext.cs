@@ -9,14 +9,15 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Ray.Domain;
-using Ray.Domain.RepositoryInterfaces;
+using Ray.Domain.Entities;
+using Ray.Domain.Repositories;
 
 namespace Ray.Infrastructure.EFRepository
 {
     /// <summary>
     /// EF的数据库上下文
     /// </summary>
-    public abstract class EFContext : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
+    public abstract class EfDbContext<TDbContext> : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
     {
         protected IMediator _mediator;
         ICapPublisher _capBus;
@@ -24,7 +25,7 @@ namespace Ray.Infrastructure.EFRepository
         /// <summary>
         /// 构造
         /// </summary>
-        public EFContext() : base()
+        public EfDbContext() : base()
         {
 
         }
@@ -33,7 +34,7 @@ namespace Ray.Infrastructure.EFRepository
         /// 构造
         /// </summary>
         /// <param name="options"></param>
-        public EFContext(DbContextOptions options)
+        public EfDbContext(DbContextOptions options)
             : base(options)
         {
 
@@ -45,7 +46,7 @@ namespace Ray.Infrastructure.EFRepository
         /// <param name="options"></param>
         /// <param name="mediator"></param>
         /// <param name="capBus"></param>
-        public EFContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus)
+        public EfDbContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus)
             : base(options)
         {
             _mediator = mediator;
@@ -53,6 +54,12 @@ namespace Ray.Infrastructure.EFRepository
         }
 
         #region 封装OnModelCreating
+        private static readonly MethodInfo ApplyConfigurationsFromAssemblyMethodInfo
+            = typeof(TDbContext)
+                .GetMethod(
+                    nameof(ApplyConfigurationsFromAssembly),
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
         /// <summary>
         /// 实体映射配置类所在程序集
         /// (用于OnModelCreating方法利用反射批量关联映射类)
@@ -64,10 +71,11 @@ namespace Ray.Infrastructure.EFRepository
         /// （如：配置实体映射、向表初始化数据等）
         /// </summary>
         /// <param name="modelBuilder"></param>
-        protected sealed override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            RayOnModelCreating(modelBuilder);
+
+            ApplyConfigurationsFromAssemblyMethodInfo.Invoke(this, new object[] { modelBuilder });
         }
         /// <summary>
         /// 创建Model时执行操作
@@ -75,10 +83,11 @@ namespace Ray.Infrastructure.EFRepository
         /// (如果不想自动化添加,可以重写后自己添加)
         /// </summary>
         /// <param name="modelBuilder"></param>
-        protected virtual void RayOnModelCreating(ModelBuilder modelBuilder)
+        protected virtual void ApplyConfigurationsFromAssembly(ModelBuilder modelBuilder)
         {
-            if (EntityTypeConfigurationAssembly != null)
-                modelBuilder.ApplyConfigurationsFromAssembly(this.EntityTypeConfigurationAssembly);
+            var assembly = Assembly.GetExecutingAssembly();
+            var assembly2 = typeof(TDbContext).Assembly;
+            modelBuilder.ApplyConfigurationsFromAssembly(assembly2);
         }
         #endregion
 

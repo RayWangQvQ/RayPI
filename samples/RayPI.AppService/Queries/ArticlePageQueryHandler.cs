@@ -12,25 +12,25 @@ namespace RayPI.AppService.Queries
 {
     public class ArticlePageQueryHandler : RequestHandler<ArticlePageQuery, List<ArticleQueryViewModel>>
     {
-        private readonly IBaseRepository<ArticleEntity> _articleRepository;
+        private readonly IBaseRepository<Article> _articleRepository;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public ArticlePageQueryHandler(IBaseRepository<ArticleEntity> baseRepository)
+        public ArticlePageQueryHandler(IBaseRepository<Article> baseRepository)
         {
             this._articleRepository = baseRepository;
         }
 
         protected override List<ArticleQueryViewModel> Handle(ArticlePageQuery request)
         {
-            IQueryable<ArticleEntity> entityQuerable = _articleRepository.GetAll();
+            IQueryable<Article> entityQuerable = _articleRepository.GetAll();
             if (!string.IsNullOrWhiteSpace(request.Title))
                 entityQuerable = entityQuerable.Where(x => x.Title.Contains(request.Title));
 
             //var list = AutoMapperHelper.Map<List<ArticleEntity>, List<ArticleQueryViewModel>>(entityQuerable.ToList());
             var list = entityQuerable.ToList()
-                .Select(x => AutoMapperHelper.Map<ArticleEntity, ArticleQueryViewModel>(x))
+                .Select(x => AutoMapperHelper.Map<Article, ArticleQueryViewModel>(x))
                 .ToList();
             return list;
         }

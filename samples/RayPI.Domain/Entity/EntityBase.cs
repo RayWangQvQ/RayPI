@@ -1,5 +1,6 @@
 ﻿using System;
 using Ray.Domain;
+using Ray.Domain.Entities;
 using RayPI.Infrastructure.Treasury.Interfaces;
 
 namespace RayPI.Domain.Entity
