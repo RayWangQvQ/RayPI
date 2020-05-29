@@ -9,7 +9,7 @@ using RayPI.Domain.IRepository;
 
 namespace RayPI.AppService.Commands
 {
-    public class CreateArticleCmdHandler : RequestHandler<CreateArticleCmd, long>
+    public class CreateArticleCmdHandler : RequestHandler<CreateArticleCmd, Guid>
     {
         private readonly IBaseRepository<Article> _articleRepository;
 
@@ -18,16 +18,15 @@ namespace RayPI.AppService.Commands
             this._articleRepository = baseRepository;
         }
 
-        protected override long Handle(CreateArticleCmd request)
+        protected override Guid Handle(CreateArticleCmd request)
         {
-            var entity = new Article
+            var entity = new Article(request.Title)
             {
-                Title = request.Title,
                 SubTitle = request.SubTitle,
                 Content = request.Content
             };
 
-            long id = _articleRepository.Add(entity).Id;
+            var id = _articleRepository.InsertAsync(entity).Result.Id;
             return id;
         }
     }

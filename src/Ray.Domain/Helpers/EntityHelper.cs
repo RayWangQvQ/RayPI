@@ -18,7 +18,7 @@ namespace Ray.Domain.Helpers
            Func<TKey> idFactory,
            bool checkForDisableIdGenerationAttribute = false)
         {
-            var property = CachedIdProperties.GetOrAdd(
+            PropertyInfo property = CachedIdProperties.GetOrAdd(
                 $"{entity.GetType().FullName}-{checkForDisableIdGenerationAttribute}", () =>
                 {
                     var idProperty = entity

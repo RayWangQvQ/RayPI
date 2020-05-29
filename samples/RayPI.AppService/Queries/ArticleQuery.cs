@@ -8,6 +8,6 @@ namespace RayPI.AppService.Queries
 {
     public class ArticleQuery : IRequest<ArticleQueryViewModel>
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

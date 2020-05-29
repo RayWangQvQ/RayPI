@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ray.Infrastructure.Auditing
+namespace Ray.Infrastructure.Auditing.Modification
 {
     /// <summary>
     /// This interface can be implemented to store modification information (who and when modified lastly).

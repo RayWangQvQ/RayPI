@@ -7,9 +7,9 @@ using RayPI.Domain.Entity;
 
 namespace RayPI.Repository.EFRepository.DbMapping
 {
-    public class ArticleConfig : EntityBaseTypeConfig<ArticleEntity>
+    public class ArticleConfig : EntityBaseTypeConfig<Article>
     {
-        public override void MyConfigureField(EntityTypeBuilder<ArticleEntity> builder)
+        public override void MyConfigureField(EntityTypeBuilder<Article> builder)
         {
             //map：
             builder.Property(x => x.Title).IsRequired();

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ray.Infrastructure.Auditing
+namespace Ray.Infrastructure.Auditing.Creation
 {
     /// <summary>
     /// 拥有创建时间属性

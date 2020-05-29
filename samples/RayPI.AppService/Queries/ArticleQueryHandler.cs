@@ -25,7 +25,7 @@ namespace RayPI.AppService.Queries
 
         protected override ArticleQueryViewModel Handle(ArticleQuery request)
         {
-            var entity = _articleRepository.Find(request.Id);
+            var entity = _articleRepository.FindAsync(x => x.Id == request.Id).Result;
             return AutoMapperHelper.Map<Article, ArticleQueryViewModel>(entity);
         }
     }

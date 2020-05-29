@@ -1,17 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ray.Infrastructure.EFRepository;
 using RayPI.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Ray.Infrastructure.Repository.EfCore;
 
 namespace RayPI.Repository.EFRepository.DbMapping
 {
     /// <summary>Map实体基类的基础字段</summary>
     /// <typeparam name="TEntity"></typeparam>
     public abstract class EntityBaseTypeConfig<TEntity> : EntityTypeConfiguration<TEntity>
-        where TEntity : EntityBase
+        where TEntity : BaseEntity
     {
         public override void ConfigureField(EntityTypeBuilder<TEntity> builder)
         {
@@ -20,17 +20,17 @@ namespace RayPI.Repository.EFRepository.DbMapping
 
             MyConfigureField(builder);
 
-            builder.Property(x => x.CreateId).IsRequired(false);
-            builder.Property(x => x.CreateName).HasMaxLength(128).IsRequired(false);
-            builder.Property(x => x.CreateTime).IsRequired(false);
-            builder.Property(x => x.UpdateId).IsRequired(false);
-            builder.Property(x => x.UpdateName).HasMaxLength(128).IsRequired(false);
-            builder.Property(x => x.UpdateTime).IsRequired(false);
+            builder.Property(x => x.CreatorId).IsRequired(false);
+            //builder.Property(x => x.CreateName).HasMaxLength(128).IsRequired(false);
+            builder.Property(x => x.CreationTime).IsRequired();
+
+            builder.Property(x => x.LastModifierId).IsRequired(false);
+            //builder.Property(x => x.UpdateName).HasMaxLength(128).IsRequired(false);
+            builder.Property(x => x.LastModificationTime).IsRequired(false);
 
             builder.Property(x => x.IsDeleted).IsRequired();
-            builder.Property(x => x.DeleteTime).IsRequired(false);
-
-            builder.Ignore(x => x.AutoSetter);
+            builder.Property(x => x.DeleterId).IsRequired(false);
+            builder.Property(x => x.DeletionTime).IsRequired(false);
         }
 
         public abstract void MyConfigureField(EntityTypeBuilder<TEntity> builder);

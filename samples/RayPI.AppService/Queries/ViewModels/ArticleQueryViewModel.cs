@@ -9,7 +9,7 @@ namespace RayPI.AppService.Queries.ViewModels
         /// <summary>
         /// Id
         /// </summary>
-        public long Id { get; set; }
+        public Guid Id { get; set; }
         /// <summary>
         /// 标题
         /// </summary>

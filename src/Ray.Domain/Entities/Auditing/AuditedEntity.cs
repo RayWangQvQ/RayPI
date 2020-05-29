@@ -8,8 +8,14 @@ namespace Ray.Domain.Entities.Auditing
     /// <summary>
     /// This class can be used to simplify implementing <see cref="IAuditedObject"/>.
     /// </summary>
-    public abstract class AuditedEntity : CreationAuditedEntity, IAuditedObject
+    public abstract class AuditedEntity : Entity, IAuditedObject
     {
+        /// <inheritdoc />
+        public virtual DateTime CreationTime { get; set; }
+
+        /// <inheritdoc />
+        public virtual Guid? CreatorId { get; set; }
+
         /// <inheritdoc />
         public virtual DateTime? LastModificationTime { get; set; }
 
@@ -20,9 +26,15 @@ namespace Ray.Domain.Entities.Auditing
     /// <summary>
     /// This class can be used to simplify implementing <see cref="IAuditedObject"/>.
     /// </summary>
-    /// <typeparam name="TKey">Type of the primary key of the entity</typeparam>
-    public abstract class AuditedEntity<TKey> : CreationAuditedEntity<TKey>, IAuditedObject
+    /// <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
+    public abstract class AuditedEntity<TPrimaryKey> : Entity<TPrimaryKey>, IAuditedObject
     {
+        /// <inheritdoc />
+        public virtual DateTime CreationTime { get; set; }
+
+        /// <inheritdoc />
+        public virtual Guid? CreatorId { get; set; }
+
         /// <inheritdoc />
         public virtual DateTime? LastModificationTime { get; set; }
 
@@ -34,7 +46,7 @@ namespace Ray.Domain.Entities.Auditing
 
         }
 
-        protected AuditedEntity(TKey id)
+        protected AuditedEntity(TPrimaryKey id)
             : base(id)
         {
 

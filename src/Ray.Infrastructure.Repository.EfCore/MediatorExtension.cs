@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +7,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Ray.Domain;
 using Ray.Domain.Entities;
 
-namespace Ray.Infrastructure.EFRepository
+namespace Ray.Infrastructure.Repository.EfCore
 {
     static class MediatorExtension
     {

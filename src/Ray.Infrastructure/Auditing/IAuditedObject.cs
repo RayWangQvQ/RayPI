@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ray.Infrastructure.Auditing.Creation;
+using Ray.Infrastructure.Auditing.Modification;
 
 namespace Ray.Infrastructure.Auditing
 {

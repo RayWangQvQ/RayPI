@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ray.Infrastructure.Auditing
+﻿namespace Ray.Infrastructure.Auditing.Creation
 {
     /// <summary>
     /// 定义了创建信息属性 (创建人与创建时间).

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -8,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Ray.Infrastructure.Extensions;
 
-namespace Ray.Infrastructure.EFRepository.Behaviors
+namespace Ray.Infrastructure.Repository.EfCore.Behaviors
 {
     public class TransactionBehavior<TEFContext, TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TEFContext : EfDbContext<TEFContext>

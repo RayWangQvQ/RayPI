@@ -5,7 +5,7 @@ using MediatR;
 
 namespace RayPI.AppService.Commands
 {
-    public class CreateArticleCmd : IRequest<long>
+    public class CreateArticleCmd : IRequest<Guid>
     {
         /// <summary>
         /// 标题

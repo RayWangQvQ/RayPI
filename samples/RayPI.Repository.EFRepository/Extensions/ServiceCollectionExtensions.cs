@@ -17,7 +17,7 @@ namespace RayPI.Repository.EFRepository.Extensions
         /// <param name="services"></param>
         /// <param name="connStr"></param>
         /// <returns></returns>
-        public static IServiceCollection AddMyRepository(this IServiceCollection services, string connStr)
+        public static IServiceCollection AddMyRepository(this IServiceCollection services)
         {
             #region 注册数据库上下文,需要传入数据库配置(数据库类型,链接字符串等)
             //方法1:利用IConfiguration对象读取配置
@@ -35,7 +35,7 @@ namespace RayPI.Repository.EFRepository.Extensions
             //注册实体仓储:
             services.AddAssemblyServices(Assembly.GetExecutingAssembly(), x => x.Name.EndsWith("Repository"));
             //注册泛型仓储:
-            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             #endregion
 
             return services;

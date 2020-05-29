@@ -8,9 +8,14 @@ namespace Ray.Domain.Entities.Auditing
     /// <summary>
     /// This class can be used to simplify implementing <see cref="IAuditedObject"/> for aggregate roots.
     /// </summary>
-    [Serializable]
-    public abstract class AuditedAggregateRoot : CreationAuditedAggregateRoot, IAuditedObject
+    public abstract class AuditedAggregateRoot : AggregateRoot, IAuditedObject
     {
+        /// <inheritdoc />
+        public virtual DateTime CreationTime { get; set; }
+
+        /// <inheritdoc />
+        public virtual Guid? CreatorId { get; set; }
+
         /// <inheritdoc />
         public virtual DateTime? LastModificationTime { get; set; }
 
@@ -21,10 +26,15 @@ namespace Ray.Domain.Entities.Auditing
     /// <summary>
     /// This class can be used to simplify implementing <see cref="IAuditedObject"/> for aggregate roots.
     /// </summary>
-    /// <typeparam name="TKey">Type of the primary key of the entity</typeparam>
-    [Serializable]
-    public abstract class AuditedAggregateRoot<TKey> : CreationAuditedAggregateRoot<TKey>, IAuditedObject
+    /// <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
+    public abstract class AuditedAggregateRoot<TPrimaryKey> : AggregateRoot<TPrimaryKey>, IAuditedObject
     {
+        /// <inheritdoc />
+        public virtual DateTime CreationTime { get; set; }
+
+        /// <inheritdoc />
+        public virtual Guid? CreatorId { get; set; }
+
         /// <inheritdoc />
         public virtual DateTime? LastModificationTime { get; set; }
 
@@ -32,6 +42,12 @@ namespace Ray.Domain.Entities.Auditing
         public virtual Guid? LastModifierId { get; set; }
 
         protected AuditedAggregateRoot()
+        {
+
+        }
+
+        protected AuditedAggregateRoot(TPrimaryKey id)
+            : base(id)
         {
 
         }

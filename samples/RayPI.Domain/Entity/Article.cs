@@ -5,24 +5,19 @@ using RayPI.Infrastructure.Treasury.Helpers;
 
 namespace RayPI.Domain.Entity
 {
-    public class Article : EntityBase
+    public class Article : BaseEntity
     {
         public Article()
         {
-            this.Id = IdGenerateHelper.NewId;
+
         }
         /// <summary>
         /// 构造
         /// </summary>
         /// <param name="title"></param>
-        /// <param name="subTitle"></param>
-        /// <param name="content"></param>
-        public Article(string title, string subTitle, string content)
+        public Article(string title)
         {
-            this.Id = IdGenerateHelper.NewId;
             this.Title = title;
-            this.SubTitle = subTitle;
-            this.Content = content;
         }
 
         /// <summary>

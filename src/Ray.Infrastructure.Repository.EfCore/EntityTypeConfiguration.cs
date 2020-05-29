@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ray.Domain;
 using Ray.Domain.Entities;
 
-namespace Ray.Infrastructure.EFRepository
+namespace Ray.Infrastructure.Repository.EfCore
 {
     /// <summary>
     /// 实体与数据库表的映射关系

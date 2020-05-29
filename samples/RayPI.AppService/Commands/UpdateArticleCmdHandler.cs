@@ -8,7 +8,7 @@ using RayPI.Domain.IRepository;
 
 namespace RayPI.AppService.Commands
 {
-    public class UpdateArticleCmdHandler : RequestHandler<UpdateArticleCmd, long>
+    public class UpdateArticleCmdHandler : RequestHandler<UpdateArticleCmd, Guid>
     {
         private readonly IBaseRepository<Article> _articleRepository;
 
@@ -17,17 +17,17 @@ namespace RayPI.AppService.Commands
             this._articleRepository = baseRepository;
         }
 
-        protected override long Handle(UpdateArticleCmd request)
+        protected override Guid Handle(UpdateArticleCmd request)
         {
-            var entity = _articleRepository.Find(request.Id);
-            if (entity == null) throw new Exception("不存在");
+            var entity = _articleRepository.GetAsync(x => x.Id == request.Id).Result;
 
             entity.Title = request.Title;
             entity.SubTitle = request.SubTitle;
             entity.Content = request.Content;
-            _articleRepository.Update(entity);
 
-            return request.Id;
+            var result = _articleRepository.UpdateAsync(entity).Result;
+
+            return result.Id;
         }
     }
 }

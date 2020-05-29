@@ -6,6 +6,6 @@ namespace RayPI.AppService.Commands
 {
     public class UpdateArticleCmd : CreateArticleCmd
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

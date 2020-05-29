@@ -16,9 +16,10 @@ namespace RayPI.AppService.Commands
             this._articleRepository = baseRepository;
         }
 
-        protected override void Handle(DeleteArticleCmd request)
+        protected override async void Handle(DeleteArticleCmd request)
         {
-            _articleRepository.Delete(request.Id);
+            var entity = _articleRepository.GetAsync(x => x.Id == request.Id).Result;
+            await _articleRepository.DeleteAsync(entity);
         }
     }
 }

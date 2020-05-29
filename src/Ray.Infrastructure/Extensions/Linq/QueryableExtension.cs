@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Ray.Infrastructure.Helpers;
 
 namespace Ray.Infrastructure.Extensions.Linq
 {
     public static class QueryableExtension
     {
         public static IQueryable<TAggregateRoot> Set<TAggregateRoot>(this IQueryable<TAggregateRoot> tAggregateRoots,
-            Expression<Func<TAggregateRoot, TAggregateRoot>> tAggregateRoot) 
+            Expression<Func<TAggregateRoot, TAggregateRoot>> tAggregateRoot)
             where TAggregateRoot : class, new()
         {
             if (tAggregateRoot != null)
@@ -99,6 +100,22 @@ namespace Ray.Infrastructure.Extensions.Linq
             Expression<Func<TAggregateRoot>> field)
         {
             return default(TAggregateRoot);
+        }
+
+        /// <summary>
+        /// Filters a <see cref="IQueryable{T}"/> by given predicate if given condition is true.
+        /// </summary>
+        /// <param name="query">Queryable to apply filtering</param>
+        /// <param name="condition">A boolean value</param>
+        /// <param name="predicate">Predicate to filter the query</param>
+        /// <returns>Filtered or not filtered query based on <paramref name="condition"/></returns>
+        public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, bool condition, Expression<Func<T, bool>> predicate)
+        {
+            CheckHelper.NotNull(query, nameof(query));
+
+            return condition
+                ? query.Where(predicate)
+                : query;
         }
     }
 }

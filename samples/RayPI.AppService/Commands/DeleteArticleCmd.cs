@@ -5,11 +5,11 @@ using MediatR;
 
 namespace RayPI.AppService.Commands
 {
-    public class DeleteArticleCmd:IRequest
+    public class DeleteArticleCmd : IRequest
     {
         /// <summary>
         /// Id
         /// </summary>
-        public long Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

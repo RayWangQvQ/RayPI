@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ray.Infrastructure.Auditing
+namespace Ray.Infrastructure.Auditing.Modification
 {
     /// <summary>
     /// A standard interface to add DeletionTime property to a class.

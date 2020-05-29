@@ -24,15 +24,14 @@ namespace RayPI.AppService.Queries
 
         protected override List<ArticleQueryViewModel> Handle(ArticlePageQuery request)
         {
-            IQueryable<Article> entityQuerable = _articleRepository.GetAll();
+            var list = _articleRepository.GetListAsync().Result;
             if (!string.IsNullOrWhiteSpace(request.Title))
-                entityQuerable = entityQuerable.Where(x => x.Title.Contains(request.Title));
+                list = list.Where(x => x.Title.Contains(request.Title)).ToList();
 
-            //var list = AutoMapperHelper.Map<List<ArticleEntity>, List<ArticleQueryViewModel>>(entityQuerable.ToList());
-            var list = entityQuerable.ToList()
+            //return AutoMapperHelper.Map<List<Article>, List<ArticleQueryViewModel>>(list);
+            return list
                 .Select(x => AutoMapperHelper.Map<Article, ArticleQueryViewModel>(x))
                 .ToList();
-            return list;
         }
     }
 }

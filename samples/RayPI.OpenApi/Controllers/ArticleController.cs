@@ -8,6 +8,7 @@ using RayPI.AppService.Queries;
 using System.Collections.Generic;
 using RayPI.AppService.Queries.ViewModels;
 using Microsoft.AspNetCore.Routing;
+using System;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -54,7 +55,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet()]
         [Route("Id")]
-        public async Task<ArticleQueryViewModel> Get(long id)
+        public async Task<ArticleQueryViewModel> Get(Guid id)
         {
             return await _mediator.Send(new ArticleQuery { Id = id });
         }
@@ -71,7 +72,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="cmd"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<long> Create(CreateArticleCmd cmd)
+        public async Task<Guid> Create(CreateArticleCmd cmd)
         {
             return await _mediator.Send(cmd, HttpContext.RequestAborted);
         }
@@ -103,7 +104,7 @@ namespace RayPI.OpenApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete]
-        public void Delete(long id)
+        public void Delete(Guid id)
         {
             _mediator.Send(new DeleteArticleCmd { Id = id });
         }

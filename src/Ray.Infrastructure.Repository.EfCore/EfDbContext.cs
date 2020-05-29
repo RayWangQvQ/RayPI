@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using DotNetCore.CAP;
@@ -10,31 +8,27 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
-using Ray.Domain;
 using Ray.Domain.Entities;
 using Ray.Domain.Helpers;
 using Ray.Domain.Repositories;
+using Ray.Infrastructure.Auditing;
+using Ray.Infrastructure.Auditing.Deletion;
+using Ray.Infrastructure.Guids;
 using Ray.Infrastructure.Helpers;
 
-namespace Ray.Infrastructure.EFRepository
+namespace Ray.Infrastructure.Repository.EfCore
 {
     /// <summary>
     /// EF的数据库上下文
     /// </summary>
     public abstract class EfDbContext<TDbContext> : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
+        where TDbContext : DbContext
     {
         protected IMediator _mediator;
         ICapPublisher _capBus;
 
         public IGuidGenerator GuidGenerator { get; set; }
-
-        /// <summary>
-        /// 构造
-        /// </summary>
-        public EfDbContext() : base()
-        {
-
-        }
+        public IAuditPropertySetter AuditPropertySetter { get; set; }
 
         /// <summary>
         /// 构造
@@ -43,35 +37,10 @@ namespace Ray.Infrastructure.EFRepository
         public EfDbContext(DbContextOptions options)
             : base(options)
         {
-
-        }
-
-        /// <summary>
-        /// 构造
-        /// </summary>
-        /// <param name="options"></param>
-        /// <param name="mediator"></param>
-        /// <param name="capBus"></param>
-        public EfDbContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus)
-            : base(options)
-        {
-            _mediator = mediator;
-            _capBus = capBus;
+            GuidGenerator = SimpleGuidGenerator.Instance;
         }
 
         #region 封装OnModelCreating
-        private static readonly MethodInfo ApplyConfigurationsFromAssemblyMethodInfo
-            = typeof(TDbContext)
-                .GetMethod(
-                    nameof(ApplyConfigurationsFromAssembly),
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                );
-        /// <summary>
-        /// 实体映射配置类所在程序集
-        /// (用于OnModelCreating方法利用反射批量关联映射类)
-        /// </summary>
-        protected abstract Assembly EntityTypeConfigurationAssembly { get; }
-
         /// <summary>
         /// 创建Model时执行操作
         /// （如：配置实体映射、向表初始化数据等）
@@ -81,7 +50,7 @@ namespace Ray.Infrastructure.EFRepository
         {
             base.OnModelCreating(modelBuilder);
 
-            ApplyConfigurationsFromAssemblyMethodInfo.Invoke(this, new object[] { modelBuilder });
+            ApplyConfigurationsFromAssembly(modelBuilder);
         }
         /// <summary>
         /// 创建Model时执行操作
@@ -90,11 +59,7 @@ namespace Ray.Infrastructure.EFRepository
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected virtual void ApplyConfigurationsFromAssembly(ModelBuilder modelBuilder)
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            var assembly2 = typeof(TDbContext).Assembly;
-            modelBuilder.ApplyConfigurationsFromAssembly(assembly2);
-        }
+            => modelBuilder.ApplyConfigurationsFromAssembly(typeof(TDbContext).Assembly);
         #endregion
 
         #region 封装DbSet，使可以使用泛型读取
@@ -128,7 +93,7 @@ namespace Ray.Infrastructure.EFRepository
         {
             try
             {
-                var changeReport = ApplyAbpConcepts();
+                ApplyConcepts();
 
                 var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
 
@@ -144,40 +109,64 @@ namespace Ray.Infrastructure.EFRepository
             }
         }
 
-        protected virtual EntityChangeReport ApplyAbpConcepts()
+        protected virtual void ApplyConcepts()
         {
-            var changeReport = new EntityChangeReport();
-
             foreach (var entry in ChangeTracker.Entries().ToList())
             {
-                ApplyAbpConcepts(entry, changeReport);
+                ApplyConcepts(entry);
             }
-
-            return changeReport;
         }
 
-        protected virtual void ApplyConcepts(EntityEntry entry, EntityChangeReport changeReport)
+        protected virtual void ApplyConcepts(EntityEntry entry)
         {
             switch (entry.State)
             {
                 case EntityState.Added:
-                    ApplyConceptsForAddedEntity(entry, changeReport);
+                    ApplyConceptsForAddedEntity(entry);
                     break;
                 case EntityState.Modified:
-                    ApplyConceptsForModifiedEntity(entry, changeReport);
+                    ApplyConceptsForModifiedEntity(entry);
                     break;
                 case EntityState.Deleted:
-                    ApplyConceptsForDeletedEntity(entry, changeReport);
+                    ApplyConceptsForDeletedEntity(entry);
                     break;
             }
         }
 
-        protected virtual void ApplyConceptsForAddedEntity(EntityEntry entry, EntityChangeReport changeReport)
+        protected virtual void ApplyConceptsForAddedEntity(EntityEntry entry)
         {
             CheckAndSetId(entry);
-            SetConcurrencyStampIfNull(entry);
             SetCreationAuditProperties(entry);
-            changeReport.ChangedEntities.Add(new EntityChangeEntry(entry.Entity, EntityChangeType.Created));
+        }
+
+        protected virtual void ApplyConceptsForModifiedEntity(EntityEntry entry)
+        {
+            SetModificationAuditProperties(entry);
+
+            if (entry.Entity is ISoftDelete && entry.Entity.As<ISoftDelete>().IsDeleted)
+            {
+                SetDeletionAuditProperties(entry);
+            }
+        }
+        protected virtual void ApplyConceptsForDeletedEntity(EntityEntry entry)
+        {
+            if (TryCancelDeletionForSoftDelete(entry))
+            {
+                SetDeletionAuditProperties(entry);
+            }
+        }
+
+        protected virtual bool TryCancelDeletionForSoftDelete(EntityEntry entry)
+        {
+            if (!(entry.Entity is ISoftDelete))
+            {
+                return false;
+            }
+
+            entry.Reload();
+            entry.State = EntityState.Modified;
+            entry.Entity.As<ISoftDelete>().IsDeleted = true;
+            return true;
         }
 
         protected virtual void CheckAndSetId(EntityEntry entry)
@@ -186,8 +175,19 @@ namespace Ray.Infrastructure.EFRepository
             {
                 TrySetGuidId(entry, entityWithGuidId);
             }
+
+            if (entry.Entity is IEntity<long> entityWithLongId)
+            {
+                //todo
+            }
         }
 
+        #region 设置实体Id审计等属性值
+        /// <summary>
+        /// 设置Guid主键
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <param name="entity"></param>
         protected virtual void TrySetGuidId(EntityEntry entry, IEntity<Guid> entity)
         {
             if (entity.Id != default)
@@ -215,6 +215,41 @@ namespace Ray.Infrastructure.EFRepository
             );
         }
 
+        /// <summary>
+        /// 设置Long主键
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <param name="entity"></param>
+        protected virtual void TrySetLongId(EntityEntry entry, IEntity<Guid> entity)
+        {
+            //todo
+        }
+
+        /// <summary>
+        /// 设置新增相关审计属性
+        /// </summary>
+        /// <param name="entry"></param>
+        protected virtual void SetCreationAuditProperties(EntityEntry entry)
+        {
+            AuditPropertySetter?.SetCreationProperties(entry.Entity);
+        }
+        /// <summary>
+        /// 设置编辑相关审计属性
+        /// </summary>
+        /// <param name="entry"></param>
+        protected virtual void SetModificationAuditProperties(EntityEntry entry)
+        {
+            AuditPropertySetter?.SetModificationProperties(entry.Entity);
+        }
+        /// <summary>
+        /// 设置软删除相关属性
+        /// </summary>
+        /// <param name="entry"></param>
+        protected virtual void SetDeletionAuditProperties(EntityEntry entry)
+        {
+            AuditPropertySetter?.SetDeletionProperties(entry.Entity);
+        }
+        #endregion
 
         #region IUnitOfWork工作单元
         public virtual async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)

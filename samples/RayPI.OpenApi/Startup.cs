@@ -16,6 +16,10 @@ using Ray.Infrastructure.DI;
 using RayPI.Repository.EFRepository.Extensions;
 using RayPI.Infrastructure.Config.Extensions;
 using RayPI.Infrastructure.Swagger.Extensions;
+using System;
+using Ray.Infrastructure.Extensions.Json;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace RayPI.OpenApi
 {
@@ -88,11 +92,12 @@ namespace RayPI.OpenApi
 
             //注册仓储
             //string connStr = allConfig.ConnectionStringsModel.SqlServerDatabase;
-            string connStr = _configuration["Db:ConnStr"];
-            services.AddMyRepository(connStr);
+            services.AddMyRepository();
 
             //注册业务逻辑
             services.AddMyAppServices();
+
+            LogServices(services);
         }
 
         /// <summary>
@@ -142,5 +147,23 @@ namespace RayPI.OpenApi
             });
         }
 
+        public static async Task LogServices(IServiceCollection services)
+        {
+            string servicesJson = services
+                .AsJsonStr(option =>
+                {
+                    option.EnumToString = true;
+                    option.FilterProps = new FilterPropsOption
+                    {
+                        FilterEnum = FilterEnum.Ignore,
+                        Props = new[] { "UsePollingFileWatcher", "Action", "Method", "Assembly" }
+                    };
+                    option.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    };
+                }).AsFormatJsonStr();
+            await File.WriteAllTextAsync(Path.Combine(Directory.GetCurrentDirectory(), "services.txt"), servicesJson);
+        }
     }
 }
