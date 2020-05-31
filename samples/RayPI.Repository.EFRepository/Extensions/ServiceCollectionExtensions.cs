@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Ray.Infrastructure.Auditing;
 using RayPI.Domain.IRepository;
 using RayPI.Infrastructure.Config.Options;
 using RayPI.Infrastructure.Treasury.Di;
@@ -30,6 +31,9 @@ namespace RayPI.Repository.EFRepository.Extensions
                 optionBuilder.UseSqlServer(dbOption.Value.ConnStr);
             });
             #endregion
+
+            //注册审计属性赋值器
+            services.AddTransient<IAuditPropertySetter, AuditPropertySetter>();
 
             #region 注册仓储
             //注册实体仓储:

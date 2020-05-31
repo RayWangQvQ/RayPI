@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Ray.Infrastructure.EFRepository\Ray.Infrastructure.Repository.EfCore.csproj" />
     <ProjectReference Include="..\..\src\Ray.Infrastructure.Repository.EfCore\Ray.Infrastructure.Repository.EfCore.csproj" />
     <ProjectReference Include="..\..\src\Ray.Infrastructure\Ray.Infrastructure.csproj" />
     <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />

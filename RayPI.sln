@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ray.Infrastructure", "src\R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ray.Infrastructure.Repository.EfCore", "src\Ray.Infrastructure.Repository.EfCore\Ray.Infrastructure.Repository.EfCore.csproj", "{DB962420-F6D1-44B1-8825-357FC2DCC131}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ray.Infrastructure.Repository.Dapper", "src\Ray.Infrastructure.Repository.Dapper\Ray.Infrastructure.Repository.Dapper.csproj", "{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{DB962420-F6D1-44B1-8825-357FC2DCC131}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB962420-F6D1-44B1-8825-357FC2DCC131}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB962420-F6D1-44B1-8825-357FC2DCC131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +137,7 @@ Global
 		{6246CF11-2F1F-4090-AF2A-091317CA2C2D} = {D97B4127-B8AE-4C8F-B061-15D3202E2DFE}
 		{AF074312-B831-48A5-83C7-2637E914F5A8} = {9F3FCDC3-9AEF-4279-B374-5FDE32CB869F}
 		{DB962420-F6D1-44B1-8825-357FC2DCC131} = {9F3FCDC3-9AEF-4279-B374-5FDE32CB869F}
+		{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B} = {9F3FCDC3-9AEF-4279-B374-5FDE32CB869F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {538DE4CA-FD39-4EC5-92B6-EF4B4D2B8F2D}

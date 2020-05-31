@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RayPI.OpenApi</name>
+    </assembly>
+    <members>
+        <member name="T:RayPI.OpenApi.Controllers.AccountController">
+            <summary>
+            账号接口
+            </summary>
+        </member>
+        <member name="M:RayPI.OpenApi.Controllers.AccountController.Login(System.String,System.String)">
+            <summary>
+            登录获取token
+            </summary>
+            <param name="userCode"></param>
+            <param name="pwd"></param>
+            <param name="roleName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RayPI.OpenApi.Controllers.ArticleController">
+            <summary>
+            文章Api
+            </summary>
+            <summary>
+            查询
+            </summary>
+            <summary>
+            新增
+            </summary>
+            <summary>
+            编辑
+            </summary>
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="M:RayPI.OpenApi.Controllers.ArticleController.#ctor(MediatR.IMediator)">
+            <summary>
+            构造
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:RayPI.OpenApi.Controllers.ArticleController.Get(RayPI.AppService.Queries.ArticlePageQuery)">
+            <summary>
+            查询
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RayPI.OpenApi.Controllers.ArticleController.Get(System.Guid)">
+            <summary>
+            获取详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RayPI.OpenApi.Controllers.ArticleController.Create(RayPI.AppService.Commands.CreateArticleCmd)">
+            <summary>
+            新增文章
+            </summary>
+            <param name="cmd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RayPI.OpenApi.Controllers.ArticleController.Update(RayPI.AppService.Commands.UpdateArticleCmd)">
+            <summary>
+            编辑
+            </summary>
+            <param name="requset"></param>
+        </member>
+        <member name="M:RayPI.OpenApi.Controllers.ArticleController.Delete(System.Guid)">
+            <summary>
+            删除
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:RayPI.OpenApi.Filters.WebApiResultFilterAttribute">
+            <summary>
+            接口返回统一格式过滤器
+            </summary>
+        </member>
+        <member name="M:RayPI.OpenApi.Filters.WebApiResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)">
+            <summary>
+            包装接口返回类型
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:RayPI.OpenApi.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RayPI.OpenApi.Program.Main(System.String[])">
+            <summary>
+            启动
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:RayPI.OpenApi.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            生成IHost构建器
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RayPI.OpenApi.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RayPI.OpenApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            构造
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:RayPI.OpenApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册服务到[依赖注入容器]
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:RayPI.OpenApi.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            Autofac注册
+            不需要执行build构建容器，构建的工作由Core框架完成
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:RayPI.OpenApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            配置管道
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

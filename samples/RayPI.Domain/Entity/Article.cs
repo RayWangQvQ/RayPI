@@ -7,7 +7,7 @@ namespace RayPI.Domain.Entity
 {
     public class Article : BaseEntity
     {
-        public Article()
+        protected Article()
         {
 
         }

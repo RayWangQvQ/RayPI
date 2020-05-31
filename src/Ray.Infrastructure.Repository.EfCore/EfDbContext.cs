@@ -73,22 +73,6 @@ namespace Ray.Infrastructure.Repository.EfCore
         }
         #endregion
 
-        /// <summary>Sets the modified.</summary>
-        /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
-        /// <param name="entity">The entity.</param>
-        public void SetModified<TAggregateRoot>(TAggregateRoot entity) where TAggregateRoot : IAggregateRoot
-        {
-            this.Entry(entity).State = EntityState.Modified;
-        }
-
-        /// <summary>Sets the deleted.</summary>
-        /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
-        /// <param name="entity">The entity.</param>
-        public void SetDeleted<TAggregateRoot>(TAggregateRoot entity) where TAggregateRoot : IAggregateRoot
-        {
-            this.Entry(entity).State = EntityState.Deleted;
-        }
-
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             try
@@ -148,6 +132,7 @@ namespace Ray.Infrastructure.Repository.EfCore
                 SetDeletionAuditProperties(entry);
             }
         }
+
         protected virtual void ApplyConceptsForDeletedEntity(EntityEntry entry)
         {
             if (TryCancelDeletionForSoftDelete(entry))

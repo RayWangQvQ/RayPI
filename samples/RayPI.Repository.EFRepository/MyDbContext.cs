@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using RayPI.Domain.Entity;
-using RayPI.Infrastructure.Treasury.Extensions;
-using RayPI.Infrastructure.Treasury.Helpers;
 using MediatR;
 using DotNetCore.CAP;
 using Microsoft.Extensions.Logging;
-using Ray.Domain;
-using Ray.Domain.OperatorInfo;
 using Ray.Infrastructure.Repository.EfCore;
+using System.Threading.Tasks;
 
 namespace RayPI.Repository.EFRepository
 {
@@ -57,9 +50,20 @@ namespace RayPI.Repository.EFRepository
             {
                 Id = Guid.NewGuid(),
                 SubTitle = "来自DbContext的OnModelCreating",
-                Content = "这是内容"
+                Content = "这是内容",
+                CreationTime = DateTime.Now
             });
         }
         #endregion
+
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
+
+        public override ValueTask DisposeAsync()
+        {
+            return base.DisposeAsync();
+        }
     }
 }

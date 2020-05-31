@@ -26,7 +26,7 @@ namespace RayPI.AppService.Commands
                 Content = request.Content
             };
 
-            var id = _articleRepository.InsertAsync(entity).Result.Id;
+            var id = _articleRepository.InsertAsync(entity, true).Result.Id;
             return id;
         }
     }
