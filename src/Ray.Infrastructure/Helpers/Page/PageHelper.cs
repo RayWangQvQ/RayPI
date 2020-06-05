@@ -73,7 +73,7 @@ namespace Ray.Infrastructure.Helpers.Page
             SortEnum sortOrder = SortEnum.Original,
             Expression<Func<T, bool>> filter = null)
         {
-            int skipCount = pageSize * (pageIndex - 1);//跳过条数
+            int skipCount;//跳过条数
             int totalCount;//筛选后总条数
             int totalPages;//筛选后总页数
 
@@ -83,6 +83,12 @@ namespace Ray.Infrastructure.Helpers.Page
             totalPages = totalCount > 0
                 ? (int)Math.Ceiling((double)totalCount / (double)pageSize)
                 : 0;
+            pageIndex = totalPages <= 0
+                ? 1
+                : pageIndex > totalPages
+                    ? totalPages
+                    : pageIndex;
+            skipCount = pageSize * (pageIndex - 1)
 
             //排序
             if (orderByExpression != null) source = Order(source, orderByExpression, sortOrder);
