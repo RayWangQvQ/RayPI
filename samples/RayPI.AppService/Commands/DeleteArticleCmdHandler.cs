@@ -22,9 +22,7 @@ namespace RayPI.AppService.Commands
         {
             Article entity = _articleRepository.GetAsync(x => x.Id == request.Id).Result;
             await _articleRepository.DeleteAsync(entity, true);
-            //todo:
-            var i = 0;
-            return Unit.Value;
+            return default;
         }
     }
 }
