@@ -1,9 +1,9 @@
 ﻿//系统包
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 //微软包
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
 //三方包
 using Swashbuckle.AspNetCore.Swagger;
@@ -35,7 +35,7 @@ namespace RayPI.Infrastructure.Swagger.Filters
         {
             var tagList = new List<OpenApiTag>();
 
-            var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+            var basePath = AppDomain.CurrentDomain.BaseDirectory;
             var xmlpath = Path.Combine(basePath, "APIHelp.xml");
             if (!File.Exists(xmlpath))//检查xml注释文件是否存在
                 return tagList;

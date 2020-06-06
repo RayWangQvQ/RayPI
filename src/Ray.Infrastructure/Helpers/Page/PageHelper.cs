@@ -88,7 +88,7 @@ namespace Ray.Infrastructure.Helpers.Page
                 : pageIndex > totalPages
                     ? totalPages
                     : pageIndex;
-            skipCount = pageSize * (pageIndex - 1)
+            skipCount = pageSize * (pageIndex - 1);
 
             //排序
             if (orderByExpression != null) source = Order(source, orderByExpression, sortOrder);
