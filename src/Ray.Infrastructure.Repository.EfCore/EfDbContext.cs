@@ -196,7 +196,7 @@ namespace Ray.Infrastructure.Repository.EfCore
             EntityHelper.TrySetId(
                 entity,
                 () => GuidGenerator.Create(),
-                true
+                false
             );
         }
 

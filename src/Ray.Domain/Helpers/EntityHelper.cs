@@ -21,7 +21,7 @@ namespace Ray.Domain.Helpers
             PropertyInfo property = CachedIdProperties.GetOrAdd(
                 $"{entity.GetType().FullName}-{checkForDisableIdGenerationAttribute}", () =>
                 {
-                    var idProperty = entity
+                    PropertyInfo idProperty = entity
                         .GetType()
                         .GetProperties()
                         .FirstOrDefault(x => x.Name == nameof(entity.Id) &&

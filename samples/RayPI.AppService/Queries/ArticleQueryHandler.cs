@@ -11,7 +11,7 @@ using RayPI.Domain.IRepository;
 
 namespace RayPI.AppService.Queries
 {
-    public class ArticleQueryHandler : RequestHandler<ArticleQuery, ArticleQueryViewModel>
+    public class ArticleQueryHandler : IRequestHandler<ArticleQuery, ArticleQueryViewModel>
     {
         private readonly IBaseRepository<Article> _articleRepository;
 
@@ -23,9 +23,9 @@ namespace RayPI.AppService.Queries
             this._articleRepository = baseRepository;
         }
 
-        protected override ArticleQueryViewModel Handle(ArticleQuery request)
+        public async Task<ArticleQueryViewModel> Handle(ArticleQuery request, CancellationToken cancellationToken)
         {
-            var entity = _articleRepository.FindAsync(x => x.Id == request.Id).Result;
+            Article entity = await _articleRepository.FindAsync(x => x.Id == request.Id);
             return AutoMapperHelper.Map<Article, ArticleQueryViewModel>(entity);
         }
     }
