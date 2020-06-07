@@ -163,7 +163,7 @@ namespace RayPI.OpenApi
                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                     };
                 }).AsFormatJsonStr();
-            await File.WriteAllTextAsync(Path.Combine(Directory.GetCurrentDirectory(), "services.txt"), servicesJson);
+            await File.WriteAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "services.txt"), servicesJson);
         }
     }
 }

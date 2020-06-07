@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>.\RayPI.AppService.xml</DocumentationFile>
+    <DocumentationFile>..\RayPI.OpenApi\bin\Debug\netcoreapp3.1\RayPI.AppService.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,17 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Queries\ArticlesQueryHandler.cs~RF7fea23b.TMP" />
+    <None Remove="Article\Queries\ArticlesQueryHandler.cs~RF7fea23b.TMP" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ray.Infrastructure\Ray.Infrastructure.csproj" />
     <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DomainEventHandlers\" />
-    <Folder Include="IntegrationEvents\" />
   </ItemGroup>
 
   <ItemGroup>

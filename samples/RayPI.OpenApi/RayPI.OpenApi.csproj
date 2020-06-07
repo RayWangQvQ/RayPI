@@ -2,12 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Ray</Authors>
+    <Product>RayPI</Product>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>.\RayPI.OpenApi.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp3.1\RayPI.OpenApi.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
