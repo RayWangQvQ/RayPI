@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Ray.Infrastructure.Helpers;
-using RayPI.Domain.Entity;
+using RayPI.AppService.Article.Dtos;
 using RayPI.Domain.IRepository;
 
-namespace RayPI.AppService.Commands
+namespace RayPI.AppService.Article.Commands
 {
     public class UpdateArticleCmdHandler : IRequestHandler<UpdateArticleCmd, Guid>
     {
-        private readonly IBaseRepository<Article> _articleRepository;
+        private readonly IBaseRepository<Domain.Entity.Article> _articleRepository;
 
-        public UpdateArticleCmdHandler(IBaseRepository<Article> baseRepository)
+        public UpdateArticleCmdHandler(IBaseRepository<Domain.Entity.Article> baseRepository)
         {
             this._articleRepository = baseRepository;
         }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using MediatR;
 
-namespace RayPI.AppService.Commands
+namespace RayPI.AppService.Article.Dtos
 {
     public class CreateArticleCmd : IRequest<Guid>
     {

@@ -3,12 +3,10 @@ using RayPI.Infrastructure.Cors.Attributes;
 using RayPI.Infrastructure.Cors.Enums;
 using System.Threading.Tasks;
 using MediatR;
-using RayPI.AppService.Commands;
-using RayPI.AppService.Queries;
 using System.Collections.Generic;
-using RayPI.AppService.Queries.ViewModels;
 using Microsoft.AspNetCore.Routing;
 using System;
+using RayPI.AppService.Article.Dtos;
 
 namespace RayPI.OpenApi.Controllers
 {

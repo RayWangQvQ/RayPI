@@ -1,32 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using RayPI.Domain.Entity;
+using RayPI.AppService.Article.Dtos;
 using RayPI.Domain.IRepository;
 
-namespace RayPI.AppService.Commands
+namespace RayPI.AppService.Article.Commands
 {
     public class CreateArticleCmdHandler : IRequestHandler<CreateArticleCmd, Guid>
     {
-        private readonly IBaseRepository<Article> _articleRepository;
+        private readonly IBaseRepository<Domain.Entity.Article> _articleRepository;
 
-        public CreateArticleCmdHandler(IBaseRepository<Article> baseRepository)
+        public CreateArticleCmdHandler(IBaseRepository<Domain.Entity.Article> baseRepository)
         {
             this._articleRepository = baseRepository;
         }
 
         public async Task<Guid> Handle(CreateArticleCmd request, CancellationToken cancellationToken)
         {
-            var entity = new Article(request.Title)
+            var entity = new Domain.Entity.Article(request.Title)
             {
                 SubTitle = request.SubTitle,
                 Content = request.Content
             };
 
-            Article result = await _articleRepository.InsertAsync(entity, true);
+            Domain.Entity.Article result = await _articleRepository.InsertAsync(entity, true);
             return result.Id;
         }
     }

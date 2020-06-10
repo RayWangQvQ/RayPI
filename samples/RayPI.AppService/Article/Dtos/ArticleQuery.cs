@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using MediatR;
-using RayPI.AppService.Queries.ViewModels;
 
-namespace RayPI.AppService.Queries
+namespace RayPI.AppService.Article.Dtos
 {
     public class ArticleQuery : IRequest<ArticleQueryViewModel>
     {

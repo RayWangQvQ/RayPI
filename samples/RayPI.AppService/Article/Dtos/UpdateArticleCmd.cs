@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RayPI.AppService.Commands
+namespace RayPI.AppService.Article.Dtos
 {
     public class UpdateArticleCmd : CreateArticleCmd
     {
