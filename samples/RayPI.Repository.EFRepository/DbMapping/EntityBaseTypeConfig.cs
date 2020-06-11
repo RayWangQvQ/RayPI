@@ -15,8 +15,10 @@ namespace RayPI.Repository.EFRepository.DbMapping
     public abstract class EntityBaseTypeConfig<TEntity> : EntityTypeConfiguration<TEntity>
         where TEntity : BaseEntity
     {
-        public override void ConfigureField(EntityTypeBuilder<TEntity> builder)
+        protected override void ConfigureField(EntityTypeBuilder<TEntity> builder)
         {
+            base.ConfigureField(builder);
+
             builder.HasKey(x => x.Id);
             builder.Property(it => it.Id).IsRequired().ValueGeneratedNever();
 
@@ -31,25 +33,9 @@ namespace RayPI.Repository.EFRepository.DbMapping
             builder.Property(x => x.IsDeleted).IsRequired();
             builder.Property(x => x.DeleterId).IsRequired(false);
             builder.Property(x => x.DeletionTime).IsRequired(false);
-
-            var filterExpression = CreateFilterExpression<TEntity>();
-            builder.HasQueryFilter(filterExpression);
         }
 
         public abstract void MyConfigureField(EntityTypeBuilder<TEntity> builder);
-
-        protected virtual Expression<Func<TEntity, bool>> CreateFilterExpression<TEntity>()
-            where TEntity : class
-        {
-            Expression<Func<TEntity, bool>> expression = null;
-
-            if (typeof(ISoftDelete).IsAssignableFrom(typeof(TEntity)))
-            {
-                expression = e => !EF.Property<bool>(e, "IsDeleted");
-            }
-
-            return expression;
-        }
     }
 
 

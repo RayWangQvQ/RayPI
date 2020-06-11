@@ -15,6 +15,14 @@ namespace RayPI.Repository.EFRepository.DbMapping
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.SubTitle);
             builder.Property(x => x.Content);
+
+            builder.HasData(new Article("这是一条初始化的数据")
+            {
+                Id = Guid.NewGuid(),
+                SubTitle = "来自DbContext的OnModelCreating",
+                Content = "这是内容",
+                CreationTime = DateTime.Now,
+            });
         }
     }
 }

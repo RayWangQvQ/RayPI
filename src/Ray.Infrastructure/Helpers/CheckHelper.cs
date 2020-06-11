@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using Autofac;
 using Ray.Infrastructure.Extensions;
 
 namespace Ray.Infrastructure.Helpers

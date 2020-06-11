@@ -44,15 +44,6 @@ namespace RayPI.Repository.EFRepository
 
             //设置全局默认的数据库敢纲要（不设置的话默认为dbo）
             modelBuilder.HasDefaultSchema("ray");
-
-            //初始化一条数据
-            modelBuilder.Entity<Article>().HasData(new Article("这是一条初始化的数据")
-            {
-                Id = Guid.NewGuid(),
-                SubTitle = "来自DbContext的OnModelCreating",
-                Content = "这是内容",
-                CreationTime = DateTime.Now
-            });
         }
         #endregion
 
