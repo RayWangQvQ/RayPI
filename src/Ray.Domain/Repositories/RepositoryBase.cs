@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ray.Domain.Entities;
-using Ray.Infrastructure.Auditing.Deletion;
 using Ray.Infrastructure.Extensions.Linq;
 using Ray.Infrastructure.Threading;
 

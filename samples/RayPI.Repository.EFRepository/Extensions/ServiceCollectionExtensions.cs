@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Ray.Infrastructure.Auditing;
+using Ray.Infrastructure.Auditing.PropertySetter;
 using RayPI.Domain.IRepository;
 using RayPI.Infrastructure.Config.Options;
 using RayPI.Infrastructure.Treasury.Di;

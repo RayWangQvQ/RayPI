@@ -12,7 +12,7 @@ using Ray.Domain.Entities;
 using Ray.Domain.Helpers;
 using Ray.Domain.Repositories;
 using Ray.Infrastructure.Auditing;
-using Ray.Infrastructure.Auditing.Deletion;
+using Ray.Infrastructure.Auditing.PropertySetter;
 using Ray.Infrastructure.Guids;
 using Ray.Infrastructure.Helpers;
 
@@ -127,7 +127,7 @@ namespace Ray.Infrastructure.Repository.EfCore
         {
             SetModificationAuditProperties(entry);
 
-            if (entry.Entity is ISoftDelete && entry.Entity.As<ISoftDelete>().IsDeleted)
+            if (entry.Entity is ILogicDeletable && entry.Entity.As<ILogicDeletable>().IsDeleted)
             {
                 SetDeletionAuditProperties(entry);
             }
@@ -143,14 +143,14 @@ namespace Ray.Infrastructure.Repository.EfCore
 
         protected virtual bool TryCancelDeletionForSoftDelete(EntityEntry entry)
         {
-            if (!(entry.Entity is ISoftDelete))
+            if (!(entry.Entity is ILogicDeletable))
             {
                 return false;
             }
 
             entry.Reload();
             entry.State = EntityState.Modified;
-            entry.Entity.As<ISoftDelete>().IsDeleted = true;
+            entry.Entity.As<ILogicDeletable>().IsDeleted = true;
             return true;
         }
 

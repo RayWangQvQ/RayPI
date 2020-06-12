@@ -6,9 +6,9 @@ using Ray.Infrastructure.Auditing;
 namespace Ray.Domain.Entities.Auditing
 {
     /// <summary>
-    /// Implements <see cref="IFullAuditedObject"/> to be a base class for full-audited aggregate roots.
+    /// 集成了全部审计的聚合根
     /// </summary>
-    public abstract class FullAuditedAggregateRoot : AuditedAggregateRoot, IFullAuditedObject
+    public abstract class FullAuditedAggregateRoot : AuditedAggregateRoot, IHasFullAuditing
     {
         /// <inheritdoc />
         public virtual bool IsDeleted { get; set; }
@@ -21,10 +21,10 @@ namespace Ray.Domain.Entities.Auditing
     }
 
     /// <summary>
-    /// Implements <see cref="IFullAuditedObject"/> to be a base class for full-audited aggregate roots.
+    /// 集成了全部审计的聚合根
     /// </summary>
     /// <typeparam name="TKey">Type of the primary key of the entity</typeparam>
-    public abstract class FullAuditedAggregateRoot<TKey> : AuditedAggregateRoot<TKey>, IFullAuditedObject
+    public abstract class FullAuditedAggregateRoot<TKey> : AuditedAggregateRoot<TKey>, IHasFullAuditing
     {
         /// <inheritdoc />
         public virtual bool IsDeleted { get; set; }

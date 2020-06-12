@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Ray.Domain.Entities;
-using Ray.Infrastructure.Auditing.Deletion;
+using Ray.Infrastructure.Auditing;
 using Ray.Infrastructure.Repository.EfCore.Extensions;
 
 namespace Ray.Infrastructure.Repository.EfCore
@@ -43,7 +43,7 @@ namespace Ray.Infrastructure.Repository.EfCore
         /// <param name="builder"></param>
         protected virtual void ConfigureField(EntityTypeBuilder<TEntity> builder)
         {
-            builder.TryConfigureBasic();
+            builder.TryConfigureBasicProperties();
         }
 
         /// <summary>
@@ -52,8 +52,12 @@ namespace Ray.Infrastructure.Repository.EfCore
         /// <param name="builder"></param>
         protected virtual void ConfigureQueryFilter(EntityTypeBuilder<TEntity> builder)
         {
+            /*
+             * 默认过滤逻辑删除的数据
+             */
+
             Expression<Func<TEntity, bool>> expression = null;
-            if (typeof(ISoftDelete).IsAssignableFrom(typeof(TEntity)))
+            if (typeof(ILogicDeletable).IsAssignableFrom(typeof(TEntity)))
             {
                 expression = e => !EF.Property<bool>(e, "IsDeleted");
             }

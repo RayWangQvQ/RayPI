@@ -9,13 +9,14 @@ namespace RayPI.Repository.EFRepository.DbMapping
 {
     public class ArticleConfig : EntityBaseTypeConfig<Article>
     {
-        public override void MyConfigureField(EntityTypeBuilder<Article> builder)
+        protected override void AppConfigure(EntityTypeBuilder<Article> builder)
         {
             //map：
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.SubTitle);
             builder.Property(x => x.Content);
 
+            //初始化数据
             builder.HasData(new Article("这是一条初始化的数据")
             {
                 Id = Guid.NewGuid(),

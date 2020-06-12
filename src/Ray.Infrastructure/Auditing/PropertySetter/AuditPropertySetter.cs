@@ -1,46 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ray.Infrastructure.Auditing.Creation;
-using Ray.Infrastructure.Auditing.Deletion;
-using Ray.Infrastructure.Auditing.Modification;
 using Ray.Infrastructure.Users;
 
-namespace Ray.Infrastructure.Auditing
+namespace Ray.Infrastructure.Auditing.PropertySetter
 {
+    /// <summary>
+    /// 审计属性Setter器
+    /// </summary>
     public class AuditPropertySetter : IAuditPropertySetter
     {
+        /// <summary>
+        /// 当前用户
+        /// </summary>
         protected ICurrentUser CurrentUser { get; }
 
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <param name="currentUser"></param>
         public AuditPropertySetter(ICurrentUser currentUser)
         {
             CurrentUser = currentUser;
         }
 
-        /// <summary>
-        /// 为创建相关的审计属性赋值
-        /// </summary>
-        /// <param name="targetObject"></param>
         public void SetCreationProperties(object targetObject)
         {
             SetCreationTime(targetObject);
             SetCreatorId(targetObject);
         }
 
-        /// <summary>
-        /// 为修改相关的审计属性赋值
-        /// </summary>
-        /// <param name="targetObject"></param>
         public void SetModificationProperties(object targetObject)
         {
             SetLastModificationTime(targetObject);
             SetLastModifierId(targetObject);
         }
 
-        /// <summary>
-        /// 为删除相关的审计属性赋值
-        /// </summary>
-        /// <param name="targetObject"></param>
         public void SetDeletionProperties(object targetObject)
         {
             SetDeletionTime(targetObject);
@@ -48,10 +41,14 @@ namespace Ray.Infrastructure.Auditing
         }
 
 
-
+        #region 私有
+        /// <summary>
+        /// 赋值创建时间
+        /// </summary>
+        /// <param name="targetObject"></param>
         private void SetCreationTime(object targetObject)
         {
-            if (!(targetObject is IHasCreationTime objectWithCreationTime))
+            if (!(targetObject is IHasCreationAuditing objectWithCreationTime))
             {
                 return;
             }
@@ -62,6 +59,10 @@ namespace Ray.Infrastructure.Auditing
             }
         }
 
+        /// <summary>
+        /// 赋值创建人Id
+        /// </summary>
+        /// <param name="targetObject"></param>
         private void SetCreatorId(object targetObject)
         {
             if (!CurrentUser.Id.HasValue)
@@ -69,7 +70,7 @@ namespace Ray.Infrastructure.Auditing
                 return;
             }
 
-            if (targetObject is IMayHaveCreator mayHaveCreatorObject)
+            if (targetObject is IHasCreationAuditing mayHaveCreatorObject)
             {
                 if (mayHaveCreatorObject.CreatorId.HasValue && mayHaveCreatorObject.CreatorId.Value != default)
                 {
@@ -80,17 +81,25 @@ namespace Ray.Infrastructure.Auditing
             }
         }
 
+        /// <summary>
+        /// 赋值最后编辑时间
+        /// </summary>
+        /// <param name="targetObject"></param>
         private void SetLastModificationTime(object targetObject)
         {
-            if (targetObject is IHasModificationTime objectWithModificationTime)
+            if (targetObject is IHasModificationAuditing objectWithModificationTime)
             {
                 objectWithModificationTime.LastModificationTime = DateTime.Now;
             }
         }
 
+        /// <summary>
+        /// 赋值最后编辑人Id
+        /// </summary>
+        /// <param name="targetObject"></param>
         private void SetLastModifierId(object targetObject)
         {
-            if (!(targetObject is IModificationAuditedObject modificationAuditedObject))
+            if (!(targetObject is IHasModificationAuditing modificationAuditedObject))
             {
                 return;
             }
@@ -104,9 +113,13 @@ namespace Ray.Infrastructure.Auditing
             modificationAuditedObject.LastModifierId = CurrentUser.Id;
         }
 
+        /// <summary>
+        /// 赋值逻辑删除时间
+        /// </summary>
+        /// <param name="targetObject"></param>
         private void SetDeletionTime(object targetObject)
         {
-            if (targetObject is IHasDeletionTime objectWithDeletionTime)
+            if (targetObject is IHasDeletionAuditing objectWithDeletionTime)
             {
                 if (objectWithDeletionTime.DeletionTime == null)
                 {
@@ -115,9 +128,13 @@ namespace Ray.Infrastructure.Auditing
             }
         }
 
+        /// <summary>
+        /// 赋值逻辑删除人Id
+        /// </summary>
+        /// <param name="targetObject"></param>
         private void SetDeleterId(object targetObject)
         {
-            if (!(targetObject is IDeletionAuditedObject deletionAuditedObject))
+            if (!(targetObject is IHasDeletionAuditing deletionAuditedObject))
             {
                 return;
             }
@@ -135,5 +152,6 @@ namespace Ray.Infrastructure.Auditing
 
             deletionAuditedObject.DeleterId = CurrentUser.Id;
         }
+        #endregion
     }
 }

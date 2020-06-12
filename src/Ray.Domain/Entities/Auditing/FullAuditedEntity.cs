@@ -6,9 +6,9 @@ using Ray.Infrastructure.Auditing;
 namespace Ray.Domain.Entities.Auditing
 {
     /// <summary>
-    /// Implements <see cref="IFullAuditedObject"/> to be a base class for full-audited entities.
+    /// 集成了全部审计的实体
     /// </summary>
-    public abstract class FullAuditedEntity : AuditedEntity, IFullAuditedObject
+    public abstract class FullAuditedEntity : AuditedEntity, IHasFullAuditing
     {
         /// <inheritdoc />
         public virtual bool IsDeleted { get; set; }
@@ -21,10 +21,10 @@ namespace Ray.Domain.Entities.Auditing
     }
 
     /// <summary>
-    /// Implements <see cref="IFullAuditedObject"/> to be a base class for full-audited entities.
+    /// 集成了全部审计的实体
     /// </summary>
     /// <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
-    public abstract class FullAuditedEntity<TPrimaryKey> : AuditedEntity<TPrimaryKey>, IFullAuditedObject
+    public abstract class FullAuditedEntity<TPrimaryKey> : AuditedEntity<TPrimaryKey>, IHasFullAuditing
     {
         /// <inheritdoc />
         public virtual bool IsDeleted { get; set; }

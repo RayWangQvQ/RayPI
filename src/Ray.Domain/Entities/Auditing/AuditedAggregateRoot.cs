@@ -6,9 +6,9 @@ using Ray.Infrastructure.Auditing;
 namespace Ray.Domain.Entities.Auditing
 {
     /// <summary>
-    /// This class can be used to simplify implementing <see cref="IAuditedObject"/> for aggregate roots.
+    /// 集成了创建审计和编辑审计的聚合根
     /// </summary>
-    public abstract class AuditedAggregateRoot : AggregateRoot, IAuditedObject
+    public abstract class AuditedAggregateRoot : AggregateRoot, IHasCreationAuditing, IHasModificationAuditing
     {
         /// <inheritdoc />
         public virtual DateTime CreationTime { get; set; }
@@ -24,10 +24,10 @@ namespace Ray.Domain.Entities.Auditing
     }
 
     /// <summary>
-    /// This class can be used to simplify implementing <see cref="IAuditedObject"/> for aggregate roots.
+    /// 集成了创建审计和编辑审计的聚合根
     /// </summary>
     /// <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
-    public abstract class AuditedAggregateRoot<TPrimaryKey> : AggregateRoot<TPrimaryKey>, IAuditedObject
+    public abstract class AuditedAggregateRoot<TPrimaryKey> : AggregateRoot<TPrimaryKey>, IHasCreationAuditing, IHasModificationAuditing
     {
         /// <inheritdoc />
         public virtual DateTime CreationTime { get; set; }

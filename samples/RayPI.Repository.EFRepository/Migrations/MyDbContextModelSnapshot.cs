@@ -20,29 +20,43 @@ namespace RayPI.Repository.EFRepository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("RayPI.Domain.Entity.ArticleEntity", b =>
+            modelBuilder.Entity("RayPI.Domain.Entity.Article", b =>
                 {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("CreateId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("CreateName")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime?>("CreateTime")
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnName("CreationTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeleteTime")
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("CreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnName("DeleterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnName("DeletionTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnName("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnName("LastModifierId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SubTitle")
                         .HasColumnType("nvarchar(max)");
@@ -51,30 +65,19 @@ namespace RayPI.Repository.EFRepository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UpdateId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UpdateName")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
-                    b.ToTable("ArticleEntity");
+                    b.ToTable("AppArticle");
 
                     b.HasData(
                         new
                         {
-                            Id = 1L,
+                            Id = new Guid("c89b7057-477d-4185-a72c-3725e908e5db"),
                             Content = "这是内容",
-                            CreateName = "",
+                            CreationTime = new DateTime(2020, 6, 12, 10, 46, 45, 565, DateTimeKind.Local).AddTicks(5308),
                             IsDeleted = false,
                             SubTitle = "来自DbContext的OnModelCreating",
-                            Title = "这是一条初始化的数据",
-                            UpdateName = ""
+                            Title = "这是一条初始化的数据"
                         });
                 });
 #pragma warning restore 612, 618

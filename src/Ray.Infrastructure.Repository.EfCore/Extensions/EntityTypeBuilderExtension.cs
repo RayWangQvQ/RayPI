@@ -3,109 +3,93 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ray.Infrastructure.Auditing.Creation;
-using Ray.Infrastructure.Auditing.Deletion;
-using Ray.Infrastructure.Auditing.Modification;
+using Ray.Infrastructure.Auditing;
 using Ray.Infrastructure.Extensions;
 
 namespace Ray.Infrastructure.Repository.EfCore.Extensions
 {
     public static class EntityTypeBuilderExtension
     {
-        public static void TryConfigureBasic(this EntityTypeBuilder b)
+        public static void TryConfigureBasicProperties(this EntityTypeBuilder b)
         {
-            b.TryConfigureMayHaveCreator();
-            b.TryConfigureCreationTime();
+            b.TryConfigureLogicDelete();
 
-            b.TryConfigureLastModificationTime();
-            b.TryConfigureModificationAudited();
-
-            b.TryConfigureSoftDelete();
-            b.TryConfigureDeletionTime();
-            b.TryConfigureDeletionAudited();
+            b.TryConfigureCreationAuditing();
+            b.TryConfigureLastModificationAuditing();
+            b.TryConfigureDeletionAuditing();
         }
 
-        #region 创建
-        public static void TryConfigureMayHaveCreator(this EntityTypeBuilder b)
+        /// <summary>
+        /// 尝试配置逻辑删除属性
+        /// </summary>
+        /// <param name="b"></param>
+        public static void TryConfigureLogicDelete(this EntityTypeBuilder b)
         {
-            if (b.Metadata.ClrType.IsAssignableTo<IMayHaveCreator>())
+            if (b.Metadata.ClrType.IsAssignableTo<ILogicDeletable>())
             {
-                b.Property(nameof(IMayHaveCreator.CreatorId))
-                    .IsRequired(false)
-                    .HasColumnName(nameof(IMayHaveCreator.CreatorId));
-            }
-        }
-
-        public static void TryConfigureCreationTime(this EntityTypeBuilder b)
-        {
-            if (b.Metadata.ClrType.IsAssignableTo<IHasCreationTime>())
-            {
-                b.Property(nameof(IHasCreationTime.CreationTime))
-                    .IsRequired()
-                    .HasColumnName(nameof(IHasCreationTime.CreationTime));
-            }
-        }
-        #endregion
-
-        #region 编辑
-        public static void TryConfigureLastModificationTime(this EntityTypeBuilder b)
-        {
-            if (b.Metadata.ClrType.IsAssignableTo<IHasModificationTime>())
-            {
-                b.Property(nameof(IHasModificationTime.LastModificationTime))
-                    .IsRequired(false)
-                    .HasColumnName(nameof(IHasModificationTime.LastModificationTime));
-            }
-        }
-
-        public static void TryConfigureModificationAudited(this EntityTypeBuilder b)
-        {
-            if (b.Metadata.ClrType.IsAssignableTo<IModificationAuditedObject>())
-            {
-                b.TryConfigureLastModificationTime();
-
-                b.Property(nameof(IModificationAuditedObject.LastModifierId))
-                    .IsRequired(false)
-                    .HasColumnName(nameof(IModificationAuditedObject.LastModifierId));
-            }
-        }
-        #endregion
-
-        #region 删除
-        public static void TryConfigureSoftDelete(this EntityTypeBuilder b)
-        {
-            if (b.Metadata.ClrType.IsAssignableTo<ISoftDelete>())
-            {
-                b.Property(nameof(ISoftDelete.IsDeleted))
+                b.Property(nameof(ILogicDeletable.IsDeleted))
                     .IsRequired()
                     .HasDefaultValue(false)
-                    .HasColumnName(nameof(ISoftDelete.IsDeleted));
+                    .HasColumnName(nameof(ILogicDeletable.IsDeleted));
             }
         }
 
-        public static void TryConfigureDeletionTime(this EntityTypeBuilder b)
+        /// <summary>
+        /// 尝试配置创建相关审计属性
+        /// </summary>
+        /// <param name="b"></param>
+        public static void TryConfigureCreationAuditing(this EntityTypeBuilder b)
         {
-            if (b.Metadata.ClrType.IsAssignableTo<IHasDeletionTime>())
-            {
-                b.TryConfigureSoftDelete();
+            if (!b.Metadata.ClrType.IsAssignableTo<IHasCreationAuditing>()) return;
 
-                b.Property(nameof(IHasDeletionTime.DeletionTime))
-                    .IsRequired(false)
-                    .HasColumnName(nameof(IHasDeletionTime.DeletionTime));
-            }
+            //创建人Id：
+            b.Property(nameof(IHasCreationAuditing.CreatorId))
+                .IsRequired(false)
+                .HasColumnName(nameof(IHasCreationAuditing.CreatorId));
+
+            //创建时间：
+            b.Property(nameof(IHasCreationAuditing.CreationTime))
+                .IsRequired()
+                .HasColumnName(nameof(IHasCreationAuditing.CreationTime));
         }
 
-        public static void TryConfigureDeletionAudited(this EntityTypeBuilder b)
+        /// <summary>
+        /// 尝试配置最后编辑相关的审计属性
+        /// </summary>
+        /// <param name="b"></param>
+        public static void TryConfigureLastModificationAuditing(this EntityTypeBuilder b)
         {
-            if (b.Metadata.ClrType.IsAssignableTo<IDeletionAuditedObject>())
-            {
-                b.TryConfigureDeletionTime();
+            if (!b.Metadata.ClrType.IsAssignableTo<IHasModificationAuditing>()) return;
 
-                b.Property(nameof(IDeletionAuditedObject.DeleterId))
+            //最后编辑人Id：
+            b.Property(nameof(IHasModificationAuditing.LastModifierId))
+                .IsRequired(false)
+                .HasColumnName(nameof(IHasModificationAuditing.LastModifierId));
+
+            //最后编辑时间
+            b.Property(nameof(IHasModificationAuditing.LastModificationTime))
+                .IsRequired(false)
+                .HasColumnName(nameof(IHasModificationAuditing.LastModificationTime));
+        }
+
+        /// <summary>
+        /// 尝试配置删除相关的审计属性
+        /// </summary>
+        /// <param name="b"></param>
+        public static void TryConfigureDeletionAuditing(this EntityTypeBuilder b)
+        {
+            if (b.Metadata.ClrType.IsAssignableTo<ILogicDeletable>())
+            {
+                b.TryConfigureLogicDelete();
+
+                b.Property(nameof(IHasDeletionAuditing.DeleterId))
                     .IsRequired(false)
-                    .HasColumnName(nameof(IDeletionAuditedObject.DeleterId));
+                    .HasColumnName(nameof(IHasDeletionAuditing.DeleterId));
+
+                b.Property(nameof(IHasDeletionAuditing.DeletionTime))
+                    .IsRequired(false)
+                    .HasColumnName(nameof(IHasDeletionAuditing.DeletionTime));
             }
         }
-        #endregion
     }
 }

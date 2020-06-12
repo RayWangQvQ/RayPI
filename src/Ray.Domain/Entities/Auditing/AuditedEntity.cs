@@ -6,28 +6,26 @@ using Ray.Infrastructure.Auditing;
 namespace Ray.Domain.Entities.Auditing
 {
     /// <summary>
-    /// This class can be used to simplify implementing <see cref="IAuditedObject"/>.
+    /// 集成了创建审计和编辑审计的实体
     /// </summary>
-    public abstract class AuditedEntity : Entity, IAuditedObject
+    public abstract class AuditedEntity : Entity, IHasCreationAuditing, IHasModificationAuditing
     {
         /// <inheritdoc />
         public virtual DateTime CreationTime { get; set; }
-
         /// <inheritdoc />
         public virtual Guid? CreatorId { get; set; }
 
         /// <inheritdoc />
         public virtual DateTime? LastModificationTime { get; set; }
-
         /// <inheritdoc />
         public virtual Guid? LastModifierId { get; set; }
     }
 
     /// <summary>
-    /// This class can be used to simplify implementing <see cref="IAuditedObject"/>.
+    /// 集成了创建审计和编辑审计的实体
     /// </summary>
     /// <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
-    public abstract class AuditedEntity<TPrimaryKey> : Entity<TPrimaryKey>, IAuditedObject
+    public abstract class AuditedEntity<TPrimaryKey> : Entity<TPrimaryKey>, IHasCreationAuditing, IHasModificationAuditing
     {
         /// <inheritdoc />
         public virtual DateTime CreationTime { get; set; }
