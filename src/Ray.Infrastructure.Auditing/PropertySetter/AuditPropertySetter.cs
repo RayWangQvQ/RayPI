@@ -1,5 +1,5 @@
 ﻿using System;
-using Ray.Infrastructure.Users;
+using Ray.Infrastructure.Security.User;
 
 namespace Ray.Infrastructure.Auditing.PropertySetter
 {

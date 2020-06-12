@@ -107,7 +107,7 @@ namespace RayPI.OpenApi
         /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
-
+            builder.AddMyRepository();
         }
 
         /// <summary>

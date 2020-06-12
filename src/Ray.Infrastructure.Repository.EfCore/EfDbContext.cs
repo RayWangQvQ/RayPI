@@ -28,6 +28,10 @@ namespace Ray.Infrastructure.Repository.EfCore
         ICapPublisher _capBus;
 
         public IGuidGenerator GuidGenerator { get; set; }
+
+        /// <summary>
+        /// 审计属性Setter器
+        /// </summary>
         public IAuditPropertySetter AuditPropertySetter { get; set; }
 
         /// <summary>
@@ -135,13 +139,13 @@ namespace Ray.Infrastructure.Repository.EfCore
 
         protected virtual void ApplyConceptsForDeletedEntity(EntityEntry entry)
         {
-            if (TryCancelDeletionForSoftDelete(entry))
+            if (TryCancelDeletionForLogicDelete(entry))
             {
                 SetDeletionAuditProperties(entry);
             }
         }
 
-        protected virtual bool TryCancelDeletionForSoftDelete(EntityEntry entry)
+        protected virtual bool TryCancelDeletionForLogicDelete(EntityEntry entry)
         {
             if (!(entry.Entity is ILogicDeletable))
             {

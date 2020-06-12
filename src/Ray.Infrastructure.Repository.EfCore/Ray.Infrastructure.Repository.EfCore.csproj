@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ray.Domain\Ray.Domain.csproj" />
+    <ProjectReference Include="..\Ray.Infrastructure.Auditing\Ray.Infrastructure.Auditing.csproj" />
     <ProjectReference Include="..\Ray.Infrastructure\Ray.Infrastructure.csproj" />
   </ItemGroup>
 

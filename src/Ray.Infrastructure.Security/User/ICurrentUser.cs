@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 
-namespace Ray.Infrastructure.Users
+namespace Ray.Infrastructure.Security.User
 {
     public interface ICurrentUser
     {

@@ -47,6 +47,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ray.Infrastructure.Reposito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ray.Infrastructure.Repository.Dapper", "src\Ray.Infrastructure.Repository.Dapper\Ray.Infrastructure.Repository.Dapper.csproj", "{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ray.Infrastructure.Security", "src\Ray.Infrastructure.Security\Ray.Infrastructure.Security.csproj", "{36CECD37-C916-4B67-97CB-BB35D4910FD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ray.Infrastructure.Auditing", "src\Ray.Infrastructure.Auditing\Ray.Infrastructure.Auditing.csproj", "{3CD0498C-A80A-4A20-9C2E-BF314FD75332}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +117,14 @@ Global
 		{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36CECD37-C916-4B67-97CB-BB35D4910FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36CECD37-C916-4B67-97CB-BB35D4910FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36CECD37-C916-4B67-97CB-BB35D4910FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36CECD37-C916-4B67-97CB-BB35D4910FD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CD0498C-A80A-4A20-9C2E-BF314FD75332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CD0498C-A80A-4A20-9C2E-BF314FD75332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CD0498C-A80A-4A20-9C2E-BF314FD75332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CD0498C-A80A-4A20-9C2E-BF314FD75332}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +150,8 @@ Global
 		{AF074312-B831-48A5-83C7-2637E914F5A8} = {9F3FCDC3-9AEF-4279-B374-5FDE32CB869F}
 		{DB962420-F6D1-44B1-8825-357FC2DCC131} = {9F3FCDC3-9AEF-4279-B374-5FDE32CB869F}
 		{C67AF6D0-1DB1-4279-96F5-DEF1BA134E3B} = {9F3FCDC3-9AEF-4279-B374-5FDE32CB869F}
+		{36CECD37-C916-4B67-97CB-BB35D4910FD8} = {9F3FCDC3-9AEF-4279-B374-5FDE32CB869F}
+		{3CD0498C-A80A-4A20-9C2E-BF314FD75332} = {9F3FCDC3-9AEF-4279-B374-5FDE32CB869F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {538DE4CA-FD39-4EC5-92B6-EF4B4D2B8F2D}
