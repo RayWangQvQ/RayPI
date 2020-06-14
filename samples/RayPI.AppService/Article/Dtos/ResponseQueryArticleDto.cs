@@ -2,7 +2,7 @@
 
 namespace RayPI.AppService.Article.Dtos
 {
-    public class ArticleQueryViewModel
+    public class ResponseQueryArticleDto
     {
         /// <summary>
         /// Id

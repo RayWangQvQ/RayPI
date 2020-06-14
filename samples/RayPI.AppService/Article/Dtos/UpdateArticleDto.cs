@@ -2,7 +2,7 @@
 
 namespace RayPI.AppService.Article.Dtos
 {
-    public class UpdateArticleCmd : CreateArticleCmd
+    public class UpdateArticleDto : CreateArticleDto
     {
         public Guid Id { get; set; }
     }

@@ -9,7 +9,7 @@ using RayPI.Domain.IRepository;
 
 namespace RayPI.AppService.Article.Queries
 {
-    public class ArticlePageQueryHandler : IRequestHandler<ArticlePageQuery, List<ArticleQueryViewModel>>
+    public class ArticlePageQueryHandler : IRequestHandler<QueryArticlePageDto, List<ResponseQueryArticleDto>>
     {
         private readonly IBaseRepository<Domain.Entity.Article> _articleRepository;
 
@@ -21,7 +21,7 @@ namespace RayPI.AppService.Article.Queries
             this._articleRepository = baseRepository;
         }
 
-        public Task<List<ArticleQueryViewModel>> Handle(ArticlePageQuery request, CancellationToken cancellationToken)
+        public Task<List<ResponseQueryArticleDto>> Handle(QueryArticlePageDto request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Entity.Article> queryable = _articleRepository.GetQueryable();
 
@@ -30,7 +30,7 @@ namespace RayPI.AppService.Article.Queries
 
             //return AutoMapperHelper.Map<List<Article>, List<ArticleQueryViewModel>>(list);
             var list = queryable.ToList()
-                .Select(x => AutoMapperHelper.Map<Domain.Entity.Article, ArticleQueryViewModel>(x))
+                .Select(x => AutoMapperHelper.Map<Domain.Entity.Article, ResponseQueryArticleDto>(x))
                 .ToList();
             return Task.FromResult(list);
         }

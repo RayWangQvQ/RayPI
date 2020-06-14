@@ -6,7 +6,7 @@ using RayPI.Domain.IRepository;
 
 namespace RayPI.AppService.Article.Commands
 {
-    public class DeleteArticleCmdHandler : IRequestHandler<DeleteArticleCmd>
+    public class DeleteArticleCmdHandler : IRequestHandler<DeleteArticleDto>
     {
         private readonly IBaseRepository<Domain.Entity.Article> _articleRepository;
 
@@ -15,7 +15,7 @@ namespace RayPI.AppService.Article.Commands
             this._articleRepository = baseRepository;
         }
 
-        public async Task<Unit> Handle(DeleteArticleCmd request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteArticleDto request, CancellationToken cancellationToken)
         {
             Domain.Entity.Article entity = _articleRepository.GetAsync(x => x.Id == request.Id).Result;
             await _articleRepository.DeleteAsync(entity, true);

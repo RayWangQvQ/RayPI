@@ -3,8 +3,11 @@ using MediatR;
 
 namespace RayPI.AppService.Article.Dtos
 {
-    public class ArticleQuery : IRequest<ArticleQueryViewModel>
+    public class DeleteArticleDto : IRequest
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         public Guid Id { get; set; }
     }
 }

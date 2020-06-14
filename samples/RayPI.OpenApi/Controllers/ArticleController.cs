@@ -41,7 +41,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<ArticleQueryViewModel>> Get([FromQuery]ArticlePageQuery query)
+        public async Task<List<ResponseQueryArticleDto>> Get([FromQuery]QueryArticlePageDto query)
         {
             return await _mediator.Send(query, HttpContext.RequestAborted);
         }
@@ -53,9 +53,9 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet()]
         [Route("Id")]
-        public async Task<ArticleQueryViewModel> Get(Guid id)
+        public async Task<ResponseQueryArticleDto> Get(Guid id)
         {
-            return await _mediator.Send(new ArticleQuery { Id = id });
+            return await _mediator.Send(new QueryArticleDto { Id = id });
         }
     }
 
@@ -70,7 +70,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="cmd"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Guid> Create(CreateArticleCmd cmd)
+        public async Task<Guid> Create(CreateArticleDto cmd)
         {
             return await _mediator.Send(cmd, HttpContext.RequestAborted);
         }
@@ -86,7 +86,7 @@ namespace RayPI.OpenApi.Controllers
         /// </summary>
         /// <param name="requset"></param>
         [HttpPut]
-        public void Update(UpdateArticleCmd requset)
+        public void Update(UpdateArticleDto requset)
         {
             _mediator.Send(requset);
         }
@@ -104,7 +104,7 @@ namespace RayPI.OpenApi.Controllers
         [HttpDelete]
         public void Delete(Guid id)
         {
-            _mediator.Send(new DeleteArticleCmd { Id = id });
+            _mediator.Send(new DeleteArticleDto { Id = id });
         }
     }
 }

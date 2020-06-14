@@ -7,7 +7,7 @@ using RayPI.Domain.IRepository;
 
 namespace RayPI.AppService.Article.Commands
 {
-    public class CreateArticleCmdHandler : IRequestHandler<CreateArticleCmd, Guid>
+    public class CreateArticleCmdHandler : IRequestHandler<CreateArticleDto, Guid>
     {
         private readonly IBaseRepository<Domain.Entity.Article> _articleRepository;
 
@@ -16,7 +16,7 @@ namespace RayPI.AppService.Article.Commands
             this._articleRepository = baseRepository;
         }
 
-        public async Task<Guid> Handle(CreateArticleCmd request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateArticleDto request, CancellationToken cancellationToken)
         {
             var entity = new Domain.Entity.Article(request.Title)
             {
