@@ -15,7 +15,7 @@ namespace Ray.Infrastructure.Repository.EfCore
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TDbContext"></typeparam>
-    public class EfRepository<TEntity, TDbContext> : RepositoryBase<TEntity>, IEfRepository<TEntity>
+    public class EfRepository<TEntity, TDbContext> : RepositoryBase<TEntity>, IEfRepository<TEntity, TDbContext>
         where TEntity : class, IEntity
         where TDbContext : EfDbContext<TDbContext>
     {
@@ -31,8 +31,7 @@ namespace Ray.Infrastructure.Repository.EfCore
         /// <summary>
         /// 上下文
         /// </summary>
-        protected virtual TDbContext DbContext { get; }
-        DbContext IEfRepository<TEntity>.DbContext => DbContext.As<DbContext>();
+        public virtual TDbContext DbContext { get; }
 
         /// <summary>
         /// DbSet数据集
@@ -156,7 +155,7 @@ namespace Ray.Infrastructure.Repository.EfCore
     }
 
 
-    public abstract class EfRepository<TEntity, TKey, TDbContext> : EfRepository<TEntity, TDbContext>, IEfRepository<TEntity, TKey>
+    public abstract class EfRepository<TEntity, TKey, TDbContext> : EfRepository<TEntity, TDbContext>, IEfRepository<TEntity, TKey, TDbContext>
         where TEntity : class, IEntity<TKey>
         where TDbContext : EfDbContext<TDbContext>
     {

@@ -66,17 +66,12 @@ namespace Ray.Infrastructure.Repository.EfCore
             => modelBuilder.ApplyConfigurationsFromAssembly(typeof(TDbContext).Assembly);
         #endregion
 
-        #region 封装DbSet，使可以使用泛型读取
-        /// <summary>DbSet</summary>
-        /// <typeparam name="TAggregateRoot">The type of the t aggregate root.</typeparam>
-        /// <returns>IQueryable&lt;TAggregateRoot&gt;.</returns>
-        public DbSet<TAggregateRoot> RayDbSet<TAggregateRoot>() where TAggregateRoot : class
-        {
-            //Set方法会做GetOrAdd,所以可以利用传入泛型实体来获取任意实体的DbSet
-            return this.Set<TAggregateRoot>();
-        }
-        #endregion
-
+        /// <summary>
+        /// 提交变更
+        /// </summary>
+        /// <param name="acceptAllChangesOnSuccess"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             try

@@ -10,7 +10,7 @@ using RayPI.Infrastructure.Treasury.Models;
 
 namespace RayPI.Domain.IRepository
 {
-    public interface IBaseRepository<TEntity> : IRepository<TEntity>
+    public interface IBaseRepository<TEntity> : IRepositoryBase<TEntity>
         where TEntity : BaseEntity
     {
 

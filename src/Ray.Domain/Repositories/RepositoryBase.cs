@@ -12,14 +12,16 @@ using Ray.Infrastructure.Threading;
 
 namespace Ray.Domain.Repositories
 {
-    public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
+    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity>
         where TEntity : class, IEntity
     {
         public ICancellationTokenProvider CancellationTokenProvider { get; set; }
+
         public RepositoryBase()
         {
             CancellationTokenProvider = NullCancellationTokenProvider.Instance;
         }
+
         #region IQueryable接口
         public virtual Type ElementType => GetQueryable().ElementType;
 
@@ -102,7 +104,7 @@ namespace Ray.Domain.Repositories
         }
     }
 
-    public abstract class RepositoryBase<TEntity, TKey> : RepositoryBase<TEntity>, IRepository<TEntity, TKey>
+    public abstract class RepositoryBase<TEntity, TKey> : RepositoryBase<TEntity>, IRepositoryBase<TEntity, TKey>
         where TEntity : class, IEntity<TKey>
     {
         public abstract Task<TEntity> GetAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default);
