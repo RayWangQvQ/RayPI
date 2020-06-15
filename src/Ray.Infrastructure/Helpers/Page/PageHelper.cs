@@ -7,7 +7,7 @@ namespace Ray.Infrastructure.Helpers.Page
 {
     public class PageHelper
     {
-        public static PageResult<T> Page<T>(IEnumerable<T> source,
+        public static PageResultDto<T> Page<T>(IEnumerable<T> source,
             int pageSize,
             int pageIndex,
             Expression<Func<T, bool>> filter = null)
@@ -24,7 +24,7 @@ namespace Ray.Infrastructure.Helpers.Page
         /// <param name="pageIndex"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public static PageResult<T> Page<T>(IQueryable<T> source,
+        public static PageResultDto<T> Page<T>(IQueryable<T> source,
             int pageSize,
             int pageIndex,
             Expression<Func<T, bool>> filter = null)
@@ -44,7 +44,7 @@ namespace Ray.Infrastructure.Helpers.Page
         /// <param name="sortOrder"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public static PageResult<T> PageOrder<T, TK>(IEnumerable<T> source,
+        public static PageResultDto<T> PageOrder<T, TK>(IEnumerable<T> source,
             int pageSize,
             int pageIndex,
             Expression<Func<T, TK>> orderByExpression,
@@ -66,7 +66,7 @@ namespace Ray.Infrastructure.Helpers.Page
         /// <param name="sortOrder"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public static PageResult<T> PageOrder<T, TK>(IQueryable<T> source,
+        public static PageResultDto<T> PageOrder<T, TK>(IQueryable<T> source,
             int pageSize,
             int pageIndex,
             Expression<Func<T, TK>> orderByExpression,
@@ -96,7 +96,7 @@ namespace Ray.Infrastructure.Helpers.Page
             //分页
             source = source.Skip(skipCount).Take(pageSize);
 
-            return new PageResult<T>
+            return new PageResultDto<T>
             {
                 List = source.ToList(),
                 PageIndex = totalPages <= 0 ? 1 : (pageIndex > totalPages ? totalPages : pageIndex),
