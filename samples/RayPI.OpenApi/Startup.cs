@@ -90,10 +90,6 @@ namespace RayPI.OpenApi
             //注册http上下文访问器
             services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
 
-            //注册仓储
-            //string connStr = allConfig.ConnectionStringsModel.SqlServerDatabase;
-            services.AddMyRepository();
-
             //注册业务逻辑
             services.AddMyAppServices();
 
