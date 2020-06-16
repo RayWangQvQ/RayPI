@@ -24,7 +24,12 @@ namespace RayPI.Repository.EFRepository.Extensions
         /// <returns></returns>
         public static IServiceCollection AddMyRepository(this IServiceCollection services)
         {
-            //推荐使用Autofac注册
+            //todo：如果不使用IServiceCollection注册，只使用Autofac注册，刷库时会报错，待找原因
+            services.AddDbContext<MyDbContext>((serviceProvider, optionAction) =>
+            {
+                var dbOption = serviceProvider.GetRequiredService<IOptionsSnapshot<DbOption>>();
+                optionAction.UseSqlServer(dbOption.Value.ConnStr);
+            });
 
             return services;
         }

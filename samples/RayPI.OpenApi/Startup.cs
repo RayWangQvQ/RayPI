@@ -20,6 +20,8 @@ using System;
 using Ray.Infrastructure.Extensions.Json;
 using System.IO;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using Microsoft.CodeAnalysis;
 
 namespace RayPI.OpenApi
 {
@@ -92,6 +94,11 @@ namespace RayPI.OpenApi
 
             //注册业务逻辑
             services.AddMyAppServices();
+            if (System.Diagnostics.Debugger.IsAttached == false)
+            {
+                System.Diagnostics.Debugger.Launch();
+            }
+            services.AddMyRepository();
 
             LogServices(services);
         }
