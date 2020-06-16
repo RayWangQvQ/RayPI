@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Ray.Domain.Entities;
-using Ray.Infrastructure.Helpers.Page;
 
 namespace Ray.Domain.Repositories
 {

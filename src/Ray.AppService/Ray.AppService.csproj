@@ -5,11 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AppServices\" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.1.5" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ray.Domain\Ray.Domain.csproj" />
+    <ProjectReference Include="..\Ray.Infrastructure.Repository.EfCore\Ray.Infrastructure.Repository.EfCore.csproj" />
     <ProjectReference Include="..\Ray.Infrastructure\Ray.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\" />
   </ItemGroup>
 
 </Project>

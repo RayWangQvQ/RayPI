@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Ray.Infrastructure.Helpers.Page
+namespace Ray.Infrastructure.Page
 {
     /// <summary>
     /// 分页结果

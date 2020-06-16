@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RayPI.Domain.Entity;
 using Ray.Infrastructure.Repository.EfCore;
+using Ray.Domain.Entities;
+using System;
 
 namespace RayPI.Repository.EFRepository.DbMapping
 {
     /// <summary>Map实体基类的基础字段</summary>
     /// <typeparam name="TEntity"></typeparam>
     public abstract class EntityBaseTypeConfig<TEntity> : EntityTypeConfiguration<TEntity>
-        where TEntity : BaseEntity
+        where TEntity : Entity<Guid>
     {
         protected override string TableName => $"App{typeof(TEntity).Name}";
 

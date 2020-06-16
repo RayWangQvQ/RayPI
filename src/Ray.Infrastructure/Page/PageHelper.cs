@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Ray.Infrastructure.Helpers.Page
+namespace Ray.Infrastructure.Page
 {
     public class PageHelper
     {

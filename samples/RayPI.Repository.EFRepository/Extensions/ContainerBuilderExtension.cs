@@ -22,7 +22,7 @@ namespace RayPI.Repository.EFRepository.Extensions
             Assembly assembly = Assembly.GetExecutingAssembly();
 
             //注册数据库上下文：
-            builder.Register<MyDbContext>(x =>
+            builder.Register(x =>
                 {
                     var dbOption = x.Resolve<IOptionsSnapshot<DbOption>>();
 

@@ -28,4 +28,9 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Comment\Commands\" />
+    <Folder Include="Comment\Queries\" />
+  </ItemGroup>
+
 </Project>
