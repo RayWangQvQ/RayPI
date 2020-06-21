@@ -7,7 +7,7 @@ namespace Ray.Domain
     /// <summary>
     /// 实体可逻辑删除
     /// </summary>
-    public interface IEntityLogicDeletable
+    public interface ILogicDeletable
     {
         /// <summary>是否被逻辑删除</summary>
         /// <value>The state of the data.</value>
