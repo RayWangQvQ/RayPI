@@ -94,10 +94,6 @@ namespace RayPI.OpenApi
 
             //注册业务逻辑
             services.AddMyAppServices();
-            if (System.Diagnostics.Debugger.IsAttached == false)
-            {
-                System.Diagnostics.Debugger.Launch();
-            }
             services.AddMyRepository();
 
             LogServices(services);

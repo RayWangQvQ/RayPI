@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Ray.AppService\Ray.AppService.csproj" />
     <ProjectReference Include="..\..\src\Ray.Infrastructure\Ray.Infrastructure.csproj" />
     <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />
   </ItemGroup>
@@ -30,7 +31,6 @@
 
   <ItemGroup>
     <Folder Include="Comment\Commands\" />
-    <Folder Include="Comment\Queries\" />
   </ItemGroup>
 
 </Project>
