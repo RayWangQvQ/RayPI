@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using Autofac;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Ray.Infrastructure.Auditing.PropertySetter;
@@ -51,11 +53,9 @@ namespace RayPI.Repository.EFRepository.Extensions
                 .As(typeof(IBaseRepository<>));
 
             //利用反射扫描注册仓储:
-            /*
             builder.RegisterAssemblyTypes(assembly)
                 .Where(x => x.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces();
-                */
             #endregion
         }
     }
