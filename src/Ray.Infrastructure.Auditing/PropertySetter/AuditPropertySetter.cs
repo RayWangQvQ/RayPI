@@ -4,7 +4,7 @@ using Ray.Infrastructure.Security.User;
 namespace Ray.Infrastructure.Auditing.PropertySetter
 {
     /// <summary>
-    /// 审计属性Setter器
+    /// 实体审计属性赋值器
     /// </summary>
     public class AuditPropertySetter : IAuditPropertySetter
     {

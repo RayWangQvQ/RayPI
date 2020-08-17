@@ -29,7 +29,7 @@ namespace Ray.Infrastructure.Repository.EfCore
         }
 
         /// <summary>
-        /// 上下文
+        /// EF数据库上下文
         /// </summary>
         public virtual TDbContext DbContext { get; }
 
@@ -42,43 +42,15 @@ namespace Ray.Infrastructure.Repository.EfCore
         /// 工作单元
         /// （这里直接利用EF的DbContext实现）
         /// </summary>
-        public virtual IUnitOfWork UnitOfWork => DbContext;
+        public override IUnitOfWork UnitOfWork => DbContext;
 
         #region 查
-        public override async Task<long> GetCountAsync(CancellationToken cancellationToken = default)
-        {
-            return await DbSet.LongCountAsync(GetCancellationToken(cancellationToken));
-        }
-
-        public override async Task<List<TEntity>> GetListAsync(bool includeDetails = false, CancellationToken cancellationToken = default)
-        {
-            return includeDetails
-                ? await WithDetails().ToListAsync(GetCancellationToken(cancellationToken))
-                : await DbSet.ToListAsync(GetCancellationToken(cancellationToken));
-        }
-
         public override IQueryable<TEntity> GetQueryable()
         {
             return DbSet.AsQueryable();
         }
 
-        public override async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, bool includeDetails = true, CancellationToken cancellationToken = default)
-        {
-            return includeDetails
-                ? await WithDetails()
-                    .Where(predicate)
-                    .SingleOrDefaultAsync(GetCancellationToken(cancellationToken))
-                : await DbSet
-                    .Where(predicate)
-                    .SingleOrDefaultAsync(GetCancellationToken(cancellationToken));
-        }
-
-        public override IQueryable<TEntity> WithDetails()
-        {
-            return base.WithDetails();
-        }
-
-        public override IQueryable<TEntity> WithDetails(params Expression<Func<TEntity, object>>[] propertySelectors)
+        public override IQueryable<TEntity> GetQueryableWithDetails(params Expression<Func<TEntity, object>>[] propertySelectors)
         {
             var query = GetQueryable();
 
@@ -92,6 +64,30 @@ namespace Ray.Infrastructure.Repository.EfCore
 
             return query;
         }
+
+        public override async Task<long> GetCountAsync(CancellationToken cancellationToken = default)
+        {
+            return await DbSet.LongCountAsync(GetCancellationToken(cancellationToken));
+        }
+
+        public override async Task<List<TEntity>> GetListAsync(bool includeDetails = false, CancellationToken cancellationToken = default)
+        {
+            return includeDetails
+                ? await GetQueryable().ToListAsync(GetCancellationToken(cancellationToken))
+                : await DbSet.ToListAsync(GetCancellationToken(cancellationToken));
+        }
+
+        public override async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, bool includeDetails = true, CancellationToken cancellationToken = default)
+        {
+            return includeDetails
+                ? await GetQueryable()
+                    .Where(predicate)
+                    .SingleOrDefaultAsync(GetCancellationToken(cancellationToken))
+                : await DbSet
+                    .Where(predicate)
+                    .SingleOrDefaultAsync(GetCancellationToken(cancellationToken));
+        }
+
         #endregion
 
         #region 增
@@ -179,7 +175,7 @@ namespace Ray.Infrastructure.Repository.EfCore
         public virtual async Task<TEntity> FindAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
         {
             return includeDetails
-                ? await WithDetails().FirstOrDefaultAsync(e => e.Id.Equals(id), GetCancellationToken(cancellationToken))
+                ? await GetQueryable().FirstOrDefaultAsync(e => e.Id.Equals(id), GetCancellationToken(cancellationToken))
                 : await DbSet.FindAsync(new object[] { id }, GetCancellationToken(cancellationToken));
         }
         #endregion
@@ -197,5 +193,4 @@ namespace Ray.Infrastructure.Repository.EfCore
         }
         #endregion
     }
-
 }

@@ -133,7 +133,7 @@ namespace Ray.AppService.AppServices
         /// <param name="input">The input.</param>
         protected virtual IQueryable<TEntity> CreateFilteredQuery(TGetListInput input)
         {
-            return Repository;
+            return Repository.GetQueryable();
         }
 
         #region 排序

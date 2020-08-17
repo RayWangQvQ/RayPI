@@ -1,7 +1,7 @@
 ﻿namespace Ray.Infrastructure.Auditing.PropertySetter
 {
     /// <summary>
-    /// 审计属性Setter器
+    /// 审计属性赋值器
     /// </summary>
     public interface IAuditPropertySetter
     {

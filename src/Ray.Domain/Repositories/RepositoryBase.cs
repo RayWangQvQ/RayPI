@@ -22,33 +22,16 @@ namespace Ray.Domain.Repositories
             CancellationTokenProvider = NullCancellationTokenProvider.Instance;
         }
 
-        #region IQueryable接口
-        public virtual Type ElementType => GetQueryable().ElementType;
-
-        public virtual Expression Expression => GetQueryable().Expression;
-
-        public virtual IQueryProvider Provider => GetQueryable().Provider;
-        #endregion
-
-        #region IEnumerable接口
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-        #endregion
-
-        #region IEnumerator<T>接口
-        public IEnumerator<TEntity> GetEnumerator()
-        {
-            return GetQueryable().GetEnumerator();
-        }
-        #endregion
+        public abstract IUnitOfWork UnitOfWork { get; }
 
         #region 查
+        public abstract IQueryable<TEntity> GetQueryable();
+
+        public abstract IQueryable<TEntity> GetQueryableWithDetails(params Expression<Func<TEntity, object>>[] propertySelectors);
+
         public abstract Task<long> GetCountAsync(CancellationToken cancellationToken = default);
 
         public abstract Task<List<TEntity>> GetListAsync(bool includeDetails = false, CancellationToken cancellationToken = default);
-
 
         public abstract Task<TEntity> FindAsync(
             Expression<Func<TEntity, bool>> predicate,
@@ -70,18 +53,6 @@ namespace Ray.Domain.Repositories
             return entity;
         }
 
-
-        public abstract IQueryable<TEntity> GetQueryable();
-
-        public virtual IQueryable<TEntity> WithDetails()
-        {
-            return GetQueryable();
-        }
-
-        public virtual IQueryable<TEntity> WithDetails(params Expression<Func<TEntity, object>>[] propertySelectors)
-        {
-            return GetQueryable();
-        }
         #endregion
 
         #region 增

@@ -12,7 +12,7 @@ namespace Ray.Domain.Repositories
     /// 负责操作的仓储interface
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface ICommandRepository<TEntity> : IRepository
+    public interface ICommandRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IEntity
     {
         /// <summary>
