@@ -14,24 +14,24 @@ using Ray.Infrastructure.Page;
 namespace Ray.Application.AppServices
 {
     /// <summary>
-    /// 查询
+    /// 查询AppService
     /// </summary>
-    /// <typeparam name="TGetOutputDto"></typeparam>
-    /// <typeparam name="TGetListOutputDto"></typeparam>
-    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TGetDetailOutputDto"></typeparam>
+    /// <typeparam name="TGetListItemOutputDto"></typeparam>
+    /// <typeparam name="TEntityKey"></typeparam>
     /// <typeparam name="TGetListInput"></typeparam>
     /// <typeparam name="TEntity"></typeparam>
-    public class QueryAppService<TEntity, TGetOutputDto, TGetListOutputDto, TKey, TGetListInput>
+    public class QueryAppService<TEntity, TEntityKey, TGetListInput, TGetDetailOutputDto, TGetListItemOutputDto>
         : AppService,
-         IQueryAppService<TGetOutputDto, TGetListOutputDto, TKey, TGetListInput>
-        where TEntity : class, IEntity<TKey>
+         IQueryAppService<TEntityKey, TGetListInput, TGetDetailOutputDto, TGetListItemOutputDto>
+        where TEntity : class, IEntity<TEntityKey>
     {
         /// <summary>
         /// 仓储
         /// </summary>
-        protected IRepositoryBase<TEntity, TKey> Repository { get; }
+        protected IRepositoryBase<TEntity, TEntityKey> Repository { get; }
 
-        protected QueryAppService(IRepositoryBase<TEntity, TKey> repository)
+        public QueryAppService(IRepositoryBase<TEntity, TEntityKey> repository)
         {
             Repository = repository;
         }
@@ -47,7 +47,7 @@ namespace Ray.Application.AppServices
         protected virtual string GetPagePolicyName { get; set; }
 
 
-        public async Task<TGetOutputDto> GetAsync(TKey id)
+        public async Task<TGetDetailOutputDto> GetAsync(TEntityKey id)
         {
             await CheckGetPolicyAsync();
 
@@ -55,7 +55,7 @@ namespace Ray.Application.AppServices
             return MapToGetOutputDto(entity);
         }
 
-        public async Task<PageResultDto<TGetListOutputDto>> GetPageAsync(TGetListInput input)
+        public async Task<PageResultDto<TGetListItemOutputDto>> GetPageAsync(TGetListInput input)
         {
             await CheckGetListPolicyAsync();
 
@@ -69,7 +69,7 @@ namespace Ray.Application.AppServices
             var entities = await query.ToListAsync();
 
             var page = input as IPageResultRequest;
-            return new PageResultDto<TGetListOutputDto>()
+            return new PageResultDto<TGetListItemOutputDto>()
             {
                 TotalCount = totalCount,
                 PageIndex = page?.PageIndex ?? 0,
@@ -83,7 +83,7 @@ namespace Ray.Application.AppServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        protected async Task<TEntity> GetEntityByIdAsync(TKey id)
+        protected async Task<TEntity> GetEntityByIdAsync(TEntityKey id)
         {
             return await Repository.GetAsync(id);
         }
@@ -102,23 +102,23 @@ namespace Ray.Application.AppServices
 
         #region Map映射
         /// <summary>
-        /// Maps <see cref="TEntity"/> to <see cref="TGetOutputDto"/>.
+        /// Maps <see cref="TEntity"/> to <see cref="TGetDetailOutputDto"/>.
         /// It uses <see cref="IObjectMapper"/> by default.
         /// It can be overriden for custom mapping.
         /// </summary>
-        protected virtual TGetOutputDto MapToGetOutputDto(TEntity entity)
+        protected virtual TGetDetailOutputDto MapToGetOutputDto(TEntity entity)
         {
-            return ObjectMapper.Map<TEntity, TGetOutputDto>(entity);
+            return ObjectMapper.Map<TEntity, TGetDetailOutputDto>(entity);
         }
 
         /// <summary>
-        /// Maps <see cref="TEntity"/> to <see cref="TGetListOutputDto"/>.
+        /// Maps <see cref="TEntity"/> to <see cref="TGetListItemOutputDto"/>.
         /// It uses <see cref="IObjectMapper"/> by default.
         /// It can be overriden for custom mapping.
         /// </summary>
-        protected virtual TGetListOutputDto MapToGetPageOutputDto(TEntity entity)
+        protected virtual TGetListItemOutputDto MapToGetPageOutputDto(TEntity entity)
         {
-            return ObjectMapper.Map<TEntity, TGetListOutputDto>(entity);
+            return ObjectMapper.Map<TEntity, TGetListItemOutputDto>(entity);
         }
         #endregion
 
@@ -194,5 +194,16 @@ namespace Ray.Application.AppServices
             return query;
         }
         #endregion
+    }
+
+
+    public class QueryAppService<TEntity, TEntityKey, TGetListInput, TOutputDto>
+        : QueryAppService<TEntity, TEntityKey, TGetListInput, TOutputDto, TOutputDto>,
+            IQueryAppService<TEntityKey, TGetListInput, TOutputDto>
+        where TEntity : class, IEntity<TEntityKey>
+    {
+        public QueryAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
+        {
+        }
     }
 }

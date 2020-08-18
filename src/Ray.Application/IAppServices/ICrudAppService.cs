@@ -3,16 +3,16 @@
 namespace Ray.Application.IAppServices
 {
     /// <summary>
-    /// 增删改查
+    /// 增删改查AppService
     /// </summary>
     /// <typeparam name="TGetDetailOutputDto">获取详情Dto</typeparam>
     /// <typeparam name="TGetListItemOutputDto">获取列表项Dto</typeparam>
-    /// <typeparam name="TKey">主键</typeparam>
+    /// <typeparam name="TEntityKey">主键</typeparam>
     /// <typeparam name="TGetListInputDto">请求获取详情Dto</typeparam>
     /// <typeparam name="TCreateInputDto">请求创建Dto</typeparam>
     /// <typeparam name="TUpdateInputDto">请求编辑Dto</typeparam>
-    public interface ICrudAppService<TGetDetailOutputDto, TGetListItemOutputDto, in TKey, in TGetListInputDto, in TCreateInputDto, in TUpdateInputDto>
-        : IQueryAppService<TGetDetailOutputDto, TGetListItemOutputDto, TKey, TGetListInputDto>
+    public interface ICrudAppService<in TEntityKey, in TGetListInputDto, in TCreateInputDto, in TUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
+        : IQueryAppService<TEntityKey, TGetListInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
     {
         /// <summary>
         /// 添加
@@ -27,13 +27,56 @@ namespace Ray.Application.IAppServices
         /// <param name="id">主键</param>
         /// <param name="input">请求编辑Dto</param>
         /// <returns></returns>
-        Task<TGetDetailOutputDto> UpdateAsync(TKey id, TUpdateInputDto input);
+        Task<TGetDetailOutputDto> UpdateAsync(TEntityKey id, TUpdateInputDto input);
 
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns></returns>
-        Task DeleteAsync(TKey id);
+        Task DeleteAsync(TEntityKey id);
+    }
+
+    /// <summary>
+    /// 增删改查AppService
+    /// (TCreateOrUpdateInputDto与TCreateOrUpdateInputDto共用一个TCreateOrUpdateInputDto)
+    /// </summary>
+    /// <typeparam name="TGetDetailOutputDto"></typeparam>
+    /// <typeparam name="TGetListItemOutputDto"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TGetListInputDto"></typeparam>
+    /// <typeparam name="TCreateOrUpdateInputDto"></typeparam>
+    public interface ICrudAppService<in TKey, in TGetListInputDto, in TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto> :
+        ICrudAppService<TKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
+    {
+
+    }
+
+    /// <summary>
+    /// 增删改查AppService
+    /// (TCreateOrUpdateInputDto与TCreateOrUpdateInputDto共用一个TCreateOrUpdateInputDto)
+    /// (TGetDetailOrListItemOutputDto与TGetDetailOrListItemOutputDto共用一个TGetDetailOrListItemOutputDto)
+    /// </summary>
+    /// <typeparam name="TGetDetailOrListItemOutputDto"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TGetListInputDto"></typeparam>
+    /// <typeparam name="TCreateOrUpdateInputDto"></typeparam>
+    public interface ICrudAppService<in TKey, in TGetListInputDto, in TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto> :
+        ICrudAppService<TKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto, TGetDetailOrListItemOutputDto>
+    {
+
+    }
+
+    /// <summary>
+    /// 增删改查AppService
+    /// (共用过一个Dto)
+    /// </summary>
+    /// <typeparam name="TDto"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TGetListInputDto"></typeparam>
+    public interface ICrudAppService<in TKey, in TGetListInputDto, TDto> :
+        ICrudAppService<TKey, TGetListInputDto, TDto, TDto, TDto, TDto>
+    {
+
     }
 }

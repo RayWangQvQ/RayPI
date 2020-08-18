@@ -4,7 +4,7 @@ using RayPI.AppService.CommentApp.Dtos;
 
 namespace RayPI.AppService.CommentApp
 {
-    public interface ICommentAppService : ICrudAppService<CommentDto, CommentDto, Guid, QueryCommentPageDto, CommentDto, CommentDto>
+    public interface ICommentAppService : ICrudAppService<Guid, QueryCommentPageDto, CommentDto, CommentDto, CommentDto, CommentDto>
     {
     }
 }

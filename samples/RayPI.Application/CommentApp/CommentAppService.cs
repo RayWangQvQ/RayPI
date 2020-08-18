@@ -8,7 +8,7 @@ using RayPI.Domain.Entity;
 
 namespace RayPI.AppService.CommentApp
 {
-    public class CommentAppService : CrudAppService<Comment, CommentDto, CommentDto, Guid, QueryCommentPageDto, CommentDto, CommentDto>, ICommentAppService
+    public class CommentAppService : CrudAppService<Comment, Guid, QueryCommentPageDto, CommentDto, CommentDto, CommentDto, CommentDto>, ICommentAppService
     {
         private readonly IBaseRepository<Comment> _commentRepository;
 

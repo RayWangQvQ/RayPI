@@ -7,12 +7,12 @@ using Ray.Domain.Repositories;
 
 namespace Ray.Application.AppServices
 {
-    public class CrudAppService<TEntity, TGetOutputDto, TGetListOutputDto, TKey, TGetListInput, TCreateInput, TUpdateInput>
-        : QueryAppService<TEntity, TGetOutputDto, TGetListOutputDto, TKey, TGetListInput>,
-            ICrudAppService<TGetOutputDto, TGetListOutputDto, TKey, TGetListInput, TCreateInput, TUpdateInput>
-        where TEntity : class, IEntity<TKey>
+    public class CrudAppService<TEntity, TEntityKey, TGetListInputDto, TCreateInputDto, TUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
+        : QueryAppService<TEntity, TEntityKey, TGetListInputDto, TGetDetailOutputDto, TGetListItemOutputDto>,
+            ICrudAppService<TEntityKey, TGetListInputDto, TCreateInputDto, TUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
+        where TEntity : class, IEntity<TEntityKey>
     {
-        public CrudAppService(IRepositoryBase<TEntity, TKey> repository) : base(repository)
+        public CrudAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
         {
 
         }
@@ -23,7 +23,7 @@ namespace Ray.Application.AppServices
 
         protected virtual string DeletePolicyName { get; set; }
 
-        public virtual async Task<TGetOutputDto> CreateAsync(TCreateInput input)
+        public virtual async Task<TGetDetailOutputDto> CreateAsync(TCreateInputDto input)
         {
             await CheckCreatePolicyAsync();
 
@@ -34,7 +34,7 @@ namespace Ray.Application.AppServices
             return MapToGetOutputDto(entity);
         }
 
-        public virtual async Task<TGetOutputDto> UpdateAsync(TKey id, TUpdateInput input)
+        public virtual async Task<TGetDetailOutputDto> UpdateAsync(TEntityKey id, TUpdateInputDto input)
         {
             await CheckUpdatePolicyAsync();
 
@@ -46,7 +46,7 @@ namespace Ray.Application.AppServices
             return MapToGetOutputDto(entity);
         }
 
-        public virtual async Task DeleteAsync(TKey id)
+        public virtual async Task DeleteAsync(TEntityKey id)
         {
             await CheckDeletePolicyAsync();
 
@@ -72,29 +72,29 @@ namespace Ray.Application.AppServices
 
         #region Map映射
         /// <summary>
-        /// Maps <see cref="TCreateInput"/> to <see cref="TEntity"/> to create a new entity.
+        /// Maps <see cref="TCreateInputDto"/> to <see cref="TEntity"/> to create a new entity.
         /// It uses <see cref="IObjectMapper"/> by default.
         /// It can be overriden for custom mapping.
         /// </summary>
-        protected virtual TEntity MapToEntity(TCreateInput createInput)
+        protected virtual TEntity MapToEntity(TCreateInputDto createInput)
         {
-            var entity = ObjectMapper.Map<TCreateInput, TEntity>(createInput);
+            var entity = ObjectMapper.Map<TCreateInputDto, TEntity>(createInput);
             SetIdForGuids(entity);
             return entity;
         }
         /// <summary>
-        /// Maps <see cref="TUpdateInput"/> to <see cref="TEntity"/> to update the entity.
+        /// Maps <see cref="TUpdateInputDto"/> to <see cref="TEntity"/> to update the entity.
         /// It uses <see cref="IObjectMapper"/> by default.
         /// It can be overriden for custom mapping.
         /// </summary>
-        protected virtual void MapToEntity(TUpdateInput updateInput, TEntity entity)
+        protected virtual void MapToEntity(TUpdateInputDto updateInput, TEntity entity)
         {
             ObjectMapper.Map(updateInput, entity);
         }
         #endregion
 
         /// <summary>
-        /// Sets Id value for the entity if <see cref="TKey"/> is <see cref="Guid"/>.
+        /// Sets Id value for the entity if <see cref="TEntityKey"/> is <see cref="Guid"/>.
         /// It's used while creating a new entity.
         /// </summary>
         protected virtual void SetIdForGuids(TEntity entity)
