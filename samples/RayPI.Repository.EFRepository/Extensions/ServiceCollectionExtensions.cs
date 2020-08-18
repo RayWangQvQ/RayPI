@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -22,14 +23,34 @@ namespace RayPI.Repository.EFRepository.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection AddMyRepository(this IServiceCollection services)
+        public static IServiceCollection AddMyRepository(this IServiceCollection services, IConfiguration configuration)
         {
-            //todo：如果不使用IServiceCollection注册，只使用Autofac注册，刷库时会报错，待找原因
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            services.Configure<DbOption>(configuration.GetSection("Db"));
+
             services.AddDbContext<MyDbContext>((serviceProvider, optionAction) =>
             {
                 var dbOption = serviceProvider.GetRequiredService<IOptionsSnapshot<DbOption>>();
                 optionAction.UseSqlServer(dbOption.Value.ConnStr);
             });
+
+            //注册审计属性相关服务：
+            services.AddScoped<IAuditPropertySetter, AuditPropertySetter>();
+            services.AddScoped<ICurrentUser, CurrentUser>();
+            services.AddScoped<ICurrentPrincipalAccessor, ThreadCurrentPrincipalAccessor>();
+
+            #region 注册仓储
+            //注册泛型仓储:
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+            //扫描注册仓储:
+            services.Scan(scan => scan
+                .FromAssemblies(assembly)
+                .AddClasses(classes => classes.Where(t => t.Name.EndsWith("Repository")))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime());
+            #endregion
 
             return services;
         }

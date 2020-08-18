@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ray.Infrastructure.DI;
+using Ray.Infrastructure.Extensions.Json;
 using RayPI.Infrastructure.Config.Di;
 using RayPI.Infrastructure.Cors.Di;
 using RayPI.Infrastructure.Auth.Jwt;
@@ -10,18 +12,12 @@ using RayPI.Infrastructure.Config;
 using RayPI.Infrastructure.Config.ConfigModel;
 using RayPI.OpenApi.Filters;
 using RayPI.Infrastructure.Auth;
-using RayPI.AppService.Extensions;
-using Autofac;
-using Ray.Infrastructure.DI;
 using RayPI.Repository.EFRepository.Extensions;
-using RayPI.Infrastructure.Config.Extensions;
 using RayPI.Infrastructure.Swagger.Extensions;
 using System;
-using Ray.Infrastructure.Extensions.Json;
 using System.IO;
 using System.Threading.Tasks;
-using System.Diagnostics;
-using Microsoft.CodeAnalysis;
+using RayPI.AppService.Extensions;
 
 namespace RayPI.OpenApi
 {
@@ -51,17 +47,16 @@ namespace RayPI.OpenApi
         {
             //注册控制器
             services.AddControllers(options =>
-            {
-                options.Filters.Add(typeof(WebApiResultFilterAttribute));
-                options.RespectBrowserAcceptHeader = true;
-            }).AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
-            });
+                {
+                    options.Filters.Add(typeof(WebApiResultFilterAttribute));
+                    options.RespectBrowserAcceptHeader = true;
+                })
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
+                });
 
             //注册配置管理服务
-            services.AddSingleton<IConfiguration>(_configuration);
-            services.AddMyOptions();
             services.AddConfigService(_env.ContentRootPath);
             AllConfigModel allConfig = services.GetImplementationInstanceOrNull<AllConfigModel>();
 
@@ -69,7 +64,6 @@ namespace RayPI.OpenApi
             services.AddSwaggerService();
 
             //注册授权认证
-
             JwtAuthConfigModel jwtConfig = allConfig.JwtAuthConfigModel;
             var jwtOption = new JwtOption//todo:使用AutoMapper替换
             {
@@ -94,19 +88,9 @@ namespace RayPI.OpenApi
 
             //注册业务逻辑
             services.AddMyAppServices();
-            services.AddMyRepository();
+            services.AddMyRepository(_configuration);
 
             LogServices(services);
-        }
-
-        /// <summary>
-        /// Autofac注册
-        /// 不需要执行build构建容器，构建的工作由Core框架完成
-        /// </summary>
-        /// <param name="builder"></param>
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.AddMyRepository();
         }
 
         /// <summary>

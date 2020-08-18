@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RayPI.Infrastructure.Cors.Attributes;
 using RayPI.Infrastructure.Cors.Enums;
-using System.Threading.Tasks;
-using MediatR;
-using Microsoft.AspNetCore.Routing;
 using Ray.Infrastructure.Page;
-using RayPI.AppService.Comment.Dtos;
+using RayPI.AppService.CommentApp;
+using RayPI.AppService.CommentApp.Dtos;
+using System.Threading.Tasks;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -17,15 +16,15 @@ namespace RayPI.OpenApi.Controllers
     [RayCors(CorsPolicyEnum.Free)]
     public partial class CommentController : Controller
     {
-        private readonly IMediator _mediator;
+        private readonly ICommentAppService _commentAppService;
 
         /// <summary>
         /// 构造
         /// </summary>
-        /// <param name="mediator"></param>
-        public CommentController(IMediator mediator)
+        /// <param name="commentAppService"></param>
+        public CommentController(ICommentAppService commentAppService)
         {
-            this._mediator = mediator;
+            _commentAppService = commentAppService;
         }
     }
 
@@ -40,9 +39,9 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PageResultDto<CommentDto>> GetPage([FromQuery]QueryCommentPageDto query)
+        public async Task<PageResultDto<CommentDto>> GetPage([FromQuery] QueryCommentPageDto query)
         {
-            return await _mediator.Send(query, HttpContext.RequestAborted);
+            return await _commentAppService.GetPageAsync(query);
         }
     }
 

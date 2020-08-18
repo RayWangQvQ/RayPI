@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Ray.Infrastructure.Extensions.Json;
 
 namespace RayPI.OpenApi
@@ -54,7 +47,6 @@ namespace RayPI.OpenApi
             IHostBuilder hostBuilder = Host.CreateDefaultBuilder(args);
 
             hostBuilder.ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-            hostBuilder.UseServiceProviderFactory(new AutofacServiceProviderFactory()); //引入Autofac
 
             return hostBuilder;
         }
