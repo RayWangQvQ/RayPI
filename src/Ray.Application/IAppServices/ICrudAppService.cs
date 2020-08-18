@@ -43,11 +43,11 @@ namespace Ray.Application.IAppServices
     /// </summary>
     /// <typeparam name="TGetDetailOutputDto"></typeparam>
     /// <typeparam name="TGetListItemOutputDto"></typeparam>
-    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TEntityKey"></typeparam>
     /// <typeparam name="TGetListInputDto"></typeparam>
     /// <typeparam name="TCreateOrUpdateInputDto"></typeparam>
-    public interface ICrudAppService<in TKey, in TGetListInputDto, in TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto> :
-        ICrudAppService<TKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
+    public interface ICrudAppService<in TEntityKey, in TGetListInputDto, in TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
+        :ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
     {
 
     }
@@ -58,11 +58,11 @@ namespace Ray.Application.IAppServices
     /// (TGetDetailOrListItemOutputDto与TGetDetailOrListItemOutputDto共用一个TGetDetailOrListItemOutputDto)
     /// </summary>
     /// <typeparam name="TGetDetailOrListItemOutputDto"></typeparam>
-    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TEntityKey"></typeparam>
     /// <typeparam name="TGetListInputDto"></typeparam>
     /// <typeparam name="TCreateOrUpdateInputDto"></typeparam>
-    public interface ICrudAppService<in TKey, in TGetListInputDto, in TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto> :
-        ICrudAppService<TKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto, TGetDetailOrListItemOutputDto>
+    public interface ICrudAppService<in TEntityKey, in TGetListInputDto, in TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto>
+        :ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto, TGetDetailOrListItemOutputDto>
     {
 
     }
@@ -72,10 +72,10 @@ namespace Ray.Application.IAppServices
     /// (共用过一个Dto)
     /// </summary>
     /// <typeparam name="TDto"></typeparam>
-    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TEntityKey"></typeparam>
     /// <typeparam name="TGetListInputDto"></typeparam>
-    public interface ICrudAppService<in TKey, in TGetListInputDto, TDto> :
-        ICrudAppService<TKey, TGetListInputDto, TDto, TDto, TDto, TDto>
+    public interface ICrudAppService<in TEntityKey, in TGetListInputDto, TDto>
+        :ICrudAppService<TEntityKey, TGetListInputDto, TDto, TDto, TDto, TDto>
     {
 
     }

@@ -113,4 +113,41 @@ namespace Ray.Application.AppServices
             );
         }
     }
+
+        
+    public class CrudAppService<TEntity, TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
+        : CrudAppService<TEntity, TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto,TGetDetailOutputDto, TGetListItemOutputDto>,
+            ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
+        where TEntity : class, IEntity<TEntityKey>
+    {
+        public CrudAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
+        {
+
+        }
+    }
+
+
+    public class CrudAppService<TEntity, TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto>
+        : CrudAppService<TEntity, TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto, TGetDetailOrListItemOutputDto>,
+            ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto>
+        where TEntity : class, IEntity<TEntityKey>
+    {
+        public CrudAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
+        {
+
+        }
+    }
+
+
+    public class CrudAppService<TEntity, TEntityKey, TGetListInputDto, TDto>
+        : CrudAppService<TEntity, TEntityKey, TGetListInputDto, TDto, TDto, TDto, TDto>,
+            ICrudAppService<TEntityKey, TGetListInputDto, TDto>
+        where TEntity : class, IEntity<TEntityKey>
+    {
+        public CrudAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
+        {
+
+        }
+    }
+
 }
