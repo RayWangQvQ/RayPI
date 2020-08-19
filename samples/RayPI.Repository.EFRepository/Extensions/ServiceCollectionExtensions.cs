@@ -5,10 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
+using Ray.Domain.Entities;
+using Ray.Domain.Repositories;
 using Ray.Infrastructure.Auditing;
 using Ray.Infrastructure.Auditing.PropertySetter;
+using Ray.Infrastructure.Repository.EfCore;
 using Ray.Infrastructure.Security.Claims;
 using Ray.Infrastructure.Security.User;
+using RayPI.Domain.Entity;
 using RayPI.Domain.IRepository;
 using RayPI.Infrastructure.Config.Options;
 using RayPI.Infrastructure.Treasury.Di;
@@ -42,6 +46,7 @@ namespace RayPI.Repository.EFRepository.Extensions
 
             #region 注册仓储
             //注册泛型仓储:
+            //services.AddTransient(typeof(IRepositoryBase<,>), typeof(EfRepository<,,>));//todo
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
             //扫描注册仓储:

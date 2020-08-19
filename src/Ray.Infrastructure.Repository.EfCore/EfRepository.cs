@@ -151,7 +151,7 @@ namespace Ray.Infrastructure.Repository.EfCore
     }
 
 
-    public abstract class EfRepository<TEntity, TKey, TDbContext> : EfRepository<TEntity, TDbContext>, IEfRepository<TEntity, TKey, TDbContext>
+    public class EfRepository<TEntity, TKey, TDbContext> : EfRepository<TEntity, TDbContext>, IEfRepository<TEntity, TKey, TDbContext>
         where TEntity : class, IEntity<TKey>
         where TDbContext : EfDbContext<TDbContext>
     {

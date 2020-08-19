@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Ray.Application.IAppServices;
 using Ray.Domain.Entities;
 using Ray.Domain.Repositories;
@@ -29,11 +30,10 @@ namespace Ray.Application.AppServices
         /// <summary>
         /// 仓储
         /// </summary>
-        protected IRepositoryBase<TEntity, TEntityKey> Repository { get; }
+        protected virtual IRepositoryBase<TEntity, TEntityKey> Repository => this.ServiceProvider.GetRequiredService<IRepositoryBase<TEntity, TEntityKey>>();
 
-        public QueryAppService(IRepositoryBase<TEntity, TEntityKey> repository)
+        public QueryAppService(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            Repository = repository;
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Ray.Application.AppServices
             IQueryAppService<TEntityKey, TGetListInput, TOutputDto>
         where TEntity : class, IEntity<TEntityKey>
     {
-        public QueryAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
+        public QueryAppService(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
     }

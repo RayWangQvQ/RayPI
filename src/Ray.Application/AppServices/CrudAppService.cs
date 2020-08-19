@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Ray.Application.IAppServices;
 using Ray.Domain.Entities;
 using Ray.Domain.Helpers;
@@ -12,9 +13,10 @@ namespace Ray.Application.AppServices
             ICrudAppService<TEntityKey, TGetListInputDto, TCreateInputDto, TUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
         where TEntity : class, IEntity<TEntityKey>
     {
-        public CrudAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
-        {
+        protected virtual IUnitOfWork UnitOfWork => this.ServiceProvider.GetRequiredService<IUnitOfWork>();
 
+        public CrudAppService(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
         }
 
         protected virtual string CreatePolicyName { get; set; }
@@ -114,13 +116,13 @@ namespace Ray.Application.AppServices
         }
     }
 
-        
+
     public class CrudAppService<TEntity, TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
-        : CrudAppService<TEntity, TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto,TGetDetailOutputDto, TGetListItemOutputDto>,
+        : CrudAppService<TEntity, TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>,
             ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
         where TEntity : class, IEntity<TEntityKey>
     {
-        public CrudAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
+        public CrudAppService(IServiceProvider serviceProvider) : base(serviceProvider)
         {
 
         }
@@ -132,7 +134,7 @@ namespace Ray.Application.AppServices
             ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto>
         where TEntity : class, IEntity<TEntityKey>
     {
-        public CrudAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
+        public CrudAppService(IServiceProvider serviceProvider) : base(serviceProvider)
         {
 
         }
@@ -144,7 +146,7 @@ namespace Ray.Application.AppServices
             ICrudAppService<TEntityKey, TGetListInputDto, TDto>
         where TEntity : class, IEntity<TEntityKey>
     {
-        public CrudAppService(IRepositoryBase<TEntity, TEntityKey> repository) : base(repository)
+        public CrudAppService(IServiceProvider serviceProvider) : base(serviceProvider)
         {
 
         }

@@ -9,52 +9,19 @@ namespace Ray.Application.AppServices
 {
     public class AppService : IAppService
     {
+        /// <summary>
+        /// 当前容器
+        /// </summary>
         public IServiceProvider ServiceProvider { get; set; }
-        protected readonly object ServiceProviderLock = new object();
 
-        public IGuidGenerator GuidGenerator { get; set; }
-
-        protected Type ObjectMapperContext { get; set; }
-        protected IObjectMapper ObjectMapper
+        public AppService(IServiceProvider serviceProvider)
         {
-            get
-            {
-                if (_objectMapper != null)
-                {
-                    return _objectMapper;
-                }
-
-                if (ObjectMapperContext == null)
-                {
-                    return LazyGetRequiredService(ref _objectMapper);
-                }
-
-                return LazyGetRequiredService(
-                    typeof(IObjectMapper<>).MakeGenericType(ObjectMapperContext),
-                    ref _objectMapper
-                );
-            }
+            ServiceProvider = serviceProvider;
         }
-        private IObjectMapper _objectMapper;
 
-        protected TService LazyGetRequiredService<TService>(ref TService reference)
-            => LazyGetRequiredService(typeof(TService), ref reference);
+        public IGuidGenerator GuidGenerator => ServiceProvider.GetRequiredService<IGuidGenerator>();
 
-        protected TRef LazyGetRequiredService<TRef>(Type serviceType, ref TRef reference)
-        {
-            if (reference == null)
-            {
-                lock (ServiceProviderLock)
-                {
-                    if (reference == null)
-                    {
-                        reference = (TRef)ServiceProvider.GetRequiredService(serviceType);
-                    }
-                }
-            }
-
-            return reference;
-        }
+        protected IObjectMapper ObjectMapper => ServiceProvider.GetRequiredService<IObjectMapper>();
 
         /// <summary>
         /// Checks for given <paramref name="policyName"/>.
