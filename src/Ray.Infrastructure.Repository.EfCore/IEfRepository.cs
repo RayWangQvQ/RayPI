@@ -4,7 +4,7 @@ using Ray.Domain.Repositories;
 
 namespace Ray.Infrastructure.Repository.EfCore
 {
-    public interface IEfRepository<TEntity> : IRepositoryBase<TEntity>
+    public interface IEfRepository<TEntity> : IBaseRepository<TEntity>
         where TEntity : class, IEntity
     {
         /// <summary>
@@ -18,7 +18,7 @@ namespace Ray.Infrastructure.Repository.EfCore
         DbSet<TEntity> DbSet { get; }
     }
 
-    public interface IEfRepository<TEntity, TKey> : IEfRepository<TEntity>, IRepositoryBase<TEntity, TKey>
+    public interface IEfRepository<TEntity, TKey> : IEfRepository<TEntity>, IBaseRepository<TEntity, TKey>
         where TEntity : class, IEntity<TKey>
     {
 

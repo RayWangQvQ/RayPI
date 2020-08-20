@@ -8,9 +8,9 @@ using Microsoft.Extensions.Options;
 using Ray.Domain.Repositories;
 using Ray.Infrastructure.DI;
 using Ray.Infrastructure.Repository.EfCore;
-using RayPI.Domain.IRepository;
+using RayPI.Domain.IRepositories;
 using RayPI.Infrastructure.Config.Options;
-using RayPI.Repository.EFRepository.Repository;
+using RayPI.Repository.EFRepository.Repositories;
 
 namespace RayPI.Repository.EFRepository
 {
@@ -30,25 +30,18 @@ namespace RayPI.Repository.EFRepository
                 optionAction.UseSqlServer(dbOption.Value.ConnStr);
             });
 
-            //泛型仓储
-            services.AddTransient(typeof(IMyBaseRepository<>), typeof(MyBaseRepository<>));
-
             return services;
         }
 
         public static void AddMyRepository(this ContainerBuilder builder)
         {
-            //注册泛型仓储:
-            builder.RegisterGeneric(typeof(MyBaseRepository<>))
-                .As(typeof(IMyBaseRepository<>))
-                .As(typeof(IRepositoryBase<,>));//Autofac允许泛型属性不一样
+            
         }
 
         public static void UseMyRepository(this IApplicationBuilder app)
         {
             //初始化数据库（如果数据库不存在，则创建一个）
-            //using var scope = app.ApplicationServices.CreateScope();
-            using var scope = RayContainer.ServiceProviderRoot.CreateScope();
+            using var scope = app.ApplicationServices.CreateScope();
             var dbContext = scope.ServiceProvider.GetService<MyDbContext>();
             dbContext.Database.EnsureCreated();
         }

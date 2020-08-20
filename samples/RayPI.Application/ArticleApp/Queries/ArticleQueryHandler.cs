@@ -3,20 +3,20 @@ using System.Threading.Tasks;
 using MediatR;
 using Ray.Infrastructure.Helpers;
 using RayPI.AppService.ArticleApp.Dtos;
-using RayPI.Domain.IRepository;
+using RayPI.Domain.IRepositories;
 
 namespace RayPI.AppService.ArticleApp.Queries
 {
     public class ArticleQueryHandler : IRequestHandler<QueryArticleDto, ResponseQueryArticleDto>
     {
-        private readonly IMyBaseRepository<Domain.Entity.Article> _articleRepository;
+        private readonly IArticleRepository _articleRepository;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public ArticleQueryHandler(IMyBaseRepository<Domain.Entity.Article> baseRepository)
+        public ArticleQueryHandler(IArticleRepository articleRepository)
         {
-            this._articleRepository = baseRepository;
+            this._articleRepository = articleRepository;
         }
 
         public async Task<ResponseQueryArticleDto> Handle(QueryArticleDto request, CancellationToken cancellationToken)

@@ -2,17 +2,17 @@
 using System.Threading.Tasks;
 using MediatR;
 using RayPI.AppService.ArticleApp.Dtos;
-using RayPI.Domain.IRepository;
+using RayPI.Domain.IRepositories;
 
 namespace RayPI.AppService.ArticleApp.Commands
 {
     public class DeleteArticleCmdHandler : IRequestHandler<DeleteArticleDto>
     {
-        private readonly IMyBaseRepository<Domain.Entity.Article> _articleRepository;
+        private readonly IArticleRepository _articleRepository;
 
-        public DeleteArticleCmdHandler(IMyBaseRepository<Domain.Entity.Article> baseRepository)
+        public DeleteArticleCmdHandler(IArticleRepository articleRepository)
         {
-            this._articleRepository = baseRepository;
+            this._articleRepository = articleRepository;
         }
 
         public async Task<Unit> Handle(DeleteArticleDto request, CancellationToken cancellationToken)

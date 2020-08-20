@@ -30,7 +30,7 @@ namespace Ray.Application.AppServices
         /// <summary>
         /// 仓储
         /// </summary>
-        protected virtual IRepositoryBase<TEntity, TEntityKey> Repository => this.ServiceProvider.GetRequiredService<IRepositoryBase<TEntity, TEntityKey>>();
+        protected virtual IBaseRepository<TEntity, TEntityKey> Repository => this.ServiceProvider.GetRequiredService<IBaseRepository<TEntity, TEntityKey>>();
 
         public QueryAppService(IServiceProvider serviceProvider) : base(serviceProvider)
         {

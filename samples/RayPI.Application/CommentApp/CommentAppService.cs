@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Ray.Application.AppServices;
 using Ray.Infrastructure.Page;
 using RayPI.AppService.CommentApp.Dtos;
-using RayPI.Domain.IRepository;
+using RayPI.Domain.IRepositories;
 using RayPI.Domain.Entity;
 using Ray.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;

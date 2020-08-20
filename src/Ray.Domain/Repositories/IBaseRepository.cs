@@ -10,7 +10,7 @@ namespace Ray.Domain.Repositories
     /// 【职责：实体的CRUD】
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IRepositoryBase<TEntity> : IQueryRepository<TEntity>, ICommandRepository<TEntity>
+    public interface IBaseRepository<TEntity> : IQueryRepository<TEntity>, ICommandRepository<TEntity>
         where TEntity : class, IEntity
     {
 
@@ -22,7 +22,7 @@ namespace Ray.Domain.Repositories
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TKey"></typeparam>
-    public interface IRepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity>, IQueryRepository<TEntity, TKey>, ICommandRepository<TEntity, TKey>
+    public interface IBaseRepository<TEntity, TKey> : IBaseRepository<TEntity>, IQueryRepository<TEntity, TKey>, ICommandRepository<TEntity, TKey>
         where TEntity : class, IEntity<TKey>
     {
 

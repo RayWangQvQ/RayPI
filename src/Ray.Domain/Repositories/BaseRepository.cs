@@ -12,7 +12,7 @@ using Ray.Infrastructure.Threading;
 
 namespace Ray.Domain.Repositories
 {
-    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity>
+    public abstract class RepositoryBase<TEntity> : IBaseRepository<TEntity>
         where TEntity : class, IEntity
     {
         public ICancellationTokenProvider CancellationTokenProvider { get; set; }
@@ -75,7 +75,7 @@ namespace Ray.Domain.Repositories
         }
     }
 
-    public abstract class RepositoryBase<TEntity, TKey> : RepositoryBase<TEntity>, IRepositoryBase<TEntity, TKey>
+    public abstract class RepositoryBase<TEntity, TKey> : RepositoryBase<TEntity>, IBaseRepository<TEntity, TKey>
         where TEntity : class, IEntity<TKey>
     {
         public abstract Task<TEntity> GetAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default);

@@ -29,7 +29,7 @@ namespace Ray.Infrastructure.Repository.EfCore
             services.AddScoped<ICurrentPrincipalAccessor, ThreadCurrentPrincipalAccessor>();
 
             //注册泛型仓储:
-            services.AddTransient(typeof(IRepositoryBase<,>), typeof(EfRepository<,>));
+            services.AddTransient(typeof(IBaseRepository<,>), typeof(EfRepository<,>));
 
             //扫描注册仓储:
             services.Scan(scan => scan

@@ -3,17 +3,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using RayPI.AppService.ArticleApp.Dtos;
-using RayPI.Domain.IRepository;
+using RayPI.Domain.IRepositories;
 
 namespace RayPI.AppService.ArticleApp.Commands
 {
     public class UpdateArticleCmdHandler : IRequestHandler<UpdateArticleDto, Guid>
     {
-        private readonly IMyBaseRepository<Domain.Entity.Article> _articleRepository;
+        private readonly IArticleRepository _articleRepository;
 
-        public UpdateArticleCmdHandler(IMyBaseRepository<Domain.Entity.Article> baseRepository)
+        public UpdateArticleCmdHandler(IArticleRepository articleRepository)
         {
-            this._articleRepository = baseRepository;
+            this._articleRepository = articleRepository;
         }
 
         public async Task<Guid> Handle(UpdateArticleDto request, CancellationToken cancellationToken)
