@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ray.Infrastructure.DI;
-using Ray.Infrastructure.Extensions.Json;
 using RayPI.Infrastructure.Config.Di;
 using RayPI.Infrastructure.Cors.Di;
 using RayPI.Infrastructure.Auth.Jwt;
@@ -12,12 +11,12 @@ using RayPI.Infrastructure.Config;
 using RayPI.Infrastructure.Config.ConfigModel;
 using RayPI.OpenApi.Filters;
 using RayPI.Infrastructure.Auth;
-using RayPI.Repository.EFRepository.Extensions;
 using RayPI.Infrastructure.Swagger.Extensions;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using RayPI.AppService.Extensions;
+using RayPI.Repository.EFRepository;
 
 namespace RayPI.OpenApi
 {
@@ -90,8 +89,19 @@ namespace RayPI.OpenApi
             services.AddMyAppServices();
             services.AddMyRepository(_configuration);
 
-            LogServices(services);
+
         }
+
+        /*
+        /// <summary>
+        /// Autofac注册
+        /// </summary>
+        /// <param name="builder"></param>
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.AddMyRepository();
+        }
+        */
 
         /// <summary>
         /// 配置管道
@@ -130,22 +140,9 @@ namespace RayPI.OpenApi
             });
         }
 
-        public static async Task LogServices(IServiceCollection services)
+        public static async Task LogServices(IServiceProvider sp)
         {
-            string servicesJson = services
-                .AsJsonStr(option =>
-                {
-                    option.EnumToString = true;
-                    option.FilterProps = new FilterPropsOption
-                    {
-                        FilterEnum = FilterEnum.Ignore,
-                        Props = new[] { "UsePollingFileWatcher", "Action", "Method", "Assembly" }
-                    };
-                    option.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
-                    {
-                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                    };
-                }).AsFormatJsonStr();
+            string servicesJson = MsDiHelper.SerializeServiceDescriptors(sp, o => { o.IsSerializeImplementationInstance = false; });
             await File.WriteAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "services.txt"), servicesJson);
         }
     }

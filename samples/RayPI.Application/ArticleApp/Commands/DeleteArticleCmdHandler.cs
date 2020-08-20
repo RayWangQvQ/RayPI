@@ -8,9 +8,9 @@ namespace RayPI.AppService.ArticleApp.Commands
 {
     public class DeleteArticleCmdHandler : IRequestHandler<DeleteArticleDto>
     {
-        private readonly IBaseRepository<Domain.Entity.Article> _articleRepository;
+        private readonly IMyBaseRepository<Domain.Entity.Article> _articleRepository;
 
-        public DeleteArticleCmdHandler(IBaseRepository<Domain.Entity.Article> baseRepository)
+        public DeleteArticleCmdHandler(IMyBaseRepository<Domain.Entity.Article> baseRepository)
         {
             this._articleRepository = baseRepository;
         }

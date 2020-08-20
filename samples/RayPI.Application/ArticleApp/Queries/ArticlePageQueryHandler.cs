@@ -11,12 +11,12 @@ namespace RayPI.AppService.ArticleApp.Queries
 {
     public class ArticlePageQueryHandler : IRequestHandler<QueryArticlePageDto, List<ResponseQueryArticleDto>>
     {
-        private readonly IBaseRepository<Domain.Entity.Article> _articleRepository;
+        private readonly IMyBaseRepository<Domain.Entity.Article> _articleRepository;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public ArticlePageQueryHandler(IBaseRepository<Domain.Entity.Article> baseRepository)
+        public ArticlePageQueryHandler(IMyBaseRepository<Domain.Entity.Article> baseRepository)
         {
             this._articleRepository = baseRepository;
         }

@@ -12,10 +12,10 @@ namespace RayPI.AppService.CommentApp
 {
     public class CommentAppService : CrudAppService<Comment, Guid, QueryCommentPageDto, CommentDto>, ICommentAppService
     {
+        //protected override IRepositoryBase<Comment, Guid> Repository => this.ServiceProvider.GetRequiredService<IMyBaseRepository<Comment>>();
+
         public CommentAppService(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
-
-        //protected override IRepositoryBase<Comment, Guid> Repository => this.ServiceProvider.GetRequiredService<IBaseRepository<Comment>>();
     }
 }

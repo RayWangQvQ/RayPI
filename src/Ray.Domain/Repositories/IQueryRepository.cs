@@ -13,7 +13,7 @@ namespace Ray.Domain.Repositories
     /// 负责查询的仓储interface
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IQueryRepository<TEntity> : IRepository<TEntity>
+    public interface IQueryRepository<TEntity> : IRepository
         where TEntity : class, IEntity
     {
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Ray.Infrastructure.Extensions.Json;
@@ -47,6 +48,7 @@ namespace RayPI.OpenApi
             IHostBuilder hostBuilder = Host.CreateDefaultBuilder(args);
 
             hostBuilder.ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+            //hostBuilder.UseServiceProviderFactory(new AutofacServiceProviderFactory()); //引入Autofac
 
             return hostBuilder;
         }

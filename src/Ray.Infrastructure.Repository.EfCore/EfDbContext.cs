@@ -22,8 +22,7 @@ namespace Ray.Infrastructure.Repository.EfCore
     /// <summary>
     /// EF的数据库上下文
     /// </summary>
-    public abstract class EfDbContext<TDbContext> : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
-        where TDbContext : DbContext
+    public class EfDbContext : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
     {
         protected IMediator _mediator;
         ICapPublisher _capBus;
@@ -67,7 +66,7 @@ namespace Ray.Infrastructure.Repository.EfCore
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected virtual void ApplyConfigurationsFromAssembly(ModelBuilder modelBuilder)
-            => modelBuilder.ApplyConfigurationsFromAssembly(typeof(TDbContext).Assembly);
+            => modelBuilder.ApplyConfigurationsFromAssembly(typeof(EfDbContext).Assembly);
         #endregion
 
 
