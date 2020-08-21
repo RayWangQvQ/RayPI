@@ -28,6 +28,7 @@ namespace RayPI.Repository.EFRepository
             {
                 var dbOption = serviceProvider.GetRequiredService<IOptionsSnapshot<DbOption>>();
                 optionAction.UseSqlServer(dbOption.Value.ConnStr);
+                //optionAction.UseSqlite(dbOption.Value.ConnStr);
             });
 
             return services;

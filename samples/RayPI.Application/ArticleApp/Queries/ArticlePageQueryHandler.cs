@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Ray.Infrastructure.Helpers;
 using RayPI.AppService.ArticleApp.Dtos;
+using RayPI.Domain.Entity;
 using RayPI.Domain.IRepositories;
 
 namespace RayPI.AppService.ArticleApp.Queries
@@ -23,7 +24,7 @@ namespace RayPI.AppService.ArticleApp.Queries
 
         public Task<List<ResponseQueryArticleDto>> Handle(QueryArticlePageDto request, CancellationToken cancellationToken)
         {
-            IQueryable<Domain.Entity.Article> queryable = _articleRepository.GetQueryable();
+            IQueryable<Article> queryable = _articleRepository.GetQueryable();
 
             if (!string.IsNullOrWhiteSpace(request.Title))
                 queryable = queryable.Where(x => x.Title.Contains(request.Title));

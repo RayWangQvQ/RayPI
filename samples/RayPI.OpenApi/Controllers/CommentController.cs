@@ -5,6 +5,8 @@ using Ray.Infrastructure.Page;
 using RayPI.AppService.CommentApp;
 using RayPI.AppService.CommentApp.Dtos;
 using System.Threading.Tasks;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -39,9 +41,30 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PageResultDto<CommentDto>> GetPage([FromQuery] QueryCommentPageDto query)
+        public async Task<PageResultDto<CommentDto>> GetPage(
+            [FromQuery] Guid? articleId,
+            [FromQuery][Required][Range(1, int.MaxValue)] int pageIndex,
+            [FromQuery][Required][Range(1, int.MaxValue)] int pageSize)
         {
+            var query = new QueryCommentPageDto
+            {
+                ArticleId = articleId,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
             return await _commentAppService.GetPageAsync(query);
+        }
+
+        /// <summary>
+        /// 获取详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<CommentDto> Get([FromRoute]Guid id)
+        {
+            return await _commentAppService.GetAsync(id);
         }
     }
 
