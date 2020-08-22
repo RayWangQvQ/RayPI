@@ -5,19 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Ray.Infrastructure.ObjectMapping
 {
-    public class DefaultObjectMapper<TContext> : DefaultObjectMapper, IObjectMapper<TContext>
-    {
-        public DefaultObjectMapper(
-            IServiceProvider serviceProvider,
-            IAutoObjectMappingProvider<TContext> autoObjectMappingProvider
-            ) : base(
-                serviceProvider,
-                autoObjectMappingProvider)
-        {
-
-        }
-    }
-
     public class DefaultObjectMapper : IObjectMapper
     {
         public IAutoObjectMappingProvider AutoObjectMappingProvider { get; }
@@ -111,6 +98,19 @@ namespace Ray.Infrastructure.ObjectMapping
         protected virtual TDestination AutoMap<TSource, TDestination>(TSource source, TDestination destination)
         {
             return AutoObjectMappingProvider.Map<TSource, TDestination>(source, destination);
+        }
+    }
+
+    public class DefaultObjectMapper<TContext> : DefaultObjectMapper, IObjectMapper<TContext>
+    {
+        public DefaultObjectMapper(
+            IServiceProvider serviceProvider,
+            IAutoObjectMappingProvider<TContext> autoObjectMappingProvider
+            ) : base(
+                serviceProvider,
+                autoObjectMappingProvider)
+        {
+
         }
     }
 }

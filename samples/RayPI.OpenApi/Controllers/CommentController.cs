@@ -41,17 +41,8 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PageResultDto<CommentDto>> GetPage(
-            [FromQuery] Guid? articleId,
-            [FromQuery][Required][Range(1, int.MaxValue)] int pageIndex,
-            [FromQuery][Required][Range(1, int.MaxValue)] int pageSize)
+        public async Task<PageResultDto<CommentDto>> GetPage([FromQuery]QueryCommentPageDto query)
         {
-            var query = new QueryCommentPageDto
-            {
-                ArticleId = articleId,
-                PageIndex = pageIndex,
-                PageSize = pageSize
-            };
             return await _commentAppService.GetPageAsync(query);
         }
 
@@ -73,7 +64,12 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     public partial class CommentController
     {
-
+        [HttpPost]
+        public async Task<Guid> Add([FromBody]CommentDto request)
+        {
+            var re= await _commentAppService.CreateAsync(request);
+            return Guid.NewGuid();
+        }
     }
 
     /// <summary>
