@@ -12,23 +12,16 @@ namespace Ray.Infrastructure.ObjectMap.AutoMapper
     {
         public static IServiceCollection AddRayAutoMapper(this IServiceCollection services, params Assembly[] assemblies)
         {
+            //注册RayMapper
             services.AddRayMapper();
 
             services.Replace(
-                ServiceDescriptor.Transient<IAutoObjectMapper, AutoMapperAutoRayMapper>()
+                ServiceDescriptor.Transient<IAutoObjectMapper, AutoMapperAutoObjectMapper>()
             );
 
-            List<Type> profileTypes = new List<Type>();
-            foreach (var assembly in assemblies)
-            {
-                var profiles = assembly.GetTypes()
-                    .Where(x => typeof(Profile).IsAssignableFrom(x));
-                profileTypes.AddRange(profiles);
-            }
-
-            // 添加映射规则
-            if (profileTypes.Any())
-                services.AddAutoMapper(profileTypes.ToArray());
+            //添加AutoMapper服务
+            if (assemblies.Any())
+                services.AddAutoMapper(assemblies);
 
             return services;
         }

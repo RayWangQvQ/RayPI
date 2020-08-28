@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Ray.Infrastructure.Extensions;
 
-namespace Ray.Infrastructure.Repository.EfCore.Behaviors
+namespace Ray.Repository.EfCore.Behaviors
 {
     public class TransactionBehavior<TEFContext, TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TEFContext : EfDbContext

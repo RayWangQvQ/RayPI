@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Ray.Domain.Repositories;
 using Ray.Infrastructure.DI;
-using Ray.Infrastructure.Repository.EfCore;
+using Ray.Repository.EfCore;
 using RayPI.Domain.IRepositories;
 using RayPI.Infrastructure.Config.Options;
 using RayPI.Repository.EFRepository.Repositories;

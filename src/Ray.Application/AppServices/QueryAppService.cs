@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Ray.Application.IAppServices;
 using Ray.Domain.Entities;
@@ -66,7 +65,8 @@ namespace Ray.Application.AppServices
             query = ApplySorting(query, input);
             query = ApplyPaging(query, input);
 
-            var entities = await query.ToListAsync();
+            //var entities = await query.ToListAsync();//todo：暂时未实现异步
+            var entities = await Task.FromResult(query.ToList());
 
             var page = input as IPageRequest;
             return new PageResultDto<TGetListItemOutputDto>()

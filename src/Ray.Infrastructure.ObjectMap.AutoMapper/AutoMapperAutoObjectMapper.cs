@@ -2,11 +2,14 @@
 
 namespace Ray.Infrastructure.ObjectMap.AutoMapper
 {
-    public class AutoMapperAutoRayMapper : IAutoObjectMapper
+    /// <summary>
+    /// 使用AutoMapper实现IAutoObjectMapper
+    /// </summary>
+    public class AutoMapperAutoObjectMapper : IAutoObjectMapper
     {
         private readonly IMapper _mapper;
 
-        public AutoMapperAutoRayMapper(IMapper mapper)
+        public AutoMapperAutoObjectMapper(IMapper mapper)
         {
             _mapper = mapper;
         }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Ray.Infrastructure.Auditing;
 using Ray.Infrastructure.Extensions;
 
-namespace Ray.Infrastructure.Repository.EfCore.Extensions
+namespace Ray.Repository.EfCore.Extensions
 {
     public static class EntityTypeBuilderExtension
     {

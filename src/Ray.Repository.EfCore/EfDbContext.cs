@@ -17,7 +17,7 @@ using Ray.Infrastructure.Auditing.PropertySetter;
 using Ray.Infrastructure.Guids;
 using Ray.Infrastructure.Helpers;
 
-namespace Ray.Infrastructure.Repository.EfCore
+namespace Ray.Repository.EfCore
 {
     /// <summary>
     /// EF的数据库上下文

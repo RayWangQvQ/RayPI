@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Ray.Domain;
 using Ray.Domain.Entities;
 
-namespace Ray.Infrastructure.Repository.EfCore
+namespace Ray.Repository.EfCore
 {
     static class MediatorExtension
     {

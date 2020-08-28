@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Ray.Domain.Entities;
 using Ray.Infrastructure.Auditing;
-using Ray.Infrastructure.Repository.EfCore.Extensions;
+using Ray.Repository.EfCore.Extensions;
 
-namespace Ray.Infrastructure.Repository.EfCore
+namespace Ray.Repository.EfCore
 {
     /// <summary>
     /// 实体与数据库表的映射关系

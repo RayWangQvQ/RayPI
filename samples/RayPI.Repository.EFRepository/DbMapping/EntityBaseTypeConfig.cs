@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RayPI.Domain.Entity;
-using Ray.Infrastructure.Repository.EfCore;
 using Ray.Domain.Entities;
 using System;
+using Ray.Repository.EfCore;
 
 namespace RayPI.Repository.EFRepository.DbMapping
 {

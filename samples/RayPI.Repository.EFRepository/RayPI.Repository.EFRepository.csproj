@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Ray.Infrastructure.Repository.EfCore\Ray.Infrastructure.Repository.EfCore.csproj" />
     <ProjectReference Include="..\..\src\Ray.Infrastructure\Ray.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Ray.Repository.EfCore\Ray.Repository.EfCore.csproj" />
     <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Auth\RayPI.Infrastructure.Auth.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Config\RayPI.Infrastructure.Config.csproj" />

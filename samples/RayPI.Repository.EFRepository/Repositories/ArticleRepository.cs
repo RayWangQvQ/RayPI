@@ -1,6 +1,6 @@
 ﻿using System;
 using Ray.Domain.Repositories;
-using Ray.Infrastructure.Repository.EfCore;
+using Ray.Repository.EfCore;
 using RayPI.Domain.Entity;
 using RayPI.Domain.IRepositories;
 

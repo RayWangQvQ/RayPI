@@ -12,7 +12,6 @@
     <ProjectReference Include="..\Ray.Domain\Ray.Domain.csproj" />
     <ProjectReference Include="..\Ray.Infrastructure.ObjectMap.AutoMapper\Ray.Infrastructure.ObjectMap.AutoMapper.csproj" />
     <ProjectReference Include="..\Ray.Infrastructure.ObjectMap\Ray.Infrastructure.ObjectMap.csproj" />
-    <ProjectReference Include="..\Ray.Infrastructure.Repository.EfCore\Ray.Infrastructure.Repository.EfCore.csproj" />
     <ProjectReference Include="..\Ray.Infrastructure\Ray.Infrastructure.csproj" />
   </ItemGroup>
 

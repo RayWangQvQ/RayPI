@@ -4,8 +4,8 @@ using RayPI.Domain.Entity;
 using MediatR;
 using DotNetCore.CAP;
 using Microsoft.Extensions.Logging;
-using Ray.Infrastructure.Repository.EfCore;
 using System.Threading.Tasks;
+using Ray.Repository.EfCore;
 
 namespace RayPI.Repository.EFRepository
 {

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Ray.Domain.Entities;
 using Ray.Domain.Repositories;
 using Ray.Infrastructure.Auditing.PropertySetter;
 using Ray.Infrastructure.Security.Claims;
 using Ray.Infrastructure.Security.User;
 
-namespace Ray.Infrastructure.Repository.EfCore
+namespace Ray.Repository.EfCore
 {
     public static class RayEfCoreRepositoryModule
     {
