@@ -41,7 +41,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PageResultDto<CommentDto>> GetPage([FromQuery]QueryCommentPageDto query)
+        public async Task<PageResultDto<CommentDto>> GetPage([FromQuery] PageAndSortRequest query)
         {
             return await _commentAppService.GetPageAsync(query);
         }
@@ -53,7 +53,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public async Task<CommentDto> Get([FromRoute]Guid id)
+        public async Task<CommentDto> Get([FromRoute] Guid id)
         {
             return await _commentAppService.GetAsync(id);
         }
@@ -64,10 +64,15 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     public partial class CommentController
     {
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<Guid> Add([FromBody]CommentDto request)
+        public async Task<Guid> Add([FromBody] CommentDto request)
         {
-            var re= await _commentAppService.CreateAsync(request);
+            var re = await _commentAppService.CreateAsync(request);
             return Guid.NewGuid();
         }
     }

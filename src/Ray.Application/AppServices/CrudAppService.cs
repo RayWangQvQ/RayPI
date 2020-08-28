@@ -5,6 +5,7 @@ using Ray.Application.IAppServices;
 using Ray.Domain.Entities;
 using Ray.Domain.Helpers;
 using Ray.Domain.Repositories;
+using Ray.Infrastructure.Page;
 
 namespace Ray.Application.AppServices
 {
@@ -152,4 +153,14 @@ namespace Ray.Application.AppServices
         }
     }
 
+    public class CrudAppService<TEntity, TEntityKey, TDto>
+        : CrudAppService<TEntity, TEntityKey, PageAndSortRequest, TDto, TDto, TDto, TDto>,
+            ICrudAppService<TEntityKey, TDto>
+        where TEntity : class, IEntity<TEntityKey>
+    {
+        public CrudAppService(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+
+        }
+    }
 }

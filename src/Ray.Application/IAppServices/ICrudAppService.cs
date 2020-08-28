@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Ray.Infrastructure.Page;
 
 namespace Ray.Application.IAppServices
 {
@@ -47,7 +48,7 @@ namespace Ray.Application.IAppServices
     /// <typeparam name="TGetListInputDto"></typeparam>
     /// <typeparam name="TCreateOrUpdateInputDto"></typeparam>
     public interface ICrudAppService<in TEntityKey, in TGetListInputDto, in TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
-        :ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
+        : ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOutputDto, TGetListItemOutputDto>
     {
 
     }
@@ -62,7 +63,7 @@ namespace Ray.Application.IAppServices
     /// <typeparam name="TGetListInputDto"></typeparam>
     /// <typeparam name="TCreateOrUpdateInputDto"></typeparam>
     public interface ICrudAppService<in TEntityKey, in TGetListInputDto, in TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto>
-        :ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto, TGetDetailOrListItemOutputDto>
+        : ICrudAppService<TEntityKey, TGetListInputDto, TCreateOrUpdateInputDto, TCreateOrUpdateInputDto, TGetDetailOrListItemOutputDto, TGetDetailOrListItemOutputDto>
     {
 
     }
@@ -75,7 +76,13 @@ namespace Ray.Application.IAppServices
     /// <typeparam name="TEntityKey"></typeparam>
     /// <typeparam name="TGetListInputDto"></typeparam>
     public interface ICrudAppService<in TEntityKey, in TGetListInputDto, TDto>
-        :ICrudAppService<TEntityKey, TGetListInputDto, TDto, TDto, TDto, TDto>
+        : ICrudAppService<TEntityKey, TGetListInputDto, TDto, TDto, TDto, TDto>
+    {
+
+    }
+
+    public interface ICrudAppService<in TEntityKey, TDto>
+        : ICrudAppService<TEntityKey, PageAndSortRequest, TDto>
     {
 
     }

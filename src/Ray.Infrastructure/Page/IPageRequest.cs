@@ -1,6 +1,9 @@
 ﻿namespace Ray.Infrastructure.Page
 {
-    public interface IPageResultRequest
+    /// <summary>
+    /// 获取分页请求
+    /// </summary>
+    public interface IPageRequest
     {
         /// <summary>
         /// 每页条数

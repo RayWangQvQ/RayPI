@@ -68,7 +68,7 @@ namespace Ray.Application.AppServices
 
             var entities = await query.ToListAsync();
 
-            var page = input as IPageResultRequest;
+            var page = input as IPageRequest;
             return new PageResultDto<TGetListItemOutputDto>()
             {
                 TotalCount = totalCount,
@@ -152,7 +152,7 @@ namespace Ray.Application.AppServices
             }
 
             //IQueryable.Task requires sorting, so we should sort if Take will be used.
-            if (input is IPageResultRequest)
+            if (input is IPageRequest)
             {
                 return ApplyDefaultSorting(query);
             }
@@ -185,7 +185,7 @@ namespace Ray.Application.AppServices
         protected virtual IQueryable<TEntity> ApplyPaging(IQueryable<TEntity> query, TGetListInput input)
         {
             //Try to use paging if available
-            if (input is IPageResultRequest pagedInput)
+            if (input is IPageRequest pagedInput)
             {
                 return query.PageBy(pagedInput.PageSize, pagedInput.PageIndex);
             }
