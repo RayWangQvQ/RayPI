@@ -80,7 +80,7 @@ namespace Ray.Application.AppServices
         /// </summary>
         protected virtual TEntity MapToEntity(TCreateInputDto createInput)
         {
-            var entity = ObjectMapper.Map<TCreateInputDto, TEntity>(createInput);
+            var entity = RayMapper.Map<TCreateInputDto, TEntity>(createInput);
             SetIdForGuids(entity);
             return entity;
         }
@@ -91,7 +91,7 @@ namespace Ray.Application.AppServices
         /// </summary>
         protected virtual void MapToEntity(TUpdateInputDto updateInput, TEntity entity)
         {
-            ObjectMapper.Map(updateInput, entity);
+            RayMapper.Map(updateInput, entity);
         }
         #endregion
 

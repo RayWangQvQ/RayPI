@@ -22,7 +22,7 @@ namespace Ray.Application.AppServices
 
         public IGuidGenerator GuidGenerator => ServiceProvider.GetRequiredService<IGuidGenerator>();
 
-        protected IRayMapper ObjectMapper => ServiceProvider.GetRequiredService<IRayMapper>();
+        protected IRayMapper RayMapper => ServiceProvider.GetRequiredService<IRayMapper>();
 
         /// <summary>
         /// Checks for given <paramref name="policyName"/>.

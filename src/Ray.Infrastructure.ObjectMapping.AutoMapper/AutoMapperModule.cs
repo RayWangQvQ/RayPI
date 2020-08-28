@@ -13,6 +13,8 @@ namespace Ray.Infrastructure.ObjectMapping.AutoMapper
     {
         public static IServiceCollection AddRayAutoMapper(this IServiceCollection services, params Assembly[] assemblies)
         {
+            services.AddRayMapper();
+
             services.Replace(
                 ServiceDescriptor.Transient<IAutoRayMapper, AutoMapperAutoRayMapper>()
             );

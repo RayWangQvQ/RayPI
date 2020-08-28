@@ -108,7 +108,7 @@ namespace Ray.Application.AppServices
         /// </summary>
         protected virtual TGetDetailOutputDto MapToGetOutputDto(TEntity entity)
         {
-            return ObjectMapper.Map<TEntity, TGetDetailOutputDto>(entity);
+            return RayMapper.Map<TEntity, TGetDetailOutputDto>(entity);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Ray.Application.AppServices
         /// </summary>
         protected virtual TGetListItemOutputDto MapToGetPageOutputDto(TEntity entity)
         {
-            return ObjectMapper.Map<TEntity, TGetListItemOutputDto>(entity);
+            return RayMapper.Map<TEntity, TGetListItemOutputDto>(entity);
         }
         #endregion
 
