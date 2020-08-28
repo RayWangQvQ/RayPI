@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Ray.Application.IAppServices;
+using Ray.Domain.Repositories;
 using Ray.Infrastructure.Guids;
 using Ray.Infrastructure.ObjectMapping;
 
@@ -21,7 +22,7 @@ namespace Ray.Application.AppServices
 
         public IGuidGenerator GuidGenerator => ServiceProvider.GetRequiredService<IGuidGenerator>();
 
-        protected IObjectMapper ObjectMapper => ServiceProvider.GetRequiredService<IObjectMapper>();
+        protected IRayMapper ObjectMapper => ServiceProvider.GetRequiredService<IRayMapper>();
 
         /// <summary>
         /// Checks for given <paramref name="policyName"/>.

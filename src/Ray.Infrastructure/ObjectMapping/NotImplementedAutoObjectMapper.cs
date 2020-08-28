@@ -4,9 +4,11 @@ using System.Text;
 
 namespace Ray.Infrastructure.ObjectMapping
 {
-    public sealed class NotImplementedAutoObjectMappingProvider : IAutoObjectMappingProvider
+    public sealed class NotImplementedAutoObjectMapper : IAutoRayMapper
     {
-        public TDestination Map<TSource, TDestination>(object source)
+        public IAutoRayMapper AutoObjectMapper => throw new NotImplementedException();
+
+        public TDestination Map<TSource, TDestination>(TSource source)
         {
             throw new NotImplementedException($"Can not map from given object ({source}) to {typeof(TDestination).AssemblyQualifiedName}.");
         }

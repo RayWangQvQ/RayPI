@@ -15,8 +15,8 @@ using RayPI.Infrastructure.Swagger.Extensions;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using RayPI.AppService.Extensions;
 using RayPI.Repository.EFRepository;
+using RayPI.Application;
 
 namespace RayPI.OpenApi
 {
@@ -88,8 +88,6 @@ namespace RayPI.OpenApi
             //注册业务逻辑
             services.AddMyAppServices();
             services.AddMyRepository(_configuration);
-
-
         }
 
         /*
@@ -112,6 +110,7 @@ namespace RayPI.OpenApi
         {
             //可以拿到根容器存储下，方便以后调用
             RayContainer.ServiceProviderRoot = app.ApplicationServices;
+            LogServices(RayContainer.ServiceProviderRoot);
 
             app.UseMyRepository();
 

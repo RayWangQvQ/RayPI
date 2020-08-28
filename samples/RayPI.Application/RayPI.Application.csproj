@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ray.Application\Ray.Application.csproj" />
+    <ProjectReference Include="..\..\src\Ray.Infrastructure.ObjectMapping.AutoMapper\Ray.Infrastructure.ObjectMapping.AutoMapper.csproj" />
     <ProjectReference Include="..\..\src\Ray.Infrastructure\Ray.Infrastructure.csproj" />
     <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />
   </ItemGroup>

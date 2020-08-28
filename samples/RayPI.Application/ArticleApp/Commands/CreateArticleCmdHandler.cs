@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using RayPI.AppService.ArticleApp.Dtos;
+using RayPI.Domain.Entity;
 using RayPI.Domain.IRepositories;
 
 namespace RayPI.AppService.ArticleApp.Commands
@@ -18,13 +19,13 @@ namespace RayPI.AppService.ArticleApp.Commands
 
         public async Task<Guid> Handle(CreateArticleDto request, CancellationToken cancellationToken)
         {
-            var entity = new Domain.Entity.Article(request.Title)
+            var entity = new Article(request.Title)
             {
                 SubTitle = request.SubTitle,
                 Content = request.Content
             };
 
-            Domain.Entity.Article result = await _articleRepository.InsertAsync(entity, true);
+            Article result = await _articleRepository.InsertAsync(entity, true);
             return result.Id;
         }
     }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using RayPI.AppService.ArticleApp.Dtos;
+using RayPI.Domain.Entity;
 using RayPI.Domain.IRepositories;
 
 namespace RayPI.AppService.ArticleApp.Commands
@@ -17,7 +18,7 @@ namespace RayPI.AppService.ArticleApp.Commands
 
         public async Task<Unit> Handle(DeleteArticleDto request, CancellationToken cancellationToken)
         {
-            Domain.Entity.Article entity = _articleRepository.GetAsync(x => x.Id == request.Id).Result;
+            Article entity = _articleRepository.GetAsync(x => x.Id == request.Id).Result;
             await _articleRepository.DeleteAsync(entity, true);
             return default;
         }
