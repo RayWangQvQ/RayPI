@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RayPI.Infrastructure.Cors.Attributes;
 using RayPI.Infrastructure.Cors.Enums;
-using System.Threading.Tasks;
-using MediatR;
-using Microsoft.AspNetCore.Routing;
 using Ray.Infrastructure.Page;
-using RayPI.AppService.Comment.Dtos;
+using RayPI.AppService.CommentApp;
+using RayPI.AppService.CommentApp.Dtos;
+using System.Threading.Tasks;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -17,15 +18,15 @@ namespace RayPI.OpenApi.Controllers
     [RayCors(CorsPolicyEnum.Free)]
     public partial class CommentController : Controller
     {
-        private readonly IMediator _mediator;
+        private readonly ICommentAppService _commentAppService;
 
         /// <summary>
         /// 构造
         /// </summary>
-        /// <param name="mediator"></param>
-        public CommentController(IMediator mediator)
+        /// <param name="commentAppService"></param>
+        public CommentController(ICommentAppService commentAppService)
         {
-            this._mediator = mediator;
+            _commentAppService = commentAppService;
         }
     }
 
@@ -42,7 +43,19 @@ namespace RayPI.OpenApi.Controllers
         [HttpGet]
         public async Task<PageResultDto<CommentDto>> GetPage([FromQuery]QueryCommentPageDto query)
         {
-            return await _mediator.Send(query, HttpContext.RequestAborted);
+            return await _commentAppService.GetPageAsync(query);
+        }
+
+        /// <summary>
+        /// 获取详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<CommentDto> Get([FromRoute]Guid id)
+        {
+            return await _commentAppService.GetAsync(id);
         }
     }
 
@@ -51,7 +64,12 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     public partial class CommentController
     {
-
+        [HttpPost]
+        public async Task<Guid> Add([FromBody]CommentDto request)
+        {
+            var re= await _commentAppService.CreateAsync(request);
+            return Guid.NewGuid();
+        }
     }
 
     /// <summary>

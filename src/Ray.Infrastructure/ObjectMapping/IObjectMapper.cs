@@ -4,16 +4,8 @@ using System.Text;
 
 namespace Ray.Infrastructure.ObjectMapping
 {
-    /// <summary>
-    /// Defines a simple interface to automatically map objects.
-    /// </summary>
     public interface IObjectMapper
     {
-        /// <summary>
-        /// Gets the underlying <see cref="IAutoObjectMappingProvider"/> object that is used for auto object mapping.
-        /// </summary>
-        IAutoObjectMappingProvider AutoObjectMappingProvider { get; }
-
         /// <summary>
         /// Converts an object to another. Creates a new object of <see cref="TDestination"/>.
         /// </summary>
@@ -34,16 +26,7 @@ namespace Ray.Infrastructure.ObjectMapping
     }
 
     /// <summary>
-    /// Defines a simple interface to automatically map objects for a specific context.
-    /// </summary>
-    public interface IObjectMapper<TContext> : IObjectMapper
-    {
-
-    }
-
-    /// <summary>
-    /// Maps an object to another.
-    /// Implement this interface to override object to object mapping for specific types.
+    /// Mapper映射器
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <typeparam name="TDestination"></typeparam>

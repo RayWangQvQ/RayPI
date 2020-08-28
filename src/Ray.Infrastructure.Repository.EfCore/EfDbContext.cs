@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,8 +22,7 @@ namespace Ray.Infrastructure.Repository.EfCore
     /// <summary>
     /// EF的数据库上下文
     /// </summary>
-    public abstract class EfDbContext<TDbContext> : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
-        where TDbContext : DbContext
+    public class EfDbContext : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
     {
         protected IMediator _mediator;
         ICapPublisher _capBus;
@@ -30,7 +30,8 @@ namespace Ray.Infrastructure.Repository.EfCore
         public IGuidGenerator GuidGenerator { get; set; }
 
         /// <summary>
-        /// 审计属性Setter器
+        /// 审计属性赋值器
+        /// todo：构造注入
         /// </summary>
         public IAuditPropertySetter AuditPropertySetter { get; set; }
 
@@ -44,6 +45,7 @@ namespace Ray.Infrastructure.Repository.EfCore
             GuidGenerator = SimpleGuidGenerator.Instance;
         }
 
+
         #region 封装OnModelCreating
         /// <summary>
         /// 创建Model时执行操作
@@ -56,6 +58,7 @@ namespace Ray.Infrastructure.Repository.EfCore
 
             ApplyConfigurationsFromAssembly(modelBuilder);
         }
+
         /// <summary>
         /// 创建Model时执行操作
         /// (默认会利用反射读取EntityTypeConfigurationAssembly程序集内所有的IEntityTypeConfiguration<TEntity>配置类)
@@ -63,15 +66,11 @@ namespace Ray.Infrastructure.Repository.EfCore
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected virtual void ApplyConfigurationsFromAssembly(ModelBuilder modelBuilder)
-            => modelBuilder.ApplyConfigurationsFromAssembly(typeof(TDbContext).Assembly);
+            => modelBuilder.ApplyConfigurationsFromAssembly(typeof(EfDbContext).Assembly);
         #endregion
 
-        /// <summary>
-        /// 提交变更
-        /// </summary>
-        /// <param name="acceptAllChangesOnSuccess"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+
+        #region IUnitOfWork工作单元
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             try
@@ -92,6 +91,24 @@ namespace Ray.Infrastructure.Repository.EfCore
             }
         }
 
+        public virtual async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
+        {
+            /*
+             * 这里顺序有2种选择：
+             * 1.先发事件再持久化到数据库：如果发送事件异常，则当前事务会回滚；
+             * 2.先持久化到数据库再发事件：如果发送事件异常，则需要做跨服务的事务处理或消息补偿
+             */
+
+            await _mediator.PublishDomainEventsAsync(this);
+            var result = await base.SaveChangesAsync(cancellationToken);
+            return true;
+        }
+        #endregion
+
+
+        /// <summary>
+        /// 为实体添加附加操作（逻辑删除、审计属性赋值等）
+        /// </summary>
         protected virtual void ApplyConcepts()
         {
             foreach (var entry in ChangeTracker.Entries().ToList())
@@ -100,6 +117,10 @@ namespace Ray.Infrastructure.Repository.EfCore
             }
         }
 
+        /// <summary>
+        /// 为实体添加附加操作
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void ApplyConcepts(EntityEntry entry)
         {
             switch (entry.State)
@@ -116,12 +137,20 @@ namespace Ray.Infrastructure.Repository.EfCore
             }
         }
 
+        /// <summary>
+        /// 插入实体时的附加操作
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void ApplyConceptsForAddedEntity(EntityEntry entry)
         {
             CheckAndSetId(entry);
             SetCreationAuditProperties(entry);
         }
 
+        /// <summary>
+        /// 更新实体时的附加操作
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void ApplyConceptsForModifiedEntity(EntityEntry entry)
         {
             SetModificationAuditProperties(entry);
@@ -132,6 +161,10 @@ namespace Ray.Infrastructure.Repository.EfCore
             }
         }
 
+        /// <summary>
+        /// 删除实体时的附加操作
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void ApplyConceptsForDeletedEntity(EntityEntry entry)
         {
             if (TryCancelDeletionForLogicDelete(entry))
@@ -140,12 +173,14 @@ namespace Ray.Infrastructure.Repository.EfCore
             }
         }
 
+        /// <summary>
+        /// 设置逻辑删除
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <returns></returns>
         protected virtual bool TryCancelDeletionForLogicDelete(EntityEntry entry)
         {
-            if (!(entry.Entity is ILogicDeletable))
-            {
-                return false;
-            }
+            if (!(entry.Entity is ILogicDeletable)) return false;
 
             entry.Reload();
             entry.State = EntityState.Modified;
@@ -217,6 +252,7 @@ namespace Ray.Infrastructure.Repository.EfCore
         {
             AuditPropertySetter?.SetCreationProperties(entry.Entity);
         }
+
         /// <summary>
         /// 设置编辑相关审计属性
         /// </summary>
@@ -225,6 +261,7 @@ namespace Ray.Infrastructure.Repository.EfCore
         {
             AuditPropertySetter?.SetModificationProperties(entry.Entity);
         }
+
         /// <summary>
         /// 设置软删除相关属性
         /// </summary>
@@ -235,25 +272,17 @@ namespace Ray.Infrastructure.Repository.EfCore
         }
         #endregion
 
-        #region IUnitOfWork工作单元
-        public virtual async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
-        {
-            var result = await base.SaveChangesAsync(cancellationToken);
-            await _mediator.PublishDomainEventsAsync(this);
-            return true;
-        }
-        #endregion
-
         #region ITransaction事务
         public virtual IDbContextTransaction CurrentTransaction { get; private set; }
 
         public virtual bool HasActiveTransaction => CurrentTransaction != null;
 
-        public virtual Task<IDbContextTransaction> BeginTransactionAsync()
+        public virtual async Task<IDbContextTransaction> BeginTransactionAsync()
         {
             if (CurrentTransaction != null) return null;
-            CurrentTransaction = Database.BeginTransaction(_capBus, autoCommit: false);//包DotNetCore.CAP.MySql
-            return Task.FromResult(CurrentTransaction);
+            CurrentTransaction = await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);//包Microsoft.EntityFrameworkCore.Relational
+
+            return CurrentTransaction;
         }
 
         public virtual async Task CommitTransactionAsync(IDbContextTransaction transaction)

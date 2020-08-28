@@ -14,8 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="MediatR" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
@@ -26,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RayPI.AppService\RayPI.AppService.csproj" />
+    <ProjectReference Include="..\RayPI.Application\RayPI.Application.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Auth\RayPI.Infrastructure.Auth.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Config\RayPI.Infrastructure.Config.csproj" />
     <ProjectReference Include="..\RayPI.Infrastructure.Cors\RayPI.Infrastructure.Cors.csproj" />

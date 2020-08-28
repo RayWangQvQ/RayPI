@@ -4,14 +4,13 @@ using Ray.Domain.Repositories;
 
 namespace Ray.Infrastructure.Repository.EfCore
 {
-    public interface IEfRepository<TEntity, TDbContext> : IRepositoryBase<TEntity>
+    public interface IEfRepository<TEntity> : IBaseRepository<TEntity>
         where TEntity : class, IEntity
-        where TDbContext : EfDbContext<TDbContext>
     {
         /// <summary>
         /// EF的数据库上下文
         /// </summary>
-        TDbContext DbContext { get; }
+        DbContext DbContext { get; }
 
         /// <summary>
         /// EF的DbSet数据集
@@ -19,9 +18,8 @@ namespace Ray.Infrastructure.Repository.EfCore
         DbSet<TEntity> DbSet { get; }
     }
 
-    public interface IEfRepository<TEntity, TKey, TDbContext> : IEfRepository<TEntity, TDbContext>, IRepositoryBase<TEntity, TKey>
+    public interface IEfRepository<TEntity, TKey> : IEfRepository<TEntity>, IBaseRepository<TEntity, TKey>
         where TEntity : class, IEntity<TKey>
-        where TDbContext : EfDbContext<TDbContext>
     {
 
     }

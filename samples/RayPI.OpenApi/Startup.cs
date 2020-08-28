@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ray.Infrastructure.DI;
 using RayPI.Infrastructure.Config.Di;
 using RayPI.Infrastructure.Cors.Di;
 using RayPI.Infrastructure.Auth.Jwt;
@@ -10,18 +11,12 @@ using RayPI.Infrastructure.Config;
 using RayPI.Infrastructure.Config.ConfigModel;
 using RayPI.OpenApi.Filters;
 using RayPI.Infrastructure.Auth;
-using RayPI.AppService.Extensions;
-using Autofac;
-using Ray.Infrastructure.DI;
-using RayPI.Repository.EFRepository.Extensions;
-using RayPI.Infrastructure.Config.Extensions;
 using RayPI.Infrastructure.Swagger.Extensions;
 using System;
-using Ray.Infrastructure.Extensions.Json;
 using System.IO;
 using System.Threading.Tasks;
-using System.Diagnostics;
-using Microsoft.CodeAnalysis;
+using RayPI.Repository.EFRepository;
+using RayPI.Application;
 
 namespace RayPI.OpenApi
 {
@@ -51,17 +46,16 @@ namespace RayPI.OpenApi
         {
             //注册控制器
             services.AddControllers(options =>
-            {
-                options.Filters.Add(typeof(WebApiResultFilterAttribute));
-                options.RespectBrowserAcceptHeader = true;
-            }).AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
-            });
+                {
+                    options.Filters.Add(typeof(WebApiResultFilterAttribute));
+                    options.RespectBrowserAcceptHeader = true;
+                })
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
+                });
 
             //注册配置管理服务
-            services.AddSingleton<IConfiguration>(_configuration);
-            services.AddMyOptions();
             services.AddConfigService(_env.ContentRootPath);
             AllConfigModel allConfig = services.GetImplementationInstanceOrNull<AllConfigModel>();
 
@@ -69,7 +63,6 @@ namespace RayPI.OpenApi
             services.AddSwaggerService();
 
             //注册授权认证
-
             JwtAuthConfigModel jwtConfig = allConfig.JwtAuthConfigModel;
             var jwtOption = new JwtOption//todo:使用AutoMapper替换
             {
@@ -94,20 +87,19 @@ namespace RayPI.OpenApi
 
             //注册业务逻辑
             services.AddMyAppServices();
-            services.AddMyRepository();
-
-            LogServices(services);
+            services.AddMyRepository(_configuration);
         }
 
+        /*
         /// <summary>
         /// Autofac注册
-        /// 不需要执行build构建容器，构建的工作由Core框架完成
         /// </summary>
         /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.AddMyRepository();
         }
+        */
 
         /// <summary>
         /// 配置管道
@@ -118,6 +110,7 @@ namespace RayPI.OpenApi
         {
             //可以拿到根容器存储下，方便以后调用
             RayContainer.ServiceProviderRoot = app.ApplicationServices;
+            LogServices(RayContainer.ServiceProviderRoot);
 
             app.UseMyRepository();
 
@@ -146,22 +139,9 @@ namespace RayPI.OpenApi
             });
         }
 
-        public static async Task LogServices(IServiceCollection services)
+        public static async Task LogServices(IServiceProvider sp)
         {
-            string servicesJson = services
-                .AsJsonStr(option =>
-                {
-                    option.EnumToString = true;
-                    option.FilterProps = new FilterPropsOption
-                    {
-                        FilterEnum = FilterEnum.Ignore,
-                        Props = new[] { "UsePollingFileWatcher", "Action", "Method", "Assembly" }
-                    };
-                    option.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
-                    {
-                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                    };
-                }).AsFormatJsonStr();
+            string servicesJson = MsDiHelper.SerializeServiceDescriptors(sp, o => { o.IsSerializeImplementationInstance = false; });
             await File.WriteAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "services.txt"), servicesJson);
         }
     }

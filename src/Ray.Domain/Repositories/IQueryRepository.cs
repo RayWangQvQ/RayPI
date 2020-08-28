@@ -13,9 +13,22 @@ namespace Ray.Domain.Repositories
     /// 负责查询的仓储interface
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IQueryRepository<TEntity> : IRepository, IQueryable<TEntity>
+    public interface IQueryRepository<TEntity> : IRepository
         where TEntity : class, IEntity
     {
+        /// <summary>
+        /// 获取IQueryable集合
+        /// </summary>
+        /// <returns></returns>
+        IQueryable<TEntity> GetQueryable();
+
+        /// <summary>
+        /// 获取IQueryable集合（包含导航属性）
+        /// </summary>
+        /// <param name="propertySelectors"></param>
+        /// <returns></returns>
+        IQueryable<TEntity> GetQueryableWithDetails(params Expression<Func<TEntity, object>>[] propertySelectors);
+
         /// <summary>
         /// 获取总数
         /// </summary>
@@ -28,21 +41,6 @@ namespace Ray.Domain.Repositories
         /// <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>Entity</returns>
         Task<List<TEntity>> GetListAsync(bool includeDetails = false, CancellationToken cancellationToken = default);
-
-        IQueryable<TEntity> GetQueryable();
-
-        /// <summary>
-        /// 获取IQueryable集合
-        /// </summary>
-        /// <returns></returns>
-        IQueryable<TEntity> WithDetails();
-
-        /// <summary>
-        /// 获取IQueryable集合
-        /// </summary>
-        /// <param name="propertySelectors"></param>
-        /// <returns></returns>
-        IQueryable<TEntity> WithDetails(params Expression<Func<TEntity, object>>[] propertySelectors);
 
         /// <summary>
         /// 根据 <paramref name="predicate"/>条件获取一个实体（不会抛异常）.

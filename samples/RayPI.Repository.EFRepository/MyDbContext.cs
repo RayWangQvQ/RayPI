@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RayPI.Repository.EFRepository
 {
-    public class MyDbContext : EfDbContext<MyDbContext>
+    public class MyDbContext : EfDbContext
     {
         private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
@@ -23,7 +23,6 @@ namespace RayPI.Repository.EFRepository
         {
         }
 
-        #region OnConfiguring
         /// <summary>
         /// 配置数据库
         /// （该方法内配置会覆盖构造函数中传入的DbContextOptions）
@@ -34,9 +33,7 @@ namespace RayPI.Repository.EFRepository
             //日志：
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
         }
-        #endregion
 
-        #region OnModelCreating
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //映射关系
@@ -45,16 +42,10 @@ namespace RayPI.Repository.EFRepository
             //设置全局默认的数据库敢纲要（不设置的话默认为dbo）
             modelBuilder.HasDefaultSchema("ray");
         }
-        #endregion
 
-        public override void Dispose()
+        protected override void ApplyConfigurationsFromAssembly(ModelBuilder modelBuilder)
         {
-            base.Dispose();
-        }
-
-        public override ValueTask DisposeAsync()
-        {
-            return base.DisposeAsync();
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyDbContext).Assembly);
         }
     }
 }

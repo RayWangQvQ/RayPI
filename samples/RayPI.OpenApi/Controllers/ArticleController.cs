@@ -6,7 +6,7 @@ using MediatR;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Routing;
 using System;
-using RayPI.AppService.Article.Dtos;
+using RayPI.AppService.ArticleApp.Dtos;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -41,7 +41,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<ResponseQueryArticleDto>> Get([FromQuery]QueryArticlePageDto query)
+        public async Task<List<ResponseQueryArticleDto>> Get([FromQuery] QueryArticlePageDto query)
         {
             return await _mediator.Send(query, HttpContext.RequestAborted);
         }

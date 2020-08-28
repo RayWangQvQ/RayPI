@@ -13,6 +13,9 @@ namespace Ray.Domain.Repositories
     /// </summary>
     public interface IRepository
     {
-
+        /// <summary>
+        /// 工作单元
+        /// </summary>
+        IUnitOfWork UnitOfWork { get; }
     }
 }
