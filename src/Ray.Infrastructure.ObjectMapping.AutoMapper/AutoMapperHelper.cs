@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Ray.Infrastructure.Helpers
+namespace Ray.Infrastructure.ObjectMapping.AutoMapper
 {
     public class AutoMapperHelper
     {

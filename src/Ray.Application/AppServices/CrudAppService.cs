@@ -75,10 +75,10 @@ namespace Ray.Application.AppServices
 
         #region Map映射
         /// <summary>
-        /// Maps <see cref="TCreateInputDto"/> to <see cref="TEntity"/> to create a new entity.
-        /// It uses <see cref="IObjectMapper"/> by default.
-        /// It can be overriden for custom mapping.
+        /// 创建Dto——>Entity
         /// </summary>
+        /// <param name="createInput"></param>
+        /// <returns></returns>
         protected virtual TEntity MapToEntity(TCreateInputDto createInput)
         {
             var entity = RayMapper.Map<TCreateInputDto, TEntity>(createInput);
@@ -98,7 +98,7 @@ namespace Ray.Application.AppServices
 
         /// <summary>
         /// Sets Id value for the entity if <see cref="TEntityKey"/> is <see cref="Guid"/>.
-        /// It's used while creating a new entity.
+        /// 用于新增实体.
         /// </summary>
         protected virtual void SetIdForGuids(TEntity entity)
         {

@@ -17,6 +17,7 @@ using System.IO;
 using System.Threading.Tasks;
 using RayPI.Repository.EFRepository;
 using RayPI.Application;
+using Ray.Infrastructure.ObjectMapping.AutoMapper;
 
 namespace RayPI.OpenApi
 {
@@ -47,7 +48,7 @@ namespace RayPI.OpenApi
             //注册控制器
             services.AddControllers(options =>
                 {
-                    options.Filters.Add(typeof(WebApiResultFilterAttribute));
+                    //options.Filters.Add(typeof(WebApiResultFilterAttribute));
                     options.RespectBrowserAcceptHeader = true;
                 })
                 .AddNewtonsoftJson(options =>
@@ -64,16 +65,7 @@ namespace RayPI.OpenApi
 
             //注册授权认证
             JwtAuthConfigModel jwtConfig = allConfig.JwtAuthConfigModel;
-            var jwtOption = new JwtOption//todo:使用AutoMapper替换
-            {
-                Issuer = jwtConfig.Issuer,
-                Audience = jwtConfig.Audience,
-                WebExp = jwtConfig.WebExp,
-                AppExp = jwtConfig.AppExp,
-                MiniProgramExp = jwtConfig.MiniProgramExp,
-                OtherExp = jwtConfig.OtherExp,
-                SecurityKey = jwtConfig.SecurityKey
-            };
+            var jwtOption = AutoMapperHelper.Map<JwtAuthConfigModel, JwtOption>(jwtConfig);
             services.AddSingleton(jwtOption);
             services.AddRayAuthService(jwtOption);
 

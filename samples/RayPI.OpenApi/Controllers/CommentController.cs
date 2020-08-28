@@ -70,10 +70,9 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Guid> Add([FromBody] CommentDto request)
+        public async Task<CommentDto> Add([FromBody] CommentDto request)
         {
-            var re = await _commentAppService.CreateAsync(request);
-            return Guid.NewGuid();
+            return await _commentAppService.CreateAsync(request);
         }
     }
 
