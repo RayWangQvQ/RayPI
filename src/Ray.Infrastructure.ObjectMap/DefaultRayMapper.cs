@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ray.Infrastructure.ObjectMapping
+namespace Ray.Infrastructure.ObjectMap
 {
     public class DefaultRayMapper : IRayMapper
     {
-        public IAutoRayMapper AutoRayMapper { get; }
+        public IAutoObjectMapper AutoObjectMapper { get; }
 
         protected IServiceProvider ServiceProvider { get; }
 
         public DefaultRayMapper(
             IServiceProvider serviceProvider,
-            IAutoRayMapper autoRayMapper)
+            IAutoObjectMapper autoRayMapper)
         {
-            AutoRayMapper = autoRayMapper;
+            AutoObjectMapper = autoRayMapper;
             ServiceProvider = serviceProvider;
         }
 
@@ -63,25 +61,12 @@ namespace Ray.Infrastructure.ObjectMapping
 
         protected virtual TDestination AutoMap<TSource, TDestination>(TSource source)
         {
-            return AutoRayMapper.Map<TSource, TDestination>(source);
+            return AutoObjectMapper.Map<TSource, TDestination>(source);
         }
 
         protected virtual TDestination AutoMap<TSource, TDestination>(TSource source, TDestination destination)
         {
-            return AutoRayMapper.Map<TSource, TDestination>(source, destination);
-        }
-    }
-
-    public class DefaultRayMapper<TContext> : DefaultRayMapper, IRayMapper<TContext>
-    {
-        public DefaultRayMapper(
-            IServiceProvider serviceProvider,
-            IAutoRayMapper<TContext> autoRayMapper
-            ) : base(
-                serviceProvider,
-                autoRayMapper)
-        {
-
+            return AutoObjectMapper.Map<TSource, TDestination>(source, destination);
         }
     }
 }

@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Ray.Infrastructure.ObjectMapping.AutoMapper
+namespace Ray.Infrastructure.ObjectMap.AutoMapper
 {
     public static class AutoMapperModule
     {
@@ -16,7 +15,7 @@ namespace Ray.Infrastructure.ObjectMapping.AutoMapper
             services.AddRayMapper();
 
             services.Replace(
-                ServiceDescriptor.Transient<IAutoRayMapper, AutoMapperAutoRayMapper>()
+                ServiceDescriptor.Transient<IAutoObjectMapper, AutoMapperAutoRayMapper>()
             );
 
             List<Type> profileTypes = new List<Type>();

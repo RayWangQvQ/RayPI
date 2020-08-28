@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ray.Infrastructure.ObjectMapping
+namespace Ray.Infrastructure.ObjectMap
 {
-    public sealed class NotImplementedAutoObjectMapper : IAutoRayMapper
+    public sealed class NotImplementedAutoObjectMapper : IAutoObjectMapper
     {
-        public IAutoRayMapper AutoObjectMapper => throw new NotImplementedException();
+        public IAutoObjectMapper AutoObjectMapper => throw new NotImplementedException();
 
         public TDestination Map<TSource, TDestination>(TSource source)
         {

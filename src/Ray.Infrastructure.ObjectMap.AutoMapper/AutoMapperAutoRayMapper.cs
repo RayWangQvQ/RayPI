@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 
-namespace Ray.Infrastructure.ObjectMapping.AutoMapper
+namespace Ray.Infrastructure.ObjectMap.AutoMapper
 {
-    public class AutoMapperAutoRayMapper : IAutoRayMapper
+    public class AutoMapperAutoRayMapper : IAutoObjectMapper
     {
         private readonly IMapper _mapper;
 
@@ -22,14 +19,6 @@ namespace Ray.Infrastructure.ObjectMapping.AutoMapper
         public virtual TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
         {
             return _mapper.Map(source, destination);
-        }
-    }
-
-    public class AutoMapperAutoRayMapper<TContext> : AutoMapperAutoRayMapper, IAutoRayMapper<TContext>
-    {
-        public AutoMapperAutoRayMapper(IMapper mapperAccessor)
-            : base(mapperAccessor)
-        {
         }
     }
 }

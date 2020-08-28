@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ray.Infrastructure.ObjectMapping
+﻿namespace Ray.Infrastructure.ObjectMap
 {
     public interface IObjectMapper
     {

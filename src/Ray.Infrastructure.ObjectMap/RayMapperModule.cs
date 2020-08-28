@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Ray.Infrastructure.ObjectMapping
+namespace Ray.Infrastructure.ObjectMap
 {
     public static class RayMapperModule
     {
         public static IServiceCollection AddRayMapper(this IServiceCollection services)
         {
             services.AddSingleton<IRayMapper, DefaultRayMapper>();
-            services.AddSingleton<IAutoRayMapper, NotImplementedAutoObjectMapper>();
+            services.AddSingleton<IAutoObjectMapper, NotImplementedAutoObjectMapper>();
 
             return services;
         }

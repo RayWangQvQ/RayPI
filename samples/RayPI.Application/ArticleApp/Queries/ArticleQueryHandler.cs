@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Ray.Infrastructure.Helpers;
-using Ray.Infrastructure.ObjectMapping.AutoMapper;
+using Ray.Infrastructure.ObjectMap.AutoMapper;
 using RayPI.AppService.ArticleApp.Dtos;
 using RayPI.Domain.Entity;
 using RayPI.Domain.IRepositories;

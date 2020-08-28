@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ray.Infrastructure\Ray.Infrastructure.csproj" />
+    <ProjectReference Include="..\Ray.Infrastructure.ObjectMap\Ray.Infrastructure.ObjectMap.csproj" />
   </ItemGroup>
 
 </Project>

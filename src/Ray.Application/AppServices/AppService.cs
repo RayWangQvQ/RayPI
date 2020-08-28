@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Ray.Application.IAppServices;
 using Ray.Domain.Repositories;
 using Ray.Infrastructure.Guids;
-using Ray.Infrastructure.ObjectMapping;
+using Ray.Infrastructure.ObjectMap;
 
 namespace Ray.Application.AppServices
 {

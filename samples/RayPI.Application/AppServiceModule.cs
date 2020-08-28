@@ -5,7 +5,7 @@ using System.Text;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Ray.Application.IAppServices;
-using Ray.Infrastructure.ObjectMapping.AutoMapper;
+using Ray.Infrastructure.ObjectMap.AutoMapper;
 
 namespace RayPI.Application
 {
