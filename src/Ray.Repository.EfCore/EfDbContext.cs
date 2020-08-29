@@ -9,6 +9,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
 using Ray.Domain.Entities;
 using Ray.Domain.Helpers;
 using Ray.Domain.Repositories;
@@ -26,23 +27,24 @@ namespace Ray.Repository.EfCore
     {
         protected IMediator _mediator;
         ICapPublisher _capBus;
+        private readonly IServiceProvider _serviceProvider;
 
         public IGuidGenerator GuidGenerator { get; set; }
 
         /// <summary>
         /// 审计属性赋值器
-        /// todo：构造注入
         /// </summary>
-        public IAuditPropertySetter AuditPropertySetter { get; set; }
+        public IAuditPropertySetter AuditPropertySetter => _serviceProvider.GetRequiredService<IAuditPropertySetter>();
 
         /// <summary>
         /// 构造
         /// </summary>
         /// <param name="options"></param>
-        public EfDbContext(DbContextOptions options)
+        public EfDbContext(DbContextOptions options, IServiceProvider serviceProvider)
             : base(options)
         {
             GuidGenerator = SimpleGuidGenerator.Instance;
+            _serviceProvider = serviceProvider;
         }
 
 
@@ -188,16 +190,21 @@ namespace Ray.Repository.EfCore
             return true;
         }
 
+
+        /// <summary>
+        /// 检查并设置Id
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void CheckAndSetId(EntityEntry entry)
         {
-            if (entry.Entity is IEntity<Guid> entityWithGuidId)
+            switch (entry.Entity)
             {
-                TrySetGuidId(entry, entityWithGuidId);
-            }
-
-            if (entry.Entity is IEntity<long> entityWithLongId)
-            {
-                //todo
+                case IEntity<Guid> entityWithGuidId:
+                    TrySetGuidId(entry, entityWithGuidId);
+                    return;
+                case IEntity<long> entityWithLongId:
+                    //todo
+                    return;
             }
         }
 

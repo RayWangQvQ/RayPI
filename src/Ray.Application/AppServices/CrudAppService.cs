@@ -42,8 +42,10 @@ namespace Ray.Application.AppServices
             await CheckUpdatePolicyAsync();
 
             var entity = await GetEntityByIdAsync(id);
-            //TODO: Check if input has id different than given id and normalize if it's default value, throw ex otherwise
+            if (entity == null) throw new Exception("Id is not exist");//todo:异常
+
             MapToEntity(input, entity);
+
             await Repository.UpdateAsync(entity, autoSave: true);
 
             return MapToGetOutputDto(entity);
@@ -75,7 +77,7 @@ namespace Ray.Application.AppServices
 
         #region Map映射
         /// <summary>
-        /// 创建Dto——>Entity
+        /// 映射：创建Dto <see cref="TCreateInputDto"/>——>Entity <see cref="TEntity"/>
         /// </summary>
         /// <param name="createInput"></param>
         /// <returns></returns>
@@ -85,10 +87,10 @@ namespace Ray.Application.AppServices
             SetIdForGuids(entity);
             return entity;
         }
+
         /// <summary>
-        /// Maps <see cref="TUpdateInputDto"/> to <see cref="TEntity"/> to update the entity.
-        /// It uses <see cref="IObjectMapper"/> by default.
-        /// It can be overriden for custom mapping.
+        /// 映射： 编辑Dto <see cref="TUpdateInputDto"/> ——> 实体 <see cref="TEntity"/>.
+        /// 默认使用 <see cref="IRayMapper"/> 实现.
         /// </summary>
         protected virtual void MapToEntity(TUpdateInputDto updateInput, TEntity entity)
         {

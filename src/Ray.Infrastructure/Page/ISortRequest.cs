@@ -3,7 +3,7 @@
     /// <summary>
     /// This interface is defined to standardize to request a sorted result.
     /// </summary>
-    public interface ISortedResultRequest
+    public interface ISortRequest
     {
         /// <summary>
         /// Sorting information.

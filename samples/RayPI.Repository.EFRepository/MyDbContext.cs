@@ -13,13 +13,8 @@ namespace RayPI.Repository.EFRepository
     {
         private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
-        public MyDbContext(DbContextOptions options)
-            : base(options)
-        {
-        }
-
-        public MyDbContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus)
-            : base(options)
+        public MyDbContext(DbContextOptions options, IServiceProvider serviceProvider)
+            : base(options, serviceProvider)
         {
         }
 

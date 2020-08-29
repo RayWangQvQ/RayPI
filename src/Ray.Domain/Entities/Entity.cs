@@ -55,7 +55,7 @@ namespace Ray.Domain.Entities
             Id = id;
         }
 
-        public virtual TPrimaryKey Id { get; set; }
+        public virtual TPrimaryKey Id { get; protected set; }
 
         public override object[] GetKeys()
         {

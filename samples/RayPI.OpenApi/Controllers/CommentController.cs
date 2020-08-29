@@ -81,7 +81,19 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     public partial class CommentController
     {
-
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<CommentDto> Update([FromRoute]Guid id,
+            [FromBody] CommentDto request)
+        {
+            return await _commentAppService.UpdateAsync(id, request);
+        }
     }
 
     /// <summary>

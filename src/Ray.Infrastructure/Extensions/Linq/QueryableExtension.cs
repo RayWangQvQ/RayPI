@@ -119,13 +119,14 @@ namespace Ray.Infrastructure.Extensions.Linq
         }
 
         /// <summary>
-        /// Used for paging. Can be used as an alternative to Skip(...).Take(...) chaining.
+        /// IQueryable分页
         /// </summary>
         public static IQueryable<T> PageBy<T>(this IQueryable<T> query, int pageSize, int pageIndex)
         {
             CheckHelper.NotNull(query, nameof(query));
 
-            return query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            return query.Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize);
         }
     }
 }

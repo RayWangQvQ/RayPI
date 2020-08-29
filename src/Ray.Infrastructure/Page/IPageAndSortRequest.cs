@@ -7,8 +7,7 @@ namespace Ray.Infrastructure.Page
     /// <summary>
     /// 获取分页并排序请求
     /// </summary>
-    public interface IPageAndSortRequest : IPageRequest
+    public interface IPageAndSortRequest : IPageRequest, ISortRequest
     {
-        string Sorting { get; set; }
     }
 }

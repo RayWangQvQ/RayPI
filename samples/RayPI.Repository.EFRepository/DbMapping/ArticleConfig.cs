@@ -19,7 +19,6 @@ namespace RayPI.Repository.EFRepository.DbMapping
             //初始化数据
             builder.HasData(new Article("这是一条初始化的数据")
             {
-                Id = Guid.NewGuid(),
                 SubTitle = "来自DbContext的OnModelCreating",
                 Content = "这是内容",
                 CreationTime = DateTime.Now,

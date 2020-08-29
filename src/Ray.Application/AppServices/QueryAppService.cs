@@ -78,6 +78,9 @@ namespace Ray.Application.AppServices
             };
         }
 
+
+
+
         /// <summary>
         /// 根据主键获取实体
         /// </summary>
@@ -86,6 +89,18 @@ namespace Ray.Application.AppServices
         protected async Task<TEntity> GetEntityByIdAsync(TEntityKey id)
         {
             return await Repository.GetAsync(id);
+        }
+
+        /// <summary>
+        /// 通过入参获取筛选后的 <see cref="IQueryable"/>，有继承的AppService根据具体的入参和业务覆写实现
+        /// 它只负责筛选，不负责排序和分页.
+        /// 排序可通过 <see cref="ApplySorting"/> 实现，分页可通过 <see cref="ApplyPaging"/> 实现
+        /// methods.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        protected virtual IQueryable<TEntity> CreateFilteredQuery(TGetListInput input)
+        {
+            return Repository.GetQueryable();
         }
 
         #region 鉴权
@@ -102,9 +117,8 @@ namespace Ray.Application.AppServices
 
         #region Map映射
         /// <summary>
-        /// Maps <see cref="TEntity"/> to <see cref="TGetDetailOutputDto"/>.
-        /// It uses <see cref="IObjectMapper"/> by default.
-        /// It can be overriden for custom mapping.
+        /// 将 <see cref="TEntity"/> 映射为 <see cref="TGetDetailOutputDto"/>.
+        /// 默认使用 <see cref="IRayMapper"/> 进行映射.
         /// </summary>
         protected virtual TGetDetailOutputDto MapToGetOutputDto(TEntity entity)
         {
@@ -112,9 +126,8 @@ namespace Ray.Application.AppServices
         }
 
         /// <summary>
-        /// Maps <see cref="TEntity"/> to <see cref="TGetListItemOutputDto"/>.
-        /// It uses <see cref="IObjectMapper"/> by default.
-        /// It can be overriden for custom mapping.
+        /// 将 <see cref="TEntity"/> 映射为 <see cref="TGetListItemOutputDto"/>.
+        /// 默认使用 <see cref="IRayMapper"/> 进行映射.
         /// </summary>
         protected virtual TGetListItemOutputDto MapToGetPageOutputDto(TEntity entity)
         {
@@ -122,28 +135,16 @@ namespace Ray.Application.AppServices
         }
         #endregion
 
-        /// <summary>
-        /// This method should create <see cref="IQueryable{TEntity}"/> based on given input.
-        /// It should filter query if needed, but should not do sorting or paging.
-        /// Sorting should be done in <see cref="ApplySorting"/> and paging should be done in <see cref="ApplyPaging"/>
-        /// methods.
-        /// </summary>
-        /// <param name="input">The input.</param>
-        protected virtual IQueryable<TEntity> CreateFilteredQuery(TGetListInput input)
-        {
-            return Repository.GetQueryable();
-        }
-
         #region 排序
         /// <summary>
-        /// Should apply sorting if needed.
+        /// 尝试附加排序操作
         /// </summary>
         /// <param name="query">The query.</param>
         /// <param name="input">The input.</param>
         protected virtual IQueryable<TEntity> ApplySorting(IQueryable<TEntity> query, TGetListInput input)
         {
-            //Try to sort query if available
-            if (input is ISortedResultRequest sortInput)
+            //如果实现了ISortRequest，则直接按照Sorting字符串排序
+            if (input is ISortRequest sortInput)
             {
                 if (!sortInput.Sorting.IsNullOrWhiteSpace())
                 {
@@ -151,7 +152,7 @@ namespace Ray.Application.AppServices
                 }
             }
 
-            //IQueryable.Task requires sorting, so we should sort if Take will be used.
+            //IQueryable.Task 需要排序, 如果分页需要使用Take，那么需要附加一个默认排序
             if (input is IPageRequest)
             {
                 return ApplyDefaultSorting(query);
@@ -162,14 +163,21 @@ namespace Ray.Application.AppServices
         }
 
         /// <summary>
-        /// Applies sorting if no sorting specified but a limited result requested.
+        /// 附加默认排序（如果请求分页但又没有指定排序，则需要附加默认排序）
         /// </summary>
         /// <param name="query">The query.</param>
         protected virtual IQueryable<TEntity> ApplyDefaultSorting(IQueryable<TEntity> query)
         {
+            //如果有创建时间，则按照创建时间倒序排序
             if (typeof(TEntity).IsAssignableTo<IHasCreationAuditing>())
             {
                 return query.OrderByDescending(e => ((IHasCreationAuditing)e).CreationTime);
+            }
+
+            //如果有Id，则按照Id倒叙排序
+            if (typeof(TEntity).GetProperty("Id") != null)
+            {
+                return query.OrderBy("Id Desc");
             }
 
             throw new Exception("No sorting specified but this query requires sorting. Override the ApplyDefaultSorting method for your application service derived from QueryAppService!");
@@ -178,19 +186,19 @@ namespace Ray.Application.AppServices
 
         #region 分页
         /// <summary>
-        /// Should apply paging if needed.
+        /// 尝试附加分页操作
         /// </summary>
         /// <param name="query">The query.</param>
         /// <param name="input">The input.</param>
         protected virtual IQueryable<TEntity> ApplyPaging(IQueryable<TEntity> query, TGetListInput input)
         {
-            //Try to use paging if available
+            //如果实现了IPageRequest，则按照要求分页
             if (input is IPageRequest pagedInput)
             {
                 return query.PageBy(pagedInput.PageSize, pagedInput.PageIndex);
             }
 
-            //No paging
+            //没有实现则直接返回
             return query;
         }
         #endregion
