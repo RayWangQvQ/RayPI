@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Ray.Application.Dtos;
 using Ray.Application.IAppServices;
 using Ray.Domain.Entities;
 using Ray.Domain.Helpers;
@@ -94,6 +95,12 @@ namespace Ray.Application.AppServices
         /// </summary>
         protected virtual void MapToEntity(TUpdateInputDto updateInput, TEntity entity)
         {
+            if (updateInput is IEntityDto<TEntityKey> entityDto)
+            {
+                entityDto.Id = entity.Id;
+            }
+            //todo：如果没有实现IEntityDto，可以根据反射拿到Id属性
+
             RayMapper.Map(updateInput, entity);
         }
         #endregion
@@ -144,9 +151,9 @@ namespace Ray.Application.AppServices
     }
 
 
-    public class CrudAppService<TEntity, TEntityKey, TGetListInputDto, TDto>
-        : CrudAppService<TEntity, TEntityKey, TGetListInputDto, TDto, TDto, TDto, TDto>,
-            ICrudAppService<TEntityKey, TGetListInputDto, TDto>
+    public class CrudAppService<TEntity, TEntityKey, TCreateOrUpdateDto, TDto>
+        : CrudAppService<TEntity, TEntityKey, PageAndSortRequest, TCreateOrUpdateDto, TCreateOrUpdateDto, TDto, TDto>,
+            ICrudAppService<TEntityKey, TCreateOrUpdateDto, TDto>
         where TEntity : class, IEntity<TEntityKey>
     {
         public CrudAppService(IServiceProvider serviceProvider) : base(serviceProvider)

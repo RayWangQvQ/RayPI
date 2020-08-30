@@ -70,19 +70,24 @@ namespace Ray.Application.IAppServices
 
     /// <summary>
     /// 增删改查AppService
-    /// (共用过一个Dto)
     /// </summary>
     /// <typeparam name="TDto"></typeparam>
     /// <typeparam name="TEntityKey"></typeparam>
     /// <typeparam name="TGetListInputDto"></typeparam>
-    public interface ICrudAppService<in TEntityKey, in TGetListInputDto, TDto>
-        : ICrudAppService<TEntityKey, TGetListInputDto, TDto, TDto, TDto, TDto>
+    public interface ICrudAppService<in TEntityKey, TCreateOrUpdateDto, TDto>
+        : ICrudAppService<TEntityKey, PageAndSortRequest, TCreateOrUpdateDto, TCreateOrUpdateDto, TDto, TDto>
     {
 
     }
 
+    /// <summary>
+    /// 增删改查AppService
+    /// (共用过一个Dto)
+    /// </summary>
+    /// <typeparam name="TEntityKey"></typeparam>
+    /// <typeparam name="TDto"></typeparam>
     public interface ICrudAppService<in TEntityKey, TDto>
-        : ICrudAppService<TEntityKey, PageAndSortRequest, TDto>
+        : ICrudAppService<TEntityKey, PageAndSortRequest, TDto, TDto, TDto, TDto>
     {
 
     }

@@ -13,6 +13,7 @@
     <OutputPath></OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'RayPI' " />
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
