@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Ray.Application.Dtos;
@@ -43,7 +46,7 @@ namespace Ray.Application.AppServices
             await CheckUpdatePolicyAsync();
 
             var entity = await GetEntityByIdAsync(id);
-            if (entity == null) throw new Exception("Id is not exist");//todo:异常
+            if (entity == null) throw new Exception($"Id is not exist:{id}");//todo:异常
 
             MapToEntity(input, entity);
 
@@ -56,7 +59,7 @@ namespace Ray.Application.AppServices
         {
             await CheckDeletePolicyAsync();
 
-            await Repository.DeleteAsync(id);
+            await Repository.DeleteAsync(id, true);
         }
 
 
@@ -98,11 +101,15 @@ namespace Ray.Application.AppServices
             if (updateInput is IEntityDto<TEntityKey> entityDto)
             {
                 entityDto.Id = entity.Id;
+                RayMapper.Map(updateInput, entity);
+                return;
             }
-            //todo：如果没有实现IEntityDto，可以根据反射拿到Id属性
+
+            TrySetUpdateInputDtoIdByPropertyName(updateInput, entity);
 
             RayMapper.Map(updateInput, entity);
         }
+
         #endregion
 
         /// <summary>
@@ -123,6 +130,41 @@ namespace Ray.Application.AppServices
                 () => GuidGenerator.Create(),
                 true
             );
+        }
+
+        /// <summary>
+        /// 根据属性名称Id尝试为UpdateDto赋值主键
+        /// </summary>
+        /// <param name="updateInput"></param>
+        /// <param name="entity"></param>
+        protected virtual void TrySetUpdateInputDtoIdByPropertyName(TUpdateInputDto updateInput, TEntity entity)
+        {
+            PropertyInfo pi = typeof(TUpdateInputDto).GetProperty("Id");
+            if (pi == null || !pi.CanWrite) return;
+
+            Type dtoKeyType = pi.PropertyType;
+            Type entityKeyType = typeof(TEntityKey);
+
+            if (dtoKeyType == typeof(TEntityKey))
+            {
+                pi.SetValue(updateInput, entity.Id, null);
+                return;
+            }
+
+            //判断Dto里是否设置为了可空类型
+            if (dtoKeyType.IsGenericType && dtoKeyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                //可空类型
+                NullableConverter nullableConverter = new NullableConverter(entityKeyType);
+                entityKeyType = nullableConverter.UnderlyingType;
+                if (string.IsNullOrEmpty(entityKeyType.FullName)) return;
+
+                var value = Convert.ChangeType(entity.Id, entityKeyType);
+                if (value != null)
+                {
+                    pi.SetValue(updateInput, value, null);
+                }
+            }
         }
     }
 
