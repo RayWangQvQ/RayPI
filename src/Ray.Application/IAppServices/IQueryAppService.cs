@@ -40,4 +40,15 @@ namespace Ray.Application.IAppServices
     {
 
     }
+
+    /// <summary>
+    /// 查询AppService
+    /// </summary>
+    /// <typeparam name="TEntityKey"></typeparam>
+    /// <typeparam name="TOutPutDto"></typeparam>
+    public interface IQueryAppService<in TEntityKey, TOutPutDto>
+        : IQueryAppService<TEntityKey, PageAndSortRequest, TOutPutDto, TOutPutDto>
+    {
+
+    }
 }

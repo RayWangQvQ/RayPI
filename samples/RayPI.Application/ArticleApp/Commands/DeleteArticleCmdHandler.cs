@@ -1,26 +1,26 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Ray.Application.AppServices;
 using RayPI.AppService.ArticleApp.Dtos;
 using RayPI.Domain.Entity;
 using RayPI.Domain.IRepositories;
 
 namespace RayPI.AppService.ArticleApp.Commands
 {
-    public class DeleteArticleCmdHandler : IRequestHandler<DeleteArticleDto>
+    public class DeleteArticleCmdHandler
+        : CrudAppService<Article, Guid, DeleteArticleDto>,
+            IRequestHandler<DeleteArticleDto, bool>
     {
-        private readonly IArticleRepository _articleRepository;
-
-        public DeleteArticleCmdHandler(IArticleRepository articleRepository)
+        public DeleteArticleCmdHandler(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            this._articleRepository = articleRepository;
         }
 
-        public async Task<Unit> Handle(DeleteArticleDto request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteArticleDto request, CancellationToken cancellationToken)
         {
-            Article entity = _articleRepository.GetAsync(x => x.Id == request.Id).Result;
-            await _articleRepository.DeleteAsync(entity, true);
-            return default;
+            await this.DeleteAsync(request.Id);
+            return true;
         }
     }
 }

@@ -214,4 +214,14 @@ namespace Ray.Application.AppServices
         {
         }
     }
+
+    public class QueryAppService<TEntity, TEntityKey, TOutputDto>
+        : QueryAppService<TEntity, TEntityKey, PageAndSortRequest, TOutputDto, TOutputDto>,
+            IQueryAppService<TEntityKey, TOutputDto>
+        where TEntity : class, IEntity<TEntityKey>
+    {
+        public QueryAppService(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+    }
 }

@@ -3,10 +3,9 @@ using RayPI.Infrastructure.Cors.Attributes;
 using RayPI.Infrastructure.Cors.Enums;
 using System.Threading.Tasks;
 using MediatR;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Routing;
 using System;
 using RayPI.AppService.ArticleApp.Dtos;
+using Ray.Infrastructure.Page;
 
 namespace RayPI.OpenApi.Controllers
 {
@@ -41,7 +40,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<ResponseQueryArticleDto>> Get([FromQuery] QueryArticlePageDto query)
+        public async Task<PageResultDto<ArticleDetailDto>> Get([FromQuery] QueryArticlePageDto query)
         {
             return await _mediator.Send(query, HttpContext.RequestAborted);
         }
@@ -51,9 +50,9 @@ namespace RayPI.OpenApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet()]
-        [Route("Id")]
-        public async Task<ResponseQueryArticleDto> Get(Guid id)
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ArticleDetailDto> Get([FromRoute] Guid id)
         {
             return await _mediator.Send(new QueryArticleDto { Id = id });
         }
@@ -70,7 +69,7 @@ namespace RayPI.OpenApi.Controllers
         /// <param name="cmd"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Guid> Create(CreateArticleDto cmd)
+        public async Task<ArticleDetailDto> Create([FromBody] CreateArticleDto cmd)
         {
             return await _mediator.Send(cmd, HttpContext.RequestAborted);
         }
@@ -86,9 +85,11 @@ namespace RayPI.OpenApi.Controllers
         /// </summary>
         /// <param name="requset"></param>
         [HttpPut]
-        public void Update(UpdateArticleDto requset)
+        [Route("{id}")]
+        public async Task<ArticleDetailDto> Update([FromRoute] Guid id, [FromBody] UpdateArticleDto requset)
         {
-            _mediator.Send(requset);
+            requset.Id = id;
+            return await _mediator.Send(requset);
         }
     }
 
@@ -102,9 +103,10 @@ namespace RayPI.OpenApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete]
-        public void Delete(Guid id)
+        [Route("{id}")]
+        public async Task<bool> Delete([FromRoute] Guid id)
         {
-            _mediator.Send(new DeleteArticleDto { Id = id });
+            return await _mediator.Send(new DeleteArticleDto { Id = id });
         }
     }
 }

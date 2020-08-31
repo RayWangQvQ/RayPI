@@ -1,6 +1,8 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Ray.Application.AppServices;
 using Ray.Infrastructure.Helpers;
 using Ray.Infrastructure.ObjectMap.AutoMapper;
 using RayPI.AppService.ArticleApp.Dtos;
@@ -9,22 +11,20 @@ using RayPI.Domain.IRepositories;
 
 namespace RayPI.AppService.ArticleApp.Queries
 {
-    public class ArticleQueryHandler : IRequestHandler<QueryArticleDto, ResponseQueryArticleDto>
+    public class ArticleQueryHandler
+        : QueryAppService<Article, Guid, ArticleDetailDto>,
+            IRequestHandler<QueryArticleDto, ArticleDetailDto>
     {
-        private readonly IArticleRepository _articleRepository;
-
         /// <summary>
         /// 构造
         /// </summary>
-        public ArticleQueryHandler(IArticleRepository articleRepository)
+        public ArticleQueryHandler(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            this._articleRepository = articleRepository;
         }
 
-        public async Task<ResponseQueryArticleDto> Handle(QueryArticleDto request, CancellationToken cancellationToken)
+        public async Task<ArticleDetailDto> Handle(QueryArticleDto request, CancellationToken cancellationToken)
         {
-            Article entity = await _articleRepository.FindAsync(x => x.Id == request.Id);
-            return AutoMapperHelper.Map<Domain.Entity.Article, ResponseQueryArticleDto>(entity);
+            return await GetAsync(request.Id);
         }
     }
 }

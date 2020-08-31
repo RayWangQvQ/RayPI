@@ -3,7 +3,7 @@ using MediatR;
 
 namespace RayPI.AppService.ArticleApp.Dtos
 {
-    public class CreateArticleDto : IRequest<Guid>
+    public class CreateArticleDto : IRequest<ArticleDetailDto>
     {
         /// <summary>
         /// 标题

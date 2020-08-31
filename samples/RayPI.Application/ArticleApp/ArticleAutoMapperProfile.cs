@@ -14,7 +14,8 @@ namespace RayPI.Application.ArticleApp
     {
         public ArticleAutoMapperProfile()
         {
-            CreateMap<Article, ResponseQueryArticleDto>();
+            CreateMap<Article, ArticleDetailDto>();
+            CreateMap<CreateArticleDto, Article>();
             CreateMap<UpdateArticleDto, Article>();
         }
     }
