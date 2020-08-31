@@ -89,7 +89,7 @@ namespace RayPI.OpenApi.Controllers
         /// <returns></returns>
         [HttpPatch]
         [Route("{id}")]
-        public async Task<CommentDto> Update([FromRoute]Guid id,
+        public async Task<CommentDto> Update([FromRoute] Guid id,
             [FromBody] CommentDto request)
         {
             return await _commentAppService.UpdateAsync(id, request);
@@ -101,6 +101,16 @@ namespace RayPI.OpenApi.Controllers
     /// </summary>
     public partial class CommentController
     {
-
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task Delete([FromRoute] Guid id)
+        {
+            await _commentAppService.DeleteAsync(id);
+        }
     }
 }
