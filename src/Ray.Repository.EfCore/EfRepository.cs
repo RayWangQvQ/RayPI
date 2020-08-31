@@ -99,7 +99,7 @@ namespace Ray.Repository.EfCore
 
             if (autoSave)
             {
-                await DbContext.SaveChangesAsync(GetCancellationToken(cancellationToken));
+                await UnitOfWork.SaveEntitiesAsync(GetCancellationToken(cancellationToken));
             }
 
             return savedEntity;
@@ -115,7 +115,7 @@ namespace Ray.Repository.EfCore
 
             if (autoSave)
             {
-                await DbContext.SaveChangesAsync(GetCancellationToken(cancellationToken));
+                await UnitOfWork.SaveEntitiesAsync(GetCancellationToken(cancellationToken));
             }
 
             return updatedEntity;
@@ -129,7 +129,7 @@ namespace Ray.Repository.EfCore
 
             if (autoSave)
             {
-                await DbContext.SaveChangesAsync(GetCancellationToken(cancellationToken));
+                await UnitOfWork.SaveEntitiesAsync(GetCancellationToken(cancellationToken));
             }
         }
 
@@ -146,7 +146,7 @@ namespace Ray.Repository.EfCore
 
             if (autoSave)
             {
-                await DbContext.SaveChangesAsync(GetCancellationToken(cancellationToken));
+                await UnitOfWork.SaveEntitiesAsync(GetCancellationToken(cancellationToken));
             }
         }
         #endregion

@@ -35,7 +35,9 @@ namespace Ray.Repository.EfCore
         /// 实体对应数据库的表名
         /// （默认为实体类名称）
         /// </summary>
-        protected virtual string TableName => typeof(TEntity).Name;
+        protected virtual string TableName => typeof(TEntity).Name
+            .TrimEnd("Entity".ToCharArray())
+            .TrimEnd("AggregateRoot".ToCharArray());
 
         /// <summary>
         /// 字段的配置映射

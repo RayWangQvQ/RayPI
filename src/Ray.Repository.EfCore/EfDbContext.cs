@@ -95,14 +95,8 @@ namespace Ray.Repository.EfCore
 
         public virtual async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            /*
-             * 这里顺序有2种选择：
-             * 1.先发事件再持久化到数据库：如果发送事件异常，则当前事务会回滚；
-             * 2.先持久化到数据库再发事件：如果发送事件异常，则需要做跨服务的事务处理或消息补偿
-             */
-
             await _mediator.PublishDomainEventsAsync(this);
-            var result = await base.SaveChangesAsync(cancellationToken);
+            await base.SaveChangesAsync(cancellationToken);
             return true;
         }
         #endregion

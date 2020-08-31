@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RayPI.Domain.Entity;
 
-namespace RayPI.Repository.EFRepository.DbMapping
+namespace RayPI.Repository.EFRepository.EntityTypeConfigurations
 {
-    public class ArticleConfig : EntityBaseTypeConfig<Article>
+    public class ArticleConfig : BaseEntityTypeConfig<Article>
     {
         protected override void AppConfigure(EntityTypeBuilder<Article> builder)
         {
