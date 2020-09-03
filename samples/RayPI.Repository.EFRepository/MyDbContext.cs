@@ -9,7 +9,7 @@ using Ray.Repository.EfCore;
 
 namespace RayPI.Repository.EFRepository
 {
-    public class MyDbContext : EfDbContext
+    public class MyDbContext : RayDbContext
     {
         private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 

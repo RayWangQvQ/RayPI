@@ -14,7 +14,7 @@ namespace Ray.Domain.Repositories
     public interface IRepository
     {
         /// <summary>
-        /// 工作单元
+        /// 工作单元，用于事务性提交数据到数据库
         /// </summary>
         IUnitOfWork UnitOfWork { get; }
     }

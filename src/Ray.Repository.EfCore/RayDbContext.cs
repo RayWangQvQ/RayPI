@@ -23,7 +23,7 @@ namespace Ray.Repository.EfCore
     /// <summary>
     /// EF的数据库上下文
     /// </summary>
-    public class EfDbContext : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
+    public class RayDbContext : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
     {
         protected IMediator _mediator;
         ICapPublisher _capBus;
@@ -40,7 +40,7 @@ namespace Ray.Repository.EfCore
         /// 构造
         /// </summary>
         /// <param name="options"></param>
-        public EfDbContext(DbContextOptions options, IServiceProvider serviceProvider)
+        public RayDbContext(DbContextOptions options, IServiceProvider serviceProvider)
             : base(options)
         {
             GuidGenerator = SimpleGuidGenerator.Instance;
@@ -68,7 +68,7 @@ namespace Ray.Repository.EfCore
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected virtual void ApplyConfigurationsFromAssembly(ModelBuilder modelBuilder)
-            => modelBuilder.ApplyConfigurationsFromAssembly(typeof(EfDbContext).Assembly);
+            => modelBuilder.ApplyConfigurationsFromAssembly(typeof(RayDbContext).Assembly);
         #endregion
 
 
@@ -96,7 +96,7 @@ namespace Ray.Repository.EfCore
         public virtual async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
             await _mediator.PublishDomainEventsAsync(this);
-            await base.SaveChangesAsync(cancellationToken);
+            await SaveChangesAsync(cancellationToken);
             return true;
         }
         #endregion

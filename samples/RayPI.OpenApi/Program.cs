@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -34,7 +35,7 @@ namespace RayPI.OpenApi
 
             ServiceProvider = host.Services;
             //打印容器
-            LogContainer(host);
+            LogContainerAsync();
 
             host.Run();
         }
@@ -54,26 +55,14 @@ namespace RayPI.OpenApi
         }
 
 
-        private static void LogContainer(IHost host)
+        private static async void LogContainerAsync()
         {
-            string builderJson = host.Services
-                .AsJsonStr(option =>
-                {
-                    //option.EnumToString = true;
-                    option.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
-                    {
-                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                    };
-                    option.FilterProps = new FilterPropsOption
-                    {
-                        FilterEnum = FilterEnum.Ignore,
-                        Props = new[]
-                        {
-                            "UsePollingFileWatcher", "Action", "Method", "Assembly","CustomAttributes","assemblies"
-                        }
-                    };
-                }).AsFormatJsonStr();
-            File.WriteAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "container.txt"), builderJson);
+            var content = await Task.Run<string>(() =>
+             {
+                 var jsonStr = Program.ServiceProvider.SerializeServiceDescriptor(o => { o.IsSerializeImplementationInstance = false; });
+                 return jsonStr;
+             });
+            await File.WriteAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "container.txt"), content);
         }
     }
 }

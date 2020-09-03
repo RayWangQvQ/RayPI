@@ -9,7 +9,7 @@ using Ray.Infrastructure.Extensions;
 namespace Ray.Repository.EfCore.Behaviors
 {
     public class TransactionBehavior<TEFContext, TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TEFContext : EfDbContext
+        where TEFContext : RayDbContext
     {
         ILogger _logger;
         TEFContext _efContext;

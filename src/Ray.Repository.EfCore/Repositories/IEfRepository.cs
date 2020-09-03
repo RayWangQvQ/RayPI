@@ -2,7 +2,7 @@
 using Ray.Domain.Entities;
 using Ray.Domain.Repositories;
 
-namespace Ray.Repository.EfCore
+namespace Ray.Repository.EfCore.Repositories
 {
     public interface IEfRepository<TEntity> : IBaseRepository<TEntity>
         where TEntity : class, IEntity

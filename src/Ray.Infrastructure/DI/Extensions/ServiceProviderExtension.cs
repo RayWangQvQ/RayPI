@@ -106,5 +106,30 @@ namespace System
             return objList ?? new List<object>();
         }
 
+        public static string SerializeServiceDescriptor(this IServiceProvider serviceProvider, Action<SerializeServiceDescriptorOptions> options)
+        {
+            SerializeServiceDescriptorOptions serializeOptions = new SerializeServiceDescriptorOptions();
+            options(serializeOptions);
+
+            var descs = serviceProvider.GetServiceDescriptorsFromScope()
+                .Select(x => new ServiceDescriptorDto(x));
+
+            string jsonStr = descs.AsJsonStr(option =>
+            {
+                option.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                    NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                };
+                option.EnumToString = true;
+                option.FilterProps = new FilterPropsOption
+                {
+                    FilterEnum = FilterEnum.Ignore,
+                    Props = serializeOptions.IgnorePropsAll.ToArray()
+                };
+            }).AsFormatJsonStr();
+
+            return jsonStr;
+        }
     }
 }

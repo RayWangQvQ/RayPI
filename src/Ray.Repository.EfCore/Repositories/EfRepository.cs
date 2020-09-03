@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Ray.Domain.Entities;
 using Ray.Domain.Repositories;
 
-namespace Ray.Repository.EfCore
+namespace Ray.Repository.EfCore.Repositories
 {
     /// <summary>
     /// EF仓储抽象基类
