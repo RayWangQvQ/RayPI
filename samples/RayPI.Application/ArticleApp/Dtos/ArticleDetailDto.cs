@@ -1,8 +1,9 @@
 ﻿using System;
+using Ray.Infrastructure.Auditing;
 
 namespace RayPI.AppService.ArticleApp.Dtos
 {
-    public class ArticleDetailDto
+    public class ArticleDetailDto : IHasCreationAuditing, IHasModificationAuditing
     {
         /// <summary>
         /// Id
@@ -20,5 +21,10 @@ namespace RayPI.AppService.ArticleApp.Dtos
         /// 内容
         /// </summary>
         public string Content { get; set; }
+
+        public DateTime CreationTime { get; set; }
+        public Guid? CreatorId { get; set; }
+        public DateTime? LastModificationTime { get; set; }
+        public Guid? LastModifierId { get; set; }
     }
 }

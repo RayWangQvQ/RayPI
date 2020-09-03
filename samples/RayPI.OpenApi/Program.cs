@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Ray.Infrastructure.DI;
 using Ray.Infrastructure.Extensions.Json;
 
 namespace RayPI.OpenApi
@@ -13,7 +14,7 @@ namespace RayPI.OpenApi
     /// </summary>
     public class Program
     {
-        public static IServiceProvider ServiceProvider;
+        public static IServiceProvider ServiceProviderRoot;
 
         /// <summary>
         /// 启动
@@ -33,7 +34,7 @@ namespace RayPI.OpenApi
              * CreateServiceProvider();
              */
 
-            ServiceProvider = host.Services;
+            ServiceProviderRoot = host.Services;
             //打印容器
             LogContainerAsync();
 
@@ -59,7 +60,7 @@ namespace RayPI.OpenApi
         {
             var content = await Task.Run<string>(() =>
              {
-                 var jsonStr = Program.ServiceProvider.SerializeServiceDescriptor(o => { o.IsSerializeImplementationInstance = false; });
+                 var jsonStr = MsDiHelper.SerializeServiceDescriptors(ServiceProviderRoot, o => { o.IsSerializeImplementationInstance = false; });
                  return jsonStr;
              });
             await File.WriteAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "container.txt"), content);
