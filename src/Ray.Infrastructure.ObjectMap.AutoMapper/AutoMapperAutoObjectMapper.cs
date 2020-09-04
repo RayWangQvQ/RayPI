@@ -16,14 +16,20 @@ namespace Ray.Infrastructure.ObjectMap.AutoMapper
 
         public virtual TDestination Map<TSource, TDestination>(TSource source)
         {
-            //todo:判断是否存在map配置，不存在则使用Helper进行映射
-            return _mapper.Map<TDestination>(source);
+            //todo:是否需要记录日志
+            if (_mapper.ConfigurationProvider.FindTypeMapFor<TSource, TDestination>() != null)
+                return _mapper.Map<TDestination>(source);
+
+            return AutoMapperHelper.Map<TSource, TDestination>(source);
         }
 
         public virtual TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
         {
-            //todo:判断是否存在map配置，不存在则使用Helper进行映射
-            return _mapper.Map(source, destination);
+            //todo:是否需要记录日志
+            if (_mapper.ConfigurationProvider.FindTypeMapFor<TSource, TDestination>() != null)
+                return _mapper.Map(source, destination);
+
+            return AutoMapperHelper.Map<TSource, TDestination>(source, destination);
         }
     }
 }
