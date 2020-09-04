@@ -1,8 +1,7 @@
 ﻿using System;
 using Ray.Domain.Repositories;
 using Ray.Repository.EfCore.Repositories;
-using RayPI.Domain.Entity;
-using RayPI.Domain.IRepositories;
+using RayPI.Domain.Aggregates.ArticleAggregate;
 
 namespace RayPI.Repository.EFRepository.Repositories
 {

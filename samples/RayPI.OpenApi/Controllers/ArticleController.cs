@@ -4,8 +4,8 @@ using RayPI.Infrastructure.Cors.Enums;
 using System.Threading.Tasks;
 using MediatR;
 using System;
-using RayPI.AppService.ArticleApp.Dtos;
 using Ray.Infrastructure.Page;
+using RayPI.Application.ArticleApp.Dtos;
 
 namespace RayPI.OpenApi.Controllers
 {

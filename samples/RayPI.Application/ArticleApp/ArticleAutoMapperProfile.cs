@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
-using RayPI.AppService.ArticleApp.Dtos;
-using RayPI.Domain.Entity;
+using RayPI.Application.ArticleApp.Dtos;
+using RayPI.Domain.Aggregates.ArticleAggregate;
 
 namespace RayPI.Application.ArticleApp
 {

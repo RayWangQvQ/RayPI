@@ -6,7 +6,7 @@ namespace Ray.Infrastructure.Extensions.Json
 {
     public static class ObjectExtension
     {
-        public static string AsJsonStr(this object obj, bool useSystem = true)
+        public static string AsJsonStr(this object obj, bool useSystem)
         {
             if (obj == null) return null;
             return useSystem

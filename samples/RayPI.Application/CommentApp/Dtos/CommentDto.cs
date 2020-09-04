@@ -1,8 +1,7 @@
 ﻿using System;
 using Ray.Application.Dtos;
-using Ray.Infrastructure.Auditing;
 
-namespace RayPI.AppService.CommentApp.Dtos
+namespace RayPI.Application.CommentApp.Dtos
 {
     public class CommentDto : IEntityDto<Guid>
     {

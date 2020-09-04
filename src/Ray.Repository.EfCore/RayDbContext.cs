@@ -25,7 +25,7 @@ namespace Ray.Repository.EfCore
     /// </summary>
     public class RayDbContext : DbContext, IUnitOfWork, ITransaction<IDbContextTransaction>
     {
-        protected IMediator _mediator;
+        protected IMediator _mediator => _serviceProvider.GetRequiredService<IMediator>();
         ICapPublisher _capBus;
         private readonly IServiceProvider _serviceProvider;
 

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using MediatR;
+﻿using MediatR;
 using Ray.Infrastructure.Page;
 
-namespace RayPI.AppService.ArticleApp.Dtos
+namespace RayPI.Application.ArticleApp.Dtos
 {
     public class QueryArticlePageDto : PageAndSortRequest, IRequest<PageResultDto<ArticleDetailDto>>
     {

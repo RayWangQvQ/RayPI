@@ -1,8 +1,8 @@
 ﻿using System;
 using Ray.Application.IAppServices;
-using RayPI.AppService.CommentApp.Dtos;
+using RayPI.Application.CommentApp.Dtos;
 
-namespace RayPI.AppService.CommentApp
+namespace RayPI.Application.CommentApp
 {
     /// <summary>
     /// 评论AppService

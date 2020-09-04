@@ -2,11 +2,11 @@
 using RayPI.Infrastructure.Cors.Attributes;
 using RayPI.Infrastructure.Cors.Enums;
 using Ray.Infrastructure.Page;
-using RayPI.AppService.CommentApp;
-using RayPI.AppService.CommentApp.Dtos;
 using System.Threading.Tasks;
 using System;
 using System.ComponentModel.DataAnnotations;
+using RayPI.Application.CommentApp;
+using RayPI.Application.CommentApp.Dtos;
 
 namespace RayPI.OpenApi.Controllers
 {

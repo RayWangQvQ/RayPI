@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RayPI.Domain.Entity
+﻿namespace RayPI.Domain.Aggregates.CommentAggregate
 {
     public class Comment : BaseAggregateRoot
     {

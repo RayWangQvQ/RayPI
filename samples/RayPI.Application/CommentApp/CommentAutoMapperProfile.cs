@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
-using RayPI.AppService.CommentApp.Dtos;
-using RayPI.Domain.Entity;
+using RayPI.Application.CommentApp.Dtos;
+using RayPI.Domain.Aggregates.CommentAggregate;
 
 namespace RayPI.Application.CommentApp
 {

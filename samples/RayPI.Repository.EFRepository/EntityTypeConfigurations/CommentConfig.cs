@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RayPI.Domain.Entity;
+using RayPI.Domain.Aggregates.CommentAggregate;
 
 namespace RayPI.Repository.EFRepository.EntityTypeConfigurations
 {

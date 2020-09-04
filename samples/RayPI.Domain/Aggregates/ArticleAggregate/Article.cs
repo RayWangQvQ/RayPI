@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RayPI.Infrastructure.Treasury.Helpers;
+﻿using RayPI.Domain.Events;
 
-namespace RayPI.Domain.Entity
+namespace RayPI.Domain.Aggregates.ArticleAggregate
 {
-    public class Article : BaseEntity
+    public class Article : BaseAggregateRoot
     {
         protected Article()
         {
@@ -18,6 +15,9 @@ namespace RayPI.Domain.Entity
         public Article(string title)
         {
             this.Title = title;
+
+            //发送新增领域事件
+            this.AddDomainEvent(new ArticleAddedDomainEvent(this));
         }
 
         /// <summary>

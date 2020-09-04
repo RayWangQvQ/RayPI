@@ -9,7 +9,7 @@ using Ray.Infrastructure.ObjectMap.AutoMapper;
 
 namespace RayPI.Application
 {
-    public static class AppServiceModule
+    public static class ApplicationModule
     {
         /// <summary>
         /// 注册AppService

@@ -1,10 +1,7 @@
 ﻿using System;
-using Ray.Domain;
-using Ray.Domain.Entities;
 using Ray.Domain.Entities.Auditing;
-using RayPI.Infrastructure.Treasury.Interfaces;
 
-namespace RayPI.Domain.Entity
+namespace RayPI.Domain.Aggregates
 {
     /// <summary>
     /// 实体基类

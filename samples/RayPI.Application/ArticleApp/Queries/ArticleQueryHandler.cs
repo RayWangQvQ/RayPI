@@ -3,13 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Ray.Application.AppServices;
-using Ray.Infrastructure.Helpers;
-using Ray.Infrastructure.ObjectMap.AutoMapper;
-using RayPI.AppService.ArticleApp.Dtos;
-using RayPI.Domain.Entity;
-using RayPI.Domain.IRepositories;
+using RayPI.Application.ArticleApp.Dtos;
+using RayPI.Domain.Aggregates.ArticleAggregate;
 
-namespace RayPI.AppService.ArticleApp.Queries
+namespace RayPI.Application.ArticleApp.Queries
 {
     public class ArticleQueryHandler
         : QueryAppService<Article, Guid, ArticleDetailDto>,

@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RayPI.Domain.Entity;
+using RayPI.Domain.Aggregates.ArticleAggregate;
 
 namespace RayPI.Repository.EFRepository.EntityTypeConfigurations
 {

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
 using Ray.Application.AppServices;
-using RayPI.AppService.ArticleApp.Dtos;
-using RayPI.Domain.Entity;
-using RayPI.Domain.IRepositories;
+using RayPI.Application.ArticleApp.Dtos;
+using RayPI.Domain.Aggregates.ArticleAggregate;
 
-namespace RayPI.AppService.ArticleApp.Commands
+namespace RayPI.Application.ArticleApp.Commands
 {
     public class UpdateArticleCmdHandler
         : CrudAppService<Article, Guid, UpdateArticleDto, ArticleDetailDto>,

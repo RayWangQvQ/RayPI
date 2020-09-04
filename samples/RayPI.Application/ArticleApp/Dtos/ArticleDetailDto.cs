@@ -1,7 +1,7 @@
 ﻿using System;
 using Ray.Infrastructure.Auditing;
 
-namespace RayPI.AppService.ArticleApp.Dtos
+namespace RayPI.Application.ArticleApp.Dtos
 {
     public class ArticleDetailDto : IHasCreationAuditing, IHasModificationAuditing
     {

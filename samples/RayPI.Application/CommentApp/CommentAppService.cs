@@ -1,9 +1,9 @@
 ﻿using System;
 using Ray.Application.AppServices;
-using RayPI.AppService.CommentApp.Dtos;
-using RayPI.Domain.Entity;
+using RayPI.Application.CommentApp.Dtos;
+using RayPI.Domain.Aggregates.CommentAggregate;
 
-namespace RayPI.AppService.CommentApp
+namespace RayPI.Application.CommentApp
 {
     /// <summary>
     /// 评论AppService

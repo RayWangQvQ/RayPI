@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using RayPI.Domain.Entity;
 using MediatR;
 using DotNetCore.CAP;
 using Microsoft.Extensions.Logging;

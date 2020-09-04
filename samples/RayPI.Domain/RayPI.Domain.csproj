@@ -9,7 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DomainService\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.1.0" />
   </ItemGroup>
 
   <ItemGroup>

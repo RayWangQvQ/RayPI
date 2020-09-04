@@ -1,7 +1,6 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 
-namespace RayPI.AppService.ArticleApp.Dtos
+namespace RayPI.Application.ArticleApp.Dtos
 {
     public class CreateArticleDto : IRequest<ArticleDetailDto>
     {
