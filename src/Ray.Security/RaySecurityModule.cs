@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
-using Ray.Infrastructure.Security.Claims;
-using Ray.Infrastructure.Security.User;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Ray.Security.Claims;
+using Ray.Security.User;
 
-namespace Ray.Infrastructure.Security
+namespace Ray.Security
 {
     public static class RaySecurityModule
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 
-namespace Ray.Infrastructure.Security.User
+namespace Ray.Security.User
 {
     public interface ICurrentUser
     {

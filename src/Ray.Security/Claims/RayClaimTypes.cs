@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text;
+﻿using System.Security.Claims;
 
-namespace Ray.Infrastructure.Security.Claims
+namespace Ray.Security.Claims
 {
     //TODO: Instead of directly using static properties, can we just create an RayClaimOptions and pass these values as defaults?
     /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace Ray.Infrastructure.ObjectMap
+﻿namespace Ray.ObjectMap
 {
     public interface IObjectMapper
     {

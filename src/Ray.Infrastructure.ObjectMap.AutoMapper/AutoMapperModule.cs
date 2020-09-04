@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Ray.Infrastructure.ObjectMap.AutoMapper
+namespace Ray.ObjectMap.AutoMapper
 {
     public static class AutoMapperModule
     {

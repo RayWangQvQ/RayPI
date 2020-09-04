@@ -23,9 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ray.Application\Ray.Application.csproj" />
+    <ProjectReference Include="..\..\src\Ray.Auditing\Ray.Auditing.csproj" />
     <ProjectReference Include="..\..\src\Ray.Infrastructure\Ray.Infrastructure.csproj" />
     <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />
-    <ProjectReference Include="..\..\src\Ray.Infrastructure.ObjectMap.AutoMapper\Ray.Infrastructure.ObjectMap.AutoMapper.csproj" />
+    <ProjectReference Include="..\..\src\Ray.Infrastructure.ObjectMap.AutoMapper\Ray.ObjectMap.AutoMapper.csproj" />
   </ItemGroup>
 
   <ItemGroup>

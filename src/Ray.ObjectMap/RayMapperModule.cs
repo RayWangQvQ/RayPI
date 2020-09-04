@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Ray.Infrastructure.ObjectMap
+namespace Ray.ObjectMap
 {
     public static class RayMapperModule
     {

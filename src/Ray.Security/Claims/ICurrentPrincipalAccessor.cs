@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 
-namespace Ray.Infrastructure.Security.Claims
+namespace Ray.Security.Claims
 {
     public interface ICurrentPrincipalAccessor
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using Ray.Infrastructure.Security.User;
+using Ray.Security.User;
 
-namespace Ray.Infrastructure.Auditing.PropertySetter
+namespace Ray.Auditing.PropertySetter
 {
     /// <summary>
     /// 实体审计属性赋值器

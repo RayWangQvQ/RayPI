@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
-namespace Ray.Infrastructure.Security.User
+namespace Ray.Security.User
 {
     public static class CurrentUserExtensions
     {

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using Ray.Infrastructure.Helpers;
-using Ray.Infrastructure.Security.Claims;
+using Ray.Security.Claims;
 
-namespace Ray.Infrastructure.Security.Principal
+namespace Ray.Security.Principal
 {
     public static class RayClaimsIdentityExtension
     {

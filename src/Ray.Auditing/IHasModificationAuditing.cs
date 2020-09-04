@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ray.Infrastructure.Auditing
+namespace Ray.Auditing
 {
     /// <summary>
     /// 编辑相关的审计字段

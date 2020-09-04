@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Ray.Infrastructure.Auditing;
+using Ray.Auditing;
 
 namespace Ray.Domain.Entities.Auditing
 {

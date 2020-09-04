@@ -1,5 +1,5 @@
 ﻿using System;
-using Ray.Infrastructure.Auditing;
+using Ray.Auditing;
 
 namespace RayPI.Application.ArticleApp.Dtos
 {

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 using System.Threading;
+using Ray.Infrastructure;
 
-namespace Ray.Infrastructure.Security.Claims
+namespace Ray.Security.Claims
 {
     public class ThreadCurrentPrincipalAccessor : ICurrentPrincipalAccessor
     {

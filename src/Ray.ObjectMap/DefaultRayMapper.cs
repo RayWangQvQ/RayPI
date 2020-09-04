@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ray.Infrastructure.ObjectMap
+namespace Ray.ObjectMap
 {
     public class DefaultRayMapper : IRayMapper
     {

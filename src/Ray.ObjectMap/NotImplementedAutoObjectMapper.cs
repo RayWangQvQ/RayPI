@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ray.Infrastructure.ObjectMap
+namespace Ray.ObjectMap
 {
     public sealed class NotImplementedAutoObjectMapper : IAutoObjectMapper
     {

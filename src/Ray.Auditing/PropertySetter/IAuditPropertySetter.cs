@@ -1,4 +1,4 @@
-﻿namespace Ray.Infrastructure.Auditing.PropertySetter
+﻿namespace Ray.Auditing.PropertySetter
 {
     /// <summary>
     /// 审计属性赋值器

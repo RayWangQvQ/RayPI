@@ -2,8 +2,8 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Ray.Auditing;
 using Ray.Domain.Entities;
-using Ray.Infrastructure.Auditing;
 using Ray.Repository.EfCore.Extensions;
 
 namespace Ray.Repository.EfCore

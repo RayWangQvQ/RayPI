@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
+using Ray.Auditing;
+using Ray.Auditing.PropertySetter;
 using Ray.Domain.Entities;
 using Ray.Domain.Helpers;
 using Ray.Domain.Repositories;
-using Ray.Infrastructure.Auditing;
-using Ray.Infrastructure.Auditing.PropertySetter;
 using Ray.Infrastructure.Guids;
 using Ray.Infrastructure.Helpers;
 

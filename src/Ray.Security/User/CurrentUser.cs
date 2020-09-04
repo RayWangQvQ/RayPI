@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using Ray.Infrastructure.Security.Claims;
-using Ray.Infrastructure.Security.Principal;
+using Ray.Security.Claims;
+using Ray.Security.Principal;
 
-namespace Ray.Infrastructure.Security.User
+namespace Ray.Security.User
 {
     public class CurrentUser : ICurrentUser
     {

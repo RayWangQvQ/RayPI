@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Ray.Infrastructure.Auditing.PropertySetter;
-using Ray.Infrastructure.Security;
+using Ray.Auditing.PropertySetter;
+using Ray.Security;
 
-namespace Ray.Infrastructure.Auditing
+namespace Ray.Auditing
 {
     public static class RayAuditingModule
     {

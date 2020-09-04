@@ -1,4 +1,4 @@
-﻿namespace Ray.Infrastructure.Auditing
+﻿namespace Ray.Auditing
 {
     /// <summary>
     /// 用于标记实体允许逻辑删除

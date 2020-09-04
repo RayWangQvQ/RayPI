@@ -15,7 +15,7 @@ using RayPI.Infrastructure.Swagger.Extensions;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Ray.Infrastructure.ObjectMap.AutoMapper;
+using Ray.ObjectMap.AutoMapper;
 using RayPI.Repository.EFRepository;
 using RayPI.Application;
 

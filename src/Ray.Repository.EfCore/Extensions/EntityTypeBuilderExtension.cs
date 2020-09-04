@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ray.Infrastructure.Auditing;
+using Ray.Auditing;
 using Ray.Infrastructure.Extensions;
 
 namespace Ray.Repository.EfCore.Extensions

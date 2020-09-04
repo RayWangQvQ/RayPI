@@ -2,8 +2,8 @@
 using System.Xml.XPath;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Ray.Auditing;
 using Ray.Domain.Repositories;
-using Ray.Infrastructure.Auditing;
 using Ray.Repository.EfCore.Repositories;
 
 namespace Ray.Repository.EfCore

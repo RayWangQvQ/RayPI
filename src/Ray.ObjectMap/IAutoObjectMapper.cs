@@ -1,4 +1,4 @@
-﻿namespace Ray.Infrastructure.ObjectMap
+﻿namespace Ray.ObjectMap
 {
     /// <summary>
     /// 自动化Mapper映射器

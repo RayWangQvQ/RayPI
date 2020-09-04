@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ray.Infrastructure.Auditing
+﻿namespace Ray.Auditing
 {
     /// <summary>
     /// 创建 && 编辑 && 逻辑删除相关的审计字段
