@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,8 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ray.Domain\Ray.Domain.csproj" />
-    <ProjectReference Include="..\Ray.Infrastructure.ObjectMap.AutoMapper\Ray.ObjectMap.AutoMapper.csproj" />
     <ProjectReference Include="..\Ray.Infrastructure\Ray.Infrastructure.csproj" />
+    <ProjectReference Include="..\Ray.ObjectMap\Ray.ObjectMap.csproj" />
   </ItemGroup>
 
   <ItemGroup>

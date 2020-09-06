@@ -78,7 +78,7 @@ namespace RayPI.OpenApi
             services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
 
             //注册业务逻辑
-            services.AddMyAppServices();
+            services.AddMyAppServices(_configuration);
             services.AddMyRepository(_configuration);
         }
 
@@ -102,7 +102,6 @@ namespace RayPI.OpenApi
         {
             //可以拿到根容器存储下，方便以后调用
             RayContainer.ServiceProviderRoot = app.ApplicationServices;
-            LogServices(RayContainer.ServiceProviderRoot);
 
             app.UseMyRepository();
 
@@ -129,12 +128,8 @@ namespace RayPI.OpenApi
             {
                 endpoints.MapControllers();
             });
-        }
 
-        public static async Task LogServices(IServiceProvider sp)
-        {
-            string servicesJson = MsDiHelper.SerializeServiceDescriptors(sp, o => { o.IsSerializeImplementationInstance = false; });
-            await File.WriteAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "services.txt"), servicesJson);
+            app.ConfigureEventBus();
         }
     }
 }
