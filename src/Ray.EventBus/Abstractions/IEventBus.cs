@@ -33,9 +33,19 @@ namespace Ray.EventBus.Abstractions
         void SubscribeDynamic<THandler>(string eventName)
             where THandler : IDynamicIntegrationEventHandler;
 
+        /// <summary>
+        /// 取消订阅
+        /// </summary>
+        /// <typeparam name="THandler"></typeparam>
+        /// <param name="eventName"></param>
         void UnsubscribeDynamic<THandler>(string eventName)
             where THandler : IDynamicIntegrationEventHandler;
 
+        /// <summary>
+        /// 取消订阅
+        /// </summary>
+        /// <typeparam name="TEvent"></typeparam>
+        /// <typeparam name="THandler"></typeparam>
         void Unsubscribe<TEvent, THandler>()
             where THandler : IIntegrationEventHandler<TEvent>
             where TEvent : IntegrationEvent;

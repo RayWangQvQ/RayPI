@@ -8,7 +8,7 @@ using Ray.EventBus.Events;
 namespace Ray.EventBus.SubscriptionsManagers
 {
     /// <summary>
-    /// 基于内存的事件总线订阅管理
+    /// 默认的基于内存的事件总线订阅管理
     /// </summary>
     public partial class InMemoryEventBusSubscriptionsManager : IEventBusSubscriptionsManager
     {
