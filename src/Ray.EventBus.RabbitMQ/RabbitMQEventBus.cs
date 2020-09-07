@@ -158,7 +158,7 @@ namespace Ray.EventBus.RabbitMQ
 
                 _consumerChannel.BasicConsume(
                     queue: _queueName,
-                    autoAck: false,
+                    autoAck: false,//acknowledge，是否自动确认为已消费。这里设置为false，选择消费后手动回调告诉RabbitMQ已消费
                     consumer: consumer);
             }
             else
