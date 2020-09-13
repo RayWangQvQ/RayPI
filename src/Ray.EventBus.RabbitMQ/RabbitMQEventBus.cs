@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Polly;
@@ -37,18 +38,19 @@ namespace Ray.EventBus.RabbitMQ
             ILogger<RabbitMQEventBus> logger,
             IEventBusSubscriptionsManager subsManager,
             IServiceProvider serviceProvider,
-            string queueName = null,
-            int retryCount = 3
+            IOptionsMonitor<RabbitMqOptions> options
             )
         {
             _persistentConnection = persistentConnection ?? throw new ArgumentNullException(nameof(persistentConnection));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _subsManager = subsManager ?? new InMemoryEventBusSubscriptionsManager();
             this._serviceProvider = serviceProvider;
-            _queueName = queueName;
-            _consumerChannel = CreateConsumerChannel();
-            _retryCount = retryCount;
+            _queueName = options.CurrentValue.SubscriptionClientName;
+            _retryCount = options.CurrentValue.EventBusRetryCount;
             _subsManager.OnEventRemoved += SubsManager_OnEventRemoved;
+
+            //创建消费者连接通道（会声明交换器和队列）
+            _consumerChannel = CreateConsumerChannel();
         }
 
         public void Publish(IntegrationEvent @event)
@@ -57,6 +59,19 @@ namespace Ray.EventBus.RabbitMQ
             {
                 _persistentConnection.TryConnect();
             }
+
+            string eventName = @event.GetType().Name;
+
+            //创建IModel
+            _logger.LogTrace("Creating RabbitMQ channel to publish event: {EventId} ({EventName})", @event.Id, eventName);
+            using IModel channel = _persistentConnection.CreateModel();
+
+            //声明交换器（direct类型）
+            _logger.LogTrace("Declaring RabbitMQ exchange to publish event: {EventId}", @event.Id);
+            channel.ExchangeDeclare(exchange: BROKER_NAME, type: "direct");
+
+            var message = JsonConvert.SerializeObject(@event);
+            var body = Encoding.UTF8.GetBytes(message);
 
             RetryPolicy policy = RetryPolicy.Handle<BrokerUnreachableException>()
                 .Or<SocketException>()
@@ -68,23 +83,10 @@ namespace Ray.EventBus.RabbitMQ
                             "Could not publish event: {EventId} after {Timeout}s ({ExceptionMessage})",
                             @event.Id, $"{time.TotalSeconds:n1}", ex.Message);
                     });
-
-            string eventName = @event.GetType().Name;
-
-            _logger.LogTrace("Creating RabbitMQ channel to publish event: {EventId} ({EventName})", @event.Id, eventName);
-
-            using IModel channel = _persistentConnection.CreateModel();
-            _logger.LogTrace("Declaring RabbitMQ exchange to publish event: {EventId}", @event.Id);
-
-            channel.ExchangeDeclare(exchange: BROKER_NAME, type: "direct");
-
-            var message = JsonConvert.SerializeObject(@event);
-            var body = Encoding.UTF8.GetBytes(message);
-
             policy.Execute(() =>
             {
                 IBasicProperties properties = channel.CreateBasicProperties();
-                properties.DeliveryMode = 2; // persistent
+                properties.DeliveryMode = 2; //设置消息持久化
 
                 _logger.LogTrace("Publishing event to RabbitMQ: {EventId}", @event.Id);
 
@@ -123,6 +125,11 @@ namespace Ray.EventBus.RabbitMQ
             StartBasicConsume();
         }
 
+        /// <summary>
+        /// 订阅
+        /// （主要负责绑定交换器和队列）
+        /// </summary>
+        /// <param name="eventName"></param>
         private void DoInternalSubscription(string eventName)
         {
             //如果订阅管理中已存在，说明已经绑定过该eventName，直接返回
@@ -134,7 +141,7 @@ namespace Ray.EventBus.RabbitMQ
                 _persistentConnection.TryConnect();
             }
 
-            //绑定queue
+            //绑定交换器与队列
             using (IModel channel = _persistentConnection.CreateModel())
             {
                 channel.QueueBind(queue: _queueName,
@@ -283,6 +290,10 @@ namespace Ray.EventBus.RabbitMQ
         }
         #endregion
 
+        /// <summary>
+        /// 创建消费者连接通道
+        /// </summary>
+        /// <returns></returns>
         private IModel CreateConsumerChannel()
         {
             if (!_persistentConnection.IsConnected)
@@ -291,12 +302,13 @@ namespace Ray.EventBus.RabbitMQ
             }
 
             _logger.LogTrace("Creating RabbitMQ consumer channel");
-
             var channel = _persistentConnection.CreateModel();
 
+            //声明交换器
             channel.ExchangeDeclare(exchange: BROKER_NAME,
                 type: "direct");
 
+            //声明队列
             channel.QueueDeclare(queue: _queueName,
                 durable: true,
                 exclusive: false,

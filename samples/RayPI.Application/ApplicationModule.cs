@@ -28,7 +28,14 @@ namespace RayPI.Application
             Assembly appServiceAssembly = Assembly.GetExecutingAssembly();
 
             //注册事件总线
-            services.AddRayRabbitMQEventBus(configuration);
+            services.AddRayRabbitMQEventBus(o =>
+            {
+                o.EventBusConnection = configuration["EventBus:EventBusConnection"];
+                o.EventBusUserName = configuration["EventBus:EventBusUserName"];
+                o.EventBusPassword = configuration["EventBus:EventBusPassword"];
+                o.EventBusRetryCount = int.Parse(configuration["EventBus:EventBusRetryCount"]);
+                o.SubscriptionClientName = configuration["EventBus:SubscriptionClientName"];
+            });
 
             //注册AutoMapper
             services.AddRayAutoMapper(appServiceAssembly);
