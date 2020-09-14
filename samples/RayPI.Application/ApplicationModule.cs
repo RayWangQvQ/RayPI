@@ -13,6 +13,7 @@ using Ray.ObjectMap.AutoMapper;
 using RayPI.Application.IntegrationEvents;
 using RayPI.Application.IntegrationEvents.EventHandlers;
 using RayPI.Application.IntegrationEvents.Events;
+using RayPI.Repository.EFRepository;
 
 namespace RayPI.Application
 {
@@ -30,11 +31,17 @@ namespace RayPI.Application
             //注册事件总线
             services.AddRayRabbitMQEventBus(o =>
             {
-                o.EventBusConnection = configuration["EventBus:EventBusConnection"];
-                o.EventBusUserName = configuration["EventBus:EventBusUserName"];
-                o.EventBusPassword = configuration["EventBus:EventBusPassword"];
-                o.EventBusRetryCount = int.Parse(configuration["EventBus:EventBusRetryCount"]);
-                o.SubscriptionClientName = configuration["EventBus:SubscriptionClientName"];
+                configuration.GetSection("EventBus").Bind(o);
+            });
+            services.AddCap(options =>
+            {
+                options.UseEntityFramework<MyDbContext>();
+
+                options.UseRabbitMQ(options =>
+                {
+                    configuration.GetSection("RabbitMQ").Bind(options);
+                });
+                //options.UseDashboard();
             });
 
             //注册AutoMapper
@@ -68,7 +75,7 @@ namespace RayPI.Application
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 
             //订阅
-            eventBus.Subscribe<ArticleAddedIntegrationEvent, ArticleAddedIntegrationEventHandler>();
+            //eventBus.Subscribe<ArticleAddedIntegrationEvent, ArticleAddedIntegrationEventHandler>();
         }
     }
 }

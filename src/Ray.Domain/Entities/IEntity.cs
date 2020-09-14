@@ -16,6 +16,8 @@ namespace Ray.Domain.Entities
         /// </summary>
         /// <returns></returns>
         object[] GetKeys();
+
+        void AddCreatedDomainEvent();
     }
 
     /// <summary>

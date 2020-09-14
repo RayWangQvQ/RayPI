@@ -9,11 +9,11 @@ namespace RayPI.Application.IntegrationEvents.Events
 {
     public class ArticleAddedIntegrationEvent : IntegrationEvent
     {
-        public ArticleAddedIntegrationEvent(Article article)
+        public ArticleAddedIntegrationEvent(Guid articleId)
         {
-            Article = article;
+            ArticleId = articleId;
         }
 
-        public Article Article { get; }
+        public Guid ArticleId { get; }
     }
 }

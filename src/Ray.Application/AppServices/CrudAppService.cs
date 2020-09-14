@@ -35,6 +35,7 @@ namespace Ray.Application.AppServices
             await CheckCreatePolicyAsync();
 
             var entity = MapToEntity(input);
+            entity.AddCreatedDomainEvent();
 
             await Repository.InsertAsync(entity, autoSave: true);
 

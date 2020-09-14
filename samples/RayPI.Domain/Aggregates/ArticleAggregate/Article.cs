@@ -1,4 +1,5 @@
-﻿using RayPI.Domain.Events;
+﻿using Ray.Domain;
+using RayPI.Domain.Events;
 
 namespace RayPI.Domain.Aggregates.ArticleAggregate
 {
@@ -15,9 +16,7 @@ namespace RayPI.Domain.Aggregates.ArticleAggregate
         public Article(string title)
         {
             this.Title = title;
-
-            //发送新增领域事件
-            this.AddDomainEvent(new ArticleAddedDomainEvent(this));
+            AddDomainEvent(new ArticleAddedDomainEvent(this));
         }
 
         /// <summary>
@@ -32,5 +31,7 @@ namespace RayPI.Domain.Aggregates.ArticleAggregate
         /// 内容
         /// </summary>
         public string Content { get; set; }
+
+        public override IDomainEvent CreatedDomainEvent => new ArticleAddedDomainEvent(this);
     }
 }

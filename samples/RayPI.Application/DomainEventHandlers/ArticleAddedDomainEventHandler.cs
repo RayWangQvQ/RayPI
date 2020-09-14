@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using DotNetCore.CAP;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Ray.Infrastructure.Extensions.Json;
@@ -16,12 +17,15 @@ namespace RayPI.Application.DomainEventHandlers
     {
         private readonly ILogger<ArticleAddedDomainEventHandler> _logger;
         private readonly IIntegrationEventService _integrationEventService;
+        private readonly ICapPublisher _capPublisher;
 
         public ArticleAddedDomainEventHandler(ILogger<ArticleAddedDomainEventHandler> logger
-            , IIntegrationEventService integrationEventService)
+            , IIntegrationEventService integrationEventService,
+            ICapPublisher capPublisher)
         {
             _logger = logger;
             this._integrationEventService = integrationEventService;
+            this._capPublisher = capPublisher;
         }
 
         public async Task Handle(ArticleAddedDomainEvent notification, CancellationToken cancellationToken)
@@ -29,7 +33,8 @@ namespace RayPI.Application.DomainEventHandlers
             //暂时没想好要做啥，记个日志并且发送综合事件
             _logger.LogInformation($"进入领域事件处理器，新增了文章：{notification.Article.AsJsonStr()}");
 
-            await _integrationEventService.PublishEvent(new ArticleAddedIntegrationEvent(notification.Article));
+            //await _integrationEventService.PublishEvent(new ArticleAddedIntegrationEvent(notification.Article));
+            await _capPublisher.PublishAsync("ArticleAdded", new ArticleAddedIntegrationEvent(notification.Article.Id));
         }
     }
 }
