@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ray.Infrastructure.Guids
+namespace Ray.Guids
 {
     /// <summary>
     /// Implements <see cref="IGuidGenerator"/> by using <see cref="Guid.NewGuid"/>.

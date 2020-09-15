@@ -34,14 +34,7 @@ namespace Ray.Domain.Entities
         {
             _domainEvents?.Clear();
         }
-
-        public void AddCreatedDomainEvent()
-        {
-            AddDomainEvent(CreatedDomainEvent);
-        }
         #endregion
-
-        public virtual IDomainEvent CreatedDomainEvent { get; }
     }
 
     /// <summary>

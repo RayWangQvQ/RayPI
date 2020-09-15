@@ -15,7 +15,7 @@ using Ray.Auditing.PropertySetter;
 using Ray.Domain.Entities;
 using Ray.Domain.Helpers;
 using Ray.Domain.Repositories;
-using Ray.Infrastructure.Guids;
+using Ray.Guids;
 using Ray.Infrastructure.Helpers;
 
 namespace Ray.Repository.EfCore

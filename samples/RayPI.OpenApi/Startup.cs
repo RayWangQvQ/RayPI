@@ -128,8 +128,6 @@ namespace RayPI.OpenApi
             {
                 endpoints.MapControllers();
             });
-
-            app.ConfigureEventBus();
         }
     }
 }

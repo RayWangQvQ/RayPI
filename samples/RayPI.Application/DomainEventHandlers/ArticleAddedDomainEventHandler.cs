@@ -16,15 +16,12 @@ namespace RayPI.Application.DomainEventHandlers
     public class ArticleAddedDomainEventHandler : INotificationHandler<ArticleAddedDomainEvent>
     {
         private readonly ILogger<ArticleAddedDomainEventHandler> _logger;
-        private readonly IIntegrationEventService _integrationEventService;
         private readonly ICapPublisher _capPublisher;
 
-        public ArticleAddedDomainEventHandler(ILogger<ArticleAddedDomainEventHandler> logger
-            , IIntegrationEventService integrationEventService,
+        public ArticleAddedDomainEventHandler(ILogger<ArticleAddedDomainEventHandler> logger,
             ICapPublisher capPublisher)
         {
             _logger = logger;
-            this._integrationEventService = integrationEventService;
             this._capPublisher = capPublisher;
         }
 

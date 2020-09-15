@@ -4,12 +4,11 @@ using System.Text;
 using System.Threading.Tasks;
 using DotNetCore.CAP;
 using Microsoft.Extensions.Logging;
-using Ray.EventBus.Abstractions;
 using RayPI.Application.IntegrationEvents.Events;
 
 namespace RayPI.Application.IntegrationEvents.EventHandlers
 {
-    public class ArticleAddedIntegrationEventHandler : IIntegrationEventHandler<ArticleAddedIntegrationEvent>
+    public class ArticleAddedIntegrationEventHandler : ICapSubscribe
     {
         private readonly ILogger<ArticleAddedIntegrationEventHandler> _logger;
 

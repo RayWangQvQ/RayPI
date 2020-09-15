@@ -35,7 +35,6 @@ namespace Ray.Application.AppServices
             await CheckCreatePolicyAsync();
 
             var entity = MapToEntity(input);
-            entity.AddCreatedDomainEvent();
 
             await Repository.InsertAsync(entity, autoSave: true);
 
@@ -89,7 +88,7 @@ namespace Ray.Application.AppServices
         protected virtual TEntity MapToEntity(TCreateInputDto createInput)
         {
             var entity = RayMapper.Map<TCreateInputDto, TEntity>(createInput);
-            SetIdForGuids(entity);
+            SetIdForGuids(entity);//todo
             return entity;
         }
 
@@ -129,7 +128,7 @@ namespace Ray.Application.AppServices
             EntityHelper.TrySetId(
                 entityWithGuidId,
                 () => GuidGenerator.Create(),
-                true
+                false
             );
         }
 

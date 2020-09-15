@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Ray.Application.IAppServices;
 using Ray.Domain.Repositories;
-using Ray.Infrastructure.Guids;
+using Ray.Guids;
 using Ray.ObjectMap;
 
 namespace Ray.Application.AppServices

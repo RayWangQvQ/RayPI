@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ray.Domain\Ray.Domain.csproj" />
+    <ProjectReference Include="..\Ray.Guids\Ray.Guids.csproj" />
     <ProjectReference Include="..\Ray.Infrastructure\Ray.Infrastructure.csproj" />
     <ProjectReference Include="..\Ray.ObjectMap\Ray.ObjectMap.csproj" />
   </ItemGroup>

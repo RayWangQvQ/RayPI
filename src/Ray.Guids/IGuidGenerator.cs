@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ray.Infrastructure.Guids
+namespace Ray.Guids
 {
     /// <summary>
     /// Used to generate Ids.

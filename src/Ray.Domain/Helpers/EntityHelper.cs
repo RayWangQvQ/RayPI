@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Ray.Domain.Entities;
+using Ray.Domain.Entities.Attributes;
 
 namespace Ray.Domain.Helpers
 {
@@ -13,13 +14,21 @@ namespace Ray.Domain.Helpers
         private static readonly ConcurrentDictionary<string, PropertyInfo> CachedIdProperties =
             new ConcurrentDictionary<string, PropertyInfo>();
 
+        /// <summary>
+        /// 尝试为实体Id赋值
+        /// </summary>
+        /// <typeparam name="TKey">Id类型</typeparam>
+        /// <param name="entity">实体对象</param>
+        /// <param name="idFactory">Id生成工厂</param>
+        /// <param name="checkForDisableIdGenerationAttribute">是否检查Id属性的忽略自动生成特性DisableIdGenerationAttribute</param>
         public static void TrySetId<TKey>(
            IEntity<TKey> entity,
            Func<TKey> idFactory,
            bool checkForDisableIdGenerationAttribute = false)
         {
             PropertyInfo property = CachedIdProperties.GetOrAdd(
-                $"{entity.GetType().FullName}-{checkForDisableIdGenerationAttribute}", () =>
+                $"{entity.GetType().FullName}-{checkForDisableIdGenerationAttribute}",
+                () =>
                 {
                     PropertyInfo idProperty = entity
                         .GetType()
@@ -32,7 +41,8 @@ namespace Ray.Domain.Helpers
                         return null;
                     }
 
-                    if (checkForDisableIdGenerationAttribute)
+                    if (checkForDisableIdGenerationAttribute
+                    && idProperty.IsDefined(typeof(DisableIdGenerationAttribute), true))
                     {
                         return null;
                     }

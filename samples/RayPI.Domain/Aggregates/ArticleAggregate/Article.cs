@@ -31,7 +31,5 @@ namespace RayPI.Domain.Aggregates.ArticleAggregate
         /// 内容
         /// </summary>
         public string Content { get; set; }
-
-        public override IDomainEvent CreatedDomainEvent => new ArticleAddedDomainEvent(this);
     }
 }

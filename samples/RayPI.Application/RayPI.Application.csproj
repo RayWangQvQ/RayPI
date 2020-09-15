@@ -24,8 +24,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ray.Application\Ray.Application.csproj" />
     <ProjectReference Include="..\..\src\Ray.Auditing\Ray.Auditing.csproj" />
-    <ProjectReference Include="..\..\src\Ray.EventBus.RabbitMQ\Ray.EventBus.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\src\Ray.EventBus\Ray.EventBus.csproj" />
     <ProjectReference Include="..\..\src\Ray.Infrastructure\Ray.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Ray.ObjectMap.AutoMapper\Ray.ObjectMap.AutoMapper.csproj" />
     <ProjectReference Include="..\RayPI.Domain\RayPI.Domain.csproj" />

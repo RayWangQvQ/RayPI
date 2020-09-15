@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Ray.Auditing\Ray.Auditing.csproj" />
     <ProjectReference Include="..\Ray.Domain\Ray.Domain.csproj" />
+    <ProjectReference Include="..\Ray.Guids\Ray.Guids.csproj" />
     <ProjectReference Include="..\Ray.Infrastructure\Ray.Infrastructure.csproj" />
   </ItemGroup>
 

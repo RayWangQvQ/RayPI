@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
+using DotNetCore.CAP;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ray.Application;
 using Ray.Application.IAppServices;
-using Ray.EventBus.Abstractions;
-using Ray.EventBus.RabbitMQ;
 using Ray.ObjectMap.AutoMapper;
-using RayPI.Application.IntegrationEvents;
-using RayPI.Application.IntegrationEvents.EventHandlers;
-using RayPI.Application.IntegrationEvents.Events;
 using RayPI.Repository.EFRepository;
 
 namespace RayPI.Application
@@ -26,21 +19,22 @@ namespace RayPI.Application
         /// <returns></returns>
         public static IServiceCollection AddMyAppServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddRayApplicationModule();
+
             Assembly appServiceAssembly = Assembly.GetExecutingAssembly();
 
             //注册事件总线
-            services.AddRayRabbitMQEventBus(o =>
-            {
-                configuration.GetSection("EventBus").Bind(o);
-            });
             services.AddCap(options =>
             {
+                //绑定数据库，会创建2张表，分别为消费消息表与发布消息表
                 options.UseEntityFramework<MyDbContext>();
 
+                //指定消息队列
                 options.UseRabbitMQ(options =>
                 {
                     configuration.GetSection("RabbitMQ").Bind(options);
                 });
+
                 //options.UseDashboard();
             });
 
@@ -60,22 +54,11 @@ namespace RayPI.Application
             //扫描注册所有综合事件处理器
             services.Scan(scan => scan
                 .FromAssemblies(appServiceAssembly)
-                .AddClasses(classes => classes.AssignableTo<IIntegrationEventHandler>())
-                .AsImplementedInterfaces()
+                .AddClasses(classes => classes.AssignableTo<ICapSubscribe>())
                 .AsSelf()
                 .WithTransientLifetime());
 
-            services.AddTransient<IIntegrationEventService, IntegrationEventService>();
-
             return services;
-        }
-
-        public static void ConfigureEventBus(this IApplicationBuilder app)
-        {
-            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
-
-            //订阅
-            //eventBus.Subscribe<ArticleAddedIntegrationEvent, ArticleAddedIntegrationEventHandler>();
         }
     }
 }
