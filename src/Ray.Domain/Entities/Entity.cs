@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ray.Domain.Events;
 
 namespace Ray.Domain.Entities
 {

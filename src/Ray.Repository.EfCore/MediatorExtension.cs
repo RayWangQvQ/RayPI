@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Ray.Domain;
 using Ray.Domain.Entities;
+using Ray.Domain.Events;
 
 namespace Ray.Repository.EfCore
 {

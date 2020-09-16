@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MediatR;
-using Ray.Domain;
+﻿using MediatR;
+using Ray.Domain.Events;
 using RayPI.Domain.Aggregates.ArticleAggregate;
 
 namespace RayPI.Domain.Events
