@@ -63,6 +63,11 @@ namespace Ray.Domain.Entities
             return new object[] { Id };
         }
 
+        /// <summary>
+        /// 重写Equals方法
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is Entity<TPrimaryKey>))
@@ -82,6 +87,10 @@ namespace Ray.Domain.Entities
                 return item.Id.Equals(this.Id);
         }
 
+        /// <summary>
+        /// 重写GetHashCode方法
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             if (!IsTransient())
@@ -97,6 +106,7 @@ namespace Ray.Domain.Entities
 
         /// <summary>
         /// 对象是否为全新创建的，未持久化的
+        /// （通过Id有没有被赋值过判断）
         /// </summary>
         /// <returns></returns>
         public bool IsTransient()
@@ -104,11 +114,21 @@ namespace Ray.Domain.Entities
             return EqualityComparer<TPrimaryKey>.Default.Equals(Id, default);
         }
 
+        /// <summary>
+        /// 重写ToString方法
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"[Entity: {GetType().Name}] Id = {Id}";
         }
 
+        /// <summary>
+        /// 定于恒等操作符
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator ==(Entity<TPrimaryKey> left, Entity<TPrimaryKey> right)
         {
             if (Object.Equals(left, null))
@@ -117,6 +137,12 @@ namespace Ray.Domain.Entities
                 return left.Equals(right);
         }
 
+        /// <summary>
+        /// 定于不等操作符
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator !=(Entity<TPrimaryKey> left, Entity<TPrimaryKey> right)
         {
             return !(left == right);

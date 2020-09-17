@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 //本地项目包
 using RayPI.Infrastructure.Treasury.Models;
-using RayPI.Treasury.Helpers;
 
 namespace RayPI.Infrastructure.RayException.Middleware
 {
@@ -54,7 +53,7 @@ namespace RayPI.Infrastructure.RayException.Middleware
                 else//系统异常
                 {
                     context.Response.StatusCode = 500;
-                    LogHelper.SetLog(LogLevel.Error, ex, _env.ContentRootPath);
+                    //todo:Log
                 }
                 await HandleExceptionAsync(context, context.Response.StatusCode, ex.Message);
                 isCatched = true;

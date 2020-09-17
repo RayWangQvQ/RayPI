@@ -31,7 +31,7 @@ namespace RayPI.Application.DomainEventHandlers
             _logger.LogInformation($"进入领域事件处理器，新增了文章：{notification.Article.AsJsonStr()}");
 
             //await _integrationEventService.PublishEvent(new ArticleAddedIntegrationEvent(notification.Article));
-            await _capPublisher.PublishAsync("ArticleAdded", new ArticleAddedIntegrationEvent(notification.Article.Id));
+            await _capPublisher.PublishAsync("ArticleAdded", new ArticleAddedIntegrationEvent(notification.Article, notification.Article.Id));
         }
     }
 }

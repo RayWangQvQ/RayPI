@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DotNetCore.CAP;
 using Microsoft.Extensions.Logging;
 using RayPI.Application.IntegrationEvents.Events;
+using Ray.Infrastructure.Extensions.Json;
 
 namespace RayPI.Application.IntegrationEvents.EventHandlers
 {
@@ -20,7 +21,7 @@ namespace RayPI.Application.IntegrationEvents.EventHandlers
         [CapSubscribe("ArticleAdded")]
         public async Task Handle(ArticleAddedIntegrationEvent @event)
         {
-            await Task.Run(() => _logger.LogInformation("进入综合事件处理器，接受到了综合事件：{0}", @event.GetType().Name));
+            await Task.Run(() => _logger.LogInformation("进入综合事件处理器，接受到了综合事件{eventName}:{data}", @event.GetType().Name, @event.AsJsonStr()));
         }
     }
 }
