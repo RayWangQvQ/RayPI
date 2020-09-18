@@ -11,12 +11,11 @@ namespace RayPI.Application.IntegrationEvents.Events
     /// </summary>
     public class ArticleAddedIntegrationEvent
     {
-        public ArticleAddedIntegrationEvent(Article entity, Guid articleId)
+        public ArticleAddedIntegrationEvent(ArticleDetailDto dto)
         {
-            ArticleId = articleId;
+            ArticleDto = dto;
         }
 
-        public Article Article { get; set; }
-        public Guid ArticleId { get; }
+        public ArticleDetailDto ArticleDto { get; set; }
     }
 }
