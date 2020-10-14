@@ -1,6 +1,6 @@
 # RayPI
 
-RayPI是一个基于.NET Core 3.1的极简风Web开发框架，支持领域驱动，并集成了基础的CRUD，开箱即用。
+RayPI是一款基于.NET Core 3.1的极简风Web开发框架，支持领域驱动，并集成了基础的CRUD，开箱即用。
 
 事实上，对于简单的项目，我们只需要定义Entity与DTO，即可自动化完成RESTful风格的WebApi接口开发。
 
